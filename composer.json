@@ -1,0 +1,51 @@
+{
+    "name": "nfephp-org/sped-efdreinf",
+    "type": "library",
+    "description": "API para geração e comunicação dos eventos relativos ao projeto EFD-Reinf da Receita Federal do Brasil.",
+    "keywords": ["nfe","nfce","sped","nfephp"],
+    "homepage": "https://github.com/nfephp-org/sped-efdreinf",
+    "license": ["GPL-3.0+","LGPL-3.0+", "MIT"],
+    "authors": [
+        {
+            "name": "Roberto L. Machado",
+            "email": "linux.rlm@gmail.com.br",
+            "homepage": "http://www.nfephp.org",
+            "role": "Developer"
+        },
+        {
+            "name": "Comunidade NFePHP",
+            "homepage": "https://github.com/nfephp-org/sped-efdreinf/graphs/contributors"
+        }
+    ],
+    "require": {
+        "php" : "~5.6|~7.0",
+        "nfephp-org/sped-common" : "^5.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^2.8",
+        "phpunit/phpunit": "^5.7",
+        "scrutinizer/ocular": "^1.3",
+        "phpmd/phpmd": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+          "NFePHP\\EFDReinf\\": "src/"
+        } 
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NFePHP\\EFDReinf\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpcbf": "vendor/bin/phpcbf --standard=psr2 src/ & vendor/bin/phpcbf --standard=psr2 tests/",
+        "phpcs": "vendor/bin/phpcs --standard=psr2 src/; vendor/bin/phpcs --standard=psr2 tests/"
+    },
+    "extra": {
+        "branch-alias": {
+            "v5.0": "5.0-dev"
+        }
+    },
+    "minimum-stability": "stable"
+}
