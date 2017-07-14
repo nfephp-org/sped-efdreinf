@@ -1,0 +1,12 @@
+.idea
+limpaTAB.php
+*~
+*.pfx
+*.pem
+messdetector.txt
+local
+vendor
+nbproject
+build
+composer.lock
+config.json
