@@ -1,5 +1,7 @@
 # sped-efdreinf
 
+## Pacote em estruturação INICIAL ainda nada útil
+
 A Escrituração Fiscal Digital de Retenções e Outras Informações Fiscais EFD-Reinf é um dos módulos do Sistema Público de Escrituração Digital - SPED, a ser utilizado pelas pessoas jurídicas e físicas, em complemento ao Sistema de Escrituração Digital das Obrigações Fiscais, Previdenciárias e Trabalhistas – eSocial.
  
 Tem por objeto a escrituração de rendimentos pagos e retenções de Imposto de Renda, Contribuição Social do contribuinte exceto aquelas relacionadas ao trabalho e informações sobre a receita bruta para a apuração das contribuições previdenciárias substituídas. Substituirá, portanto, o módulo da EFD-Contribuições que apura a Contribuição Previdenciária sobre a Receita Bruta (CPRB).
