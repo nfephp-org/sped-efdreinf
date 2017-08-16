@@ -5,6 +5,7 @@ limpaTAB.php
 *.pem
 messdetector.txt
 local
+outros
 vendor
 nbproject
 build
