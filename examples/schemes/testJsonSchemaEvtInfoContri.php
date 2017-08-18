@@ -21,11 +21,6 @@ $jsonSchema = '{
             "minimum": 1,
             "maximum": 99999
         },
-        "modo": {
-            "required": true,
-            "type": "string",
-            "pattern": "INC|ALT|EXC"
-        },
         "inivalid": {
             "required": true,
             "type": "string",
@@ -35,6 +30,140 @@ $jsonSchema = '{
             "required": false,
             "type": ["string","null"],
             "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])$"
+        },
+        "modo": {
+            "required": true,
+            "type": "string",
+            "pattern": "INC|ALT|EXC"
+        },
+        "infoCadastro": {
+            "required": false,
+            "type": ["object","null"],
+            "properties": {
+                "classtrib": {
+                    "required": true,
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 2,
+                    "pattern": "^[0-9]"
+                },
+                "indescrituracao": {
+                    "required": true,
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "inddesoneracao": {
+                    "required": true,
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "indacordoisenmulta": {
+                    "required": true,
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "indsitpj": {
+                    "required": false,
+                    "type": ["integer","null"],
+                    "minimum": 0,
+                    "maximum": 4
+                },
+                "contato": {
+                    "required": true,
+                    "type": "object",
+                    "properties": {
+                        "nmctt": {
+                            "required": true,
+                            "type": "string",
+                            "maxLength": 70
+                        },
+                        "cpfctt": {
+                            "required": true,
+                            "type": "string",
+                            "maxLength": 11,
+                            "pattern": "^[0-9]"
+                        },
+                        "fonefixo": {
+                            "required": false,
+                            "type": ["string","null"],
+                            "mimLength": 10,
+                            "maxLength": 13,
+                            "pattern": "^[0-9]"
+                        },
+                        "fonecel": {
+                            "required": false,
+                            "type": ["string","null"],
+                            "mimLength": 10,
+                            "maxLength": 13,
+                            "pattern": "^[0-9]"
+                        },
+                        "email": {
+                            "required": false,
+                            "type": ["string","null"],
+                            "maxLength": 60
+                        }
+                    }
+                },
+                "softwarehouse": {
+                    "required": false,
+                    "type": ["array","null"],
+                    "minItems": 0,
+                    "maxItems": 99,
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "cnpjsofthouse": {
+                                "required": true,
+                                "type": "string",
+                                "maxLength": 14,
+                                "pattern": "^[0-9]"
+                            },
+                            "nmrazao": {
+                                "required": true,
+                                "type": "string",
+                                "maxLength": 115
+                            },
+                            "nmcont": {
+                                "required": true,
+                                "type": "string",
+                                "maxLength": 70
+                            },
+                            "telefone": {
+                                "required": true,
+                                "type": "string",
+                                "minLength": 10
+                                "maxLength": 13,
+                                "pattern": "^[0-9]"
+                            },
+                            "email": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "maxLength": 60
+                            }
+                        }
+                    }    
+                },
+                "infoefr": {
+                    "required": false,
+                    "type": ["object","null"],
+                    "properties": {
+                        "ideefr": {
+                            "required": true,
+                            "type": "string",
+                            "pattern": "S|N"
+                        },
+                        "cnpjefr": {
+                            "required": false,
+                            "type": ["string","null"],
+                            "maxLength": 14,
+                            "pattern": "^[0-9]"
+                        }
+                    }
+                }
+            }
         }
     }
 }';
@@ -45,7 +174,29 @@ $std->sequencial = 1;
 $std->modo = 'INC';
 $std->inivalid = '2017-01';
 $std->fimvalid = '2017-12';
-        
+$std->infocadastro = new \stdClass();
+$std->infocadastro->classtrib = '01';
+$std->infocadastro->indescrituracao = 0;
+$std->infocadastro->inddesoneracao = 0;
+$std->infocadastro->indacordoisenmulta = 0;
+$std->infocadastro->indsitpj = 0;
+$std->infocadastro->contato = new \stdClass();
+$std->infocadastro->contato->nmctt = 'Fulano de Tal';
+$std->infocadastro->contato->cpfctt = '12345678901';
+$std->infocadastro->contato->fonefixo = '115555555';
+$std->infocadastro->contato->fonecel = '1199999999';
+$std->infocadastro->contato->email = 'fulano@email.com';
+
+$std->infocadastro->softhouse[0] = new \stdClass();
+$std->infocadastro->softhouse[0]->cnpjsofthouse = '12345678901234';
+$std->infocadastro->softhouse[0]->nmrazao = 'Razao Social';
+$std->infocadastro->softhouse[0]->nmcont = 'Fulano de Tal';
+$std->infocadastro->softhouse[0]->telefone = '115555555';
+$std->infocadastro->softhouse[0]->email = 'fulano@email.com';
+
+$std->infocadastro->infoefr = new \stdClass();
+$std->infocadastro->infoefr->ideefr = 'N';
+$std->infocadastro->infoefr->cnpjefr = '12345678901234';
 
 
 // Schema must be decoded before it can be used for validation

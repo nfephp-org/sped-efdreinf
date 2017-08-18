@@ -1,6 +1,5 @@
 <?php
 
-
 namespace NFePHP\EFDReinf\Factories;
 
 /**
@@ -22,12 +21,13 @@ use NFePHP\EFDReinf\Common\FactoryId;
 use NFePHP\Common\Certificate;
 use stdClass;
 
-class EvtAdmPrelim extends Factory implements FactoryInterface
+class EvtInfoContri extends Factory implements FactoryInterface
 {
     /**
      * @var string
      */
-    protected $evtName = 'evtInfoContri';
+    protected $evtName = 'evtInfoContribuinte';
+    protected $evtTag = 'evtInfoContri';
     /**
      * @var string
      */
@@ -54,8 +54,7 @@ class EvtAdmPrelim extends Factory implements FactoryInterface
      */
     protected function toNode()
     {
-        $ideEmpregador = $this->node->getElementsByTagName('ideEmpregador')->item(0);
-        
+        $ideContri = $this->node->getElementsByTagName('ideContri')->item(0);
         //o idEvento pode variar de evento para evento
         //então cada factory individualmente terá de construir o seu
         $ideEvento = $this->dom->createElement("ideEvento");
@@ -77,32 +76,168 @@ class EvtAdmPrelim extends Factory implements FactoryInterface
             $this->verProc,
             true
         );
-        $this->node->insertBefore($ideEvento, $ideEmpregador);
-
+        $this->node->insertBefore($ideEvento, $ideContri);
         //tag deste evento em particular
-        $infoRegPrelim = $this->dom->createElement("infoRegPrelim");
+        $infoContri = $this->dom->createElement("infoContri");
+        //se aplica a todos os modos
+        $idePeriodo = $this->dom->createElement("idePeriodo");
         $this->dom->addChild(
-            $infoRegPrelim,
-            "cpfTrab",
-            $this->std->cpftrab,
+            $idePeriodo,
+            "iniValid",
+            $this->std->inivalid,
             true
         );
         $this->dom->addChild(
-            $infoRegPrelim,
-            "dtNascto",
-            $this->std->dtnascto,
-            true
+            $idePeriodo,
+            "fimValid",
+            !empty($this->std->fimvalid) ? $this->std->fimvalid : null,
+            false
         );
-        $this->dom->addChild(
-            $infoRegPrelim,
-            "dtAdm",
-            $this->std->dtadm,
-            true
-        );
-        $this->node->appendChild($infoRegPrelim);
-        
+        if (!empty($this->std->infocadastro)) {
+            $cad = $this->std->infocadastro;
+            $infocadastro = $this->dom->createElement("infoCadastro");
+            $this->dom->addChild(
+                $infocadastro,
+                "classTrib",
+                $cad->classtrib,
+                true
+            );
+            $this->dom->addChild(
+                $infocadastro,
+                "indEscrituracao",
+                $cad->indescrituracao,
+                true
+            );
+            $this->dom->addChild(
+                $infocadastro,
+                "indDesoneracao",
+                $cad->inddesoneracao,
+                true
+            );
+            $this->dom->addChild(
+                $infocadastro,
+                "indAcordoIsenMulta",
+                $cad->indacordoisenmulta,
+                true
+            );
+            $indsitpj = null;
+            if (isset($cad->indsitpj)) {
+                $indsitpj = $cad->indsitpj;
+            }
+            $this->dom->addChild(
+                $infocadastro,
+                "indSitPJ",
+                $indsitpj,
+                false
+            );
+            $contato = $this->dom->createElement("contato");
+            $this->dom->addChild(
+                $contato,
+                "nmCtt",
+                $cad->contato->nmctt,
+                true
+            );
+            $this->dom->addChild(
+                $contato,
+                "cpfCtt",
+                $cad->contato->cpfctt,
+                true
+            );
+            $this->dom->addChild(
+                $contato,
+                "foneFixo",
+                !empty($cad->contato->fonefixo)
+                    ? $cad->contato->fonefixo
+                    : null,
+                false
+            );
+            $this->dom->addChild(
+                $contato,
+                "foneCel",
+                !empty($cad->contato->fonecel)
+                    ? $cad->contato->fonecel
+                    : null,
+                false
+            );
+            $this->dom->addChild(
+                $contato,
+                "email",
+                !empty($cad->contato->email)
+                    ? $cad->contato->email
+                    : null,
+                false
+            );
+            $infocadastro->appendChild($contato);
+            if (!empty($cad->softhouse)) {
+                foreach($cad->softhouse as $soft) {
+                    $softhouse = $this->dom->createElement("softHouse");
+                    $this->dom->addChild(
+                        $softhouse,
+                        "cnpjSoftHouse",
+                        $soft->cnpjsofthouse,
+                        true
+                    );
+                    $this->dom->addChild(
+                        $softhouse,
+                        "nmRazao",
+                        $soft->nmrazao,
+                        true
+                    );
+                    $this->dom->addChild(
+                        $softhouse,
+                        "nmCont",
+                        $soft->nmcont,
+                        true
+                    );
+                    $this->dom->addChild(
+                        $softhouse,
+                        "telefone",
+                        !empty($soft->telefone) ? $soft->telefone : null,
+                        false
+                    );
+                    $this->dom->addChild(
+                        $softhouse,
+                        "email",
+                        !empty($soft->email) ? $soft->email : null,
+                        false
+                    );
+                    $infocadastro->appendChild($softhouse);
+                }
+            }
+            if (!empty($cad->infoefr)) {
+                $infoEFR = $this->dom->createElement("infoEFR");
+                $this->dom->addChild(
+                    $infoEFR,
+                    "ideEFR",
+                    $cad->infoefr->ideefr,
+                    true
+                );
+                $this->dom->addChild(
+                    $infoEFR,
+                    "cnpjEFR",
+                    !empty($cad->infoefr->cnpjefr) ? $cad->infoefr->cnpjefr : null,
+                    false
+                );
+                $infocadastro->appendChild($infoEFR);
+            }
+        }
+        if ($this->std->modo == 'INC') {
+            $modo = $this->dom->createElement("inclusao");
+            $modo->appendChild($idePeriodo);
+            $modo->appendChild($infocadastro);
+        } elseif ($this->std->modo == 'ALT') {
+            $modo = $this->dom->createElement("alteracao");
+            $modo->appendChild($idePeriodo);
+            $modo->appendChild($infocadastro);
+        } else {
+            $modo = $this->dom->createElement("exclusao");
+            $modo->appendChild($idePeriodo);
+        }
         //finalização do xml
-        $this->eSocial->appendChild($this->node);
+        $infoContri->appendChild($modo);
+        $this->node->appendChild($infoContri);
+        $this->reinf->appendChild($this->node);
+        //$this->xml = $this->dom->saveXML($this->reinf);
         $this->sign();
     }
 }
