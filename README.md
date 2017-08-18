@@ -113,13 +113,13 @@ Este pacote está diponibilizado sob LGPLv3 ou MIT License (MIT). Leia  [Arquivo
 [ico-license]: https://poser.pugx.org/nfephp-org/nfephp/license.svg?style=flat-square
 [ico-gitter]: https://img.shields.io/badge/GITTER-4%20users%20online-green.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/nfephp-org/sped-esocial
-[link-travis]: https://travis-ci.org/nfephp-org/sped-esocial
-[link-scrutinizer]: https://scrutinizer-ci.com/g/nfephp-org/sped-esocial/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/nfephp-org/sped-esocial
-[link-downloads]: https://packagist.org/packages/nfephp-org/sped-esocial
+[link-packagist]: https://packagist.org/packages/nfephp-org/sped-efdreinf
+[link-travis]: https://travis-ci.org/nfephp-org/sped-efdreinf
+[link-scrutinizer]: https://scrutinizer-ci.com/g/nfephp-org/sped-efdreinf/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/nfephp-org/sped-efdreinf
+[link-downloads]: https://packagist.org/packages/nfephp-org/sped-efdreinf
 [link-author]: https://github.com/nfephp-org
-[link-issues]: https://github.com/nfephp-org/sped-esocial/issues
-[link-forks]: https://github.com/nfephp-org/sped-esocial/network
-[link-stars]: https://github.com/nfephp-org/sped-esocial/stargazers
-[link-gitter]: https://gitter.im/nfephp-org/sped-esocial?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+[link-issues]: https://github.com/nfephp-org/sped-efdreinf/issues
+[link-forks]: https://github.com/nfephp-org/sped-efdreinf/network
+[link-stars]: https://github.com/nfephp-org/sped-efdreinf/stargazers
+[link-gitter]: https://gitter.im/nfephp-org/sped-efdreinf?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
