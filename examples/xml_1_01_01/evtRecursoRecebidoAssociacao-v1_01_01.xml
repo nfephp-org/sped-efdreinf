@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Reinf xmlns="http://www.reinf.esocial.gov.br/schemas/evtRecursoRecebidoAssociacao/v1_01_01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.reinf.esocial.gov.br/schemas/evtRecursoRecebidoAssociacao/v1_01_01 evtRecursoRecebidoAssociacao-v1_01_01.xsd ">
+  <evtAssocDespRec id="">
+    <ideEvento>
+      <indRetif>0</indRetif>
+      <perApur>2001-01</perApur>
+      <tpAmb>0</tpAmb>
+      <procEmi>0</procEmi>
+      <verProc>verProc</verProc>
+    </ideEvento>
+    <ideContri>
+      <tpInsc>0</tpInsc>
+      <nrInsc>nrInsc</nrInsc>
+      <ideEstab>
+        <tpInscEstab>0</tpInscEstab>
+        <nrInscEstab>nrInscEstab</nrInscEstab>
+        <recursosRec>
+          <cnpjOrigRecurso>cnpjOrigRecurso</cnpjOrigRecurso>
+          <vlrTotalRec>vlrTotalRec</vlrTotalRec>
+          <vlrTotalRet>vlrTotalRet</vlrTotalRet>
+          <infoRecurso>
+            <tpRepasse>tpRepasse</tpRepasse>
+            <vlrBruto>vlrBruto</vlrBruto>
+            <vlrRetApur>vlrRetApur</vlrRetApur>
+          </infoRecurso>
+        </recursosRec>
+      </ideEstab>
+    </ideContri>
+  </evtAssocDespRec>
+  <Signature/>
+</Reinf>

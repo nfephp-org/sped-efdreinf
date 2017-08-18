@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Reinf xmlns="http://www.reinf.esocial.gov.br/schemas/evtTabProcesso/v1_01_01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.reinf.esocial.gov.br/schemas/evtTabProcesso/v1_01_01 evtTabProcesso-v1_01_01.xsd ">
+  <evtTabProcesso id="">
+    <ideEvento>
+      <tpAmb>0</tpAmb>
+      <procEmi>0</procEmi>
+      <verProc>verProc</verProc>
+    </ideEvento>
+    <ideContri>
+      <tpInsc>0</tpInsc>
+      <nrInsc>nrInsc</nrInsc>
+    </ideContri>
+    <infoProcesso/>
+  </evtTabProcesso>
+  <Signature/>
+</Reinf>

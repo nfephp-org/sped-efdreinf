@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Reinf xmlns="http://www.reinf.esocial.gov.br/schemas/evtReabreEvPer/v1_01_01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.reinf.esocial.gov.br/schemas/evtReabreEvPer/v1_01_01 evtReabreEvPer-v1_01_01.xsd ">
+  <evtReabreEvPer id="">
+    <ideEvento>
+      <perApur>perApur</perApur>
+      <tpAmb>0</tpAmb>
+      <procEmi>0</procEmi>
+      <verProc>verProc</verProc>
+    </ideEvento>
+    <ideContri>
+      <tpInsc>0</tpInsc>
+      <nrInsc>nrInsc</nrInsc>
+    </ideContri>
+  </evtReabreEvPer>
+  <Signature/>
+</Reinf>

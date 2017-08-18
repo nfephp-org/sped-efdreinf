@@ -24,7 +24,20 @@ class Event
      * @var array
      */
     private static $available = [
-        'evtInfoContri' => Factories\EvtInfoContri::class,
+        'evtinfocontri' => Factories\EvtInfoContri::class,
+        'evttabprocesso' => Factories\EvtTabProcesso::class,
+        'evtservtom' => Factories\EvtServTom::class,
+        'evtservprest' => Factories\EvtServPrest::class,
+        'evtassocdesprec' => Factories\EvtAssocDespRec::class,
+        'evtassocdesprep' => Factories\EvtAssocDespRep::class,
+        'evtcomprod' => Factories\EvtComProd::class,
+        'evtcprb' => Factories\EvtCPRB::class,
+        'evtpgtosdivs' => Factories\EvtPgtosDivs::class,
+        'evtreabreevper' => Factories\EvtReabreEvPer::class,
+        'evtfechaevper' => Factories\EvtFechaEvPer::class,
+        'evtespdesportivo' => Factories\EvtEspDesportivo::class,
+        'evttotal' => Factories\EvtTotal::class,
+        'evtexclusao' => Factories\EvtExclusao::class
     ];
     
     /**
@@ -32,8 +45,20 @@ class Event
      * @var array
      */
     private static $aliases = [
-        'r1000' => 'evtInfoContri',
-        
+        'r1000' => 'evtinfocontri',
+        'r1070' => 'evttabprocesso',
+        'r2010' => 'evtservtom',
+        'r2020' => 'evtservprest',
+        'r2030' => 'evtassocdesprec',
+        'r2040' => 'evtassocdesprep',
+        'r2050' => 'evtcomprod',
+        'r2060' => 'evtcprb',
+        'r2070' => 'evtpgtosdivs',
+        'r2098' => 'evteeabreevper',
+        'r2099' => 'evtfecharvper',
+        'r3010' => 'evtespdesportivo',
+        'r5001' => 'evttotal',
+        'r9000' => 'evtexclusao'
     ];
     
     /**
