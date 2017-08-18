@@ -53,7 +53,5 @@ class EvtExclusao extends Factory implements FactoryInterface
      */
     protected function toNode()
     {
-        
     }
-    
 }

@@ -53,8 +53,5 @@ class EvtServTom extends Factory implements FactoryInterface
      */
     protected function toNode()
     {
-        
     }
-    
 }
-

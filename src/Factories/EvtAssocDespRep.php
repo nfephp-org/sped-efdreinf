@@ -53,7 +53,5 @@ class EvtAssocDespRep extends Factory implements FactoryInterface
      */
     protected function toNode()
     {
-        
     }
-    
 }

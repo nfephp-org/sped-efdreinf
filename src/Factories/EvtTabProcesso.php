@@ -53,7 +53,5 @@ class EvtTabProcesso extends Factory implements FactoryInterface
      */
     protected function toNode()
     {
-        
     }
-    
 }

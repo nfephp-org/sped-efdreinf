@@ -53,8 +53,5 @@ class EvtCPRB extends Factory implements FactoryInterface
      */
     protected function toNode()
     {
-        
     }
-    
 }
-

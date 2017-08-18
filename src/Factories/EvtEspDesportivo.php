@@ -53,7 +53,5 @@ class EvtEspDesportivo extends Factory implements FactoryInterface
      */
     protected function toNode()
     {
-        
     }
-    
 }

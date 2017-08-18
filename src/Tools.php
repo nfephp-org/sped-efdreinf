@@ -68,7 +68,6 @@ class Tools extends ToolsBase
      */
     public function consultaLoteEventos($protocolo)
     {
-        
     }
     
     /**
