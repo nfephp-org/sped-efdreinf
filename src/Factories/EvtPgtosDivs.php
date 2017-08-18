@@ -9,14 +9,6 @@
 namespace NFePHP\EFDReinf\Factories;
 
 /**
- * Description of EvtPgtosDivs
- *
- * @author administrador
- */
-class EvtPgtosDivs {
-    //put your code here
-}
-/**
  * Class EFD-Reinf EvtPgtosDivs Event R-2070 constructor
  *
  * @category  API
@@ -67,7 +59,5 @@ class EvtPgtosDivs extends Factory implements FactoryInterface
      */
     protected function toNode()
     {
-        
     }
-    
 }
