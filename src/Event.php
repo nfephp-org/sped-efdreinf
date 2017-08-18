@@ -5,7 +5,7 @@ namespace NFePHP\EFDReinf;
 /**
  * Class efdReinf Event constructor
  *
- * @category  NFePHP
+ * @category  API
  * @package   NFePHP\EFDReinf
  * @copyright NFePHP Copyright (c) 2017
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
@@ -62,7 +62,7 @@ class Event
     ];
     
     /**
-     * Call classes to build XML eSocial Event
+     * Call classes to build XML EFDReinf Event
      * @param string $name
      * @param array $arguments [config, std, certificate, $date]
      * @return object

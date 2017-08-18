@@ -11,6 +11,7 @@ use NFePHP\Common\DOMImproved as Dom;
 use NFePHP\Common\Signer;
 use NFePHP\Common\Strings;
 use NFePHP\Common\Validator;
+use NFePHP\EFDReinf\Exception\EventsException;
 use stdClass;
 
 abstract class Factory
@@ -46,7 +47,7 @@ abstract class Factory
     /**
      * @var string
      */
-    public $layout = '2.2.2';
+    public $layout = '';
     /**
      * @var string
      */
@@ -66,7 +67,7 @@ abstract class Factory
     /**
      * @var string
      */
-    protected $xmlns = "http://www.esocial.gov.br/schema/evt/";
+    protected $xmlns = "http://www.reinf.esocial.gov.br/schemas/";
     /**
      * @var string
      */
@@ -86,7 +87,7 @@ abstract class Factory
     /**
      * @var DOMNode
      */
-    protected $eSocial;
+    protected $reinf;
     /**
      * @var DOMElement
      */
@@ -137,9 +138,7 @@ abstract class Factory
         $this->layoutStr = $this->strLayoutVer($this->layout);
         $this->certificate = $certificate;
         if (empty($std) || !is_object($std)) {
-            throw new \InvalidArgumentException(
-                'Você deve passar os parâmetros num stdClass.'
-            );
+            throw EventsException::wrongArgument(1003, '');
         }
         $this->jsonschema = realpath(
             __DIR__
@@ -151,6 +150,7 @@ abstract class Factory
             __DIR__
             . "/../../schemes/$this->layoutStr/"
             . $this->evtName
+            . "-" . $this->layoutStr
             . ".xsd"
         );
         //convert all data fields to lower case
@@ -218,11 +218,11 @@ abstract class Factory
         $validator = new JsonValid();
         $validator->check($data, (object)['$ref' => 'file://' . $this->jsonschema]);
         if (!$validator->isValid()) {
-            $msg = "JSON does not validate. Violations:\n";
+            $msg = "";
             foreach ($validator->getErrors() as $error) {
                 $msg .= sprintf("[%s] %s\n", $error['property'], $error['message']);
             }
-            throw new \RuntimeException($msg);
+            throw EventsException::wrongArgument(1004, $msg);
         }
         return true;
     }
@@ -237,38 +237,37 @@ abstract class Factory
             $this->dom->preserveWhiteSpace = false;
             $this->dom->formatOutput = false;
             $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                . "<eSocial xmlns=\"$this->xmlns"
+                . "<Reinf xmlns=\"$this->xmlns"
                 . $this->evtName
                 . "/$this->layoutStr\" "
                 . "xmlns:xsi=\"$this->xsi\">"
-                . "</eSocial>";
+                . "</Reinf>";
             $this->dom->loadXML($xml);
-            $this->eSocial = $this->dom->getElementsByTagName('eSocial')->item(0);
+            $this->reinf = $this->dom->getElementsByTagName('Reinf')->item(0);
             $this->evtid = FactoryId::build(
                 $this->tpInsc,
                 $this->nrInsc,
                 $this->date,
                 $this->std->sequencial
             );
-            $this->node = $this->dom->createElement($this->evtName);
-            $att = $this->dom->createAttribute('Id');
+            $this->node = $this->dom->createElement($this->evtTag);
+            $att = $this->dom->createAttribute('id');
             $att->value = $this->evtid;
             $this->node->appendChild($att);
-
-            $ideEmpregador = $this->dom->createElement("ideEmpregador");
+            $ideContri = $this->dom->createElement("ideContri");
             $this->dom->addChild(
-                $ideEmpregador,
+                $ideContri,
                 "tpInsc",
                 $this->tpInsc,
                 true
             );
             $this->dom->addChild(
-                $ideEmpregador,
+                $ideContri,
                 "nrInsc",
                 $this->nrInsc,
                 true
             );
-            $this->node->appendChild($ideEmpregador);
+            $this->node->appendChild($ideContri);
         }
     }
 
@@ -304,9 +303,7 @@ abstract class Factory
 
     /**
      * Remove XML declaration from XML string
-     *
      * @param string $xml
-     *
      * @return string
      */
     protected function clearXml($xml)
@@ -320,7 +317,6 @@ abstract class Factory
 
     /**
      * Convert xml of event to array
-     *
      * @return array
      */
     public function toArray()
@@ -330,7 +326,6 @@ abstract class Factory
 
     /**
      * Convert xml to json string
-     *
      * @return string
      */
     public function toJson()
@@ -353,7 +348,6 @@ abstract class Factory
 
     /**
      * Convert xml to stdClass
-     *
      * @return stdClass
      */
     public function toStd()
@@ -363,9 +357,7 @@ abstract class Factory
 
     /**
      * Adjust missing properties form original data according schema
-     *
      * @param \stdClass $data
-     *
      * @return \stdClass
      */
     public function standardizeProperties(stdClass $data)
@@ -383,13 +375,13 @@ abstract class Factory
      */
     protected function sign()
     {
-        $xml = $this->dom->saveXML($this->eSocial);
+        $xml = $this->dom->saveXML($this->reinf);
         $xml = Strings::clearXmlString($xml);
         if (!empty($this->certificate)) {
             $xml = Signer::sign(
                 $this->certificate,
                 $xml,
-                'eSocial',
+                'Reinf',
                 '',
                 OPENSSL_ALGO_SHA256,
                 [true, false, null, null]

@@ -13,7 +13,7 @@ namespace NFePHP\EFDReinf\Exception;
 class ProcessException extends \InvalidArgumentException implements ExceptionInterface
 {
     public static $list = [
-        2000 => "O numero máximo de eventos em um lote é 100, você está tentando enviar {{ msg }} eventos !",
+        2000 => "O numero máximo de eventos em um lote é 100, você está tentando enviar {{msg}} eventos !",
         2001 => "Não temos um certificado disponível!",
         2002 => "",
         2003 => "",

@@ -7,7 +7,7 @@ use DateTime;
 class FactoryId
 {
     /**
-     * Build Id for eSocial event
+     * Build Id for EFDReinf event
      * @param int $tpInsc
      * @param string $nrInsc
      * @param DateTime $date

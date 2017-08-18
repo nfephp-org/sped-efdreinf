@@ -123,7 +123,7 @@ class SoapCurl extends SoapBase implements SoapInterface
     {
         $response = '';
         $this->saveTemporarilyKeyFiles();
-        $url .= '?WSDL';
+        $url .= '?singleWsdl';
         $oCurl = curl_init();
         curl_setopt($oCurl, CURLOPT_URL, $url);
         curl_setopt($oCurl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);

@@ -16,8 +16,8 @@ class EventsException extends \InvalidArgumentException implements ExceptionInte
         1000 => "Este evento [{{msg}}] não foi encontrado.",
         1001 => "Não foi passado o config.",
         1002 => "Não foram passados os dados do evento.",
-        1003 => "",
-        1004 => "",
+        1003 => "Você deve passar os parâmetros de configuração num stdClass.",
+        1004 => "JSON does not validate. Violations:\n{{msg}}",
         1005 => ""
     ];
     
