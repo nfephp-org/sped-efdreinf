@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Reinf xmlns="http://www.reinf.esocial.gov.br/schemas/evtFechamento/v1_01_01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.reinf.esocial.gov.br/schemas/evtFechamento/v1_01_01 evtFechamento-v1_01_01.xsd ">
+  <evtFechaEvPer id="">
+    <ideEvento>
+      <perApur>2001-01</perApur>
+      <tpAmb>0</tpAmb>
+      <procEmi>0</procEmi>
+      <verProc>verProc</verProc>
+    </ideEvento>
+    <ideContri>
+      <tpInsc>0</tpInsc>
+      <nrInsc>nrInsc</nrInsc>
+    </ideContri>
+    <ideRespInf>
+      <nmResp>nmResp</nmResp>
+      <cpfResp>cpfResp</cpfResp>
+      <email>email</email>
+    </ideRespInf>
+    <infoFech>
+      <evtServTm>S</evtServTm>
+      <evtServPr>S</evtServPr>
+      <evtAssDespRec>S</evtAssDespRec>
+      <evtAssDespRep>S</evtAssDespRep>
+      <evtComProd>S</evtComProd>
+      <evtCPRB>S</evtCPRB>
+      <evtPgtos>S</evtPgtos>
+    </infoFech>
+  </evtFechaEvPer>
+  <Signature/>
+</Reinf>

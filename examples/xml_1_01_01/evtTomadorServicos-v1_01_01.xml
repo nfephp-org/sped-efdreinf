@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Reinf xmlns="http://www.reinf.esocial.gov.br/schemas/evtTomadorServicos/v1_01_01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.reinf.esocial.gov.br/schemas/evtTomadorServicos/v1_01_01 evtTomadorServicos-v1_01_01.xsd ">
+  <evtServTom id="">
+    <ideEvento>
+      <indRetif>0</indRetif>
+      <perApur>2001-01</perApur>
+      <tpAmb>0</tpAmb>
+      <procEmi>0</procEmi>
+      <verProc>verProc</verProc>
+    </ideEvento>
+    <ideContri>
+      <tpInsc>0</tpInsc>
+      <nrInsc>nrInsc</nrInsc>
+    </ideContri>
+    <infoServTom>
+      <ideEstabObra>
+        <tpInscEstab>0</tpInscEstab>
+        <nrInscEstab>nrInscEstab</nrInscEstab>
+        <indObra>0</indObra>
+        <idePrestServ>
+          <cnpjPrestador>cnpjPrestador</cnpjPrestador>
+          <vlrTotalBruto>vlrTotalBruto</vlrTotalBruto>
+          <vlrTotalBaseRet>vlrTotalBaseRet</vlrTotalBaseRet>
+          <vlrTotalRetPrinc>vlrTotalRetPrinc</vlrTotalRetPrinc>
+          <indCPRB>0</indCPRB>
+          <nfs>
+            <serie>serie</serie>
+            <numDocto>numDocto</numDocto>
+            <dtEmissaoNF>2001-01-01</dtEmissaoNF>
+            <vlrBruto>vlrBruto</vlrBruto>
+            <infoTpServ>
+              <tpServico>tpServico</tpServico>
+              <vlrMatEquip>vlrMatEquip</vlrMatEquip>
+              <vlrDedAlim>vlrDedAlim</vlrDedAlim>
+              <vlrDedTrans>vlrDedTrans</vlrDedTrans>
+              <vlrBaseRet>vlrBaseRet</vlrBaseRet>
+              <vlrRetencao>vlrRetencao</vlrRetencao>
+            </infoTpServ>
+          </nfs>
+        </idePrestServ>
+      </ideEstabObra>
+    </infoServTom>
+  </evtServTom>
+  <Signature/>
+</Reinf>
