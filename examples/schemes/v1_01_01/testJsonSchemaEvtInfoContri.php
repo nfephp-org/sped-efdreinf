@@ -1,12 +1,12 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
-require_once '../../bootstrap.php';
+require_once '../../../bootstrap.php';
 
-use JsonSchema\Validator;
-use JsonSchema\SchemaStorage;
-use JsonSchema\Constraints\Factory;
 use JsonSchema\Constraints\Constraint;
+use JsonSchema\Constraints\Factory;
+use JsonSchema\SchemaStorage;
+use JsonSchema\Validator;
 
 $evento = 'evtInfoContri';
 $version = '1_01_01';
@@ -229,4 +229,4 @@ if ($jsonValidator->isValid()) {
     die;
 }
 //salva se sucesso
-file_put_contents("../../jsonSchemes/v$version/$evento.schema", $jsonSchema);
+file_put_contents("../../../jsonSchemes/v$version/$evento.schema", $jsonSchema);
