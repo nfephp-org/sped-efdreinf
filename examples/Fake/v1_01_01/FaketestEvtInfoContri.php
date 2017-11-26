@@ -55,9 +55,9 @@ $std->infocadastro->infoefr->cnpjefr = '12345678901234';
 
 try {
     
-    //carrega a classe responsavel por lidar com os certificados
-    $content = file_get_contents('expired_certificate.pfx');
-    $password = 'associação';
+   //carrega a classe responsavel por lidar com os certificados
+    $content     = file_get_contents('expired_certificate.pfx');
+    $password    = 'associacao';
     $certificate = Certificate::readPfx($content, $password);
     
     //cria o evento e retorna o XML assinado
