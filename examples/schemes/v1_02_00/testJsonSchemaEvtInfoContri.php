@@ -1,15 +1,15 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
-require_once '../../bootstrap.php';
+require_once '../../../bootstrap.php';
 
-use JsonSchema\Validator;
-use JsonSchema\SchemaStorage;
-use JsonSchema\Constraints\Factory;
 use JsonSchema\Constraints\Constraint;
+use JsonSchema\Constraints\Factory;
+use JsonSchema\SchemaStorage;
+use JsonSchema\Validator;
 
 $evento = 'evtInfoContri';
-$version = '1_01_01';
+$version = '1_02_00';
 
 $jsonSchema = '{
     "title": "evtInfoContri",
@@ -134,7 +134,7 @@ $jsonSchema = '{
                             "telefone": {
                                 "required": true,
                                 "type": "string",
-                                "minLength": 10
+                                "minLength": 10,
                                 "maxLength": 13,
                                 "pattern": "^[0-9]"
                             },
@@ -164,7 +164,7 @@ $jsonSchema = '{
                     }
                 }
             }
-        }
+        }    
     }
 }';
 
@@ -174,12 +174,14 @@ $std->sequencial = 1;
 $std->modo = 'INC';
 $std->inivalid = '2017-01';
 $std->fimvalid = '2017-12';
+
 $std->infocadastro = new \stdClass();
 $std->infocadastro->classtrib = '01';
 $std->infocadastro->indescrituracao = 0;
 $std->infocadastro->inddesoneracao = 0;
 $std->infocadastro->indacordoisenmulta = 0;
 $std->infocadastro->indsitpj = 0;
+
 $std->infocadastro->contato = new \stdClass();
 $std->infocadastro->contato->nmctt = 'Fulano de Tal';
 $std->infocadastro->contato->cpfctt = '12345678901';
@@ -201,7 +203,13 @@ $std->infocadastro->infoefr->cnpjefr = '12345678901234';
 
 // Schema must be decoded before it can be used for validation
 $jsonSchemaObject = json_decode($jsonSchema);
-
+if (empty($jsonSchemaObject)) {
+    echo "<h2>Erro de digitação no schema ! Revise</h2>";
+    echo "<pre>";
+    print_r($jsonSchema);
+    echo "</pre>";
+    die();
+}
 // The SchemaStorage can resolve references, loading additional schemas from file as needed, etc.
 $schemaStorage = new SchemaStorage();
 
@@ -216,7 +224,8 @@ $jsonValidator = new Validator(new Factory($schemaStorage));
 // Do validation (use isValid() and getErrors() to check the result)
 $jsonValidator->validate(
     $std,
-    $jsonSchemaObject
+    $jsonSchemaObject,
+    Constraint::CHECK_MODE_COERCE_TYPES  //tenta converter o dado no tipo indicado no schema
 );
 
 if ($jsonValidator->isValid()) {
@@ -229,4 +238,4 @@ if ($jsonValidator->isValid()) {
     die;
 }
 //salva se sucesso
-file_put_contents("../../jsonSchemes/v$version/$evento.schema", $jsonSchema);
+file_put_contents("../../../jsonSchemes/v$version/$evento.schema", $jsonSchema);

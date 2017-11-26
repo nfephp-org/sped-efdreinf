@@ -1,0 +1,234 @@
+{
+    "title": "evtServPrest",
+    "type": "object",
+    "properties": {
+        "sequencial": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 99999
+        },
+        "indretif": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2
+        },
+        "nrrecibo": {
+            "required": false,
+            "type": ["string","null"],
+            "maxLength": 52
+        },
+        "perapur": {
+            "required": true,
+            "type": "string",
+            "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])$"
+        },
+        "tpinscestabprest": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1
+        },
+        "nrinscestabprest": {
+            "required": true,
+            "type": "string",
+            "maxLength": 14,
+            "pattern": "^[0-9]"
+        },
+        "tpinsctomador": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4
+        },
+        "nrinsctomador": {
+            "required": true,
+            "type": "string",
+            "maxLength": 14,
+            "pattern": "^[0-9]"
+        },
+        "indobra": {
+            "required": true,
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+        },
+        "vlrtotalbruto": {
+            "required": true,
+            "type": "number"
+        },
+        "vlrtotalbaseret": {
+            "required": true,
+            "type": "number"
+        },
+        "vlrtotalretprinc": {
+            "required": true,
+            "type": "number"
+        },
+        "vlrtotalretadic": {
+            "required": false,
+            "type": ["number","null"]
+        },
+        "vlrtotalnretprinc": {
+            "required": false,
+            "type": ["number","null"]
+        },
+        "vlrtotalnretadic": {
+            "required": false,
+            "type": ["number","null"]
+        },
+        "nfs": {
+            "required": true,
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 500,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "serie": {
+                        "required": true,
+                        "type": "string",
+                        "maxLength": 5
+                    },
+                    "numdocto": {
+                        "required": true,
+                        "type": "string",
+                        "maxLength": 15
+                    },
+                    "dtemissaonf": {
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$"
+                    },
+                    "vlrbruto": {
+                        "required": true,
+                        "type": "number"
+                    },
+                    "obs": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "maxLength": 250
+                    },
+                    "infotpserv": {
+                        "required": true,
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 9,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "tpservico": {
+                                    "required": true,
+                                    "type": "string",
+                                    "maxLength": 9,
+                                    "pattern": "^[0-9]"
+                                },
+                                "vlrbaseret": {
+                                    "required": true,
+                                    "type": "number"
+                                },
+                                "vlrretencao": {
+                                    "required": true,
+                                    "type": "number"
+                                },
+                                "vlrretsub": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlrnretprinc": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlrservicos15": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlrservicos20": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlrservicos25": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlradicional": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlrnretadic": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "infoprocretpr": {
+            "required": false,
+            "type": ["array","null"],
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "tpprocretprinc": {
+                        "required": true,
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2
+                    },
+                    "nrprocretprinc": {
+                        "required": true,
+                        "type": "string",
+                        "maxLength": 21
+                    },
+                    "codsuspprinc": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "maxLength": 14,
+                        "pattern": "^[0-9]"
+                    },
+                    "valorprinc": {
+                           "required": true,
+                           "type": "number"
+                    }
+                }
+            }
+        },
+        "infoprocretad": {
+            "required": false,
+            "type": ["array","null"],
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "tpprocretadic": {
+                        "required": true,
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2
+                    },
+                    "nrprocretadic": {
+                        "required": true,
+                        "type": "string",
+                        "maxLength": 21
+                    },
+                    "codsuspadic": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "maxLength": 14,
+                        "pattern": "^[0-9]"
+                    },
+                    "valoradic": {
+                        "required": true,
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    }
+}
