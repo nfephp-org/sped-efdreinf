@@ -169,7 +169,7 @@ class EvtInfoContri extends Factory implements FactoryInterface
             );
             $infocadastro->appendChild($contato);
             if (!empty($cad->softhouse)) {
-                foreach($cad->softhouse as $soft) {
+                foreach ($cad->softhouse as $soft) {
                     $softhouse = $this->dom->createElement("softHouse");
                     $this->dom->addChild(
                         $softhouse,
