@@ -114,7 +114,23 @@ $jsonSchema = '{
                     "maxLength": 2
                 }
             }
-        }    
+        },
+        "novavalidade": {
+            "required": false,
+            "type": ["object","null"],
+            "properties": {
+                "inivalid": {
+                    "required": true,
+                    "type": "string",
+                    "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])$"
+                },
+                "fimvalid": {
+                    "required": false,
+                    "type": ["string","null"],
+                    "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])$"
+                }
+            }
+        }
     }
 }';
 
@@ -138,6 +154,9 @@ $std->dadosprocjud->ufvara = 'SP';
 $std->dadosprocjud->codmunic = '3548714';
 $std->dadosprocjud->idvara = 'TR';
 
+$std->novavalidade = new \stdClass();
+$std->novavalidade->inivalid = '2017-11';
+$std->novavalidade->fimvalid = null;
 
 // Schema must be decoded before it can be used for validation
 $jsonSchemaObject = json_decode($jsonSchema);

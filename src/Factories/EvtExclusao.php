@@ -30,6 +30,10 @@ class EvtExclusao extends Factory implements FactoryInterface
     /**
      * @var string
      */
+    protected $evtTag = 'evtExclusao';
+    /**
+     * @var string
+     */
     protected $evtAlias = 'R-9000';
 
     /**
@@ -53,5 +57,52 @@ class EvtExclusao extends Factory implements FactoryInterface
      */
     protected function toNode()
     {
+        $ideContri = $this->node->getElementsByTagName('ideContri')->item(0);
+        //o idEvento pode variar de evento para evento
+        //então cada factory individualmente terá de construir o seu
+        $ideEvento = $this->dom->createElement("ideEvento");
+        $this->dom->addChild(
+            $ideEvento,
+            "tpAmb",
+            $this->tpAmb,
+            true
+        );
+        $this->dom->addChild(
+            $ideEvento,
+            "procEmi",
+            $this->procEmi,
+            true
+        );
+        $this->dom->addChild(
+            $ideEvento,
+            "verProc",
+            $this->verProc,
+            true
+        );
+        $this->node->insertBefore($ideEvento, $ideContri);
+        //tag deste evento em particular
+        $infoExclusao = $this->dom->createElement("infoExclusao");
+        $this->dom->addChild(
+            $infoExclusao,
+            "tpEvento",
+            $this->std->tpevento,
+            true
+        );
+        $this->dom->addChild(
+            $infoExclusao,
+            "nrRecEvt",
+            $this->std->nrrecevt,
+            true
+        );
+        $this->dom->addChild(
+            $infoExclusao,
+            "perApur",
+            $this->std->perapur,
+            true
+        );
+        $this->node->appendChild($infoExclusao);
+        $this->reinf->appendChild($this->node);
+        //$this->xml = $this->dom->saveXML($this->reinf);
+        $this->sign();
     }
 }

@@ -27,7 +27,7 @@ $configJson = json_encode($config, JSON_PRETTY_PRINT);
 $std = new \stdClass();
 $std->sequencial = 1;
 $std->tpevento = 'R-2010'; //R-2010 a R-2070 e R-3010
-$std->nrrecevt = '121212-23221-1212121133-212121';
+$std->nrrecevt = '121212-23-1245-55555-125498787888858552';
 $std->perapur = '2017-11';
 
 try {
@@ -45,8 +45,8 @@ try {
         '2017-08-03 10:37:00'
     )->toXml();
     
-    //$xml = Evento::r9000($json, $std, $certificate)->toXML();
-    //$json = Event::evtExclusao($configjson, $std, $certificate)->toJson();
+    //$xml = Event::r9000($configJson, $std, $certificate)->toXML();
+    //$json = Event::evtExclusao($configJson, $std, $certificate)->toJson();
     
     header('Content-type: text/xml; charset=UTF-8');
     echo $xml;

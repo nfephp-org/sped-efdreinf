@@ -30,7 +30,8 @@ $jsonSchema = '{
         "nrrecevt": {
             "required": true,
             "type": "string",
-            "maxLength": 52
+            "maxLength": 52,
+            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4,6}[-][0-9]{1,18})$"
         },
         "perapur": {
             "required": true,
@@ -44,7 +45,7 @@ $jsonSchema = '{
 $std = new \stdClass();
 $std->sequencial = 1;
 $std->tpevento = 'R-2010'; //R-2010 a R-2070 e R-3010
-$std->nrrecevt = '121212-23221-1212121133-212121';
+$std->nrrecevt = '121212-23-1245-55555-125498787888858552';
 $std->perapur = '2017-11';
 
 

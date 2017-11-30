@@ -70,8 +70,8 @@ try {
         '2017-08-03 10:37:00'
     )->toXml();
     
-    //$xml = Evento::r1000($json, $std, $certificate)->toXML();
-    //$json = Event::evtInfoContri($configjson, $std, $certificate)->toJson();
+    //$xml = Event::r1000($configJson, $std, $certificate)->toXML();
+    //$json = Event::evtInfoContri($configJson, $std, $certificate)->toJson();
     
     header('Content-type: text/xml; charset=UTF-8');
     echo $xml;
