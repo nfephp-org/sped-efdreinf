@@ -28,10 +28,10 @@ $std = new \stdClass();
 $std->sequencial = 1;
 $std->tpproc = 1;
 $std->nrproc = 'apc123455678';
-$std->inivalid = '2017-11';
-$std->fimvalid = null;
+$std->inivalid = '2016-11';
+$std->fimvalid = '2017-11';
 $std->indautoria = 1;
-$std->modo = 'INC';
+$std->modo = 'ALT';
 
 $std->infosusp[0] = new \stdClass();
 $std->infosusp[0]->codsusp = '234567890123';
@@ -43,6 +43,10 @@ $std->dadosprocjud = new \stdClass();
 $std->dadosprocjud->ufvara = 'SP';
 $std->dadosprocjud->codmunic = '3548714';
 $std->dadosprocjud->idvara = 'TR';
+
+$std->novavalidade = new \stdClass();
+$std->novavalidade->inivalid = '2017-12';
+$std->novavalidade->fimvalid = '2018-12';
 
 try {
     
@@ -59,8 +63,8 @@ try {
         '2017-08-03 10:37:00'
     )->toXml();
     
-    //$xml = Evento::r1070($json, $std, $certificate)->toXML();
-    //$json = Event::evtTabProcesso($configjson, $std, $certificate)->toJson();
+    //$xml = Event::r1070($configJson, $std, $certificate)->toXML();
+    //$json = Event::evtTabProcesso($configJson, $std, $certificate)->toJson();
     
     header('Content-type: text/xml; charset=UTF-8');
     echo $xml;

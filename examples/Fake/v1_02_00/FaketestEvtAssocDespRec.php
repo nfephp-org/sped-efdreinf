@@ -26,32 +26,29 @@ $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
 $std = new \stdClass();
 $std->sequencial = 1;
-$std->modo = 'INC';
-$std->inivalid = '2017-01';
-$std->fimvalid = '2017-12';
-$std->infocadastro = new \stdClass();
-$std->infocadastro->classtrib = '01';
-$std->infocadastro->indescrituracao = 0;
-$std->infocadastro->inddesoneracao = 0;
-$std->infocadastro->indacordoisenmulta = 0;
-$std->infocadastro->indsitpj = 0;
-$std->infocadastro->contato = new \stdClass();
-$std->infocadastro->contato->nmctt = 'Fulano de Tal';
-$std->infocadastro->contato->cpfctt = '12345678901';
-$std->infocadastro->contato->fonefixo = '115555555';
-$std->infocadastro->contato->fonecel = '1199999999';
-$std->infocadastro->contato->email = 'fulano@email.com';
+$std->indretif = 1;
+$std->nrrecibo = '1-00-1234-1234-1234556789012345';
+$std->perapur = '2017-11';
+$std->tpinscestab = 1;
+$std->nrinscestab = '12345678901234';
 
-$std->infocadastro->softhouse[0] = new \stdClass();
-$std->infocadastro->softhouse[0]->cnpjsofthouse = '12345678901234';
-$std->infocadastro->softhouse[0]->nmrazao = 'Razao Social';
-$std->infocadastro->softhouse[0]->nmcont = 'Fulano de Tal';
-$std->infocadastro->softhouse[0]->telefone = '115555555';
-$std->infocadastro->softhouse[0]->email = 'fulano@email.com';
+$std->recursosrec[0] = new \stdClass();
+$std->recursosrec[0]->cnpjorigrecurso = '12345678901234';
+$std->recursosrec[0]->vlrtotalrec = '1000,00';
+$std->recursosrec[0]->vlrtotalret = '100,00';
+$std->recursosrec[0]->vlrtotalnret = '10,00';
 
-$std->infocadastro->infoefr = new \stdClass();
-$std->infocadastro->infoefr->ideefr = 'N';
-$std->infocadastro->infoefr->cnpjefr = '12345678901234';
+$std->recursosrec[0]->inforecurso[0] = new \stdClass();
+$std->recursosrec[0]->inforecurso[0]->tprepasse = 3;
+$std->recursosrec[0]->inforecurso[0]->descrecurso = 'sei la';
+$std->recursosrec[0]->inforecurso[0]->vlrbruto = '5000,00';
+$std->recursosrec[0]->inforecurso[0]->vlrretapur = '500,00';
+
+$std->recursosrec[0]->infoproc[0] = new \stdClass();
+$std->recursosrec[0]->infoproc[0]->tpproc = 1;
+$std->recursosrec[0]->infoproc[0]->nrproc = 'ABC21';
+$std->recursosrec[0]->infoproc[0]->codsusp = '12345678901234';
+$std->recursosrec[0]->infoproc[0]->vlrnret = '1000,66';
 
 try {
     
