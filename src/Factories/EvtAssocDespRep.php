@@ -121,7 +121,7 @@ class EvtAssocDespRep extends Factory implements FactoryInterface
             "tpInscEstab",
             $this->std->tpinscestab,
             true
-        );        
+        );
         $this->dom->addChild(
             $ideEstab,
             "nrInscEstab",
@@ -155,7 +155,7 @@ class EvtAssocDespRep extends Factory implements FactoryInterface
                 false
             );
             foreach ($r->inforecurso as $i) {
-                $infoRecurso = $this->dom->createElement("infoRecurso"); 
+                $infoRecurso = $this->dom->createElement("infoRecurso");
                 $this->dom->addChild(
                     $infoRecurso,
                     "tpRepasse",
@@ -209,8 +209,8 @@ class EvtAssocDespRep extends Factory implements FactoryInterface
                         );
                         $infoRecurso->appendChild($infoProc);
                     }
-                }                
-                $recursosRep->appendChild($infoRecurso); 
+                }
+                $recursosRep->appendChild($infoRecurso);
             }
             $ideEstab->appendChild($recursosRep);
         }
