@@ -77,7 +77,7 @@ class EvtTotal extends Factory implements FactoryInterface
             "cdRetorno",
             $this->std->cdretorno,
             true
-        );        
+        );
         $this->dom->addChild(
             $ideStatus,
             "descRetorno",
@@ -88,26 +88,26 @@ class EvtTotal extends Factory implements FactoryInterface
             foreach ($this->std->regocorrs as $r) {
                 $regOcorrs = $this->dom->createElement("regOcorrs");
                 $this->dom->addChild(
-                   $regOcorrs,
-                   "tpOcorr",
+                    $regOcorrs,
+                    "tpOcorr",
                     $r->tpocorr,
                     true
                 );
                 $this->dom->addChild(
-                   $regOcorrs,
-                   "localErroAviso",
+                    $regOcorrs,
+                    "localErroAviso",
                     $r->localerroaviso,
                     true
                 );
                 $this->dom->addChild(
-                   $regOcorrs,
-                   "codResp",
+                    $regOcorrs,
+                    "codResp",
                     $r->codresp,
                     true
                 );
                 $this->dom->addChild(
-                   $regOcorrs,
-                   "dscResp",
+                    $regOcorrs,
+                    "dscResp",
                     $r->dscresp,
                     true
                 );
@@ -162,13 +162,13 @@ class EvtTotal extends Factory implements FactoryInterface
             "indEscrituracao",
             $this->std->indescrituracao,
             true
-        );        
+        );
         $this->dom->addChild(
             $infoContrib,
             "indDesoneracao",
             $this->std->inddesoneracao,
             true
-        );        
+        );
         $this->dom->addChild(
             $infoContrib,
             "indAcordoIsenMulta",
@@ -225,43 +225,43 @@ class EvtTotal extends Factory implements FactoryInterface
                     "tpInscTomador",
                     $r->tpinsctomador,
                     true
-                );                
+                );
                 $this->dom->addChild(
                     $rPrest,
                     "nrInscTomador",
                     $r->nrinsctomador,
                     true
-                );                
+                );
                 $this->dom->addChild(
                     $rPrest,
                     "vlrTotalBaseRet",
                     $r->vlrtotalbaseret,
                     true
-                );                
+                );
                 $this->dom->addChild(
                     $rPrest,
                     "vlrTotalRetPrinc",
                     $r->vlrtotalretprinc,
                     true
-                );                
+                );
                 $this->dom->addChild(
                     $rPrest,
                     "vlrTotalRetAdic",
                     !empty($r->vlrtotalretadic) ? $r->vlrtotalretadic : null,
                     false
-                );                
+                );
                 $this->dom->addChild(
                     $rPrest,
                     "vlrTotalNRetPrinc",
                     !empty($r->vlrtotalnretprinc) ? $r->vlrtotalnretprinc : null,
                     false
-                );                
+                );
                 $this->dom->addChild(
                     $rPrest,
                     "vlrTotalNRetAdic",
                     !empty($r->vlrtotalnretadic) ? $r->vlrtotalnretadic : null,
                     false
-                );                
+                );
                 $infoContrib->appendChild($rPrest);
             }
         }
@@ -273,7 +273,7 @@ class EvtTotal extends Factory implements FactoryInterface
                     "cnpjAssocDesp",
                     $r->cnpjassocdesp,
                     true
-                );                
+                );
                 $this->dom->addChild(
                     $rRecRepAD,
                     "vlrTotalRep",
@@ -295,7 +295,7 @@ class EvtTotal extends Factory implements FactoryInterface
                 $infoContrib->appendChild($rRecRepAD);
             }
         }
-        if (!empty($this->std->rcoml)) { 
+        if (!empty($this->std->rcoml)) {
             $rComl = $this->dom->createElement("RComl");
             $r = $this->std->rcoml;
             $this->dom->addChild(
@@ -334,9 +334,9 @@ class EvtTotal extends Factory implements FactoryInterface
                 !empty($r->vlrsenarsusp) ? $r->vlrsenarsusp : null,
                 false
             );
-            $infoContrib->appendChild($rComl); 
+            $infoContrib->appendChild($rComl);
         }
-        if (!empty($this->std->rcprb)) { 
+        if (!empty($this->std->rcprb)) {
             foreach ($this->std->rcprb as $r) {
                 $rCPRB = $this->dom->createElement("RCPRB");
                 $this->dom->addChild(

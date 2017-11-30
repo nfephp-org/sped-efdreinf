@@ -155,7 +155,7 @@ class EvtTabProcesso extends Factory implements FactoryInterface
                 false
             );
         }
-        foreach($this->std->infosusp as $i) {
+        foreach ($this->std->infosusp as $i) {
             $infosusp = $this->dom->createElement("infoSusp");
             $this->dom->addChild(
                 $infosusp,
