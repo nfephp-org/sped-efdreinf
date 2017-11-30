@@ -136,40 +136,40 @@ class EvtCPRB extends Factory implements FactoryInterface
         foreach ($this->std->tipocod as $t) {
             $tipoCod = $this->dom->createElement("tipoCod");
             $this->dom->addChild(
-               $tipoCod,
-               "codAtivEcon",
-               $t->codativecon,
-               true
+                $tipoCod,
+                "codAtivEcon",
+                $t->codativecon,
+                true
             );
             $this->dom->addChild(
-               $tipoCod,
-               "vlrRecBrutaAtiv",
-               $t->vlrrecbrutaativ,
-               true
+                $tipoCod,
+                "vlrRecBrutaAtiv",
+                $t->vlrrecbrutaativ,
+                true
             );
             $this->dom->addChild(
-               $tipoCod,
-               "vlrExcRecBruta",
-               $t->vlrexcrecbruta,
-               true
+                $tipoCod,
+                "vlrExcRecBruta",
+                $t->vlrexcrecbruta,
+                true
             );
             $this->dom->addChild(
-               $tipoCod,
-               "vlrAdicRecBruta",
-               $t->vlradicrecbruta,
-               true
+                $tipoCod,
+                "vlrAdicRecBruta",
+                $t->vlradicrecbruta,
+                true
             );
             $this->dom->addChild(
-               $tipoCod,
-               "vlrBcCPRB",
-               $t->vlrbccprb,
-               true
+                $tipoCod,
+                "vlrBcCPRB",
+                $t->vlrbccprb,
+                true
             );
             $this->dom->addChild(
-               $tipoCod,
-               "vlrCPRBapur",
-               !empty($t->vlrcprbapur) ? $t->vlrcprbapur : null,
-               false
+                $tipoCod,
+                "vlrCPRBapur",
+                !empty($t->vlrcprbapur) ? $t->vlrcprbapur : null,
+                false
             );
             if (!empty($t->tipoajuste)) {
                 foreach ($t->tipoajuste as $a) {
@@ -238,7 +238,7 @@ class EvtCPRB extends Factory implements FactoryInterface
                 );
                 $ideEstab->appendChild($infoProc);
             }
-        }    
+        }
         $info->appendChild($ideEstab);
         $this->node->appendChild($info);
         $this->reinf->appendChild($this->node);
