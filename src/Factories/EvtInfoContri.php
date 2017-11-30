@@ -25,7 +25,7 @@ class EvtInfoContri extends Factory implements FactoryInterface
 {
     /**
      * @var string
-     * NOTA: refere-se ao nome do XSD
+     * NOTA: refere-se ao nome do XSD e ao namespace
      */
     protected $evtName = 'evtInfoContribuinte';
     /**

@@ -25,6 +25,7 @@ class EvtExclusao extends Factory implements FactoryInterface
 {
     /**
      * @var string
+     * NOTA: indica o XSD e o namespace do XML
      */
     protected $evtName = 'evtExclusao';
     /**

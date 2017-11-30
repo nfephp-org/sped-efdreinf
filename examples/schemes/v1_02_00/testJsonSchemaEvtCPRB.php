@@ -30,7 +30,8 @@ $jsonSchema = '{
         "nrrecibo": {
             "required": false,
             "type": ["string","null"],
-            "maxLength": 52
+            "maxLength": 52,
+            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18})$"
         },
         "perapur": {
             "required": true,
@@ -51,15 +52,18 @@ $jsonSchema = '{
         },
         "vlrrecbrutatotal": {
             "required": true,
-            "type": "number"
+            "type": "string",
+            "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
         },
         "vlrcpapurtotal": {
             "required": true,
-            "type": "number"
+            "type": "string",
+            "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
         },
         "vlrcprbsusptotal": {
             "required": true,
-            "type": "number"
+            "type": "string",
+            "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
         },
         "tipocod": {
             "required": true,
@@ -77,23 +81,28 @@ $jsonSchema = '{
                     },
                     "vlrrecbrutaativ": {
                         "required": true,
-                        "type": "number"
+                        "type": "string",
+                        "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
                     },
                     "vlrexcrecbruta": {
                         "required": true,
-                        "type": "number"
+                        "type": "string",
+                        "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
                     },
                     "vlradicrecbruta": {
                         "required": true,
-                        "type": "number"
+                        "type": "string",
+                        "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
                     },
                     "vlrbccprb": {
                         "required": true,
-                        "type": "number"
+                        "type": "string",
+                        "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
                     },
                     "vlrcprbapur": {
                         "required": false,
-                        "type": ["number","null"]
+                        "type": "string",
+                        "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
                     },
                     "tipoajuste": {
                         "required": false,
@@ -117,7 +126,8 @@ $jsonSchema = '{
                                 },
                                 "vlrajuste": {
                                     "required": true,
-                                    "type": "number"
+                                    "type": "string",
+                                    "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
                                 },
                                 "descajuste": {
                                     "required": true,
@@ -145,7 +155,8 @@ $jsonSchema = '{
                 "properties": {
                     "vlrcprbsusp": {
                         "required": true,
-                        "type": "number"
+                        "type": "string",
+                        "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
                     },
                     "tpproc": {
                         "required": true,
@@ -174,31 +185,31 @@ $jsonSchema = '{
 $std = new \stdClass();
 $std->sequencial = 1;
 $std->indretif = 1;
-$std->nrrecibo = '737373737373737';
+$std->nrrecibo = '1-00-1234-1234-1234556789012345';
 $std->perapur = '2017-11';
 $std->tpinscestab = 1;
 $std->nrinscestab = "12345678901";
-$std->vlrrecbrutatotal = 10000; 
-$std->vlrcpapurtotal = 1020;
-$std->vlrcprbsusptotal = 200;
+$std->vlrrecbrutatotal = '10000,00'; 
+$std->vlrcpapurtotal = '1020,00';
+$std->vlrcprbsusptotal = '200,00';
 
 $std->tipocod[0] = new \stdClass();
 $std->tipocod[0]->codativecon = '12345678';
-$std->tipocod[0]->vlrrecbrutaativ = 4444;
-$std->tipocod[0]->vlrexcrecbruta = 3333;
-$std->tipocod[0]->vlradicrecbruta = 2222;
-$std->tipocod[0]->vlrbccprb = 1111;
-$std->tipocod[0]->vlrcprbapur = 2000;
+$std->tipocod[0]->vlrrecbrutaativ = '4444,44';
+$std->tipocod[0]->vlrexcrecbruta = '3333,33';
+$std->tipocod[0]->vlradicrecbruta = '2222,22';
+$std->tipocod[0]->vlrbccprb = '1111,11';
+$std->tipocod[0]->vlrcprbapur = '2000,00';
 
 $std->tipocod[0]->tipoajuste[0] = new \stdClass();
 $std->tipocod[0]->tipoajuste[0]->tpajuste = 0;
 $std->tipocod[0]->tipoajuste[0]->codajuste = 11;
-$std->tipocod[0]->tipoajuste[0]->vlrajuste = 200;
+$std->tipocod[0]->tipoajuste[0]->vlrajuste = '200,00';
 $std->tipocod[0]->tipoajuste[0]->descajuste = 'sei la';
 $std->tipocod[0]->tipoajuste[0]->dtajuste = '2017-10';
 
 $std->infoproc[0] = new \stdClass();
-$std->infoproc[0]->vlrcprbsusp = 200;
+$std->infoproc[0]->vlrcprbsusp = '200,00';
 $std->infoproc[0]->tpproc = 1;
 $std->infoproc[0]->nrproc = 'ABC21';
 $std->infoproc[0]->codsusp = '12345678901234';

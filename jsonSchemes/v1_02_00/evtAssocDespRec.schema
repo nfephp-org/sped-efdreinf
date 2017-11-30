@@ -17,20 +17,21 @@
         "nrrecibo": {
             "required": false,
             "type": ["string","null"],
-            "maxLength": 52
+            "maxLength": 52,
+            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18})$"
         },
         "perapur": {
             "required": true,
             "type": "string",
             "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])$"
         },
-        "tpinscestabprest": {
+        "tpinscestab": {
             "required": true,
             "type": "integer",
             "minimum": 1,
             "maximum": 1
         },
-        "nrinscestabprest": {
+        "nrinscestab": {
             "required": true,
             "type": "string",
             "maxLength": 14,
@@ -52,15 +53,18 @@
                     },    
                     "vlrtotalrec": {
                         "required": true,
-                        "type": "number"
+                        "type": "string",
+                        "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
                     },
                     "vlrtotalret": {
                         "required": true,
-                        "type": "number"
+                        "type": "string",
+                        "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
                     },
                     "vlrtotalnret": {
                         "required": false,
-                        "type": ["number","null"]
+                        "type": ["string","null"],
+                        "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
                     },
                     "inforecurso": {
                         "required": true,
@@ -83,11 +87,13 @@
                                 },
                                 "vlrbruto": {
                                     "required": true,
-                                    "type": "number"
+                                    "type": "string",
+                                    "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
                                 },
                                 "vlrretapur": {
                                     "required": true,
-                                    "type": "number"
+                                    "type": "string",
+                                    "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
                                 }
                             }
                         }    
@@ -119,7 +125,8 @@
                                 },
                                 "vlrnret": {
                                     "required": true,
-                                    "type": "number"
+                                    "type": "string",
+                                    "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
                                 }
                             }
                         }

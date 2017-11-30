@@ -27,28 +27,28 @@ $configJson = json_encode($config, JSON_PRETTY_PRINT);
 $std = new \stdClass();
 $std->sequencial = 1;
 $std->indretif = 1;
-$std->nrrecibo = '737373737373737';
+$std->nrrecibo = '1-00-1234-1234-1234556789012345';
 $std->perapur = '2017-11';
 $std->tpinscestab = 1;
 $std->nrinscestab = '12345678901234';
 
-$std->recursosrec[0] = new \stdClass();
-$std->recursosrec[0]->cnpjassocdesp = '12345678901234';
-$std->recursosrec[0]->vlrtotalrec = 1000;
-$std->recursosrec[0]->vlrtotalret = 100;
-$std->recursosrec[0]->vlrtotalnret = 10;
+$std->recursosrep[0] = new \stdClass();
+$std->recursosrep[0]->cnpjassocdesp = '12345678901234';
+$std->recursosrep[0]->vlrtotalrep = '1000,00';
+$std->recursosrep[0]->vlrtotalret = '100,00';
+$std->recursosrep[0]->vlrtotalnret = '10,00';
 
-$std->recursosrec[0]->inforecurso[0] = new \stdClass();
-$std->recursosrec[0]->inforecurso[0]->tprepasse = 3;
-$std->recursosrec[0]->inforecurso[0]->descrecurso = 'sei la';
-$std->recursosrec[0]->inforecurso[0]->vlrbruto = 5000;
-$std->recursosrec[0]->inforecurso[0]->vlrretapur = 500;
+$std->recursosrep[0]->inforecurso[0] = new \stdClass();
+$std->recursosrep[0]->inforecurso[0]->tprepasse = 3;
+$std->recursosrep[0]->inforecurso[0]->descrecurso = 'sei la';
+$std->recursosrep[0]->inforecurso[0]->vlrbruto = '5000,03';
+$std->recursosrep[0]->inforecurso[0]->vlrretapur = '500,99';
 
-$std->recursosrec[0]->infoproc[0] = new \stdClass();
-$std->recursosrec[0]->infoproc[0]->tpproc = 1;
-$std->recursosrec[0]->infoproc[0]->nrproc = 'ABC21';
-$std->recursosrec[0]->infoproc[0]->codsusp = '12345678901234';
-$std->recursosrec[0]->infoproc[0]->vlrnret = 1000.66;
+$std->recursosrep[0]->infoproc[0] = new \stdClass();
+$std->recursosrep[0]->infoproc[0]->tpproc = 1;
+$std->recursosrep[0]->infoproc[0]->nrproc = 'ABC21';
+$std->recursosrep[0]->infoproc[0]->codsusp = '12345678901234';
+$std->recursosrep[0]->infoproc[0]->vlrnret = '1000,66';
 
 try {
     
