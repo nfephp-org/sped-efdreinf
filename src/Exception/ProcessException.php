@@ -10,6 +10,8 @@ namespace NFePHP\EFDReinf\Exception;
  * @link       http://github.com/nfephp-org/sped-common for the canonical source repository
  */
 
+use NFePHP\Common\Exception\ExceptionInterface;
+
 class ProcessException extends \InvalidArgumentException implements ExceptionInterface
 {
     public static $list = [

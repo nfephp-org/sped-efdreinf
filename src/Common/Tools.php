@@ -57,7 +57,7 @@ class Tools
      */
     protected $serviceXsd = [];
     /**
-     * @var Certificate
+     * @var Certificate|null
      */
     protected $certificate;
     /**
@@ -73,7 +73,7 @@ class Tools
     /**
      * Constructor
      * @param string $config
-     * @param Certificate $certificate
+     * @param Certificate|null $certificate
      */
     public function __construct(
         $config,

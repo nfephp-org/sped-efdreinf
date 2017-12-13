@@ -28,7 +28,7 @@ class Tools extends ToolsBase
     public $lastResponse;
     
     /**
-     * @var NFePHP\Common\Soap\SoapInterface
+     * @var \NFePHP\Common\Soap\SoapInterface
      */
     protected $soap;
     protected $soapnamespaces = [
@@ -54,9 +54,9 @@ class Tools extends ToolsBase
     
     /**
      * SOAP communication dependency injection
-     * @param SoapInterface $soap
+     * @param \NFePHP\EFDReinf\Common\Soap\SoapInterface $soap
      */
-    public function loadSoapClass(SoapInterface $soap)
+    public function loadSoapClass($soap)
     {
         $this->soap = $soap;
     }

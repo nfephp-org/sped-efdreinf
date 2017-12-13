@@ -39,7 +39,7 @@ abstract class SoapBase implements SoapInterface
      */
     protected $proxyIP;
     /**
-     * @var string
+     * @var int
      */
     protected $proxyPort;
     /**
@@ -55,11 +55,11 @@ abstract class SoapBase implements SoapInterface
      */
     protected $prefixes = [1 => 'soapenv', 2 => 'soap'];
     /**
-     * @var Certificate
+     * @var Certificate|null
      */
     protected $certificate;
     /**
-     * @var LoggerInterface
+     * @var LoggerInterface|null
      */
     protected $logger;
     /**
@@ -149,8 +149,8 @@ abstract class SoapBase implements SoapInterface
 
     /**
      * Constructor
-     * @param Certificate $certificate
-     * @param LoggerInterface $logger
+     * @param Certificate|null $certificate
+     * @param LoggerInterface|null $logger
      */
     public function __construct(
         Certificate $certificate = null,
@@ -164,7 +164,7 @@ abstract class SoapBase implements SoapInterface
     /**
      * Check if certificate is valid
      * @param Certificate $certificate
-     * @return Certificate
+     * @return mixed
      * @throws RuntimeException
      */
     private function checkCertValidity(Certificate $certificate = null)
@@ -294,7 +294,7 @@ abstract class SoapBase implements SoapInterface
     /**
      * Set security protocol
      * @param int $protocol
-     * @return type Description
+     * @return int
      */
     public function protocol($protocol = self::SSL_DEFAULT)
     {
@@ -303,8 +303,8 @@ abstract class SoapBase implements SoapInterface
     
     /**
      * Set prefixes
-     * @param string $prefixes
-     * @return string
+     * @param array $prefixes
+     * @return array
      */
     public function setSoapPrefix($prefixes)
     {
@@ -341,7 +341,7 @@ abstract class SoapBase implements SoapInterface
      * Mount soap envelope
      * @param string $request
      * @param array $namespaces
-     * @param \SOAPHeader $header
+     * @param \SoapHeader $header
      * @return string
      */
     protected function makeEnvelopeSoap(
@@ -438,7 +438,7 @@ abstract class SoapBase implements SoapInterface
         //encontrada oportunamente.
         $dt = new \DateTime();
         $tint = new \DateInterval("PT".$this->waitingTime."M");
-        $tint->invert = true;
+        $tint->invert = 1;
         $tsLimit = $dt->add($tint)->getTimestamp();
         foreach ($contents as $item) {
             if ($item['type'] == 'file') {
@@ -470,7 +470,11 @@ abstract class SoapBase implements SoapInterface
         if (!$this->debugmode) {
             return;
         }
-        $this->debugdir = $this->certificate->getCnpj() . '/debug/';
+        $cnpj = '';
+        if (!empty($this->certificate)) {
+            $cnpj = $this->certificate->getCnpj(); 
+        }    
+        $this->debugdir = $cnpj() . '/debug/';
         $now = \DateTime::createFromFormat('U.u', microtime(true));
         $time = substr($now->format("ymdHisu"), 0, 16);
         try {
@@ -482,7 +486,7 @@ abstract class SoapBase implements SoapInterface
                 $this->debugdir . $time . "_" . $operation . "_res.txt",
                 $response
             );
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             throw new RuntimeException(
                 'Unable to create debug files.'
             );
