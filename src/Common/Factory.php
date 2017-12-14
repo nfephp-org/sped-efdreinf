@@ -2,6 +2,19 @@
 
 namespace NFePHP\EFDReinf\Common;
 
+/**
+ * Classe Factory, performs build events
+ *
+ * @category  API
+ * @package   NFePHP\EFDReinf
+ * @copyright Copyright (c) 2017
+ * @license   https://www.gnu.org/licenses/lgpl-3.0.txt LGPLv3
+ * @license   https://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+ * @license   https://opensource.org/licenses/mit-license.php MIT
+ * @author    Roberto L. Machado <linux.rlm at gmail dot com>
+ * @link      http://github.com/nfephp-org/sped-efdreinf for the canonical source repository
+ */
+
 use DateTime;
 use DOMDocument;
 use DOMElement;
@@ -60,18 +73,11 @@ abstract class Factory
      * @var string
      */
     public $jsonschema = '';
-    /**
-     * @var string
-     */
-    public $evtid = '';
+    
     /**
      * @var string
      */
     protected $xmlns = "http://www.reinf.esocial.gov.br/schemas/";
-    /**
-     * @var string
-     */
-    protected $xsi = "http://www.w3.org/2001/XMLSchema-instance";
     /**
      * @var Dom
      */
@@ -85,17 +91,21 @@ abstract class Factory
      */
     protected $xml;
     /**
-     * @var DOMNode
+     * @var \DOMElement
      */
     protected $reinf;
     /**
-     * @var DOMElement
+     * @var \DOMElement
      */
     protected $node;
     /**
-     * @var array
+     * @var string
      */
-    protected $parameters = [];
+    public $evtid = '';
+    /**
+     * @var string
+     */
+    protected $evtTag;
     /**
      * @var string
      */
@@ -105,13 +115,12 @@ abstract class Factory
      */
     protected $evtAlias = '';
     /**
-     * @var Certificate
+     * @var Certificate|null
      */
     protected $certificate;
 
     /**
      * Constructor
-     *
      * @param string      $config
      * @param stdClass    $std
      * @param Certificate $certificate
@@ -161,15 +170,12 @@ abstract class Factory
         //This is done for standardization purposes.
         //Fields with no value will not be included by the builder.
         //$this->std = $this->standardizeProperties($this->std);
-        
         $this->init();
     }
 
     /**
      * Stringfy layout number
-     *
-     * @param type $layout
-     *
+     * @param string $layout
      * @return string
      */
     protected function strLayoutVer($layout)
@@ -184,9 +190,7 @@ abstract class Factory
 
     /**
      * Change properties names of stdClass to lower case
-     *
      * @param stdClass $data
-     *
      * @return stdClass
      */
     protected static function propertiesToLower(stdClass $data)
@@ -205,9 +209,7 @@ abstract class Factory
 
     /**
      * Validation json data from json Schema
-     *
      * @param stdClass $data
-     *
      * @return boolean
      * @throws \RuntimeException
      */
@@ -240,8 +242,7 @@ abstract class Factory
             $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
                 . "<Reinf xmlns=\"$this->xmlns"
                 . $this->evtName
-                . "/$this->layoutStr\" "
-                . "xmlns:xsi=\"$this->xsi\">"
+                . "/$this->layoutStr\">"
                 . "</Reinf>";
             $this->dom->loadXML($xml);
             $this->reinf = $this->dom->getElementsByTagName('Reinf')->item(0);
@@ -271,25 +272,45 @@ abstract class Factory
             $this->node->appendChild($ideContri);
         }
     }
-
+    
+    /**
+     * Returns alias of event
+     * @return string
+     */
     public function alias()
     {
         return $this->evtAlias;
     }
-
+    
+    /**
+     * Returns the Certificate::class
+     * @return Certificate|null
+     */
     public function getCertificate()
     {
         return $this->certificate;
     }
-
+    
+    /**
+     * Insert Certificate::class
+     * @param Certificate $certificate
+     */
     public function setCertificate(Certificate $certificate)
     {
         $this->certificate = $certificate;
     }
+    
+    /**
+     * Recover calculate ID
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->evtid;
+    }
 
     /**
      * Return xml of event
-     *
      * @return string
      */
     public function toXML()
@@ -310,8 +331,8 @@ abstract class Factory
     protected function clearXml($xml)
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
-        $this->formatOutput = false;
-        $this->preserveWhiteSpace = false;
+        $dom->formatOutput = false;
+        $dom->preserveWhiteSpace = false;
         $dom->loadXML($xml);
         return $dom->saveXML($dom->documentElement);
     }
@@ -334,8 +355,8 @@ abstract class Factory
         if (empty($this->xml)) {
             $this->toNode();
         }
-        //a assinatura só faz sentido no XML, os demais formatos
-        //não devem conter dados da assinatura
+        //signature only makes sense in XML, other formats should not contain
+        //signature data
         $xml = Signer::removeSignature($this->xml);
         $dom = new \DOMDocument();
         $dom->loadXML($xml);
@@ -361,20 +382,21 @@ abstract class Factory
      * @param \stdClass $data
      * @return \stdClass
      */
-    public function standardizeProperties(stdClass $data)
-    {
-        if (!is_file($this->jsonschema)) {
-            return $data;
-        }
-        $jsonSchemaObj = json_decode(file_get_contents($this->jsonschema));
-        $sc = new ParamsStandardize($jsonSchemaObj);
-        return $sc->stdData($data);
-    }
+    //public function standardizeProperties(stdClass $data)
+    //{
+    //    if (!is_file($this->jsonschema)) {
+    //        return $data;
+    //    }
+    //    $jsonSchemaObj = json_decode(file_get_contents($this->jsonschema));
+    //    $sc = new ParamsStandardize($jsonSchemaObj);
+    //    return $sc->stdData($data);
+    //}
 
     /**
      * Sign and validate XML with XSD, can throw Exception
+     * @param string $tagsigned tag to be base of signature
      */
-    protected function sign()
+    protected function sign($tagsigned = '')
     {
         $xml = $this->dom->saveXML($this->reinf);
         $xml = Strings::clearXmlString($xml);
@@ -382,8 +404,8 @@ abstract class Factory
             $xml = Signer::sign(
                 $this->certificate,
                 $xml,
-                'Reinf',
-                '',
+                $tagsigned,
+                'id',
                 OPENSSL_ALGO_SHA256,
                 [true, false, null, null]
             );

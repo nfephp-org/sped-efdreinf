@@ -24,20 +24,6 @@ use stdClass;
 class EvtAssocDespRep extends Factory implements FactoryInterface
 {
     /**
-     * @var string
-     * NOTA: indica o XSD e o namespace do XML
-     */
-    protected $evtName = 'evtRecursoRepassadoAssociacao';
-    /**
-     * @var string
-     */
-    protected $evtTag = 'evtAssocDespRep';
-    /**
-     * @var string
-     */
-    protected $evtAlias = 'R-2040';
-
-    /**
      * Constructor
      * @param string $config
      * @param stdClass $std
@@ -51,6 +37,11 @@ class EvtAssocDespRep extends Factory implements FactoryInterface
         $date = ''
     ) {
         parent::__construct($config, $std, $certificate, $date);
+        
+        //NOTA: indica o XSD e o namespace do XML
+        $this->evtName = 'evtRecursoRepassadoAssociacao';
+        $this->evtTag = 'evtAssocDespRep';
+        $this->evtAlias = 'R-2040';
     }
     
     /**

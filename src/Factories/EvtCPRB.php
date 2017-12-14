@@ -24,21 +24,6 @@ use stdClass;
 class EvtCPRB extends Factory implements FactoryInterface
 {
     /**
-     * @var string
-     * NOTA: refere-se ao nome do XSD e ao namespace
-     */
-    protected $evtName = 'evtInfoCPRB';
-    /**
-     *
-     * @var string
-     */
-    protected $evtTag = 'evtCPRB';
-    /**
-     * @var string
-     */
-    protected $evtAlias = 'R-2060';
-
-    /**
      * Constructor
      * @param string $config
      * @param stdClass $std
@@ -52,6 +37,11 @@ class EvtCPRB extends Factory implements FactoryInterface
         $date = ''
     ) {
         parent::__construct($config, $std, $certificate, $date);
+        
+        //NOTA: indica o XSD e o namespace do XML
+        $this->evtName = 'evtInfoCPRB';
+        $this->evtTag = 'evtCPRB';
+        $this->evtAlias = 'R-2060';
     }
     
     /**

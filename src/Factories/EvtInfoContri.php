@@ -24,21 +24,6 @@ use stdClass;
 class EvtInfoContri extends Factory implements FactoryInterface
 {
     /**
-     * @var string
-     * NOTA: refere-se ao nome do XSD e ao namespace
-     */
-    protected $evtName = 'evtInfoContribuinte';
-    /**
-     *
-     * @var string
-     */
-    protected $evtTag = 'evtInfoContri';
-    /**
-     * @var string
-     */
-    protected $evtAlias = 'R-1000';
-
-    /**
      * Constructor
      * @param string $config
      * @param stdClass $std
@@ -52,6 +37,10 @@ class EvtInfoContri extends Factory implements FactoryInterface
         $date = ''
     ) {
         parent::__construct($config, $std, $certificate, $date);
+
+        $this->evtName = 'evtInfoContribuinte';
+        $this->evtTag = 'evtInfoContri';
+        $this->evtAlias = 'R-1000';
     }
     
     /**
@@ -98,6 +87,7 @@ class EvtInfoContri extends Factory implements FactoryInterface
             !empty($this->std->fimvalid) ? $this->std->fimvalid : null,
             false
         );
+        $infocadastro = null;
         if (!empty($this->std->infocadastro)) {
             $cad = $this->std->infocadastro;
             $infocadastro = $this->dom->createElement("infoCadastro");
@@ -229,11 +219,15 @@ class EvtInfoContri extends Factory implements FactoryInterface
         if ($this->std->modo == 'INC') {
             $modo = $this->dom->createElement("inclusao");
             $modo->appendChild($idePeriodo);
-            $modo->appendChild($infocadastro);
+            if (!empty($infocadastro)) {
+                $modo->appendChild($infocadastro);
+            }
         } elseif ($this->std->modo == 'ALT') {
             $modo = $this->dom->createElement("alteracao");
             $modo->appendChild($idePeriodo);
-            $modo->appendChild($infocadastro);
+            if (!empty($infocadastro)) {
+                $modo->appendChild($infocadastro);
+            }
         } else {
             $modo = $this->dom->createElement("exclusao");
             $modo->appendChild($idePeriodo);
@@ -243,6 +237,6 @@ class EvtInfoContri extends Factory implements FactoryInterface
         $this->node->appendChild($infoContri);
         $this->reinf->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->reinf);
-        $this->sign();
+        $this->sign('evtInfoContri');
     }
 }

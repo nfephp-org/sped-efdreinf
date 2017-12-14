@@ -2,8 +2,21 @@
 
 namespace NFePHP\EFDReinf\Common;
 
+/**
+ * Class Common\Tools, basic structures
+ *
+ * @category  API
+ * @package   NFePHP\EFDReinf
+ * @copyright NFePHP Copyright (c) 2017
+ * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
+ * @license   https://opensource.org/licenses/MIT MIT
+ * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
+ * @author    Roberto L. Machado <linux.rlm at gmail dot com>
+ * @link      http://github.com/nfephp-org/sped-efdreinf for the canonical source repository
+ */
+
 use NFePHP\Common\Certificate;
-use NFePHP\eSocial\Common\XsdSeeker;
+use NFePHP\EFDReinf\Common\XsdSeeker;
 use DateTime;
 
 class Tools
@@ -57,7 +70,7 @@ class Tools
      */
     protected $serviceXsd = [];
     /**
-     * @var Certificate|null
+     * @var Certificate
      */
     protected $certificate;
     /**
@@ -68,16 +81,15 @@ class Tools
      * @var string
      */
     protected $transmissornrInsc;
-    
 
     /**
      * Constructor
      * @param string $config
-     * @param Certificate|null $certificate
+     * @param Certificate $certificate
      */
     public function __construct(
         $config,
-        Certificate $certificate = null
+        Certificate $certificate
     ) {
         //set properties from config
         $stdConf = json_decode($config);
@@ -98,7 +110,7 @@ class Tools
         ).'/';
         
         $this->serviceXsd = XsdSeeker::seek(
-            $this->path . "schemes/comunicacao/$this->serviceVersion/"
+            $this->path . "schemes/comunicacao/v$this->serviceVersion/"
         );
     }
 }
