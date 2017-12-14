@@ -36,12 +36,11 @@ class EvtCPRB extends Factory implements FactoryInterface
         Certificate $certificate = null,
         $date = ''
     ) {
-        parent::__construct($config, $std, $certificate, $date);
-        
-        //NOTA: indica o XSD e o namespace do XML
-        $this->evtName = 'evtInfoCPRB';
-        $this->evtTag = 'evtCPRB';
-        $this->evtAlias = 'R-2060';
+        $params = new \stdClass();
+        $params->evtName = 'evtInfoCPRB';
+        $params->evtTag = 'evtCPRB';
+        $params->evtAlias = 'R-2060';
+        parent::__construct($config, $std, $params, $certificate, $date);
     }
     
     /**

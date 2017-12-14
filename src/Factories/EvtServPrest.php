@@ -36,11 +36,11 @@ class EvtServPrest extends Factory implements FactoryInterface
         Certificate $certificate = null,
         $date = ''
     ) {
-        parent::__construct($config, $std, $certificate, $date);
-        
-        $this->evtName = 'evtServPrest';
-        $this->evtTag = 'evtServPrest';
-        $this->evtAlias = 'R-2020';
+        $params = new \stdClass();
+        $params->evtName = 'evtPrestadorServicos';
+        $params->evtTag = 'evtServPrest';
+        $params->evtAlias = 'R-2020';
+        parent::__construct($config, $std, $params, $certificate, $date);
     }
     
     /**

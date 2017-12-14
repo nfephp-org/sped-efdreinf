@@ -36,11 +36,11 @@ class EvtReabreEvPer extends Factory implements FactoryInterface
         Certificate $certificate = null,
         $date = ''
     ) {
-        parent::__construct($config, $std, $certificate, $date);
-        
-        $this->evtName = 'evtReabreEvPer';
-        $this->evtTag = 'evtReabreEvPer';
-        $this->evtAlias = 'R-2098';
+        $params = new \stdClass();
+        $params->evtName = 'evtReabreEvPer';
+        $params->evtTag = 'evtReabreEvPer';
+        $params->evtAlias = 'R-2098';
+        parent::__construct($config, $std, $params, $certificate, $date);
     }
     
     /**

@@ -73,6 +73,19 @@ abstract class Factory
      * @var string
      */
     public $jsonschema = '';
+    /**
+     * @var string
+     */
+    public $evtTag;
+    /**
+     * @var string
+     */
+    public $evtName = '';
+    /**
+     * @var string
+     */
+    public $evtAlias = '';
+
     
     /**
      * @var string
@@ -103,18 +116,6 @@ abstract class Factory
      */
     public $evtid = '';
     /**
-     * @var string
-     */
-    protected $evtTag;
-    /**
-     * @var string
-     */
-    protected $evtName = '';
-    /**
-     * @var string
-     */
-    protected $evtAlias = '';
-    /**
      * @var Certificate|null
      */
     protected $certificate;
@@ -124,11 +125,13 @@ abstract class Factory
      * @param string      $config
      * @param stdClass    $std
      * @param Certificate $certificate
+     * @param stdClass $params
      * @param string      $date
      */
     public function __construct(
         $config,
         stdClass $std,
+        stdClass $params,
         Certificate $certificate = null,
         $date = ''
     ) {
@@ -146,6 +149,9 @@ abstract class Factory
         $this->nmRazao = $stdConf->empregador->nmRazao;
         $this->layoutStr = $this->strLayoutVer($this->layout);
         $this->certificate = $certificate;
+        $this->evtTag = $params->evtTag;
+        $this->evtName = $params->evtName;
+        $this->evtAlias = $params->evtAlias;
         if (empty($std) || !is_object($std)) {
             throw EventsException::wrongArgument(1003, '');
         }

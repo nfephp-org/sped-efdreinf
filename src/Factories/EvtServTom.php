@@ -36,11 +36,11 @@ class EvtServTom extends Factory implements FactoryInterface
         Certificate $certificate = null,
         $date = ''
     ) {
-        parent::__construct($config, $std, $certificate, $date);
-        
-        $this->evtName = 'evtServTom';
-        $this->evtTag = 'evtServTom';
-        $this->evtAlias = 'R-2010';
+        $params = new \stdClass();
+        $params->evtName = 'evtTomadorServicos';
+        $params->evtTag = 'evtServTom';
+        $params->evtAlias = 'R-2010';
+        parent::__construct($config, $std, $params, $certificate, $date);
     }
     
     /**

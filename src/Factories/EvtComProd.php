@@ -36,12 +36,11 @@ class EvtComProd extends Factory implements FactoryInterface
         Certificate $certificate = null,
         $date = ''
     ) {
-        parent::__construct($config, $std, $certificate, $date);
-        
-        //NOTA: indica o XSD e o namespace do XML
-        $this->evtName = 'evtComProd';
-        $this->evtTag = 'evtComProd';
-        $this->evtAlias = 'R-2050';
+        $params = new \stdClass();
+        $params->evtName = 'evtInfoProdRural';
+        $params->evtTag = 'evtComProd';
+        $params->evtAlias = 'R-2050';
+        parent::__construct($config, $std, $params, $certificate, $date);
     }
     
     /**

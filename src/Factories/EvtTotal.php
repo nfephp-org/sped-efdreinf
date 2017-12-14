@@ -36,11 +36,11 @@ class EvtTotal extends Factory implements FactoryInterface
         Certificate $certificate = null,
         $date = ''
     ) {
-        parent::__construct($config, $std, $certificate, $date);
-        
-        $this->evtName = 'evtTotal';
-        $this->evtTag = 'evtTotal';
-        $this->evtAlias = 'R-5001';
+        $params = new \stdClass();
+        $params->evtName = 'evtTotal';
+        $params->evtTag = 'evtTotal';
+        $params->evtAlias = 'R-5001';
+        parent::__construct($config, $std, $params, $certificate, $date);
     }
     
     /**

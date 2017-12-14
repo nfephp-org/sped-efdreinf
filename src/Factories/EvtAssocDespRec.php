@@ -36,12 +36,11 @@ class EvtAssocDespRec extends Factory implements FactoryInterface
         Certificate $certificate = null,
         $date = ''
     ) {
-        parent::__construct($config, $std, $certificate, $date);
-        
-        //NOTA: indica o XSD e o namespace do XML
-        $this->evtName = 'evtRecursoRecebidoAssociacao';
-        $this->evtTag = 'evtAssocDespRec';
-        $this->evtAlias = 'R-2030';
+        $params = new \stdClass();
+        $params->evtName = 'evtRecursoRecebidoAssociacao';
+        $params->evtTag = 'evtAssocDespRec';
+        $params->evtAlias = 'R-2030';
+        parent::__construct($config, $std, $params, $certificate, $date);
     }
     
     /**
