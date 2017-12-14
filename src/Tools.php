@@ -12,7 +12,7 @@ namespace NFePHP\EFDReinf;
  * @license   https://www.gnu.org/licenses/gpl-3.0.txt GPLv3
  * @license   https://opensource.org/licenses/mit-license.php MIT
  * @author    Roberto L. Machado <linux.rlm at gmail dot com>
- * @link      http://github.com/nfephp-org/sped-esocial for the canonical source repository
+ * @link      http://github.com/nfephp-org/sped-efdreinf for the canonical source repository
  */
 use NFePHP\Common\Certificate;
 use NFePHP\Common\Validator;
@@ -24,39 +24,57 @@ use NFePHP\EFDReinf\Exception\ProcessException;
 
 class Tools extends ToolsBase
 {
-    public $lastRequest;
-    public $lastResponse;
-    
     /**
-     * @var \NFePHP\Common\Soap\SoapInterface
+     * @var string
+     */
+    public $lastRequest;
+    /**
+     * @var string
+     */
+    public $lastResponse;
+    /**
+     * @var SoapInterface
      */
     protected $soap;
+    /**
+     * @var array
+     */
     protected $soapnamespaces = [
-        'xmlns:xsi' => "http://www.w3.org/2001/XMLSchema-instance",
-        'xmlns:xsd' => "http://www.w3.org/2001/XMLSchema",
-        'xmlns:soap' => "http://www.w3.org/2003/05/soap-envelope",
+        'xmlns:soapenv' => "http://schemas.xmlsoap.org/soap/envelope/",
         'xmlns:sped'=> "http://sped.fazenda.gov.br/"
     ];
-    protected $objHeader;
-    protected $xmlns;
+    /**
+     * @var array
+     */
     protected $uri = [
         '1' => '',
-        '2' => 'https://preprodefdreinf.receita.fazenda.gov.br/RecepcaoLoteReinf.svc'
+        '2' => 'https://preprodefdreinf.receita.fazenda.gov.br/RecepcaoLoteReinf.svc',
+        '3' => 'https://preprodefdreinf.receita.fazenda.gov.br/RecepcaoLoteReinf.svc'
     ];
+    /**
+     * @var string
+     */
     protected $action;
+    /**
+     * @var string
+     */
     protected $method;
-    protected $parameters;
-
-    public function __construct($config, Certificate $certificate = null)
+    
+    /**
+     * Constructor
+     * @param string $config
+     * @param Certificate $certificate
+     */
+    public function __construct($config, Certificate $certificate)
     {
         parent::__construct($config, $certificate);
     }
     
     /**
      * SOAP communication dependency injection
-     * @param \NFePHP\EFDReinf\Common\Soap\SoapInterface $soap
+     * @param SoapInterface $soap
      */
-    public function loadSoapClass($soap)
+    public function loadSoapClass(SoapInterface $soap)
     {
         $this->soap = $soap;
     }
@@ -68,6 +86,7 @@ class Tools extends ToolsBase
      */
     public function consultaLoteEventos($protocolo)
     {
+        return '';
     }
     
     /**
@@ -75,60 +94,46 @@ class Tools extends ToolsBase
      * @param array $eventos
      * @return string
      */
-    public function envioLoteEventos($eventos = [])
+    public function enviarLoteEventos($eventos = [])
     {
         if (empty($eventos)) {
             return '';
         }
-        $xml = "";
+        //check number of events
         $nEvt = count($eventos);
         if ($nEvt > 100) {
             throw ProcessException::wrongArgument(2000, $nEvt);
         }
-
-      
         $this->method = "ReceberLoteEventos";
-        
         $this->action = "http://sped.fazenda.gov.br/RecepcaoLoteReinf/ReceberLoteEventos";
-        
-        $uri = [
-            '1' => '',
-            '2' => 'https://preprodefdreinf.receita.fazenda.gov.br/RecepcaoLoteReinf.svc',
-            '3' => 'https://preprodefdreinf.receita.fazenda.gov.br/RecepcaoLoteReinf.svc'
-        ];
-        
-        
-        $request = "<eSocial xmlns=\"http://www.esocial.gov.br/schema/lote"
-            . "/eventos/envio/$operationVersion\" "
-            . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
-            . "<envioLoteEventos grupo=\"$grupo\">"
-            . "<ideEmpregador>"
-            . "<tpInsc>$this->tpInsc</tpInsc>"
-            . "<nrInsc>$this->nrInsc</nrInsc>"
-            . "</ideEmpregador>"
-            . "<ideTransmissor>"
-            . "<tpInsc>$this->transmissortpInsc</tpInsc>"
-            . "<nrInsc>$this->transmissornrInsc</nrInsc>"
-            . "</ideTransmissor>"
-            . "<eventos>"
-            . "$xml"
-            . "</eventos>"
-            . "</envioLoteEventos>"
-            . "</eSocial>";
-
-        /*
-        //validar a requisição conforme o seu respectivo XSD
-        Validator::isValid($request, $this->path
-            . "schemes/comunicacao/$this->serviceStr/"
-            . "EnvioLoteEventos-$operationVersion.xsd");
-        */
-        
+        $xml = "";
+        foreach ($eventos as $evt) {
+            if (!is_a($evt, '\NFePHP\EFDReinf\Common\FactoryInterface')) {
+                throw ProcessException::wrongArgument(2002, '');
+            }
+            $this->checkCertificate($evt);
+            $xml .= "<evento id=\"".$evt->getId()."\">";
+            $xml .= $evt->toXML();
+            $xml .= "</evento>";
+        }
+        //build request
+        $request = "<Reinf xmlns=\"http://www.reinf.esocial.gov.br/schemas/envioLoteEventos/v"
+            . $this->serviceVersion."\" >"
+            . "<loteEventos>"
+            . $xml
+            . "</loteEventos>"
+            . "</Reinf>";
+        //validate requisition with XSD
+        $xsd = $this->path
+            . "schemes/comunicacao/v$this->serviceVersion/"
+            . $this->serviceXsd['EnvioLoteEventos']['name'];
+        Validator::isValid($request, $xsd);
+        //build soap body
         $body = "<sped:ReceberLoteEventos>"
             . "<sped:loteEventos>"
             . $request
             . "</sped:loteEventos>"
             . "</sped:ReceberLoteEventos>";
-        
         $this->lastRequest = $body;
         $this->lastResponse = $this->sendRequest($body);
         return $this->lastResponse;
@@ -161,16 +166,15 @@ class Tools extends ToolsBase
             "SOAPAction: \"$this->action\"",
             "Content-length: $msgSize"
         ];
-        //return $envelope;
+        $url = $this->uri[$this->tpAmb];
         return (string) $this->soap->send(
             $this->method,
-            $this->uri,
+            $url,
             $this->action,
             $envelope,
             $parameters
         );
     }
-
 
     /**
      * Verify the availability of a digital certificate.
@@ -180,19 +184,10 @@ class Tools extends ToolsBase
      */
     protected function checkCertificate(FactoryInterface $evento)
     {
-        if (empty($this->certificate)) {
-            //try to get certificate from event
-            $certificate = $evento->getCertificate();
-            if (empty($certificate)) {
-                //oops no certificate avaiable
-                throw ProcessException::wrongArgument(2001, '');
-            }
-            $this->certificate = $certificate;
-        } else {
-            $certificate = $evento->getCertificate();
-            if (empty($certificate)) {
-                $evento->setCertificate($this->certificate);
-            }
+        //try to get certificate from event
+        $certificate = $evento->getCertificate();
+        if (empty($certificate)) {
+            $evento->setCertificate($this->certificate);
         }
     }
 }

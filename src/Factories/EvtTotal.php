@@ -24,20 +24,6 @@ use stdClass;
 class EvtTotal extends Factory implements FactoryInterface
 {
     /**
-     * @var string
-     * NOTA: refere-se ao nome do XSD
-     */
-    protected $evtName = 'evtTotal';
-    /**
-     * @var string
-     */
-    protected $evtTag = 'evtTotal';
-    /**
-     * @var string
-     */
-    protected $evtAlias = 'R-5001';
-
-    /**
      * Constructor
      * @param string $config
      * @param stdClass $std
@@ -51,6 +37,10 @@ class EvtTotal extends Factory implements FactoryInterface
         $date = ''
     ) {
         parent::__construct($config, $std, $certificate, $date);
+        
+        $this->evtName = 'evtTotal';
+        $this->evtTag = 'evtTotal';
+        $this->evtAlias = 'R-5001';
     }
     
     /**

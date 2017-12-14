@@ -24,15 +24,6 @@ use stdClass;
 class EvtReabreEvPer extends Factory implements FactoryInterface
 {
     /**
-     * @var string
-     */
-    protected $evtName = 'evtReabreEvPer';
-    /**
-     * @var string
-     */
-    protected $evtAlias = 'R-2098';
-
-    /**
      * Constructor
      * @param string $config
      * @param stdClass $std
@@ -46,6 +37,10 @@ class EvtReabreEvPer extends Factory implements FactoryInterface
         $date = ''
     ) {
         parent::__construct($config, $std, $certificate, $date);
+        
+        $this->evtName = 'evtReabreEvPer';
+        $this->evtTag = 'evtReabreEvPer';
+        $this->evtAlias = 'R-2098';
     }
     
     /**

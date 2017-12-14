@@ -1,9 +1,9 @@
 <?php
 
-namespace NFePHP\EFDReinf\Common;
+namespace NFePHP\EFDReinf\Exception;
 
 /**
- * Factory interface
+ * Class ExceptionInterface
  *
  * @category  API
  * @package   NFePHP\EFDReinf
@@ -14,23 +14,7 @@ namespace NFePHP\EFDReinf\Common;
  * @author    Roberto L. Machado <linux.rlm at gmail dot com>
  * @link      http://github.com/nfephp-org/sped-efdreinf for the canonical source repository
  */
-use NFePHP\Common\Certificate;
 
-interface FactoryInterface
+interface ExceptionInterface
 {
-    public function alias();
-    
-    public function toXML();
-    
-    public function toJson();
-    
-    public function toStd();
-    
-    public function toArray();
-    
-    public function getId();
-    
-    public function getCertificate();
-    
-    public function setCertificate(Certificate $certificate);
 }

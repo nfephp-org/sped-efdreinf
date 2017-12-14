@@ -2,13 +2,19 @@
 namespace NFePHP\EFDReinf\Exception;
 
 /**
- * @category   NFePHP
- * @package    NFePHP\EFDReinf\Exception
- * @copyright  Copyright (c) 2008-2017
- * @license    http://www.gnu.org/licenses/lesser.html LGPL v3
- * @author     Roberto L. Machado <linux.rlm at gmail dot com>
- * @link       http://github.com/nfephp-org/sped-common for the canonical source repository
+ * Class EventsException
+ *
+ * @category  API
+ * @package   NFePHP\EFDReinf
+ * @copyright NFePHP Copyright (c) 2017
+ * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
+ * @license   https://opensource.org/licenses/MIT MIT
+ * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
+ * @author    Roberto L. Machado <linux.rlm at gmail dot com>
+ * @link      http://github.com/nfephp-org/sped-efdreinf for the canonical source repository
  */
+
+use NFePHP\EFDReinf\Exception\ExceptionInterface;
 
 class EventsException extends \InvalidArgumentException implements ExceptionInterface
 {

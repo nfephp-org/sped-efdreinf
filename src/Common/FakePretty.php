@@ -2,6 +2,19 @@
 
 namespace NFePHP\EFDReinf\Common;
 
+/**
+ * Class FakePretty shows event and fake comunication data for analises and debugging
+ *
+ * @category  API
+ * @package   NFePHP\EFDReinf
+ * @copyright NFePHP Copyright (c) 2017
+ * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
+ * @license   https://opensource.org/licenses/MIT MIT
+ * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
+ * @author    Roberto L. Machado <linux.rlm at gmail dot com>
+ * @link      http://github.com/nfephp-org/sped-efdreinf for the canonical source repository
+ */
+
 class FakePretty
 {
     public static function prettyPrint($response, $save = '')
@@ -9,11 +22,10 @@ class FakePretty
         $std = json_decode($response);
         if (!empty($save)) {
             file_put_contents(
-                "/var/www/sped/sped-nfe/tests/fixtures/xml/$save.xml",
+                "/var/www/sped/sped-efdreinf/tests/fixtures/xml/$save.xml",
                 $std->body
             );
         }
-        
         $doc = new \DOMDocument('1.0', 'UTF-8');
         $doc->preserveWhiteSpace = false;
         $doc->formatOutput = true;
