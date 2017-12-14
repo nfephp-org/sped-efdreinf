@@ -42,11 +42,11 @@ class EvtPgtosDivs extends Factory implements FactoryInterface
         Certificate $certificate = null,
         $date = ''
     ) {
-        parent::__construct($config, $std, $certificate, $date);
-        
-        $this->evtName = 'evtPgtosDivs';
-        $this->evtTag = 'evtPgtosDivs';
-        $this->evtAlias = 'R-2070';
+        $params = new \stdClass();
+        $params->evtName = 'evtPgtosDivs';
+        $params->evtTag = 'evtPgtosDivs';
+        $params->evtAlias = 'R-2070';
+        parent::__construct($config, $std, $params, $certificate, $date);
     }
     
     /**

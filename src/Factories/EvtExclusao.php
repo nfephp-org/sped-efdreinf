@@ -36,11 +36,11 @@ class EvtExclusao extends Factory implements FactoryInterface
         Certificate $certificate = null,
         $date = ''
     ) {
-        parent::__construct($config, $std, $certificate, $date);
-        //NOTA: indica o XSD e o namespace do XML
-        $this->evtName = 'evtExclusao';
-        $this->evtTag = 'evtExclusao';
-        $this->evtAlias = 'R-9000';
+        $params = new \stdClass();
+        $params->evtName = 'evtExclusao';
+        $params->evtTag = 'evtExclusao';
+        $params->evtAlias = 'R-9000';
+        parent::__construct($config, $std, $params, $certificate, $date);
     }
     
     /**

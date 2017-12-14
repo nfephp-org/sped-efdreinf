@@ -36,11 +36,11 @@ class EvtTabProcesso extends Factory implements FactoryInterface
         Certificate $certificate = null,
         $date = ''
     ) {
-        parent::__construct($config, $std, $certificate, $date);
-        
-        $this->evtName = 'evtTabProcesso';
-        $this->evtTag = 'evtTabProcesso';
-        $this->evtAlias = 'R-1070';
+        $params = new \stdClass();
+        $params->evtName = 'evtTabProcesso';
+        $params->evtTag = 'evtTabProcesso';
+        $params->evtAlias = 'R-1070';
+        parent::__construct($config, $std, $params, $certificate, $date);
     }
     
     /**

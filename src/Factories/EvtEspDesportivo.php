@@ -36,12 +36,11 @@ class EvtEspDesportivo extends Factory implements FactoryInterface
         Certificate $certificate = null,
         $date = ''
     ) {
-        parent::__construct($config, $std, $certificate, $date);
-        
-        //NOTA: indica o XSD e o namespace do XML
-        $this->evtName = 'evtEspDesportivo';
-        $this->evtTag = 'evtEspDesportivo';
-        $this->evtAlias = 'R-3010';
+        $params = new \stdClass();
+        $params->evtName = 'evtEspDesportivo';
+        $params->evtTag = 'evtEspDesportivo';
+        $params->evtAlias = 'R-3010';
+        parent::__construct($config, $std, $params, $certificate, $date);
     }
     
     /**

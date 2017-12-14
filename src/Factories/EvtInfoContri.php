@@ -36,11 +36,11 @@ class EvtInfoContri extends Factory implements FactoryInterface
         Certificate $certificate = null,
         $date = ''
     ) {
-        parent::__construct($config, $std, $certificate, $date);
-
-        $this->evtName = 'evtInfoContribuinte';
-        $this->evtTag = 'evtInfoContri';
-        $this->evtAlias = 'R-1000';
+        $params = new \stdClass();
+        $params->evtName = 'evtInfoContribuinte';
+        $params->evtTag = 'evtInfoContri';
+        $params->evtAlias = 'R-1000';
+        parent::__construct($config, $std, $params, $certificate, $date);
     }
     
     /**

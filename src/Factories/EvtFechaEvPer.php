@@ -36,11 +36,11 @@ class EvtFechaEvPer extends Factory implements FactoryInterface
         Certificate $certificate = null,
         $date = ''
     ) {
-        parent::__construct($config, $std, $certificate, $date);
-        
-        $this->evtName = 'evtFechaEvPer';
-        $this->evtTag = 'evtFechaEvPer';
-        $this->evtAlias = 'R-2099';
+        $params = new \stdClass();
+        $params->evtName = 'evtFechamento';
+        $params->evtTag = 'evtFechaEvPer';
+        $params->evtAlias = 'R-2099';
+        parent::__construct($config, $std, $params, $certificate, $date);
     }
     
     /**
