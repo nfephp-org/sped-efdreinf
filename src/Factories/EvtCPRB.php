@@ -232,6 +232,6 @@ class EvtCPRB extends Factory implements FactoryInterface
         $this->node->appendChild($info);
         $this->reinf->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->reinf);
-        $this->sign();
+        $this->sign($this->evtTag);
     }
 }

@@ -210,6 +210,6 @@ class EvtAssocDespRec extends Factory implements FactoryInterface
         $this->node->appendChild($ideContri);
         $this->reinf->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->reinf);
-        $this->sign();
+        $this->sign($this->evtTag);
     }
 }

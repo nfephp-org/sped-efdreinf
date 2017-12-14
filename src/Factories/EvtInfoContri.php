@@ -237,6 +237,6 @@ class EvtInfoContri extends Factory implements FactoryInterface
         $this->node->appendChild($infoContri);
         $this->reinf->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->reinf);
-        $this->sign('evtInfoContri');
+        $this->sign($this->evtTag);
     }
 }

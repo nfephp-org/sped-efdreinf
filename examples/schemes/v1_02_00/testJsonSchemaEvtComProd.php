@@ -30,7 +30,9 @@ $jsonSchema = '{
         "nrrecibo": {
             "required": false,
             "type": ["string","null"],
-            "maxLength": 52
+            "minLength": 16,
+            "maxLength": 52,
+            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18})$"
         },
         "perapur": {
             "required": true,
@@ -47,7 +49,7 @@ $jsonSchema = '{
             "required": true,
             "type": "string",
             "maxLength": 14,
-            "pattern": "^[0-9]"
+            "pattern": "^([0-9]{8}|[0-9]{14})$"
         },
         "vlrrecbrutatotal": {
             "required": true,
@@ -145,11 +147,11 @@ $jsonSchema = '{
 $std = new \stdClass();
 $std->sequencial = 1;
 $std->indretif = 1;
-$std->nrrecibo = '737373737373737';
+$std->nrrecibo = '1-23-4567-8901-2345';
 $std->perapur = '2017-11';
 $std->tpinscestab = 1;
-$std->nrinscestab = "12345678901";
-$std->vlrrecbrutatotal = 10000; 
+$std->nrinscestab = "12345678901234";
+$std->vlrrecbrutatotal = 10000.00; 
 $std->vlrcpapur = 1020;
 $std->vlrratapur = 200;
 $std->vlrsenarapur = 200;
