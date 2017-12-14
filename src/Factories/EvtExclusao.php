@@ -94,6 +94,6 @@ class EvtExclusao extends Factory implements FactoryInterface
         $this->node->appendChild($infoExclusao);
         $this->reinf->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->reinf);
-        $this->sign();
+        $this->sign($this->evtTag);
     }
 }

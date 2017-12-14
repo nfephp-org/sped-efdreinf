@@ -84,7 +84,7 @@ class Tools extends ToolsBase
      * @param string $protocolo
      * @return string
      */
-    public function consultaLoteEventos($protocolo)
+    public function consultarLoteEventos($protocolo)
     {
         return '';
     }

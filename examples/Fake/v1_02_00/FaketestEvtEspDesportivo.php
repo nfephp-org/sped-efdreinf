@@ -26,60 +26,55 @@ $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
 $std = new \stdClass();
 $std->sequencial = 1;
-
 $std->indretif = 1;
-$std->nrrecibo = 'ABCD-234-2020';
+$std->nrrecibo = '1-12-1234-123456-123456576';
 $std->dtapuracao = '2017-12-01';
 
-$std->idecontri = new \stdClass();
-$std->idecontri->tpinsc = 1;
-$std->idecontri->nrinsc = '12345678901234';
+$std->ideestab[0] = new \stdClass();
+$std->ideestab[0]->tpinscestab = 1;
+$std->ideestab[0]->nrinscestab = '12345678901234';
 
-$std->idecontri->ideestab[0] = new \stdClass();
-$std->idecontri->ideestab[0]->tpinscestab = 1;
-$std->idecontri->ideestab[0]->nrinscestab = '12345678901234';
+$std->ideestab[0]->boletim[0] = new \stdClass();
+$std->ideestab[0]->boletim[0]->nrboletim = '1234';
+$std->ideestab[0]->boletim[0]->tpcompeticao = 1;
+$std->ideestab[0]->boletim[0]->categevento = 1;
+$std->ideestab[0]->boletim[0]->moddesportiva = 'corrida de bigas';
+$std->ideestab[0]->boletim[0]->nomecompeticao = 'Torneio tornado';
+$std->ideestab[0]->boletim[0]->cnpjmandante = '12345678901234';
+$std->ideestab[0]->boletim[0]->cnpjvisitante = '12345678901234';
+$std->ideestab[0]->boletim[0]->nomevisitante = 'Quebra Toco FC';
+$std->ideestab[0]->boletim[0]->pracadesportiva = 'Estadio do outro';
+$std->ideestab[0]->boletim[0]->codmunic = '1234567';
+$std->ideestab[0]->boletim[0]->uf = 'PR';
+$std->ideestab[0]->boletim[0]->qtdepagantes = 3200;
+$std->ideestab[0]->boletim[0]->qtdenaopagantes = 200;
 
-$std->idecontri->ideestab[0]->boletim[0] = new \stdClass();
-$std->idecontri->ideestab[0]->boletim[0]->nrboletim = 'abcd';
-$std->idecontri->ideestab[0]->boletim[0]->tpcompeticao = 1;
-$std->idecontri->ideestab[0]->boletim[0]->categevento = 1;
-$std->idecontri->ideestab[0]->boletim[0]->moddesportiva = 'corrida de bigas';
-$std->idecontri->ideestab[0]->boletim[0]->nomecompeticao = 'Torneio tornado';
-$std->idecontri->ideestab[0]->boletim[0]->cnpjmandante = '12345678901234';
-$std->idecontri->ideestab[0]->boletim[0]->cnpjvisitante = '12345678901234';
-$std->idecontri->ideestab[0]->boletim[0]->nomevisitante = 'Quebra Toco FC';
-$std->idecontri->ideestab[0]->boletim[0]->pracadesportiva = 'Estadio do outro';
-$std->idecontri->ideestab[0]->boletim[0]->codmunic = '1234567';
-$std->idecontri->ideestab[0]->boletim[0]->uf = 'PR';
-$std->idecontri->ideestab[0]->boletim[0]->qtdepagantes = 3200;
-$std->idecontri->ideestab[0]->boletim[0]->qtdenaopagantes = 200;
-
-$std->idecontri->ideestab[0]->boletim[0]->receitaingressos[0] = new \stdClass();
-$std->idecontri->ideestab[0]->boletim[0]->receitaingressos[0]->tpingresso = 4;
-$std->idecontri->ideestab[0]->boletim[0]->receitaingressos[0]->descingr = 'entrada';
-$std->idecontri->ideestab[0]->boletim[0]->receitaingressos[0]->qtdeingrvenda = 34568;
-$std->idecontri->ideestab[0]->boletim[0]->receitaingressos[0]->qtdeingrvendidos = 24567;
-$std->idecontri->ideestab[0]->boletim[0]->receitaingressos[0]->qtdeingrdev = 3;
-$std->idecontri->ideestab[0]->boletim[0]->receitaingressos[0]->precoindiv = 23.76;
-$std->idecontri->ideestab[0]->boletim[0]->receitaingressos[0]->vlrtotal = 290323.99;
+$std->ideestab[0]->boletim[0]->receitaingressos[0] = new \stdClass();
+$std->ideestab[0]->boletim[0]->receitaingressos[0]->tpingresso = 4;
+$std->ideestab[0]->boletim[0]->receitaingressos[0]->descingr = 'entrada';
+$std->ideestab[0]->boletim[0]->receitaingressos[0]->qtdeingrvenda = 34568;
+$std->ideestab[0]->boletim[0]->receitaingressos[0]->qtdeingrvendidos = 24567;
+$std->ideestab[0]->boletim[0]->receitaingressos[0]->qtdeingrdev = 3;
+$std->ideestab[0]->boletim[0]->receitaingressos[0]->precoindiv = 23.76;
+$std->ideestab[0]->boletim[0]->receitaingressos[0]->vlrtotal = 290323.99;
         
-$std->idecontri->ideestab[0]->boletim[0]->outrasreceitas[0] = new \stdClass();
-$std->idecontri->ideestab[0]->boletim[0]->outrasreceitas[0]->tpreceita = 4;
-$std->idecontri->ideestab[0]->boletim[0]->outrasreceitas[0]->vlrreceita = 392000029.56;
-$std->idecontri->ideestab[0]->boletim[0]->outrasreceitas[0]->descreceita = 'money money dim dim';
+$std->ideestab[0]->boletim[0]->outrasreceitas[0] = new \stdClass();
+$std->ideestab[0]->boletim[0]->outrasreceitas[0]->tpreceita = 4;
+$std->ideestab[0]->boletim[0]->outrasreceitas[0]->vlrreceita = 392000029.56;
+$std->ideestab[0]->boletim[0]->outrasreceitas[0]->descreceita = 'money money dim dim';
 
-$std->idecontri->ideestab[0]->receitatotal = new \stdClass();      
-$std->idecontri->ideestab[0]->receitatotal->vlrreceitatotal = 3456720000.36;
-$std->idecontri->ideestab[0]->receitatotal->vlrcp = 123450900.0;
-$std->idecontri->ideestab[0]->receitatotal->vlrcpsusptotal = 3498282.84;
-$std->idecontri->ideestab[0]->receitatotal->vlrreceitaclubes = 489388.43;
-$std->idecontri->ideestab[0]->receitatotal->vlrretparc = 123.76;
+$std->ideestab[0]->receitatotal = new \stdClass();      
+$std->ideestab[0]->receitatotal->vlrreceitatotal = 3456720000.36;
+$std->ideestab[0]->receitatotal->vlrcp = 123450900.0;
+$std->ideestab[0]->receitatotal->vlrcpsusptotal = 3498282.84;
+$std->ideestab[0]->receitatotal->vlrreceitaclubes = 489388.43;
+$std->ideestab[0]->receitatotal->vlrretparc = 123.76;
 
-$std->idecontri->ideestab[0]->receitatotal->infoproc[0] = new \stdClass(); 
-$std->idecontri->ideestab[0]->receitatotal->infoproc[0]->vlrcpsusp = 2345678.93;
-$std->idecontri->ideestab[0]->receitatotal->infoproc[0]->tpproc = 1;
-$std->idecontri->ideestab[0]->receitatotal->infoproc[0]->nrproc = '829js,n,sn,n';
-$std->idecontri->ideestab[0]->receitatotal->infoproc[0]->codsusp = '12345678901234';
+$std->ideestab[0]->receitatotal->infoproc[0] = new \stdClass(); 
+$std->ideestab[0]->receitatotal->infoproc[0]->vlrcpsusp = 2345678.93;
+$std->ideestab[0]->receitatotal->infoproc[0]->tpproc = 1;
+$std->ideestab[0]->receitatotal->infoproc[0]->nrproc = '829js,n,sn,n';
+$std->ideestab[0]->receitatotal->infoproc[0]->codsusp = '12345678901234';
 
 try {
     

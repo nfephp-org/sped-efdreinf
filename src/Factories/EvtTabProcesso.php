@@ -227,6 +227,6 @@ class EvtTabProcesso extends Factory implements FactoryInterface
         
         $this->reinf->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->reinf);
-        $this->sign();
+        $this->sign($this->evtTag);
     }
 }

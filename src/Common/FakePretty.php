@@ -19,6 +19,10 @@ class FakePretty
 {
     public static function prettyPrint($response, $save = '')
     {
+        if (empty($response)) {
+            $html = "Sem resposta";
+            return $html;
+        }
         $std = json_decode($response);
         if (!empty($save)) {
             file_put_contents(
