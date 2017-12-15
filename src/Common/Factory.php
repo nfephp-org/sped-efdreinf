@@ -266,7 +266,7 @@ abstract class Factory
             $this->dom->addChild(
                 $ideContri,
                 "tpInsc",
-                $this->tpInsc,
+                (string) $this->tpInsc,
                 true
             );
             $this->dom->addChild(
@@ -416,7 +416,9 @@ abstract class Factory
                 [true, false, null, null]
             );
             //validation by XSD schema throw Exception if dont pass
-            Validator::isValid($xml, $this->schema);
+            if ($this->schema) {
+                Validator::isValid($xml, $this->schema);
+            }
         }
         $this->xml = $xml;
     }
