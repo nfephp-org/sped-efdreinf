@@ -28,19 +28,19 @@ class EvtEspDesportivo extends Factory implements FactoryInterface
      * @param string $config
      * @param stdClass $std
      * @param Certificate $certificate
-     * @param string date
+     * @param string $data
      */
     public function __construct(
         $config,
         stdClass $std,
         Certificate $certificate = null,
-        $date = ''
+        $data = ''
     ) {
         $params = new \stdClass();
         $params->evtName = 'evtEspDesportivo';
         $params->evtTag = 'evtEspDesportivo';
         $params->evtAlias = 'R-3010';
-        parent::__construct($config, $std, $params, $certificate, $date);
+        parent::__construct($config, $std, $params, $certificate, $data);
     }
     
     /**
@@ -185,7 +185,7 @@ class EvtEspDesportivo extends Factory implements FactoryInterface
                     "uf",
                     $bo->uf,
                     true
-                );                
+                );
                 $this->dom->addChild(
                     $boletim,
                     "qtdePagantes",
@@ -199,8 +199,8 @@ class EvtEspDesportivo extends Factory implements FactoryInterface
                     true
                 );
                 
-                foreach($bo->receitaingressos  as $rec) {
-                    $recIng = $this->dom->createElement("receitaIngressos"); 
+                foreach ($bo->receitaingressos as $rec) {
+                    $recIng = $this->dom->createElement("receitaIngressos");
                     $this->dom->addChild(
                         $recIng,
                         "tpIngresso",
@@ -247,7 +247,7 @@ class EvtEspDesportivo extends Factory implements FactoryInterface
                 }
                 
                 if (!empty($bo->outrasreceitas)) {
-                    foreach ($bo->outrasreceitas as $or) { 
+                    foreach ($bo->outrasreceitas as $or) {
                         $oRec = $this->dom->createElement("outrasReceitas");
                         $this->dom->addChild(
                             $oRec,
@@ -279,7 +279,7 @@ class EvtEspDesportivo extends Factory implements FactoryInterface
                 "vlrReceitaTotal",
                 number_format($rt->vlrreceitatotal, 2, ',', ''),
                 true
-            );            
+            );
             $this->dom->addChild(
                 $recTot,
                 "vlrCP",
@@ -312,7 +312,7 @@ class EvtEspDesportivo extends Factory implements FactoryInterface
                         "vlrCPSusp",
                         number_format($ifp->vlrcpsusp, 2, ',', ''),
                         true
-                    );                    
+                    );
                     $this->dom->addChild(
                         $infoProc,
                         "tpProc",

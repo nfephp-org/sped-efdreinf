@@ -28,19 +28,19 @@ class EvtComProd extends Factory implements FactoryInterface
      * @param string $config
      * @param stdClass $std
      * @param Certificate $certificate
-     * @param string date
+     * @param string $data
      */
     public function __construct(
         $config,
         stdClass $std,
         Certificate $certificate = null,
-        $date = ''
+        $data = ''
     ) {
         $params = new \stdClass();
         $params->evtName = 'evtInfoProdRural';
         $params->evtTag = 'evtComProd';
         $params->evtAlias = 'R-2050';
-        parent::__construct($config, $std, $params, $certificate, $date);
+        parent::__construct($config, $std, $params, $certificate, $data);
     }
     
     /**
@@ -163,7 +163,7 @@ class EvtComProd extends Factory implements FactoryInterface
             $ideEstab->appendChild($tipoCom);
         }
         if (!empty($this->std->infoproc)) {
-            foreach($this->std->infoproc as $ip) {
+            foreach ($this->std->infoproc as $ip) {
                 $infoProc = $this->dom->createElement("infoProc");
                 $this->dom->addChild(
                     $infoProc,

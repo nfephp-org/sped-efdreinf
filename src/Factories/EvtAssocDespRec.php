@@ -28,19 +28,19 @@ class EvtAssocDespRec extends Factory implements FactoryInterface
      * @param string $config
      * @param stdClass $std
      * @param Certificate $certificate
-     * @param string date
+     * @param string $data
      */
     public function __construct(
         $config,
         stdClass $std,
         Certificate $certificate = null,
-        $date = ''
+        $data = ''
     ) {
         $params = new \stdClass();
         $params->evtName = 'evtRecursoRecebidoAssociacao';
         $params->evtTag = 'evtAssocDespRec';
         $params->evtAlias = 'R-2030';
-        parent::__construct($config, $std, $params, $certificate, $date);
+        parent::__construct($config, $std, $params, $certificate, $data);
     }
     
     /**

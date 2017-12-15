@@ -28,19 +28,19 @@ class EvtReabreEvPer extends Factory implements FactoryInterface
      * @param string $config
      * @param stdClass $std
      * @param Certificate $certificate
-     * @param string date
+     * @param string $data
      */
     public function __construct(
         $config,
         stdClass $std,
         Certificate $certificate = null,
-        $date = ''
+        $data = ''
     ) {
         $params = new \stdClass();
         $params->evtName = 'evtReabreEvPer';
         $params->evtTag = 'evtReabreEvPer';
         $params->evtAlias = 'R-2098';
-        parent::__construct($config, $std, $params, $certificate, $date);
+        parent::__construct($config, $std, $params, $certificate, $data);
     }
     
     /**
