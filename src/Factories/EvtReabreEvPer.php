@@ -48,5 +48,37 @@ class EvtReabreEvPer extends Factory implements FactoryInterface
      */
     protected function toNode()
     {
+        $ideContri = $this->node->getElementsByTagName('ideContri')->item(0);
+        //o idEvento pode variar de evento para evento
+        //então cada factory individualmente terá de construir o seu
+        $ideEvento = $this->dom->createElement("ideEvento");
+        $this->dom->addChild(
+            $ideEvento,
+            "perApur",
+            $this->std->perapur,
+            true
+        );
+        $this->dom->addChild(
+            $ideEvento,
+            "tpAmb",
+            $this->tpAmb,
+            true
+        );
+        $this->dom->addChild(
+            $ideEvento,
+            "procEmi",
+            $this->procEmi,
+            true
+        );
+        $this->dom->addChild(
+            $ideEvento,
+            "verProc",
+            $this->verProc,
+            true
+        );
+        $this->node->insertBefore($ideEvento, $ideContri);
+        $this->reinf->appendChild($this->node);
+        //$this->xml = $this->dom->saveXML($this->reinf);
+        $this->sign($this->evtTag);
     }
 }

@@ -177,31 +177,31 @@ class EvtTotal extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $rTom,
                     "vlrTotalBaseRet",
-                    $r->vlrtotalbaseret,
+                    number_format($r->vlrtotalbaseret, 2, ',', ''),
                     true
                 );
                 $this->dom->addChild(
                     $rTom,
                     "vlrTotalRetPrinc",
-                    $r->vlrtotalretprinc,
+                    number_format($r->vlrtotalretprinc, 2, ',', ''),
                     true
                 );
                 $this->dom->addChild(
                     $rTom,
                     "vlrTotalRetAdic",
-                    !empty($r->vlrtotalretadic) ? $r->vlrtotalretadic : null,
+                    !empty($r->vlrtotalretadic) ? number_format($r->vlrtotalretadic, 2, ',', '') : null,
                     false
                 );
                 $this->dom->addChild(
                     $rTom,
                     "vlrTotalNRetPrinc",
-                    !empty($r->vlrtotalnretprinc) ? $r->vlrtotalnretprinc : null,
+                    !empty($r->vlrtotalnretprinc) ? number_format($r->vlrtotalnretprinc, 2, ',', '') : null,
                     false
                 );
                 $this->dom->addChild(
                     $rTom,
                     "vlrTotalNRetAdic",
-                    !empty($r->vlrtotalnretadic) ? $r->vlrtotalnretadic : null,
+                    !empty($r->vlrtotalnretadic) ? number_format($r->vlrtotalnretadic, 2, ',', '') : null,
                     false
                 );
                 $infoContrib->appendChild($rTom);
@@ -225,31 +225,31 @@ class EvtTotal extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $rPrest,
                     "vlrTotalBaseRet",
-                    $r->vlrtotalbaseret,
+                    number_format($r->vlrtotalbaseret, 2, ',', ''),
                     true
                 );
                 $this->dom->addChild(
                     $rPrest,
                     "vlrTotalRetPrinc",
-                    $r->vlrtotalretprinc,
+                    number_format($r->vlrtotalretprinc, 2, ',', ''),
                     true
                 );
                 $this->dom->addChild(
                     $rPrest,
                     "vlrTotalRetAdic",
-                    !empty($r->vlrtotalretadic) ? $r->vlrtotalretadic : null,
+                    !empty($r->vlrtotalretadic) ? number_format($r->vlrtotalretadic, 2, ',', '') : null,
                     false
                 );
                 $this->dom->addChild(
                     $rPrest,
                     "vlrTotalNRetPrinc",
-                    !empty($r->vlrtotalnretprinc) ? $r->vlrtotalnretprinc : null,
+                    !empty($r->vlrtotalnretprinc) ? number_format($r->vlrtotalnretprinc, 2, ',', '') : null,
                     false
                 );
                 $this->dom->addChild(
                     $rPrest,
                     "vlrTotalNRetAdic",
-                    !empty($r->vlrtotalnretadic) ? $r->vlrtotalnretadic : null,
+                    !empty($r->vlrtotalnretadic) ? number_format($r->vlrtotalnretadic, 2, ',', '') : null,
                     false
                 );
                 $infoContrib->appendChild($rPrest);
@@ -267,19 +267,19 @@ class EvtTotal extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $rRecRepAD,
                     "vlrTotalRep",
-                    $r->vlrtotalrep,
+                    number_format($r->vlrtotalrep, 2, ',', ''),
                     true
                 );
                 $this->dom->addChild(
                     $rRecRepAD,
                     "vlrTotalRet",
-                    $r->vlrtotalret,
+                    number_format($r->vlrtotalret, 2, ',', ''),
                     true
                 );
                 $this->dom->addChild(
                     $rRecRepAD,
                     "vlrTotalNRet",
-                    !empty($r->vlrtotalnret) ? $r->vlrtotalnret : null,
+                    !empty($r->vlrtotalnret) ? number_format($r->vlrtotalnret, 2, ',', '') : null,
                     false
                 );
                 $infoContrib->appendChild($rRecRepAD);
@@ -291,37 +291,37 @@ class EvtTotal extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $rComl,
                 "vlrCPApur",
-                $r->vlrcpapur,
+                number_format($r->vlrcpapur, 2, ',', ''),
                 true
             );
             $this->dom->addChild(
                 $rComl,
                 "vlrRatApur",
-                $r->vlrratapur,
+                number_format($r->vlrratapur, 2, ',', ''),
                 true
             );
             $this->dom->addChild(
                 $rComl,
                 "vlrSenarApur",
-                $r->vlrsenarapur,
+                number_format($r->vlrsenarapur, 2, ',', ''),
                 true
             );
             $this->dom->addChild(
                 $rComl,
                 "vlrCPSusp",
-                !empty($r->vlrcpsusp) ? $r->vlrcpsusp : null,
+                !empty($r->vlrcpsusp) ? number_format($r->vlrcpsusp, 2, ',', '') : null,
                 false
             );
             $this->dom->addChild(
                 $rComl,
                 "vlrRatSusp",
-                !empty($r->vlrratsusp) ? $r->vlrratsusp : null,
+                !empty($r->vlrratsusp) ? number_format($r->vlrratsusp, 2, ',', '') : null,
                 false
             );
             $this->dom->addChild(
                 $rComl,
                 "vlrSenarSusp",
-                !empty($r->vlrsenarsusp) ? $r->vlrsenarsusp : null,
+                !empty($r->vlrsenarsusp) ? number_format($r->vlrsenarsusp, 2, ',', '') : null,
                 false
             );
             $infoContrib->appendChild($rComl);
@@ -338,13 +338,13 @@ class EvtTotal extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $rCPRB,
                     "vlrCPApurTotal",
-                    $r->vlrcpapurtotal,
+                    number_format($r->vlrcpapurtotal, 2, ',', ''),
                     true
                 );
                 $this->dom->addChild(
                     $rCPRB,
                     "vlrCPRBSusp",
-                    !empty($r->vlrcprbsusp) ? $r->vlrcprbsusp : null,
+                    !empty($r->vlrcprbsusp) ? number_format($r->vlrcprbsusp, 2, ',', '') : null,
                     false
                 );
                 $infoContrib->appendChild($rCPRB);

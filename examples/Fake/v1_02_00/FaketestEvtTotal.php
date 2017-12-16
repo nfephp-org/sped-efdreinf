@@ -36,7 +36,7 @@ $std->regocorrs[0]->localerroaviso = 'este é o local onde aconteceu';
 $std->regocorrs[0]->codresp = 'ksksk';
 $std->regocorrs[0]->dscresp = 'Este campo lorem ipsum';
 
-$std->dhprocess = '2017-11-22 12:34:00';
+$std->dhprocess = '2017-11-22T12:34:00';
 $std->tpev = '123456';
 $std->idev = 'lslslslslslslslsl';
 $std->hash = 'akhld wy slksndsjhslslkjsk';

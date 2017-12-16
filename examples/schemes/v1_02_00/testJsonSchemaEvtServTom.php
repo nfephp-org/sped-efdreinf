@@ -30,278 +30,270 @@ $jsonSchema = '{
         "nrrecibo": {
             "required": false,
             "type": ["string","null"],
-            "maxLength": 52
+            "maxLength": 52,
+            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18})$"
         },
         "perapur": {
             "required": true,
             "type": "string",
             "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])$"
         },
-        "ideestabobra": {
+        "tpinscestab": {
             "required": true,
-            "type": "object",
-            "properties": {
-                "tpinscestab": {
-                    "required": true,
-                    "type": "integer",
-                    "minimum": 1,
-                    "maximum": 4
-                },
-                "nrinscestab": {
-                    "required": true,
-                    "type": "string",
-                    "maxLength": 14,
-                    "pattern": "^[0-9]"
-                },
-                "indobra": {
-                    "required": true,
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 2
-                },
-                "cnpjprestador": {
-                    "required": true,
-                    "type": "string",
-                    "maxLength": 14,
-                    "pattern": "^[0-9]"
-                },
-                "vlrtotalbruto": {
-                    "required": true,
-                    "type": "number"
-                },
-                "vlrtotalbaseret": {
-                    "required": true,
-                    "type": "number"
-                },
-                "vlrtotalretprinc": {
-                    "required": true,
-                    "type": "number"
-                },
-                "vlrtotalretadic": {
-                    "required": false,
-                    "type": ["number","null"]
-                },
-                "vlrtotalnretprinc": {
-                    "required": false,
-                    "type": ["number","null"]
-                },
-                "vlrtotalnretadic": {
-                    "required": false,
-                    "type": ["number","null"]
-                },
-                "indcprb": {
-                    "required": true,
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 2
-                },
-                "nfs": {
-                    "required": true,
-                    "type": "array",
-                    "minItems": 1,
-                    "maxItems": 500,
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "serie": {
-                                "required": true,
-                                "type": "string",
-                                "maxLength": 5
-                            },
-                            "numdocto": {
-                                "required": true,
-                                "type": "string",
-                                "maxLength": 15
-                            },
-                            "dtemissaonf": {
-                                "required": true,
-                                "type": "string",
-                                "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$"
-                            },
-                            "vlrbruto": {
-                                "required": true,
-                                "type": "number"
-                            },
-                            "obs": {
-                                "required": false,
-                                "type": ["string","null"],
-                                "maxLength": 250
-                            },
-                            "infotpserv": {
-                                "required": true,
-                                "type": "array",
-                                "minItems": 1,
-                                "maxItems": 9,
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "tpservico": {
-                                            "required": true,
-                                            "type": "string",
-                                            "maxLength": 9,
-                                            "pattern": "^[0-9]"
-                                        },
-                                        "vlrbaseret": {
-                                            "required": true,
-                                            "type": "number"
-                                        },
-                                        "vlrretencao": {
-                                            "required": true,
-                                            "type": "number"
-                                        },
-                                        "vlrretsub": {
-                                            "required": false,
-                                            "type": ["number","null"]
-                                        },
-                                        "vlrnretprinc": {
-                                            "required": false,
-                                            "type": ["number","null"]
-                                        },
-                                        "vlrservicos15": {
-                                            "required": false,
-                                            "type": ["number","null"]
-                                        },
-                                        "vlrservicos20": {
-                                            "required": false,
-                                            "type": ["number","null"]
-                                        },
-                                        "vlrservicos25": {
-                                            "required": false,
-                                            "type": ["number","null"]
-                                        },
-                                        "vlradicional": {
-                                            "required": false,
-                                            "type": ["number","null"]
-                                        },
-                                        "vlrnretadic": {
-                                            "required": false,
-                                            "type": ["number","null"]
-                                        }
-                                    }
-                                }
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4
+        },
+        "nrinscestab": {
+            "required": true,
+            "type": "string",
+            "maxLength": 14,
+            "pattern": "^[0-9]"
+        },
+        "indobra": {
+            "required": true,
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+        },
+        "cnpjprestador": {
+            "required": true,
+            "type": "string",
+            "maxLength": 14,
+            "pattern": "^[0-9]"
+        },
+        "vlrtotalbruto": {
+            "required": true,
+            "type": "number"
+        },
+        "vlrtotalbaseret": {
+            "required": true,
+            "type": "number"
+        },
+        "vlrtotalretprinc": {
+            "required": true,
+            "type": "number"
+        },
+        "vlrtotalretadic": {
+           "required": false,
+           "type": ["number","null"]
+        },
+        "vlrtotalnretprinc": {
+            "required": false,
+            "type": ["number","null"]
+        },
+        "vlrtotalnretadic": {
+            "required": false,
+            "type": ["number","null"]
+        },
+        "indcprb": {
+            "required": true,
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+        },
+        "nfs": {
+           "required": true,
+           "type": "array",
+           "minItems": 1,
+           "maxItems": 500,
+           "items": {
+                "type": "object",
+                "properties": {
+                    "serie": {
+                        "required": true,
+                        "type": "string",
+                        "maxLength": 5
+                    },
+                    "numdocto": {
+                        "required": true,
+                        "type": "string",
+                        "maxLength": 15
+                    },
+                    "dtemissaonf": {
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$"
+                    },
+                    "vlrbruto": {
+                        "required": true,
+                        "type": "number"
+                    },
+                    "obs": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "maxLength": 250
+                    },
+                    "infotpserv": {
+                        "required": true,
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 9,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "tpservico": {
+                                    "required": true,
+                                    "type": "string",
+                                    "maxLength": 9,
+                                    "pattern": "^[0-9]"
+                                },
+                                "vlrbaseret": {
+                                    "required": true,
+                                    "type": "number"
+                                },
+                                "vlrretencao": {
+                                    "required": true,
+                                    "type": "number"
+                                },
+                                "vlrretsub": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlrnretprinc": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlrservicos15": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlrservicos20": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlrservicos25": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlradicional": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlrnretadic": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                }                            
                             }
                         }
                     }    
-                },
-                "infoprocretpr": {
-                    "required": false,
-                    "type": ["array","null"],
-                    "minItems": 0,
-                    "maxItems": 50,
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "tpprocretprinc": {
-                                "required": true,
-                                "type": "integer",
-                                "minimum": 1,
-                                "maximum": 2
-                            },
-                            "nrprocretprinc": {
-                                "required": true,
-                                "type": "string",
-                                "maxLength": 21
-                            },
-                            "codsuspprinc": {
-                                "required": false,
-                                "type": ["string","null"],
-                                "maxLength": 14,
-                                "pattern": "^[0-9]"
-                            },
-                            "valorprinc": {
-                                "required": true,
-                                "type": "number"
-                            }
-                        }
-                    }
-                },
-                "infoprocretad": {
-                    "required": false,
-                    "type": ["array","null"],
-                    "minItems": 0,
-                    "maxItems": 50,
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                           "tpprocretadic": {
-                                "required": true,
-                                "type": "integer",
-                                "minimum": 1,
-                                "maximum": 2
-                            },
-                           "nrprocretadic": {
-                                "required": true,
-                                "type": "string",
-                                "maxLength": 21
-                            },
-                            "codsuspadic": {
-                                "required": false,
-                                "type": ["string","null"],
-                                "maxLength": 14,
-                                "pattern": "^[0-9]"
-                            },
-                            "valoradic": {
-                                "required": true,
-                                "type": "number"
-                            }
-                        }
-                    }
                 }
             }
+        },
+        "infoprocretpr": {
+            "required": false,
+            "type": ["array","null"],
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "tpprocretprinc": {
+                        "required": true,
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2
+                    },
+                    "nrprocretprinc": {
+                        "required": true,
+                        "type": "string",
+                        "maxLength": 21
+                    },
+                    "codsuspprinc": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "maxLength": 14,
+                        "pattern": "^[0-9]"
+                    },
+                    "valorprinc": {
+                        "required": true,
+                        "type": "number"
+                    }                
+                }
+            }
+        },
+        "infoprocretad": {
+            "required": false,
+            "type": ["array","null"],
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "tpprocretadic": {
+                        "required": true,
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2
+                    },
+                    "nrprocretadic": {
+                        "required": true,
+                        "type": "string",
+                        "maxLength": 21
+                    },
+                    "codsuspadic": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "maxLength": 14,
+                        "pattern": "^[0-9]"
+                    },
+                    "valoradic": {
+                        "required": true,
+                        "type": "number"
+                    }                
+                }
+            }    
         }    
     }
-}';
-
+}'; 
 
 $std = new \stdClass();
 $std->sequencial = 1;
 $std->indretif = 1;
-$std->nrrecibo = '737373737373737';
+$std->nrrecibo = '1-00-1234-1234-1234556789012345';
 $std->perapur = '2017-11';
+$std->tpinscestab = 1;
+$std->nrinscestab = '12345678901234';
+$std->indobra = '0';
+$std->cnpjprestador = '12345678901234';
+$std->vlrtotalbruto = 456.92;
+$std->vlrtotalbaseret = 45.80;
+$std->vlrtotalretprinc = 5;
+$std->vlrtotalretadic = 54.35;
+$std->vlrtotalnretprinc = 345.66;
+$std->vlrtotalnretadic = 345.90;
+$std->indcprb = 0;
 
-$std->ideestabobra = new \stdClass();
-$std->ideestabobra->tpinscestab = 1;
-$std->ideestabobra->nrinscestab = '12345678901234';
-$std->ideestabobra->indobra = '0';
-$std->ideestabobra->cnpjprestador = '12345678901234';
-$std->ideestabobra->vlrtotalbruto = 456.92;
-$std->ideestabobra->vlrtotalbaseret = 45.80;
-$std->ideestabobra->vlrtotalretprinc = 5;
-$std->ideestabobra->vlrtotalretadic = 54.35;
-$std->ideestabobra->vlrtotalnretprinc = 345.66;
-$std->ideestabobra->vlrtotalnretadic = 345.90;
-$std->ideestabobra->indcprb = 0;
+$std->nfs[0] = new \stdClass();
+$std->nfs[0]->serie = '001';
+$std->nfs[0]->numdocto = '265465';
+$std->nfs[0]->dtemissaonf = '2017-01-22';
+$std->nfs[0]->vlrbruto = 200.00;
+$std->nfs[0]->obs = 'observacao pode ser nula';
 
-$std->ideestabobra->nfs[0] = new \stdClass();
-$std->ideestabobra->nfs[0]->serie = '001';
-$std->ideestabobra->nfs[0]->numdocto = '265465';
-$std->ideestabobra->nfs[0]->dtemissaonf = '2017-01-22';
-$std->ideestabobra->nfs[0]->vlrbruto = 200.00;
-$std->ideestabobra->nfs[0]->obs = 'observacao pode ser nula';
+$std->nfs[0]->infotpserv[0] = new \stdClass();
+$std->nfs[0]->infotpserv[0]->tpservico = '123456789';
+$std->nfs[0]->infotpserv[0]->vlrbaseret = 234.90;
+$std->nfs[0]->infotpserv[0]->vlrretencao = 12.75;
+$std->nfs[0]->infotpserv[0]->vlrretsub = 34.55;
+$std->nfs[0]->infotpserv[0]->vlrnretprinc = 2345.75;
+$std->nfs[0]->infotpserv[0]->vlrservicos15 = 22;
+$std->nfs[0]->infotpserv[0]->vlrservicos20 = 33;
+$std->nfs[0]->infotpserv[0]->vlrservicos25 = 44;
+$std->nfs[0]->infotpserv[0]->vlradicional = 5;
+$std->nfs[0]->infotpserv[0]->vlrnretadic = 1.55;
 
-$std->ideestabobra->nfs[0]->infotpserv[0] = new \stdClass();
-$std->ideestabobra->nfs[0]->infotpserv[0]->tpservico = '123456789';
-$std->ideestabobra->nfs[0]->infotpserv[0]->vlrbaseret = 234.90;
-$std->ideestabobra->nfs[0]->infotpserv[0]->vlrretencao = 12.75;
-$std->ideestabobra->nfs[0]->infotpserv[0]->vlrretsub = 34.55;
-$std->ideestabobra->nfs[0]->infotpserv[0]->vlrnretprinc = 2345.75;
-$std->ideestabobra->nfs[0]->infotpserv[0]->vlrservicos15 = 22;
-$std->ideestabobra->nfs[0]->infotpserv[0]->vlrservicos20 = 33;
-$std->ideestabobra->nfs[0]->infotpserv[0]->vlrservicos25 = 44;
-$std->ideestabobra->nfs[0]->infotpserv[0]->vlradicional = 5;
-$std->ideestabobra->nfs[0]->infotpserv[0]->vlrnretadic = 1.55;
+$std->infoprocretpr[0] = new \stdClass();
+$std->infoprocretpr[0]->tpprocretprinc = 1;
+$std->infoprocretpr[0]->nrprocretprinc = 'ZYX987';
+$std->infoprocretpr[0]->codsuspprinc = '12345678901234';
+$std->infoprocretpr[0]->valorprinc = 200.98;
 
-$std->ideestabobra->infoprocretpr[0] = new \stdClass();
-$std->ideestabobra->infoprocretpr[0]->tpprocretprinc = 1;
-$std->ideestabobra->infoprocretpr[0]->nrprocretprinc = 'ZYX987';
-$std->ideestabobra->infoprocretpr[0]->codsuspprinc = '12345678901234';
-$std->ideestabobra->infoprocretpr[0]->valorprinc = 200.98;
-
-$std->ideestabobra->infoprocretad[0] = new \stdClass();
-$std->ideestabobra->infoprocretad[0]->tpprocretadic = 1;
-$std->ideestabobra->infoprocretad[0]->nrprocretadic = 'ACB21';
-$std->ideestabobra->infoprocretad[0]->codsuspadic = '12345678901234';
-$std->ideestabobra->infoprocretad[0]->valoradic = 1000.23;
+$std->infoprocretad[0] = new \stdClass();
+$std->infoprocretad[0]->tpprocretadic = 1;
+$std->infoprocretad[0]->nrprocretadic = 'ACB21';
+$std->infoprocretad[0]->codsuspadic = '12345678901234';
+$std->infoprocretad[0]->valoradic = 1000.23;
 
 
 
