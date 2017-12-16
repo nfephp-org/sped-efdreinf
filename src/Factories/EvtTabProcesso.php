@@ -73,7 +73,6 @@ class EvtTabProcesso extends Factory implements FactoryInterface
         $this->node->insertBefore($ideEvento, $ideContri);
         //tag deste evento em particular
         $info = $this->dom->createElement("infoProcesso");
-        
         $ideProcesso  = $this->dom->createElement("ideProcesso");
         $this->dom->addChild(
             $ideProcesso,
@@ -202,7 +201,6 @@ class EvtTabProcesso extends Factory implements FactoryInterface
             }
         }
         $node->appendChild($ideProcesso);
-        
         if (!empty($this->std->novavalidade) && $this->std->modo == 'ALT') {
             $novaValidade = $this->dom->createElement("novaValidade");
             $n = $this->std->novavalidade;
@@ -220,11 +218,8 @@ class EvtTabProcesso extends Factory implements FactoryInterface
             );
             $node->appendChild($novaValidade);
         }
-        
         $info->appendChild($node);
-        
         $this->node->appendChild($info);
-        
         $this->reinf->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->reinf);
         $this->sign($this->evtTag);
