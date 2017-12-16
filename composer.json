@@ -43,11 +43,12 @@
     "scripts": {
         "test": "phpunit",
         "phpcbf": "vendor/bin/phpcbf --standard=psr2 src/ & vendor/bin/phpcbf --standard=psr2 tests/",
-        "phpcs": "vendor/bin/phpcs --standard=psr2 src/; vendor/bin/phpcs --standard=psr2 tests/"
+        "phpcs": "vendor/bin/phpcs --standard=psr2 src/; vendor/bin/phpcs --standard=psr2 tests/",
+        "phpstan": "vendor/bin/phpstan analyse src/ --level 7"
     },
     "extra": {
         "branch-alias": {
-            "v5.0": "5.0-dev"
+            "v1.0": "1.0-dev"
         }
     },
     "minimum-stability": "stable"
