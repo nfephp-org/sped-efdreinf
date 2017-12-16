@@ -97,14 +97,14 @@ class EvtServPrest extends Factory implements FactoryInterface
             "tpInscEstabPrest",
             $this->std->tpinscestabprest,
             true
-        );        
+        );
         $this->dom->addChild(
             $ideEstabPrest,
             "nrInscEstabPrest",
             $this->std->nrinscestabprest,
             true
         );
-        $ideTomador = $this->dom->createElement("ideTomador"); 
+        $ideTomador = $this->dom->createElement("ideTomador");
         $this->dom->addChild(
             $ideTomador,
             "tpInscTomador",
@@ -126,37 +126,37 @@ class EvtServPrest extends Factory implements FactoryInterface
         $this->dom->addChild(
             $ideTomador,
             "vlrTotalBruto",
-            number_format($this->std->vlrtotalbruto, 2 , ',', ''),
+            number_format($this->std->vlrtotalbruto, 2, ',', ''),
             true
         );
         $this->dom->addChild(
             $ideTomador,
             "vlrTotalBaseRet",
-            number_format($this->std->vlrtotalbaseret, 2 , ',', ''),
+            number_format($this->std->vlrtotalbaseret, 2, ',', ''),
             true
         );
         $this->dom->addChild(
             $ideTomador,
             "vlrTotalRetPrinc",
-            number_format($this->std->vlrtotalretprinc, 2 , ',', ''),
+            number_format($this->std->vlrtotalretprinc, 2, ',', ''),
             true
         );
         $this->dom->addChild(
             $ideTomador,
             "vlrTotalRetAdic",
-            !empty($this->std->vlrtotalretadic) ? number_format($this->std->vlrtotalretadic, 2 , ',', '') : null,
+            !empty($this->std->vlrtotalretadic) ? number_format($this->std->vlrtotalretadic, 2, ',', '') : null,
             false
         );
         $this->dom->addChild(
             $ideTomador,
             "vlrTotalNRetPrinc",
-            !empty($this->std->vlrtotalnretprinc) ? number_format($this->std->vlrtotalnretprinc, 2 , ',', '') : null,
+            !empty($this->std->vlrtotalnretprinc) ? number_format($this->std->vlrtotalnretprinc, 2, ',', '') : null,
             false
         );
         $this->dom->addChild(
             $ideTomador,
             "vlrTotalNRetAdic",
-            !empty($this->std->vlrtotalnretadic) ? number_format($this->std->vlrtotalnretadic, 2 , ',', '') : null,
+            !empty($this->std->vlrtotalnretadic) ? number_format($this->std->vlrtotalnretadic, 2, ',', '') : null,
             false
         );
         
@@ -167,13 +167,13 @@ class EvtServPrest extends Factory implements FactoryInterface
                 "serie",
                 $n->serie,
                 true
-            );            
+            );
             $this->dom->addChild(
                 $nfs,
                 "numDocto",
                 $n->numdocto,
                 true
-            );            
+            );
             $this->dom->addChild(
                 $nfs,
                 "dtEmissaoNF",
@@ -183,7 +183,7 @@ class EvtServPrest extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $nfs,
                 "vlrBruto",
-                number_format($n->vlrbruto, 2 , ',', ''),
+                number_format($n->vlrbruto, 2, ',', ''),
                 true
             );
             $this->dom->addChild(
@@ -258,7 +258,7 @@ class EvtServPrest extends Factory implements FactoryInterface
 
                 $nfs->appendChild($infoTpServ);
             }
-            $ideTomador->appendChild($nfs);  
+            $ideTomador->appendChild($nfs);
         }
         if (!empty($this->std->infoprocretpr)) {
             foreach ($this->std->infoprocretpr as $irp) {
