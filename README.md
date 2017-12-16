@@ -11,7 +11,6 @@
 [![Build Status][ico-travis]][link-travis]
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
-[![Code Intelligence Status]][link-code-intelligency]
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![License][ico-license]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
@@ -117,7 +116,6 @@ Este pacote está diponibilizado sob LGPLv3 ou MIT License (MIT). Leia  [Arquivo
 [link-packagist]: https://packagist.org/packages/nfephp-org/sped-efdreinf
 [link-travis]: https://travis-ci.org/nfephp-org/sped-efdreinf
 [link-scrutinizer]: https://scrutinizer-ci.com/g/nfephp-org/sped-efdreinf/code-structure
-[link-code-intelligency]: https://scrutinizer-ci.com/g/nfephp-org/sped-efdreinf/badges/code-intelligence.svg?b=master
 [link-code-quality]: https://scrutinizer-ci.com/g/nfephp-org/sped-efdreinf
 [link-downloads]: https://packagist.org/packages/nfephp-org/sped-efdreinf
 [link-author]: https://github.com/nfephp-org
