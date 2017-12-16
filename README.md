@@ -1,11 +1,8 @@
 # sped-efdreinf
 
-## Pacote em estruturação INICIAL ainda nada útil
-
 *Utilize o chat do Gitter para iniciar discussões especificas sobre o desenvolvimento deste pacote.*
 
 [![Chat][ico-gitter]][link-gitter]
-
 
 [![Latest Stable Version][ico-stable]][link-packagist]
 [![Build Status][ico-travis]][link-travis]
@@ -27,7 +24,7 @@ Este pacote é aderente com os [PSR-1], [PSR-2] e [PSR-4]. Se você observar neg
 
 Não deixe de se cadastrar no [grupo de discussão do NFePHP](http://groups.google.com/group/nfephp) para acompanhar o desenvolvimento e participar das discussões e tirar duvidas!
 
-
+## NOTA: provável falha no evtTotal, avaliando erros no XSD fornecido ISSUE #36
 
 A Escrituração Fiscal Digital de Retenções e Outras Informações Fiscais EFD-Reinf é um dos módulos do Sistema Público de Escrituração Digital - SPED, a ser utilizado pelas pessoas jurídicas e físicas, em complemento ao Sistema de Escrituração Digital das Obrigações Fiscais, Previdenciárias e Trabalhistas – eSocial.
  
