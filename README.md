@@ -26,6 +26,25 @@ Não deixe de se cadastrar no [grupo de discussão do NFePHP](http://groups.goog
 
 ## NOTA: provável falha no evtTotal, avaliando erros no XSD fornecido [ISSUE #36](https://github.com/nfephp-org/sped-efdreinf/issues/36)
 
+## Obrigatoriedade e entrega da EFD-Reinf
+A aplicação da EFD-Reinf atualizada pela Instrução Normativa 1.767, publicada no dia 14/12/17, determina o seguinte cronograma:
+
+I   para o 1º grupo, que compreende as entidades integrantes do “Grupo 2 – Entidades Empresariais”, com faturamento no ano de 2016 acima de R$ 78 milhões, **a partir de 1º de maio de 2018**, em relação aos fatos geradores ocorridos a partir dessa data;
+
+II  para o 2º grupo, que compreende os demais contribuintes, exceto os previstos no inciso III, **a partir de 1º de novembro de 2018**, em relação aos fatos geradores ocorridos a partir dessa data; e
+
+III para o 3º grupo, que compreende os entes públicos, integrantes do Grupo 1 – Administração Pública, a **partir de 1º de maio de 2019**, em relação aos fatos geradores ocorridos a partir dessa data.
+
+Ressalte-se que o prazo de vencimento da obrigação foi alterado para até o dia 15 do mês subsequente.
+
+A referida obrigação será entregue via DCTFWeb, sistema utilizado para fechamento previdenciário, que permitirá: 
+
+- Apuração automática dos débitos tributários;
+- Vinculações dos débitos e créditos tributários e compensações;
+- Consulta e aproveitamento dos créditos tributários disponíveis;
+- Emissão eletrônica de DARF com código de barras.
+
+
 A Escrituração Fiscal Digital de Retenções e Outras Informações Fiscais EFD-Reinf é um dos módulos do Sistema Público de Escrituração Digital - SPED, a ser utilizado pelas pessoas jurídicas e físicas, em complemento ao Sistema de Escrituração Digital das Obrigações Fiscais, Previdenciárias e Trabalhistas – eSocial.
  
 Tem por objeto a escrituração de rendimentos pagos e retenções de Imposto de Renda, Contribuição Social do contribuinte exceto aquelas relacionadas ao trabalho e informações sobre a receita bruta para a apuração das contribuições previdenciárias substituídas. Substituirá, portanto, o módulo da EFD-Contribuições que apura a Contribuição Previdenciária sobre a Receita Bruta (CPRB).
