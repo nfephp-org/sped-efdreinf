@@ -29,11 +29,11 @@ Não deixe de se cadastrar no [grupo de discussão do NFePHP](http://groups.goog
 ## Obrigatoriedade e entrega da EFD-Reinf
 A aplicação da EFD-Reinf atualizada pela Instrução Normativa 1.767, publicada no dia 14/12/17, determina o seguinte cronograma:
 
-I   para o 1º grupo, que compreende as entidades integrantes do “Grupo 2 – Entidades Empresariais”, com faturamento no ano de 2016 acima de R$ 78 milhões, a partir de 1º de maio de 2018, em relação aos fatos geradores ocorridos a partir dessa data;
+I   para o 1º grupo, que compreende as entidades integrantes do “Grupo 2 – Entidades Empresariais”, com faturamento no ano de 2016 acima de R$ 78 milhões, **a partir de 1º de maio de 2018**, em relação aos fatos geradores ocorridos a partir dessa data;
 
-II  para o 2º grupo, que compreende os demais contribuintes, exceto os previstos no inciso III, a partir de 1º de novembro de 2018, em relação aos fatos geradores ocorridos a partir dessa data; e
+II  para o 2º grupo, que compreende os demais contribuintes, exceto os previstos no inciso III, **a partir de 1º de novembro de 2018**, em relação aos fatos geradores ocorridos a partir dessa data; e
 
-III para o 3º grupo, que compreende os entes públicos, integrantes do Grupo 1 – Administração Pública, a partir de 1º de maio de 2019, em relação aos fatos geradores ocorridos a partir dessa data.
+III para o 3º grupo, que compreende os entes públicos, integrantes do Grupo 1 – Administração Pública, a **partir de 1º de maio de 2019**, em relação aos fatos geradores ocorridos a partir dessa data.
 
 Ressalte-se que o prazo de vencimento da obrigação foi alterado para até o dia 15 do mês subsequente.
 
