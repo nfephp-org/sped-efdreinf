@@ -1,4 +1,17 @@
-{
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+require_once '../../../bootstrap.php';
+
+use JsonSchema\Constraints\Constraint;
+use JsonSchema\Constraints\Factory;
+use JsonSchema\SchemaStorage;
+use JsonSchema\Validator;
+
+$evento = 'evtPgtosDivs';
+$version = '1_03_00';
+
+$jsonSchema = '{
     "title": "evtPgtosDivs",
     "type": "object",
     "properties": {
@@ -559,4 +572,162 @@
             }    
         }
     }
+}';
+
+
+$std = new \stdClass();
+$std->sequencial = 1;
+$std->indretif = 1;
+$std->nrrecibo = '1-00-1234-1234-1234556789012345';
+$std->perapur = '2017-11';
+
+$std->codpgto = '0916';
+$std->tpinscbenef = 2;
+$std->nrinscbenef = '12345678901';
+$std->nmrazaobenef = 'Fulano de Tal';
+
+$std->inforesidext = new \stdClass();
+$std->inforesidext->paisresid = '123';
+$std->inforesidext->dsclograd = 'Av. 5';
+$std->inforesidext->nrlograd = '342L';
+$std->inforesidext->complem = 'Apto 32';
+$std->inforesidext->bairro = 'Soho';
+$std->inforesidext->cidade = 'New Jersey';
+$std->inforesidext->codpostal = '1234567890';
+
+$std->inforesidext->indnif = 1;
+$std->inforesidext->nifbenef = '123456789';
+$std->inforesidext->relfontepagad = '500';
+
+$std->infomolestia = new \stdClass();
+$std->infomolestia->dtlaudo = '2016-05-22';
+
+$std->ideestab[0] = new \stdClass();
+$std->ideestab[0]->tpinsc = 1;
+$std->ideestab[0]->nrinsc = '12345678901234';
+
+$std->ideestab[0]->pgtopf[0] = new \stdClass();
+$std->ideestab[0]->pgtopf[0]->dtpgto = '2017-10-10';
+$std->ideestab[0]->pgtopf[0]->indsuspexig = 'N';
+$std->ideestab[0]->pgtopf[0]->inddecterceiro = 'N';
+$std->ideestab[0]->pgtopf[0]->vlrrendtributavel = 2000;
+$std->ideestab[0]->pgtopf[0]->vlrirrf = 380;
+
+$std->ideestab[0]->pgtopf[0]->detdeduca[0] = new \stdClass();
+$std->ideestab[0]->pgtopf[0]->detdeduca[0]->indtpdeducao = 4;
+$std->ideestab[0]->pgtopf[0]->detdeduca[0]->vlrdeducao = 100;
+
+$std->ideestab[0]->pgtopf[0]->rendisento[0] = new \stdClass();
+$std->ideestab[0]->pgtopf[0]->rendisento[0]->tpisencao = 1;
+$std->ideestab[0]->pgtopf[0]->rendisento[0]->vlrisento = 30000;
+$std->ideestab[0]->pgtopf[0]->rendisento[0]->descrendimento = 'chega de impostos';
+
+$std->ideestab[0]->pgtopf[0]->detcompet[0] = new \stdClass();
+$std->ideestab[0]->pgtopf[0]->detcompet[0]->indperreferencia = 1;
+$std->ideestab[0]->pgtopf[0]->detcompet[0]->perrefpagto = '2017-10';
+$std->ideestab[0]->pgtopf[0]->detcompet[0]->vlrrendtributavel = 20;
+
+$std->ideestab[0]->pgtopf[0]->inforra[0] = new \stdClass();
+$std->ideestab[0]->pgtopf[0]->inforra[0]->tpprocrra = 1;
+$std->ideestab[0]->pgtopf[0]->inforra[0]->nrprocrra = 'abcdefg';
+$std->ideestab[0]->pgtopf[0]->inforra[0]->codsusp = '12345678901234';
+$std->ideestab[0]->pgtopf[0]->inforra[0]->natrra = 'sei la';
+$std->ideestab[0]->pgtopf[0]->inforra[0]->qtdmesesrra = 49;
+
+$std->ideestab[0]->pgtopf[0]->inforra[0]->despprocjud = new \stdClass();  
+$std->ideestab[0]->pgtopf[0]->inforra[0]->despprocjud->vlrdespcustas = 10;
+$std->ideestab[0]->pgtopf[0]->inforra[0]->despprocjud->vlrdespadvogados = 1.45;
+
+$std->ideestab[0]->pgtopf[0]->inforra[0]->despprocjud->ideadvogado[0] = new \stdClass();
+$std->ideestab[0]->pgtopf[0]->inforra[0]->despprocjud->ideadvogado[0]->tpinscadvogado = 1;
+$std->ideestab[0]->pgtopf[0]->inforra[0]->despprocjud->ideadvogado[0]->nrinscadvogado = '12345678901234';
+$std->ideestab[0]->pgtopf[0]->inforra[0]->despprocjud->ideadvogado[0]->vlradvogado = 1.45;
+
+$std->ideestab[0]->pgtopf[0]->infoprocjud[0] = new \stdClass();
+$std->ideestab[0]->pgtopf[0]->infoprocjud[0]->nrprocjud = 'sei la';
+$std->ideestab[0]->pgtopf[0]->infoprocjud[0]->codsusp = '12345678901234';
+$std->ideestab[0]->pgtopf[0]->infoprocjud[0]->indorigemrecursos = 1;
+
+$std->ideestab[0]->pgtopf[0]->infoprocjud[0]->despprocjud = new \stdClass();
+$std->ideestab[0]->pgtopf[0]->infoprocjud[0]->despprocjud->vlrdespcustas = 200;
+$std->ideestab[0]->pgtopf[0]->infoprocjud[0]->despprocjud->vlrdespadvogados = 2.90;
+
+$std->ideestab[0]->pgtopf[0]->infoprocjud[0]->despprocjud->ideadvogado[0] = new \stdClass();
+$std->ideestab[0]->pgtopf[0]->infoprocjud[0]->despprocjud->ideadvogado[0]->tpinscadvogado = 1;
+$std->ideestab[0]->pgtopf[0]->infoprocjud[0]->despprocjud->ideadvogado[0]->nrinscadvogado = '12345678901234';
+$std->ideestab[0]->pgtopf[0]->infoprocjud[0]->despprocjud->ideadvogado[0]->vlradvogado = 1.45;
+
+$std->ideestab[0]->pgtopf[0]->infoprocjud[0]->origemrecursos = new \stdClass();
+$std->ideestab[0]->pgtopf[0]->infoprocjud[0]->origemrecursos->cnpjorigemrecursos = '12345678901234';
+
+$std->ideestab[0]->pgtopf[0]->depjudicial = new \stdClass();
+$std->ideestab[0]->pgtopf[0]->depjudicial->vlrdepjudicial = 23.97;
+
+$std->ideestab[0]->pgtopj[0] = new \stdClass();
+$std->ideestab[0]->pgtopj[0]->dtpagto = '2017-01-10';
+$std->ideestab[0]->pgtopj[0]->vlrrendtributavel = 2000;
+$std->ideestab[0]->pgtopj[0]->vlrret = 30.67;
+
+$std->ideestab[0]->pgtopj[0]->infoprocjud[0] = new \stdClass();
+$std->ideestab[0]->pgtopj[0]->infoprocjud[0]->nrprocjud = 'sei la';
+$std->ideestab[0]->pgtopj[0]->infoprocjud[0]->codsusp = '12345678901234';
+$std->ideestab[0]->pgtopj[0]->infoprocjud[0]->indorigemrecursos = 1;
+
+$std->ideestab[0]->pgtopj[0]->infoprocjud[0]->despprocjud = new \stdClass();
+$std->ideestab[0]->pgtopj[0]->infoprocjud[0]->despprocjud->vlrdespcustas = 200;
+$std->ideestab[0]->pgtopj[0]->infoprocjud[0]->despprocjud->vlrdespadvogados = 2.90;
+
+$std->ideestab[0]->pgtopj[0]->infoprocjud[0]->despprocjud->ideadvogado[0] = new \stdClass();
+$std->ideestab[0]->pgtopj[0]->infoprocjud[0]->despprocjud->ideadvogado[0]->tpinscadvogado = 1;
+$std->ideestab[0]->pgtopj[0]->infoprocjud[0]->despprocjud->ideadvogado[0]->nrinscadvogado = '12345678901234';
+$std->ideestab[0]->pgtopj[0]->infoprocjud[0]->despprocjud->ideadvogado[0]->vlradvogado = 1.45;
+
+$std->ideestab[0]->pgtopj[0]->infoprocjud[0]->origemrecursos = new \stdClass();
+$std->ideestab[0]->pgtopj[0]->infoprocjud[0]->origemrecursos->cnpjorigemrecursos = '12345678901234';
+
+$std->ideestab[0]->pgtoresidext = new \stdClass();
+$std->ideestab[0]->pgtoresidext->dtpagto = '2017-02-22';
+$std->ideestab[0]->pgtoresidext->tprendimento = 140;
+$std->ideestab[0]->pgtoresidext->formatributacao = 12;
+$std->ideestab[0]->pgtoresidext->vlrpgto = 2000;
+$std->ideestab[0]->pgtoresidext->vlrret = 22.95;
+        
+
+// Schema must be decoded before it can be used for validation
+$jsonSchemaObject = json_decode($jsonSchema);
+if (empty($jsonSchemaObject)) {
+    echo "<h2>Erro de digitação no schema ! Revise</h2>";
+    echo "<pre>";
+    print_r($jsonSchema);
+    echo "</pre>";
+    die();
 }
+// The SchemaStorage can resolve references, loading additional schemas from file as needed, etc.
+$schemaStorage = new SchemaStorage();
+
+// This does two things:
+// 1) Mutates $jsonSchemaObject to normalize the references (to file://mySchema#/definitions/integerData, etc)
+// 2) Tells $schemaStorage that references to file://mySchema... should be resolved by looking in $jsonSchemaObject
+$schemaStorage->addSchema('file://mySchema', $jsonSchemaObject);
+
+// Provide $schemaStorage to the Validator so that references can be resolved during validation
+$jsonValidator = new Validator(new Factory($schemaStorage));
+
+// Do validation (use isValid() and getErrors() to check the result)
+$jsonValidator->validate(
+    $std,
+    $jsonSchemaObject,
+    Constraint::CHECK_MODE_COERCE_TYPES  //tenta converter o dado no tipo indicado no schema
+);
+
+if ($jsonValidator->isValid()) {
+    echo "The supplied JSON validates against the schema.<br/>";
+} else {
+    echo "JSON does not validate. Violations:<br/>";
+    foreach ($jsonValidator->getErrors() as $error) {
+        echo sprintf("[%s] %s<br/>", $error['property'], $error['message']);
+    }
+    die;
+}
+//salva se sucesso
+file_put_contents("../../../jsonSchemes/v$version/$evento.schema", $jsonSchema);
