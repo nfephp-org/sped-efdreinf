@@ -1,4 +1,17 @@
-{
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+require_once '../../../bootstrap.php';
+
+use JsonSchema\Constraints\Constraint;
+use JsonSchema\Constraints\Factory;
+use JsonSchema\SchemaStorage;
+use JsonSchema\Validator;
+
+$evento = 'evtServTom';
+$version = '1_03_00';
+
+$jsonSchema = '{
     "title": "evtServTom",
     "type": "object",
     "properties": {
@@ -232,4 +245,94 @@
             }    
         }    
     }
+}'; 
+
+$std = new \stdClass();
+$std->sequencial = 1;
+$std->indretif = 1;
+$std->nrrecibo = '1-00-1234-1234-1234556789012345';
+$std->perapur = '2017-11';
+$std->tpinscestab = 1;
+$std->nrinscestab = '12345678901234';
+$std->indobra = '0';
+$std->cnpjprestador = '12345678901234';
+$std->vlrtotalbruto = 456.92;
+$std->vlrtotalbaseret = 45.80;
+$std->vlrtotalretprinc = 5;
+$std->vlrtotalretadic = 54.35;
+$std->vlrtotalnretprinc = 345.66;
+$std->vlrtotalnretadic = 345.90;
+$std->indcprb = 0;
+
+$std->nfs[0] = new \stdClass();
+$std->nfs[0]->serie = '001';
+$std->nfs[0]->numdocto = '265465';
+$std->nfs[0]->dtemissaonf = '2017-01-22';
+$std->nfs[0]->vlrbruto = 200.00;
+$std->nfs[0]->obs = 'observacao pode ser nula';
+
+$std->nfs[0]->infotpserv[0] = new \stdClass();
+$std->nfs[0]->infotpserv[0]->tpservico = '123456789';
+$std->nfs[0]->infotpserv[0]->vlrbaseret = 234.90;
+$std->nfs[0]->infotpserv[0]->vlrretencao = 12.75;
+$std->nfs[0]->infotpserv[0]->vlrretsub = 34.55;
+$std->nfs[0]->infotpserv[0]->vlrnretprinc = 2345.75;
+$std->nfs[0]->infotpserv[0]->vlrservicos15 = 22;
+$std->nfs[0]->infotpserv[0]->vlrservicos20 = 33;
+$std->nfs[0]->infotpserv[0]->vlrservicos25 = 44;
+$std->nfs[0]->infotpserv[0]->vlradicional = 5;
+$std->nfs[0]->infotpserv[0]->vlrnretadic = 1.55;
+
+$std->infoprocretpr[0] = new \stdClass();
+$std->infoprocretpr[0]->tpprocretprinc = 1;
+$std->infoprocretpr[0]->nrprocretprinc = 'ZYX987';
+$std->infoprocretpr[0]->codsuspprinc = '12345678901234';
+$std->infoprocretpr[0]->valorprinc = 200.98;
+
+$std->infoprocretad[0] = new \stdClass();
+$std->infoprocretad[0]->tpprocretadic = 1;
+$std->infoprocretad[0]->nrprocretadic = 'ACB21';
+$std->infoprocretad[0]->codsuspadic = '12345678901234';
+$std->infoprocretad[0]->valoradic = 1000.23;
+
+
+
+// Schema must be decoded before it can be used for validation
+$jsonSchemaObject = json_decode($jsonSchema);
+
+if (empty($jsonSchemaObject)) {
+    echo "<h2>Erro de digitação no schema ! Revise</h2>";
+    echo "<pre>";
+    print_r($jsonSchema);
+    echo "</pre>";
+    die();
 }
+// The SchemaStorage can resolve references, loading additional schemas from file as needed, etc.
+$schemaStorage = new SchemaStorage();
+
+// This does two things:
+// 1) Mutates $jsonSchemaObject to normalize the references (to file://mySchema#/definitions/integerData, etc)
+// 2) Tells $schemaStorage that references to file://mySchema... should be resolved by looking in $jsonSchemaObject
+$schemaStorage->addSchema('file://mySchema', $jsonSchemaObject);
+
+// Provide $schemaStorage to the Validator so that references can be resolved during validation
+$jsonValidator = new Validator(new Factory($schemaStorage));
+
+// Do validation (use isValid() and getErrors() to check the result)
+$jsonValidator->validate(
+    $std,
+    $jsonSchemaObject,
+    Constraint::CHECK_MODE_COERCE_TYPES  //tenta converter o dado no tipo indicado no schema
+);
+
+if ($jsonValidator->isValid()) {
+    echo "The supplied JSON validates against the schema.<br/>";
+} else {
+    echo "JSON does not validate. Violations:<br/>";
+    foreach ($jsonValidator->getErrors() as $error) {
+        echo sprintf("[%s] %s<br/>", $error['property'], $error['message']);
+    }
+    die;
+}
+//salva se sucesso
+file_put_contents("../../../jsonSchemes/v$version/$evento.schema", $jsonSchema);

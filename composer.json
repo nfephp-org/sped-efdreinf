@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "keywords": ["nfe","nfce","sped","nfephp"],
     "homepage": "https://github.com/nfephp-org/sped-efdreinf",
-    "license": ["GPL-3.0+","LGPL-3.0+", "MIT"],
+    "license": ["LGPL-3.0-or-later", "GPL-3.0-or-later", "MIT"],
     "authors": [
         {
             "name": "Roberto L. Machado",
@@ -22,7 +22,7 @@
         "php" : ">=7.0",
         "nfephp-org/sped-common" : "^5.0",
         "justinrainbow/json-schema": "^5.2",
-        "symfony/yaml": "^3.3"
+        "symfony/yaml": "^4.3"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^2.8",

@@ -1,4 +1,17 @@
-{
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+require_once '../../../bootstrap.php';
+
+use JsonSchema\Constraints\Constraint;
+use JsonSchema\Constraints\Factory;
+use JsonSchema\SchemaStorage;
+use JsonSchema\Validator;
+
+$evento = 'evtInfoContri';
+$version = '1_03_00';
+
+$jsonSchema = '{
     "title": "evtInfoContri",
     "type": "object",
     "properties": {
@@ -153,4 +166,76 @@
             }
         }    
     }
+}';
+
+
+$std = new \stdClass();
+$std->sequencial = 1;
+$std->modo = 'INC';
+$std->inivalid = '2017-01';
+$std->fimvalid = '2017-12';
+
+$std->infocadastro = new \stdClass();
+$std->infocadastro->classtrib = '01';
+$std->infocadastro->indescrituracao = 0;
+$std->infocadastro->inddesoneracao = 0;
+$std->infocadastro->indacordoisenmulta = 0;
+$std->infocadastro->indsitpj = 0;
+
+$std->infocadastro->contato = new \stdClass();
+$std->infocadastro->contato->nmctt = 'Fulano de Tal';
+$std->infocadastro->contato->cpfctt = '12345678901';
+$std->infocadastro->contato->fonefixo = '115555555';
+$std->infocadastro->contato->fonecel = '1199999999';
+$std->infocadastro->contato->email = 'fulano@email.com';
+
+$std->infocadastro->softhouse[0] = new \stdClass();
+$std->infocadastro->softhouse[0]->cnpjsofthouse = '12345678901234';
+$std->infocadastro->softhouse[0]->nmrazao = 'Razao Social';
+$std->infocadastro->softhouse[0]->nmcont = 'Fulano de Tal';
+$std->infocadastro->softhouse[0]->telefone = '115555555';
+$std->infocadastro->softhouse[0]->email = 'fulano@email.com';
+
+$std->infocadastro->infoefr = new \stdClass();
+$std->infocadastro->infoefr->ideefr = 'N';
+$std->infocadastro->infoefr->cnpjefr = '12345678901234';
+
+
+// Schema must be decoded before it can be used for validation
+$jsonSchemaObject = json_decode($jsonSchema);
+if (empty($jsonSchemaObject)) {
+    echo "<h2>Erro de digitação no schema ! Revise</h2>";
+    echo "<pre>";
+    print_r($jsonSchema);
+    echo "</pre>";
+    die();
 }
+// The SchemaStorage can resolve references, loading additional schemas from file as needed, etc.
+$schemaStorage = new SchemaStorage();
+
+// This does two things:
+// 1) Mutates $jsonSchemaObject to normalize the references (to file://mySchema#/definitions/integerData, etc)
+// 2) Tells $schemaStorage that references to file://mySchema... should be resolved by looking in $jsonSchemaObject
+$schemaStorage->addSchema('file://mySchema', $jsonSchemaObject);
+
+// Provide $schemaStorage to the Validator so that references can be resolved during validation
+$jsonValidator = new Validator(new Factory($schemaStorage));
+
+// Do validation (use isValid() and getErrors() to check the result)
+$jsonValidator->validate(
+    $std,
+    $jsonSchemaObject,
+    Constraint::CHECK_MODE_COERCE_TYPES  //tenta converter o dado no tipo indicado no schema
+);
+
+if ($jsonValidator->isValid()) {
+    echo "The supplied JSON validates against the schema.<br/>";
+} else {
+    echo "JSON does not validate. Violations:<br/>";
+    foreach ($jsonValidator->getErrors() as $error) {
+        echo sprintf("[%s] %s<br/>", $error['property'], $error['message']);
+    }
+    die;
+}
+//salva se sucesso
+file_put_contents("../../../jsonSchemes/v$version/$evento.schema", $jsonSchema);
