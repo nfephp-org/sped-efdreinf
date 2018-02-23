@@ -353,7 +353,7 @@ class EvtTotal extends Factory implements FactoryInterface
         $this->node->appendChild($infoContrib);
         
         $this->reinf->appendChild($this->node);
-        $this->xml = $this->dom->saveXML($this->reinf);
-        //$this->sign($this->evtTag);
+        //$this->xml = $this->dom->saveXML($this->reinf);
+        $this->sign($this->evtTag);
     }
 }
