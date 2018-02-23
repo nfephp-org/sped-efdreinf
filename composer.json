@@ -2,7 +2,6 @@
     "name": "nfephp-org/sped-efdreinf",
     "type": "library",
     "description": "API para geração e comunicação dos eventos relativos ao projeto EFD-Reinf da Receita Federal do Brasil.",
-    "version": "1.0.0",
     "keywords": ["nfe","nfce","sped","nfephp"],
     "homepage": "https://github.com/nfephp-org/sped-efdreinf",
     "license": ["LGPL-3.0-or-later", "GPL-3.0-or-later", "MIT"],
