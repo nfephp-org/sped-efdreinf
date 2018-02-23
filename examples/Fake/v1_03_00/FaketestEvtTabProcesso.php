@@ -31,7 +31,7 @@ $std->nrproc = 'apc123455678';
 $std->inivalid = '2016-11';
 $std->fimvalid = '2017-11';
 $std->indautoria = 1;
-$std->modo = 'ALT';
+$std->modo = 'INC';
 
 $std->infosusp[0] = new \stdClass();
 $std->infosusp[0]->codsusp = '234567890123';

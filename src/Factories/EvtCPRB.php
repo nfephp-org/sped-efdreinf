@@ -196,37 +196,37 @@ class EvtCPRB extends Factory implements FactoryInterface
                     $tipoCod->appendChild($tipoAjuste);
                 }
             }
-            $ideEstab->appendChild($tipoCod);
-        }
-        if (!empty($this->std->infoproc)) {
-            foreach ($this->std->infoproc as $i) {
-                $infoProc = $this->dom->createElement("infoProc");
-                $this->dom->addChild(
-                    $infoProc,
-                    "vlrCPRBSusp",
-                    $i->vlrcprbsusp,
-                    true
-                );
-                $this->dom->addChild(
-                    $infoProc,
-                    "tpProc",
-                    $i->tpproc,
-                    true
-                );
-                $this->dom->addChild(
-                    $infoProc,
-                    "nrProc",
-                    $i->nrproc,
-                    true
-                );
-                $this->dom->addChild(
-                    $infoProc,
-                    "codSusp",
-                    !empty($i->codsusp) ? $i->codsusp : null,
-                    false
-                );
-                $ideEstab->appendChild($infoProc);
+            if (!empty($t->infoproc)) {
+                foreach ($t->infoproc as $i) {
+                    $infoProc = $this->dom->createElement("infoProc");
+                    $this->dom->addChild(
+                        $infoProc,
+                        "tpProc",
+                        $i->tpproc,
+                        true
+                    );
+                    $this->dom->addChild(
+                        $infoProc,
+                        "nrProc",
+                        $i->nrproc,
+                        true
+                    );
+                    $this->dom->addChild(
+                        $infoProc,
+                        "codSusp",
+                        !empty($i->codsusp) ? $i->codsusp : null,
+                        false
+                    );
+                    $this->dom->addChild(
+                        $infoProc,
+                        "vlrCPRBSusp",
+                        $i->vlrcprbsusp,
+                        true
+                    );
+                    $tipoCod->appendChild($infoProc);
+                }
             }
+            $ideEstab->appendChild($tipoCod);
         }
         $info->appendChild($ideEstab);
         $this->node->appendChild($info);

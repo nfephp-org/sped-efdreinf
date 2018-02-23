@@ -36,7 +36,7 @@ $std->vlrcpapurtotal = '1020,00';
 $std->vlrcprbsusptotal = '200,00';
 
 $std->tipocod[0] = new \stdClass();
-$std->tipocod[0]->codativecon = '12345678';
+$std->tipocod[0]->codativecon = 'AB345678';
 $std->tipocod[0]->vlrrecbrutaativ = '4444,44';
 $std->tipocod[0]->vlrexcrecbruta = '3333,33';
 $std->tipocod[0]->vlradicrecbruta = '2222,22';
@@ -50,11 +50,11 @@ $std->tipocod[0]->tipoajuste[0]->vlrajuste = '200,00';
 $std->tipocod[0]->tipoajuste[0]->descajuste = 'sei la';
 $std->tipocod[0]->tipoajuste[0]->dtajuste = '2017-10';
 
-$std->infoproc[0] = new \stdClass();
-$std->infoproc[0]->vlrcprbsusp = '200,00';
-$std->infoproc[0]->tpproc = 1;
-$std->infoproc[0]->nrproc = 'ABC21';
-$std->infoproc[0]->codsusp = '12345678901234';
+$std->tipocod[0]->infoproc[0] = new \stdClass();
+$std->tipocod[0]->infoproc[0]->tpproc = 1;
+$std->tipocod[0]->infoproc[0]->nrproc = 'ABC21';
+$std->tipocod[0]->infoproc[0]->codsusp = '12345678901234';
+$std->tipocod[0]->infoproc[0]->vlrcprbsusp = '200,00';
 
 try {
     

@@ -46,8 +46,9 @@ try {
     //nesse caso um envio falso
     $tools->loadSoapClass($soap);
     
-    //executa a consulta
-    $response = $tools->consultarLoteEventos('1.2.201707.0000000000000007638');    
+    //executa a consulta 
+    //Número do Protocolo do Fechamento (recebido no retorno do evento R-2099).
+    $response = $tools->consultar('1.2.201707.0000000000000007638');    
     
     //retorna os dados que serão usados na conexão para conferência
     echo FakePretty::prettyPrint($response, 'fake_envConsulta');

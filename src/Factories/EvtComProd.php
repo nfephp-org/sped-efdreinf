@@ -160,50 +160,51 @@ class EvtComProd extends Factory implements FactoryInterface
                 number_format($tp->vlrrecbruta, 2, ',', ''),
                 true
             );
+            if (!empty($tp->infoproc)) {
+                foreach ($tp->infoproc as $ip) {
+                    $infoProc = $this->dom->createElement("infoProc");
+                    $this->dom->addChild(
+                        $infoProc,
+                        "tpProc",
+                        $ip->tpproc,
+                        true
+                    );
+                    $this->dom->addChild(
+                        $infoProc,
+                        "nrProc",
+                        $ip->nrproc,
+                        true
+                    );
+                    $this->dom->addChild(
+                        $infoProc,
+                        "codSusp",
+                        !empty($ip->codsusp) ? $ip->codsusp : null,
+                        false
+                    );
+                    $this->dom->addChild(
+                        $infoProc,
+                        "vlrCPSusp",
+                        !empty($ip->vlrcpsusp) ? number_format($ip->vlrcpsusp, 2, ',', '') : null,
+                        false
+                    );
+                    $this->dom->addChild(
+                        $infoProc,
+                        "vlrRatSusp",
+                        !empty($ip->vlrratsusp) ? number_format($ip->vlrratsusp, 2, ',', '') : null,
+                        false
+                    );
+                    $this->dom->addChild(
+                        $infoProc,
+                        "vlrSenarSusp",
+                        !empty($ip->vlrsenarsusp) ? number_format($ip->vlrsenarsusp, 2, ',', '') : null,
+                        false
+                    );
+                    $tipoCom->appendChild($infoProc);
+                }
+            }
             $ideEstab->appendChild($tipoCom);
         }
-        if (!empty($this->std->infoproc)) {
-            foreach ($this->std->infoproc as $ip) {
-                $infoProc = $this->dom->createElement("infoProc");
-                $this->dom->addChild(
-                    $infoProc,
-                    "tpProc",
-                    $ip->tpproc,
-                    true
-                );
-                $this->dom->addChild(
-                    $infoProc,
-                    "nrProc",
-                    $ip->nrproc,
-                    true
-                );
-                $this->dom->addChild(
-                    $infoProc,
-                    "codSusp",
-                    !empty($ip->codsusp) ? $ip->codsusp : null,
-                    false
-                );
-                $this->dom->addChild(
-                    $infoProc,
-                    "vlrCPSusp",
-                    !empty($ip->vlrcpsusp) ? number_format($ip->vlrcpsusp, 2, ',', '') : null,
-                    false
-                );
-                $this->dom->addChild(
-                    $infoProc,
-                    "vlrRatSusp",
-                    !empty($ip->vlrratsusp) ? number_format($ip->vlrratsusp, 2, ',', '') : null,
-                    false
-                );
-                $this->dom->addChild(
-                    $infoProc,
-                    "vlrSenarSusp",
-                    !empty($ip->vlrsenarsusp) ? number_format($ip->vlrsenarsusp, 2, ',', '') : null,
-                    false
-                );
-                $ideEstab->appendChild($infoProc);
-            }
-        }
+        
         $info->appendChild($ideEstab);
         $this->node->appendChild($info);
         $this->reinf->appendChild($this->node);

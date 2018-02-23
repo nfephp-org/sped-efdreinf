@@ -101,8 +101,8 @@ $jsonSchema = '{
                     "pattern": "[^0-9]"
                 },
                 "codmunic": {
-                    "required": false,
-                    "type": ["string","null"],
+                    "required": true,
+                    "type": "string",
                     "minLength": 7,
                     "maxLength": 7,
                     "pattern": "^[0-9]"

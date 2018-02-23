@@ -170,37 +170,37 @@ class EvtAssocDespRep extends Factory implements FactoryInterface
                     $i->vlrretapur,
                     true
                 );
-                if (!empty($r->infoproc)) {
-                    foreach ($r->infoproc as $k) {
-                        $infoProc = $this->dom->createElement("infoProc");
-                        $this->dom->addChild(
-                            $infoProc,
-                            "tpProc",
-                            $k->tpproc,
-                            true
-                        );
-                        $this->dom->addChild(
-                            $infoProc,
-                            "nrProc",
-                            $k->nrproc,
-                            true
-                        );
-                        $this->dom->addChild(
-                            $infoProc,
-                            "codSusp",
-                            !empty($k->codsusp) ? $k->codsusp : null,
-                            true
-                        );
-                        $this->dom->addChild(
-                            $infoProc,
-                            "vlrNRet",
-                            $k->vlrnret,
-                            true
-                        );
-                        $infoRecurso->appendChild($infoProc);
-                    }
-                }
                 $recursosRep->appendChild($infoRecurso);
+            }
+            if (!empty($r->infoproc)) {
+                foreach ($r->infoproc as $k) {
+                    $infoProc = $this->dom->createElement("infoProc");
+                    $this->dom->addChild(
+                        $infoProc,
+                        "tpProc",
+                        $k->tpproc,
+                        true
+                    );
+                    $this->dom->addChild(
+                        $infoProc,
+                        "nrProc",
+                        $k->nrproc,
+                        true
+                    );
+                    $this->dom->addChild(
+                        $infoProc,
+                        "codSusp",
+                        !empty($k->codsusp) ? $k->codsusp : null,
+                        true
+                    );
+                    $this->dom->addChild(
+                        $infoProc,
+                        "vlrNRet",
+                        $k->vlrnret,
+                        true
+                    );
+                    $recursosRep->appendChild($infoProc);
+                }
             }
             $ideEstab->appendChild($recursosRep);
         }

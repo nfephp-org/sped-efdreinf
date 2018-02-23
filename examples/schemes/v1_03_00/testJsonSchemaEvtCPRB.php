@@ -76,8 +76,7 @@ $jsonSchema = '{
                     "codativecon": {
                         "required": true,
                         "type": "string",
-                        "maxLength": 8,
-                        "pattern": "^[0-9]"
+                        "maxLength": 8
                     },
                     "vlrrecbrutaativ": {
                         "required": true,
@@ -108,7 +107,6 @@ $jsonSchema = '{
                         "required": false,
                         "type": ["array","null"],
                         "minItems": 0,
-                        "maxItems": 500,
                         "items": {
                             "type": "object",
                             "properties": {
@@ -141,39 +139,39 @@ $jsonSchema = '{
                                 }
                             }
                         }
-                    }
-                }
-            }    
-        },
-        "infproc": {
-            "required": false,
-            "type": ["array","null"],
-            "minItems": 0,
-            "maxItems": 50,
-            "items": {
-                "type": "object",
-                "properties": {
-                    "vlrcprbsusp": {
-                        "required": true,
-                        "type": "string",
-                        "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
                     },
-                    "tpproc": {
-                        "required": true,
-                        "type": "integer",
-                        "minimum": 1,
-                        "maximum": 2
-                    },
-                    "nrproc": {
-                        "required": true,
-                        "type": "string",
-                        "maxLength": 21
-                    },
-                    "codsusp": {
+                    "infproc": {
                         "required": false,
-                        "type": ["string","null"],
-                        "maxLength": 14,
-                        "pattern": "^[0-9]"                    
+                        "type": ["array","null"],
+                        "minItems": 0,
+                        "maxItems": 50,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "tpproc": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 2
+                                },
+                                "nrproc": {
+                                    "required": true,
+                                    "type": "string",
+                                    "maxLength": 21
+                                },
+                                "codsusp": {
+                                    "required": false,
+                                    "type": ["string","null"],
+                                    "maxLength": 14,
+                                    "pattern": "^[0-9]"                    
+                                },
+                                "vlrcprbsusp": {
+                                    "required": true,
+                                    "type": "string",
+                                    "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
+                                }
+                            }
+                        }    
                     }
                 }
             }    
@@ -208,11 +206,11 @@ $std->tipocod[0]->tipoajuste[0]->vlrajuste = '200,00';
 $std->tipocod[0]->tipoajuste[0]->descajuste = 'sei la';
 $std->tipocod[0]->tipoajuste[0]->dtajuste = '2017-10';
 
-$std->infoproc[0] = new \stdClass();
-$std->infoproc[0]->vlrcprbsusp = '200,00';
-$std->infoproc[0]->tpproc = 1;
-$std->infoproc[0]->nrproc = 'ABC21';
-$std->infoproc[0]->codsusp = '12345678901234';
+$std->tipocod[0]->infoproc[0] = new \stdClass();
+$std->tipocod[0]->infoproc[0]->vlrcprbsusp = '200,00';
+$std->tipocod[0]->infoproc[0]->tpproc = 1;
+$std->tipocod[0]->infoproc[0]->nrproc = 'ABC21';
+$std->tipocod[0]->infoproc[0]->codsusp = '12345678901234';
 
 
 // Schema must be decoded before it can be used for validation
