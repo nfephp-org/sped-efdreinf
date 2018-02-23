@@ -10,7 +10,6 @@
 [![Build Status][ico-travis]][link-travis]
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
-[![Latest Version on Packagist][ico-version]][link-packagist]
 [![License][ico-license]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 
@@ -25,8 +24,6 @@ Este pacote é aderente com os [PSR-1], [PSR-2] e [PSR-4]. Se você observar neg
 [PSR-4]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
 
 Não deixe de se cadastrar no [grupo de discussão do NFePHP](http://groups.google.com/group/nfephp) para acompanhar o desenvolvimento e participar das discussões e tirar duvidas!
-
-## NOTA: provável falha no evtTotal, avaliando erros no XSD fornecido [ISSUE #36](https://github.com/nfephp-org/sped-efdreinf/issues/36)
 
 ## Obrigatoriedade e entrega da EFD-Reinf
 A aplicação da EFD-Reinf atualizada pela Instrução Normativa 1.767, publicada no dia 14/12/17, determina o seguinte cronograma:
