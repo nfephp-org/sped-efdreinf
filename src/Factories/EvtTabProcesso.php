@@ -105,18 +105,12 @@ class EvtTabProcesso extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $ideProcesso,
                 "indAutoria",
-                !empty($this->std->indautoria) ? $this->std->indautoria : null,
-                false
+                $this->std->indautoria,
+                true
             );
         } elseif ($this->std->modo == 'ALT') {
             //alteracao
             $node = $this->dom->createElement("alteracao");
-            $this->dom->addChild(
-                $ideProcesso,
-                "indAutoria",
-                !empty($this->std->indautoria) ? $this->std->indautoria : null,
-                false
-            );
             $this->dom->addChild(
                 $ideProcesso,
                 "iniValid",
@@ -128,6 +122,12 @@ class EvtTabProcesso extends Factory implements FactoryInterface
                 "fimValid",
                 !empty($this->std->fimvalid) ? $this->std->fimvalid : null,
                 false
+            );
+            $this->dom->addChild(
+                $ideProcesso,
+                "indAutoria",
+                $this->std->indautoria,
+                true
             );
         } else {
             //exclusao
@@ -187,8 +187,8 @@ class EvtTabProcesso extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $dadosProcJud,
                 "codMunic",
-                !empty($d->codmunic) ? $d->codmunic : null,
-                false
+                $d->codmunic,
+                true
             );
             $this->dom->addChild(
                 $dadosProcJud,

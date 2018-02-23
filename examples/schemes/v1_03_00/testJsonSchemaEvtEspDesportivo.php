@@ -43,7 +43,7 @@ $jsonSchema = '{
             "required": true,
             "type": "array",
             "minItems": 1,
-            "maxItems": 500,
+            "maxItems": 25,
             "items": {
                 "type": "object",
                 "properties": {
@@ -230,8 +230,8 @@ $jsonSchema = '{
                                 "type": "number"
                             },
                             "vlrcpsusptotal": {
-                                "required": true,
-                                "type": "number"
+                                "required": false,
+                                "type": ["number","null"]
                             },
                             "vlrreceitaclubes": {
                                 "required": true,
@@ -249,10 +249,6 @@ $jsonSchema = '{
                                 "items": {
                                     "type": "object",
                                     "properties": {
-                                        "vlrcpsusp": {
-                                            "required": true,
-                                            "type": "number"
-                                        },
                                         "tpproc": {
                                             "required": true,
                                             "type": "integer",
@@ -269,6 +265,10 @@ $jsonSchema = '{
                                             "type": ["string","null"],
                                             "maxLength": 14,
                                             "pattern": "^[0-9]"
+                                        },
+                                        "vlrcpsusp": {
+                                            "required": true,
+                                            "type": "number"
                                         }
                                     }
                                 }
@@ -329,11 +329,10 @@ $std->ideestab[0]->receitatotal->vlrreceitaclubes = 489388.43;
 $std->ideestab[0]->receitatotal->vlrretparc = 123.76;
 
 $std->ideestab[0]->receitatotal->infoproc[0] = new \stdClass(); 
-$std->ideestab[0]->receitatotal->infoproc[0]->vlrcpsusp = 2345678.93;
 $std->ideestab[0]->receitatotal->infoproc[0]->tpproc = 1;
 $std->ideestab[0]->receitatotal->infoproc[0]->nrproc = '829js,n,sn,n';
 $std->ideestab[0]->receitatotal->infoproc[0]->codsusp = '12345678901234';
-
+$std->ideestab[0]->receitatotal->infoproc[0]->vlrcpsusp = 2345678.93;
         
 // Schema must be decoded before it can be used for validation
 $jsonSchemaObject = json_decode($jsonSchema);

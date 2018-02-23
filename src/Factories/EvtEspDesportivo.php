@@ -309,12 +309,6 @@ class EvtEspDesportivo extends Factory implements FactoryInterface
                     $infoProc = $this->dom->createElement("infoProc");
                     $this->dom->addChild(
                         $infoProc,
-                        "vlrCPSusp",
-                        number_format($ifp->vlrcpsusp, 2, ',', ''),
-                        true
-                    );
-                    $this->dom->addChild(
-                        $infoProc,
                         "tpProc",
                         $ifp->tpproc,
                         true
@@ -330,6 +324,12 @@ class EvtEspDesportivo extends Factory implements FactoryInterface
                         "codSusp",
                         !empty($ifp->codsusp) ? $ifp->codsusp : null,
                         false
+                    );
+                    $this->dom->addChild(
+                        $infoProc,
+                        "vlrCPSusp",
+                        number_format($ifp->vlrcpsusp, 2, ',', ''),
+                        true
                     );
                     $recTot->appendChild($infoProc);
                 }

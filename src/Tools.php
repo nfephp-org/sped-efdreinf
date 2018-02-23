@@ -52,6 +52,15 @@ class Tools extends ToolsBase
         '3' => 'https://preprodefdreinf.receita.fazenda.gov.br/RecepcaoLoteReinf.svc'
     ];
     /**
+     *
+     * @var array
+     */
+    protected $uriconsulta = [
+        '1' => '',
+        '2' => 'https://preprodefdreinf.receita.fazenda.gov.br/ConsultasReinf.svc',
+        '3' => 'https://preprodefdreinf.receita.fazenda.gov.br/ConsultasReinf.svc'
+    ];
+    /**
      * @var string
      */
     protected $action;
@@ -81,12 +90,25 @@ class Tools extends ToolsBase
     
     /**
      * Event batch query
-     * @param string $protocolo
+     * @param string $recibofechamento
      * @return string
      */
-    public function consultarLoteEventos($protocolo)
+    public function consultar($recibofechamento)
     {
-        return '';
+        if (empty($recibofechamento)) {
+            return '';
+        }
+        $this->method = "ConsultaInformacoesConsolidadas";
+        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $request = "<sped:tipoInscricaoContribuinte>$this->tpInsc</sped:tipoInscricaoContribuinte>";
+        $request .= "<sped:numeroInscricaoContribuinte>$this->nrInsc</sped:numeroInscricaoContribuinte>";
+        $request .= "<sped:numeroReciboFechamento>$recibofechamento</sped:numeroReciboFechamento>";
+        $body = "<sped:ConsultaInformacoesConsolidadas>"
+            . $request
+            . "</sped:ConsultaInformacoesConsolidadas>";
+        
+        $this->lastResponse = $this->sendRequest($body);
+        return $this->lastResponse;
     }
     
     /**
@@ -134,7 +156,6 @@ class Tools extends ToolsBase
             . $request
             . "</sped:loteEventos>"
             . "</sped:ReceberLoteEventos>";
-        $this->lastRequest = $body;
         $this->lastResponse = $this->sendRequest($body);
         return $this->lastResponse;
     }
@@ -166,7 +187,12 @@ class Tools extends ToolsBase
             "SOAPAction: \"$this->action\"",
             "Content-length: $msgSize"
         ];
-        $url = $this->uri[$this->tpAmb];
+        if ($this->method == 'ReceberLoteEventos') {
+            $url = $this->uri[$this->tpAmb];
+        } else {
+            $url = $this->uriconsulta[$this->tpAmb];
+        }
+        $this->lastRequest = $envelope;
         return (string) $this->soap->send(
             $this->method,
             $url,

@@ -43,13 +43,13 @@ $std->tipocom[0] = new \stdClass();
 $std->tipocom[0]->indcom = 1;
 $std->tipocom[0]->vlrrecbruta = 200;
 
-$std->infoproc[0] = new \stdClass();
-$std->infoproc[0]->tpproc = 1;
-$std->infoproc[0]->nrproc = 'ABC21';
-$std->infoproc[0]->codsusp = '12345678901234';
-$std->infoproc[0]->vlrcpsusp = 100;
-$std->infoproc[0]->vlrratsusp = 200;
-$std->infoproc[0]->vlrsenarsusp = 300;
+$std->tipocom[0]->infoproc[0] = new \stdClass();
+$std->tipocom[0]->infoproc[0]->tpproc = 1;
+$std->tipocom[0]->infoproc[0]->nrproc = 'ABC21';
+$std->tipocom[0]->infoproc[0]->codsusp = '12345678901234';
+$std->tipocom[0]->infoproc[0]->vlrcpsusp = 100;
+$std->tipocom[0]->infoproc[0]->vlrratsusp = 200;
+$std->tipocom[0]->infoproc[0]->vlrsenarsusp = 300;
 
 try {
     
