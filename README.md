@@ -1,4 +1,6 @@
-# sped-efdreinf
+# sped-efdreinf (versão 1.0 - layout 1.3.0)
+
+## BETHA TESTS
 
 *Utilize o chat do Gitter para iniciar discussões especificas sobre o desenvolvimento deste pacote.*
 
