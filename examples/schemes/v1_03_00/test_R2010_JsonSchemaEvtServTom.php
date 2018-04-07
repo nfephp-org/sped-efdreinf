@@ -67,31 +67,31 @@ $jsonSchema = '{
             "type": "number"
         },
         "vlrtotalbaseret": {
-            "required": true,
-            "type": "number"
+           "required": true,
+           "type": "number"
         },
         "vlrtotalretprinc": {
             "required": true,
             "type": "number"
         },
         "vlrtotalretadic": {
-           "required": false,
-           "type": ["number","null"]
+            "required": false,
+            "type": ["number","null"]
         },
         "vlrtotalnretprinc": {
-            "required": false,
-            "type": ["number","null"]
+             "required": false,
+             "type": ["number","null"]
         },
         "vlrtotalnretadic": {
-            "required": false,
-            "type": ["number","null"]
+             "required": false,
+             "type": ["number","null"]
         },
         "indcprb": {
             "required": true,
             "type": "integer",
             "minimum": 0,
             "maximum": 2
-        },
+        },    
         "nfs": {
            "required": true,
            "type": "array",
@@ -255,6 +255,7 @@ $std->perapur = '2017-11';
 $std->tpinscestab = 1;
 $std->nrinscestab = '12345678901234';
 $std->indobra = '0';
+
 $std->cnpjprestador = '12345678901234';
 $std->vlrtotalbruto = 456.92;
 $std->vlrtotalbaseret = 45.80;
@@ -262,6 +263,7 @@ $std->vlrtotalretprinc = 5;
 $std->vlrtotalretadic = 54.35;
 $std->vlrtotalnretprinc = 345.66;
 $std->vlrtotalnretadic = 345.90;
+$std->codanacont = 'skljslksjksj';
 $std->indcprb = 0;
 
 $std->nfs[0] = new \stdClass();

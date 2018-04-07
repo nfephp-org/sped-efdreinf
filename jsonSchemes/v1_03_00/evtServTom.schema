@@ -54,31 +54,31 @@
             "type": "number"
         },
         "vlrtotalbaseret": {
-            "required": true,
-            "type": "number"
+           "required": true,
+           "type": "number"
         },
         "vlrtotalretprinc": {
             "required": true,
             "type": "number"
         },
         "vlrtotalretadic": {
-           "required": false,
-           "type": ["number","null"]
+            "required": false,
+            "type": ["number","null"]
         },
         "vlrtotalnretprinc": {
-            "required": false,
-            "type": ["number","null"]
+             "required": false,
+             "type": ["number","null"]
         },
         "vlrtotalnretadic": {
-            "required": false,
-            "type": ["number","null"]
+             "required": false,
+             "type": ["number","null"]
         },
         "indcprb": {
             "required": true,
             "type": "integer",
             "minimum": 0,
             "maximum": 2
-        },
+        },    
         "nfs": {
            "required": true,
            "type": "array",
