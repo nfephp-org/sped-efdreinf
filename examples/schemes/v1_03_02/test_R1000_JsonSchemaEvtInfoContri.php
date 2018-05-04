@@ -89,14 +89,14 @@ $jsonSchema = '{
                         "fonefixo": {
                             "required": false,
                             "type": ["string","null"],
-                            "mimLength": 10,
+                            "minLength": 10,
                             "maxLength": 13,
                             "pattern": "^[0-9]"
                         },
                         "fonecel": {
                             "required": false,
                             "type": ["string","null"],
-                            "mimLength": 10,
+                            "minLength": 10,
                             "maxLength": 13,
                             "pattern": "^[0-9]"
                         },

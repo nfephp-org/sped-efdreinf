@@ -40,7 +40,7 @@ $std->infocadastro->indsitpj = 0;
 $std->infocadastro->contato = new \stdClass();
 $std->infocadastro->contato->nmctt = 'Fulano de Tal';
 $std->infocadastro->contato->cpfctt = '12345678901';
-$std->infocadastro->contato->fonefixo = '115555555';
+$std->infocadastro->contato->fonefixo = '0115555555';
 $std->infocadastro->contato->fonecel = '1199999999';
 $std->infocadastro->contato->email = 'fulano@email.com';
 
@@ -48,7 +48,7 @@ $std->infocadastro->softhouse[0] = new \stdClass();
 $std->infocadastro->softhouse[0]->cnpjsofthouse = '12345678901234';
 $std->infocadastro->softhouse[0]->nmrazao = 'Razao Social';
 $std->infocadastro->softhouse[0]->nmcont = 'Fulano de Tal';
-$std->infocadastro->softhouse[0]->telefone = '115555555';
+$std->infocadastro->softhouse[0]->telefone = '0115555555';
 $std->infocadastro->softhouse[0]->email = 'fulano@email.com';
 
 $std->infocadastro->infoefr = new \stdClass();

@@ -35,7 +35,7 @@ class Tools extends ToolsBase
     /**
      * @var SoapInterface
      */
-    protected $soap;
+    public $soap;
     /**
      * @var array
      */
