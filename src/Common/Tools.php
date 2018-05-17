@@ -98,9 +98,9 @@ class Tools
         $this->eventoVersion = $stdConf->eventoVersion;
         $this->serviceVersion = $stdConf->serviceVersion;
         $this->date = new DateTime();
-        $this->tpInsc = $stdConf->empregador->tpInsc;
-        $this->nrInsc = $stdConf->empregador->nrInsc;
-        $this->nmRazao = $stdConf->empregador->nmRazao;
+        $this->tpInsc = $stdConf->contribuinte->tpInsc;
+        $this->nrInsc = $stdConf->contribuinte->nrInsc;
+        $this->nmRazao = $stdConf->contribuinte->nmRazao;
         $this->transmissortpInsc = $stdConf->transmissor->tpInsc;
         $this->transmissornrInsc = $stdConf->transmissor->nrInsc;
         $this->certificate = $certificate;

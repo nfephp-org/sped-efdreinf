@@ -122,11 +122,11 @@ abstract class Factory
 
     /**
      * Constructor
-     * @param string      $config
-     * @param stdClass    $std
+     * @param string $config
+     * @param stdClass $std
      * @param Certificate $certificate
      * @param stdClass $params
-     * @param string      $date
+     * @param string $date OPTIONAL used for debug
      */
     public function __construct(
         $config,
@@ -144,9 +144,9 @@ abstract class Factory
         $this->tpAmb = $stdConf->tpAmb;
         $this->verProc = $stdConf->verProc;
         $this->layout = $stdConf->eventoVersion;
-        $this->tpInsc = $stdConf->empregador->tpInsc;
-        $this->nrInsc = $stdConf->empregador->nrInsc;
-        $this->nmRazao = $stdConf->empregador->nmRazao;
+        $this->tpInsc = $stdConf->contribuinte->tpInsc;
+        $this->nrInsc = $stdConf->contribuinte->nrInsc;
+        $this->nmRazao = $stdConf->contribuinte->nmRazao;
         $this->layoutStr = $this->strLayoutVer($this->layout);
         $this->certificate = $certificate;
         $this->evtTag = $params->evtTag;
