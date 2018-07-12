@@ -1,0 +1,270 @@
+{
+    "title": "evtTotalContrib",
+    "type": "object",
+    "properties": {
+        "sequencial": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 99999
+        },
+        "perapur": {
+            "required": true,
+            "type": "string",
+            "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])$"
+        },
+        "cdretorno": {
+            "required": true,
+            "type": "string",
+            "maxLength": 6
+        },
+        "descretorno": {
+            "required": true,
+            "type": "string",
+            "maxLength": 255
+        },
+        "regocorrs": {
+            "required": false,
+            "type": ["array","null"],
+            "minItems": 0,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "tpocorr": {
+                        "required": true,
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2
+                    },
+                    "localerroaviso": {
+                        "required": true,
+                        "type": "string",
+                        "maxLength": 100
+                    },
+                    "codresp": {
+                        "required": true,
+                        "type": "string",
+                        "maxLength": 6
+                    },
+                    "dscresp": {
+                        "required": true,
+                        "type": "string",
+                        "maxLength": 255
+                    }
+                }
+            }
+        },
+        "nrprotentr": {
+            "required": true,
+            "type": "string"
+        },
+        "dhprocess": {
+            "required": true,
+            "type": "string"
+        },
+        "tpev": {
+            "required": true,
+            "type": "string",
+            "maxLength": 6
+        },
+        "idev": {
+            "required": true,
+            "type": "string",
+            "maxLength": 20
+        },
+        "hash": {
+            "required": true,
+            "type": "string",
+            "maxLength": 60
+        },
+        "infototalcontrib": {
+            "required": false,
+            "type": ["array","null"],
+            "minItems": 0,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "nrrecarqbase": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "maxLength": 52
+                    },
+                    "indexistinfo": {
+                        "required": true,
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 3
+                    },
+                    "rtom": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "cnpjprestador": {
+                                    "required": true,
+                                    "type": "string",
+                                    "maxLength": 14,
+                                    "pattern": "^[0-9]"
+                                },
+                                "vlrtotalbaseret": {
+                                    "required": true,
+                                    "type": "number"
+                                },
+                                "infocrtom": {
+                                    "required": false,
+                                    "type": ["array","null"],
+                                    "minItems": 0,
+                                    "maxItems": 2,
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "crtom": {
+                                                "required": true,
+                                                "type": "string",
+                                                "pattern": "114106|116201"
+                                            },
+                                            "vlrcrtom": {
+                                                "required": false,
+                                                "type": ["number","null"],
+                                                "minimum": 0.01
+                                            },
+                                            "vlrcrtomsusp": {
+                                                "required": false,
+                                                "type": ["number","null"],
+                                                "minimum": 0.01
+                                            }
+                                        }
+                                    }
+                                }    
+                            }    
+                        }
+                    },
+                    "rprest": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "tpinsctomador": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 4
+                                },
+                                "nrinsctomador": {
+                                    "required": true,
+                                    "type": "string",
+                                    "maxLength": 14,
+                                    "pattern": "^[0-9]"
+                                },
+                                "vlrtotalbaseret": {
+                                    "required": true,
+                                    "type": "number"
+                                },
+                                "vlrtotalretprinc": {
+                                    "required": true,
+                                    "type": "number"
+                                },
+                                "vlrtotalretadic": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlrtotalnretprinc": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlrtotalnretadic": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                }
+                            }
+                        }    
+                    },
+                    "rrecrepad": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "cnpjassocdesp": {
+                                    "required": true,
+                                    "type": "string",
+                                    "pattern": "^[0-9]{14}"
+                                },
+                                "vlrtotalrep": {
+                                    "required": true,
+                                    "type": "number"
+                                },
+                                "crrecrepad": {
+                                    "required": true,
+                                    "type": "string",
+                                    "pattern": "^[0-9]{6}"
+                                },
+                                "vlrcrrecrepad": {
+                                    "required": true,
+                                    "type": "number"
+                                },
+                                "vlrcrrecrepadsusp": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                }
+                            }
+                        }
+                    },
+                    "rcoml": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
+                        "maxItems": 3,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "crcoml": {
+                                    "required": true,
+                                    "type": "string",
+                                    "pattern": "165701|165702|164605|164606|121302|121304"
+                                },
+                                "vlrcrcoml": {
+                                    "required": true,
+                                    "type": "number"
+                                },
+                                "vlrcrcomlsusp": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                }
+                            }
+                        }
+                    },
+                    "rcprb": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
+                        "maxItems": 4,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "crcprb": {
+                                    "required": true,
+                                    "type": "string",
+                                    "pattern": "299101|298501|298504|298506"
+                                },
+                                "vlrcrcprb": {
+                                    "required": true,
+                                    "type": "number"
+                                },
+                                "vlrcrcprbsusp": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }    
+    }
+}

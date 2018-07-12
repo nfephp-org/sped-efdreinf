@@ -21,6 +21,10 @@ use DateTime;
 
 class Tools
 {
+    const EVT_INICIAIS = 1;
+    const EVT_NAO_PERIODICOS = 2;
+    const EVT_PERIODICOS = 3;
+    
     /**
      * @var string
      */
@@ -81,6 +85,40 @@ class Tools
      * @var string
      */
     protected $transmissornrInsc;
+    /**
+     * @var array
+     */
+    protected $eventGroup = [
+        1 => 'EVENTOS INICIAIS',
+        2 => 'EVENTOS NÃO PERIÓDICOS',
+        3 => 'EVENTOS PERIÓDICOS',
+    ];
+    /**
+     * @var array
+     */
+    protected $grupos = [
+        1 => [ //EVENTOS INICIAIS grupo [1]
+            'R-1000',
+            'R-1070'
+        ],
+        2 => [ //EVENTOS NÃO PERIÓDICOS grupo [2]
+            'R-2030',
+            'R-2040',
+            'R-2050',
+            'R-2060',
+            'R-3010',
+            'R-5001',
+            'R-5011',
+            'R-9000'
+        ],
+        3 => [ //EVENTOS PERIÓDICOS grupo [3]
+            'R-2010',
+            'R-2020',
+            'R-2070',
+            'R-2098',
+            'R-2099',
+        ],
+    ];
 
     /**
      * Constructor
