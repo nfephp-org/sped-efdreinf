@@ -101,7 +101,7 @@ class Tools extends ToolsBase
         $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
         $request = "<sped:tipoInscricaoContribuinte>$this->tpInsc</sped:tipoInscricaoContribuinte>";
         $request .= "<sped:numeroInscricaoContribuinte>$this->nrInsc</sped:numeroInscricaoContribuinte>";
-        $request .= "<sped:numeroReciboFechamento>$recibofechamento</sped:numeroReciboFechamento>";
+        $request .= "<sped:numeroProtocoloFechamento>$recibofechamento</sped:numeroProtocoloFechamento>";
         $body = "<sped:ConsultaInformacoesConsolidadas>"
             . $request
             . "</sped:ConsultaInformacoesConsolidadas>";
