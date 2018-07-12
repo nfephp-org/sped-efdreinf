@@ -52,7 +52,6 @@ class Tools extends ToolsBase
         
     ];
     /**
-     *
      * @var array
      */
     protected $uriconsulta = [
@@ -101,7 +100,7 @@ class Tools extends ToolsBase
         $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
         $request = "<sped:tipoInscricaoContribuinte>$this->tpInsc</sped:tipoInscricaoContribuinte>";
         $request .= "<sped:numeroInscricaoContribuinte>$this->nrInsc</sped:numeroInscricaoContribuinte>";
-        $request .= "<sped:numeroReciboFechamento>$recibofechamento</sped:numeroReciboFechamento>";
+        $request .= "<sped:numeroProtocoloFechamento>$recibofechamento</sped:numeroProtocoloFechamento>";
         $body = "<sped:ConsultaInformacoesConsolidadas>"
             . $request
             . "</sped:ConsultaInformacoesConsolidadas>";
@@ -112,10 +111,11 @@ class Tools extends ToolsBase
     
     /**
      * Send batch of events
+     * @param  integer $grupo
      * @param array $eventos
      * @return string
      */
-    public function enviarLoteEventos($eventos = [])
+    public function enviarLoteEventos($grupo, $eventos = [])
     {
         if (empty($eventos)) {
             return '';
@@ -131,6 +131,13 @@ class Tools extends ToolsBase
         foreach ($eventos as $evt) {
             if (!is_a($evt, '\NFePHP\EFDReinf\Common\FactoryInterface')) {
                 throw ProcessException::wrongArgument(2002, '');
+            }
+            //verifica se o evento pertence ao grupo indicado
+            if (! in_array($evt->alias(), $this->grupos[$grupo])) {
+                throw new \RuntimeException(
+                    'O evento ' . $evt->alias() . ' não pertence a este grupo [ '
+                    . $this->eventGroup[$grupo] . ' ].'
+                );
             }
             $this->checkCertificate($evt);
             $xml .= "<evento id=\"".$evt->getId()."\">";

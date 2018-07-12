@@ -37,6 +37,7 @@ class Event
         'evtfechaevper' => Factories\EvtFechaEvPer::class,
         'evtespdesportivo' => Factories\EvtEspDesportivo::class,
         'evttotal' => Factories\EvtTotal::class,
+        'evttotalcontrib' => Factories\EvtTotalContrib::class,
         'evtexclusao' => Factories\EvtExclusao::class
     ];
     
@@ -58,6 +59,7 @@ class Event
         'r2099' => 'evtfecharvper',
         'r3010' => 'evtespdesportivo',
         'r5001' => 'evttotal',
+        'r5011' => 'evttotalcontrib',
         'r9000' => 'evtexclusao'
     ];
     
