@@ -13,7 +13,7 @@ Somente eventos do mesmo grupo podem ser enviados juntos, até o limite de 100 p
 Estes eventos devem ser os primeiros a serem enviados pelo sistema, antes de quaisquer outros.
 
 | Código | Nome  | Função |
-| :---:  | :---: | :---: |
+| :---:  | :---: | :--- |
 | R-1000 | EvtInfoContri | Informações do Contribuinte |
 | R-1070 | EvtTabProcesso | Tabela de Processos Administrativos/Judiciais |
 
@@ -22,7 +22,7 @@ Estes eventos devem ser os primeiros a serem enviados pelo sistema, antes de qua
 Estes eventos devem ser enviados de forma periódica
 
 | Código | Nome  | Função |
-| :---:  | :---: | :---: |
+| :---:  | :---: | :--- |
 | R-2010 | EvtServTom | Retenção Contribuição Previdenciária - Serviços Tomados |
 | R-2020 | EvtServprest | Retenção Contribuição Previdenciária - Serviços Prestados |
 | R-2030 | EvtAssocDespRec | Recursos Recebidos por Associação Desportiva |
@@ -38,7 +38,7 @@ Estes eventos devem ser enviados de forma periódica
 ## EVENTOS NÃO PERIÓDICOS
 
 | Código | Nome  | Função |
-| :---:  | :---: | :---: |
+| :---:  | :---: | :--- |
 | R-3010 | EvtEspDesportivo | Receita de Espetáculo Desportivo |
 | R-5001 | EvtTotal | Informações de bases e tributos por evento |
 | R-5011 | EvtTotalContrib | Informações de bases e tributos consolidadas por período de apuração |
