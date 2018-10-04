@@ -40,6 +40,4 @@ Estes eventos devem ser enviados de forma periódica
 | Código | Nome  | Função |
 | :---:  | :---: | :--- |
 | R-3010 | EvtEspDesportivo | Receita de Espetáculo Desportivo |
-| R-5001 | EvtTotal | Informações de bases e tributos por evento |
-| R-5011 | EvtTotalContrib | Informações de bases e tributos consolidadas por período de apuração |
 | R-9000 | EvtExclusao | Exclusão de Eventos |

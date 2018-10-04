@@ -76,7 +76,7 @@ $std->infoprocretad[0]->valoradic = 1000.23;
 
 try {
     
-   //carrega a classe responsavel por lidar com os certificados
+    //carrega a classe responsavel por lidar com os certificados
     $content     = file_get_contents('expired_certificate.pfx');
     $password    = 'associacao';
     $certificate = Certificate::readPfx($content, $password);
