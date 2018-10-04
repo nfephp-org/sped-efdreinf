@@ -45,7 +45,8 @@ $jsonSchema = '{
 $std = new \stdClass();
 $std->sequencial = 1;
 $std->tpevento = 'R-2010'; //R-2010 a R-2070 e R-3010
-$std->nrrecevt = '121212-23-1245-55555-125498787888858552';
+//$std->nrrecevt = '121212-23-1245-55555-125498787888858552';
+$std->nrrecevt = '30795-08-2010-1805-30795';
 $std->perapur = '2017-11';
 
 
