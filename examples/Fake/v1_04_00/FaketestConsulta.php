@@ -10,6 +10,7 @@ use NFePHP\EFDReinf\Event;
 use NFePHP\EFDReinf\Tools;
 use NFePHP\EFDReinf\Common\FakePretty;
 use NFePHP\EFDReinf\Common\Soap\SoapFake;
+use stdClass;
 
 $config = [
     'tpAmb' => 2, //tipo de ambiente 1 - Produção; 2 - Produção restrita
@@ -45,13 +46,99 @@ try {
     //carrega a classe responsável pelo envio SOAP
     //nesse caso um envio falso
     $tools->loadSoapClass($soap);
+        
+    //CONSULTAS
+    //Consolidada 
+    $std = new stdClass();
+    $std->numeroprotocolofechamento = '12345678901234';
+    $std->tipoinscricaocontribuinte = 2;
+    $std->numeroinscricaocontribuinte = '12345678901';
+    $response = $tools->consultar($tools::CONSULTA_CONSOLIDADA, $std); 
     
-    //executa a consulta 
-    //Número do Protocolo do Fechamento (recebido no retorno do evento R-2099).
-    $response = $tools->consultar('1.2.201707.0000000000000007638');    
+    //CONSULTAS
+    //R1000 
+    //$response = $tools->consultar($tools::CONSULTA_R1000, null);
+    
+    //CONSULTAS
+    //R1070 
+    //$response = $tools->consultar($tools::CONSULTA_R1070, null);
+    
+    //CONSULTAS
+    //R2010 
+    //$std = new stdClass();
+    //$std->perapur = '2018-12';
+    //$std->cnpjprestador = '12345678901234';
+    //$std->tpinscestab = 2;
+    //$std->nrinscestab = '12345678901234';
+    //$response = $tools->consultar($tools::CONSULTA_R2010, $std); 
+    
+    //CONSULTAS
+    //R2020 
+    //$std = new stdClass();
+    //$std->perapur = '2018-12';
+    //$std->nrinscestabprest = '12345678901234';
+    //$std->tpinsctomador = 2;
+    //$std->nrinsctomador = '12345678901';
+    //$response = $tools->consultar($tools::CONSULTA_R2020, $std); 
+    
+    //CONSULTAS
+    //R2030 
+    //$std = new stdClass();
+    //$std->perapur = '2018-12';
+    //$std->nrinscestab = '12345678901234';
+    //$response = $tools->consultar($tools::CONSULTA_R2030, $std); 
+    
+    //CONSULTAS
+    //R2040 
+    //$std = new stdClass();
+    //$std->perapur = '2018-12';
+    //$std->nrinscestab = '12345678901234';
+    //$response = $tools->consultar($tools::CONSULTA_R2040, $std); 
+    
+    //CONSULTAS
+    //R2050 
+    //$std = new stdClass();
+    //$std->perapur = '2018-12';
+    //$std->nrinscestab = '12345678901234';
+    //$response = $tools->consultar($tools::CONSULTA_R2050, $std); 
+    
+    //CONSULTAS
+    //R2060 
+    //$std = new stdClass();
+    //$std->perapur = '2018-12';
+    //$std->nrinscestabprest = '12345678901234';
+    //$std->tpinscestab = 1;
+    //$std->nrinscestab = '12345678901234';
+    //$response = $tools->consultar($tools::CONSULTA_R2060, $std);  
+    
+    //CONSULTAS
+    //R2098 
+    //$std = new stdClass();
+    //$std->perapur = '2018-12';
+    //$response = $tools->consultar($tools::CONSULTA_R2098, $std);  
+    
+    //CONSULTAS
+    //R2099 
+    //$std = new stdClass();
+    //$std->perapur = '2018-12';
+    //$response = $tools->consultar($tools::CONSULTA_R2099, $std);    
+    
+    //CONSULTAS
+    //R3010 
+    //$std = new stdClass();
+    //$std->dtapur = '2018-12-11';
+    //$std->nrinscestabelecimento = '12345678901234';
+    //$response = $tools->consultar($tools::CONSULTA_R3010, $std);    
+    
+    //echo "<pre>";
+    //echo str_replace(['<', '>'],['&lt;','&gt;'], $response);
+    //echo "</pre>";
+    
+    //header('Content-Type: application/xml; charset=utf-8');
+    //echo $response;
     
     //retorna os dados que serão usados na conexão para conferência
-    echo FakePretty::prettyPrint($response, 'fake_envConsulta');
+    echo FakePretty::prettyPrint($response, '');
     
 } catch (\Exception $e) {
     echo $e->getMessage();

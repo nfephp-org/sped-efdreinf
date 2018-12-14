@@ -22,7 +22,7 @@ class ProcessException extends \InvalidArgumentException implements ExceptionInt
         2000 => "O numero máximo de eventos em um lote é 100, você está tentando enviar {{msg}} eventos !",
         2001 => "Não temos um certificado disponível!",
         2002 => "Não foi passado um evento válido.",
-        2003 => "",
+        2003 => "Não foi passada uma consulta válida",
         2004 => "",
         2005 => ""
     ];
