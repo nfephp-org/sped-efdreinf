@@ -178,9 +178,22 @@ class Tools extends ToolsBase
     public function consultConsolidadas($evt, stdClass $std)
     {
         $properties = [
-            'tipoinscricaocontribuinte' => ['required' => true, 'type' => 'integer', 'min' => 1, 'max' => 2],
-            'numeroinscricaocontribuinte' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{11,14}$'],
-            'numeroprotocolofechamento' => ['required' => true, 'type' => 'string', 'regex' => ''],
+            'tipoinscricaocontribuinte' => [
+                'required' => true,
+                'type' => 'integer',
+                'min' => 1,
+                'max' => 2
+            ],
+            'numeroinscricaocontribuinte' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^[0-9]{11,14}$'
+            ],
+            'numeroprotocolofechamento' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => ''
+            ],
         ];
         $this->validInputParameters($properties, $std);
         
@@ -220,10 +233,27 @@ class Tools extends ToolsBase
     protected function consultR2010($evt, $std)
     {
         $properties = [
-            'perapur' => ['required' => true, 'type' => 'string', 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'],
-            'tpinscestab' => ['required' => true, 'type' => 'integer', 'min' => 1, 'max' => 2],
-            'nrinscestab' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{11,14}$'],
-            'cnpjprestador' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{14}$'],
+            'perapur' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
+            ],
+            'tpinscestab' => [
+                'required' => true,
+                'type' => 'integer',
+                'min' => 1,
+                'max' => 2
+            ],
+            'nrinscestab' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^[0-9]{11,14}$'
+            ],
+            'cnpjprestador' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^[0-9]{14}$'
+            ],
         ];
         $this->validInputParameters($properties, $std);
         
@@ -250,10 +280,27 @@ class Tools extends ToolsBase
     protected function consultR2020($evt, $std)
     {
         $properties = [
-            'perapur' => ['required' => true, 'type' => 'string', 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'],
-            'nrinscestabprest' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{11,14}$'],
-            'tpinsctomador' => ['required' => true, 'type' => 'integer', 'min' => 1, 'max' => 2],
-            'nrinsctomador' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{11,14}$'],
+            'perapur' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
+             ],
+            'nrinscestabprest' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^[0-9]{11,14}$'
+            ],
+            'tpinsctomador' => [
+                'required' => true,
+                'type' => 'integer',
+                'min' => 1,
+                'max' => 2
+            ],
+            'nrinsctomador' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^[0-9]{11,14}$'
+            ],
         ];
         $this->validInputParameters($properties, $std);
         
@@ -280,8 +327,16 @@ class Tools extends ToolsBase
     protected function consultR20($evt, $std)
     {
         $properties = [
-            'perapur' => ['required' => true, 'type' => 'string', 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'],
-            'nrinscestab' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{11,14}$'],
+            'perapur' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
+            ],
+            'nrinscestab' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^[0-9]{11,14}$'
+            ],
         ];
         $this->validInputParameters($properties, $std);
         
@@ -306,10 +361,27 @@ class Tools extends ToolsBase
     protected function consultR2060($evt, $std)
     {
         $properties = [
-            'perapur' => ['required' => true, 'type' => 'string', 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'],
-            'nrinscestabprest' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{11,14}$'],
-            'tpinscestab' => ['required' => true, 'type' => 'integer', 'min' => 1, 'max' => 2],
-            'nrinscestab' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{11,14}$'],
+            'perapur' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
+            ],
+            'nrinscestabprest' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^[0-9]{11,14}$'
+            ],
+            'tpinscestab' => [
+                'required' => true,
+                'type' => 'integer',
+                'min' => 1,
+                'max' => 2
+            ],
+            'nrinscestab' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^[0-9]{11,14}$'
+            ],
         ];
         $this->validInputParameters($properties, $std);
         
@@ -335,7 +407,11 @@ class Tools extends ToolsBase
     protected function consultR209($evt, $std)
     {
         $properties = [
-            'perapur' => ['required' => true, 'type' => 'string', 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'],
+            'perapur' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
+            ],
         ];
         $this->validInputParameters($properties, $std);
         
@@ -359,8 +435,16 @@ class Tools extends ToolsBase
     protected function consultR3010($evt, $std)
     {
         $properties = [
-            'dtapur' => ['required' => true, 'type' => 'string', 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])[-](0?[1-9]|[1-2][0-9]|3[0-1])$'],
-            'nrinscestabelecimento' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{11,14}$'],
+            'dtapur' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])[-](0?[1-9]|[1-2][0-9]|3[0-1])$'
+            ],
+            'nrinscestabelecimento' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^[0-9]{11,14}$'
+            ],
         ];
         $this->validInputParameters($properties, $std);
         
@@ -493,7 +577,7 @@ class Tools extends ToolsBase
     
     protected function validInputParameters($properties, $std)
     {
-        foreach($properties as $key => $rules) {
+        foreach ($properties as $key => $rules) {
             $r = json_decode(json_encode($rules));
             if ($r->required) {
                 if (!isset($std->$key)) {
@@ -508,7 +592,7 @@ class Tools extends ToolsBase
                 if ($r->type === 'string') {
                     if (!preg_match("/{$r->regex}/", $value)) {
                         throw new \Exception("$key contêm um valor invalido [$value].");
-                    } 
+                    }
                 }
             }
         }
