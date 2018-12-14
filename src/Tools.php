@@ -21,9 +21,24 @@ use NFePHP\EFDReinf\Common\FactoryInterface;
 use NFePHP\EFDReinf\Common\Soap\SoapCurl;
 use NFePHP\EFDReinf\Common\Soap\SoapInterface;
 use NFePHP\EFDReinf\Exception\ProcessException;
+use stdClass;
+use NFePHP\EFDReinf\Common\Factory;
 
 class Tools extends ToolsBase
 {
+    const CONSULTA_CONSOLIDADA = 1;
+    const CONSULTA_R1000 = 2;
+    const CONSULTA_R1070 = 3;
+    const CONSULTA_R2010 = 4;
+    const CONSULTA_R2020 = 5;
+    const CONSULTA_R2030 = 6;
+    const CONSULTA_R2040 = 7;
+    const CONSULTA_R2050 = 8;
+    const CONSULTA_R2060 = 9;
+    const CONSULTA_R2098 = 10;
+    const CONSULTA_R2099 = 11;
+    const CONSULTA_R3010 = 12;
+    
     /**
      * @var string
      */
@@ -87,27 +102,280 @@ class Tools extends ToolsBase
     }
     
     /**
-     * Event batch query
-     * @param string $recibofechamento
-     * @return string
+     * Run EFD-REINF Query
+     * @param integer $mod
+     * @param stdClass $std
+     * @throws ProcessException
      */
-    public function consultar($recibofechamento)
+    public function consultar($mod, stdClass $std = null)
     {
-        if (empty($recibofechamento)) {
-            return '';
+        if (isset($std)) {
+            //converte os nomes das propriedades do stdClass para caixa baixa
+            $std = Factory::propertiesToLower($std);
         }
-        $this->method = "ConsultaInformacoesConsolidadas";
-        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
-        $request = "<sped:tipoInscricaoContribuinte>$this->tpInsc</sped:tipoInscricaoContribuinte>";
-        $request .= "<sped:numeroInscricaoContribuinte>$this->nrInsc</sped:numeroInscricaoContribuinte>";
-        $request .= "<sped:numeroProtocoloFechamento>$recibofechamento</sped:numeroProtocoloFechamento>";
-        $body = "<sped:ConsultaInformacoesConsolidadas>"
-            . $request
-            . "</sped:ConsultaInformacoesConsolidadas>";
-        
-        $this->lastResponse = $this->sendRequest($body);
+        switch ($mod) {
+            case 1:
+                $evt = 0;
+                $request = $this->consultConsolidadas($evt, $std);
+                break;
+            case 2:
+                $evt = 1000;
+                $request = $this->consultR1($evt);
+                break;
+            case 3:
+                $evt = 1070;
+                $request = $this->consultR1($evt);
+                break;
+            case 4:
+                $evt = 2010;
+                $request = $this->consultR2010($evt, $std);
+                break;
+            case 5:
+                $evt = 2020;
+                $request = $this->consultR2020($evt, $std);
+                break;
+            case 6:
+                $evt = 2030;
+                $request = $this->consultR20($evt, $std);
+                break;
+            case 7:
+                $evt = 2040;
+                $request = $this->consultR20($evt, $std);
+                break;
+            case 8:
+                $evt = 2050;
+                $request = $this->consultR20($evt, $std);
+                break;
+            case 9:
+                $evt = 2060;
+                $request = $this->consultR2060($evt, $std);
+                break;
+            case 10:
+                $evt = 2098;
+                $request = $this->consultR209($evt, $std);
+                break;
+            case 11:
+                $evt = 2099;
+                $request = $this->consultR209($evt, $std);
+                break;
+            case 12:
+                $evt = 3010;
+                $request = $this->consultR3010($evt, $std);
+                break;
+            default:
+                throw ProcessException::wrongArgument(2003, '');
+        }
+        $this->lastResponse = $this->sendRequest($request);
         return $this->lastResponse;
     }
+    
+    /**
+     * Consultation of consolidated information
+     * @param integer $evt
+     * @param stdClass $std
+     * @return string
+     */
+    public function consultConsolidadas($evt, stdClass $std)
+    {
+        $properties = [
+            'tipoinscricaocontribuinte' => ['required' => true, 'type' => 'integer', 'min' => 1, 'max' => 2],
+            'numeroinscricaocontribuinte' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{11,14}$'],
+            'numeroprotocolofechamento' => ['required' => true, 'type' => 'string', 'regex' => ''],
+        ];
+        $this->validInputParameters($properties, $std);
+        
+        $this->method = "ConsultaInformacoesConsolidadas";
+        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $request = "<sped:{$this->method}>"
+            . "<sped:tipoInscricaoContribuinte>{$std->tipoinscricaocontribuinte}</sped:tipoInscricaoContribuinte>"
+            . "<sped:numeroInscricaoContribuinte>{$std->numeroinscricaocontribuinte}</sped:numeroInscricaoContribuinte>"
+            . "<sped:numeroProtocoloFechamento>{$std->numeroprotocolofechamento}</sped:numeroProtocoloFechamento>"
+            . "</sped:{$this->method}>";
+        return $request;
+    }
+    
+    /**
+     * Consultation R1000 and R1070
+     * @param integer $evt
+     * @return string
+     */
+    protected function consultR1($evt)
+    {
+        $this->method = "ConsultaReciboEvento{$evt}";
+        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $request = "<sped:{$this->method}>"
+            . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
+            . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
+            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
+            . "</sped:{$this->method}>";
+        return $request;
+    }
+    
+    /**
+     * Consultation R2010
+     * @param integer $evt
+     * @param stdClass $std
+     * @return string
+     */
+    protected function consultR2010($evt, $std)
+    {
+        $properties = [
+            'perapur' => ['required' => true, 'type' => 'string', 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'],
+            'tpinscestab' => ['required' => true, 'type' => 'integer', 'min' => 1, 'max' => 2],
+            'nrinscestab' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{11,14}$'],
+            'cnpjprestador' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{14}$'],
+        ];
+        $this->validInputParameters($properties, $std);
+        
+        $this->method = "ConsultaReciboEvento{$evt}";
+        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $request = "<sped:{$this->method}>"
+            . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
+            . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
+            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
+            . "<sped:perApur>{$std->perapur}</sped:dtApur>"
+            . "<sped:tpInscEstab>{$std->tpinscestab}</sped:tpInscEstab>"
+            . "<sped:nrInscEstab>{$std->nrinscestab}</sped:nrInscEstab>"
+            . "<sped:cnpjPrestador>{$std->cnpjprestador}</sped:cnpjPrestador>"
+            . "</sped:{$this->method}>";
+        return $request;
+    }
+    
+    /**
+     * Consultation R2020
+     * @param integer $evt
+     * @param stdClass $std
+     * @return string
+     */
+    protected function consultR2020($evt, $std)
+    {
+        $properties = [
+            'perapur' => ['required' => true, 'type' => 'string', 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'],
+            'nrinscestabprest' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{11,14}$'],
+            'tpinsctomador' => ['required' => true, 'type' => 'integer', 'min' => 1, 'max' => 2],
+            'nrinsctomador' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{11,14}$'],
+        ];
+        $this->validInputParameters($properties, $std);
+        
+        $this->method = "ConsultaReciboEvento{$evt}";
+        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $request = "<sped:{$this->method}>"
+            . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
+            . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
+            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
+            . "<sped:perApur>{$std->perapur}</sped:dtApur>"
+            . "<sped:nrInscEstabPrest>{$std->nrinscestabprest}</sped:nrInscEstabPrest>"
+            . "<sped:tpInscTomador>{$std->tpinsctomador}</sped:tpInscTomador>"
+            . "<sped:nrInscTomador>{$std->nrinsctomador}</sped:nrInscTomador>"
+            . "</sped:{$this->method}>";
+        return $request;
+    }
+    
+    /**
+     * Consultation R2030 and R2040 and R2050
+     * @param integer $evt
+     * @param stdClass $std
+     * @return string
+     */
+    protected function consultR20($evt, $std)
+    {
+        $properties = [
+            'perapur' => ['required' => true, 'type' => 'string', 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'],
+            'nrinscestab' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{11,14}$'],
+        ];
+        $this->validInputParameters($properties, $std);
+        
+        $this->method = "ConsultaReciboEvento{$evt}";
+        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $request = "<sped:{$this->method}>"
+            . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
+            . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
+            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
+            . "<sped:perApur>{$std->perapur}</sped:dtApur>"
+            . "<sped:nrInscEstab>{$std->nrinscestab}</sped:nrInscEstab>"
+            . "</sped:{$this->method}>";
+        return $request;
+    }
+    
+    /**
+     * Consultation R2060
+     * @param integer $evt
+     * @param stdClass $std
+     * @return string
+     */
+    protected function consultR2060($evt, $std)
+    {
+        $properties = [
+            'perapur' => ['required' => true, 'type' => 'string', 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'],
+            'nrinscestabprest' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{11,14}$'],
+            'tpinscestab' => ['required' => true, 'type' => 'integer', 'min' => 1, 'max' => 2],
+            'nrinscestab' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{11,14}$'],
+        ];
+        $this->validInputParameters($properties, $std);
+        
+        $this->method = "ConsultaReciboEvento{$evt}";
+        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $request = "<sped:{$this->method}>"
+            . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
+            . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
+            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
+            . "<sped:perApur>{$std->perapur}</sped:dtApur>"
+            . "<sped:tpInscEstab>{$std->tpinscestab}</sped:tpInscEstab>"
+            . "<sped:nrInscEstab>{$std->nrinscestab}</sped:nrInscEstab>"
+            . "</sped:{$this->method}>";
+        return $request;
+    }
+    
+    /**
+     * Consultation R2098 and R2099
+     * @param integer $evt
+     * @param stdClass $std
+     * @return string
+     */
+    protected function consultR209($evt, $std)
+    {
+        $properties = [
+            'perapur' => ['required' => true, 'type' => 'string', 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'],
+        ];
+        $this->validInputParameters($properties, $std);
+        
+        $this->method = "ConsultaReciboEvento{$evt}";
+        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $request = "<sped:{$this->method}>"
+            . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
+            . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
+            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
+            . "<sped:perApur>{$std->perapur}</sped:dtApur>"
+            . "</sped:{$this->method}>";
+        return $request;
+    }
+   
+    /**
+     * Consultation R3010
+     * @param integer $evt
+     * @param stdClass $std
+     * @return string
+     */
+    protected function consultR3010($evt, $std)
+    {
+        $properties = [
+            'dtapur' => ['required' => true, 'type' => 'string', 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])[-](0?[1-9]|[1-2][0-9]|3[0-1])$'],
+            'nrinscestabelecimento' => ['required' => true, 'type' => 'string', 'regex' => '^[0-9]{11,14}$'],
+        ];
+        $this->validInputParameters($properties, $std);
+        
+        $this->method = "ConsultaReciboEvento{$evt}";
+        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $request = "<sped:{$this->method}>"
+            . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
+            . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
+            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
+            . "<sped:dtApur>{$std->dtapur}</sped:dtApur>"
+            . "<sped:nrInscEstabelecimento>{$std->nrinscestabelecimento}</sped:nrInscEstabelecimento>"
+            . "</sped:{$this->method}>";
+        return $request;
+    }
+    
     
     /**
      * Send batch of events
@@ -220,6 +488,29 @@ class Tools extends ToolsBase
         $certificate = $evento->getCertificate();
         if (empty($certificate)) {
             $evento->setCertificate($this->certificate);
+        }
+    }
+    
+    protected function validInputParameters($properties, $std)
+    {
+        foreach($properties as $key => $rules) {
+            $r = json_decode(json_encode($rules));
+            if ($r->required) {
+                if (!isset($std->$key)) {
+                    throw new \Exception("$key não foi passado como parâmetro e é obrigatório.");
+                }
+                $value = $std->$key;
+                if ($r->type === 'integer') {
+                    if ($value < $r->min || $value > $r->max) {
+                        throw new \Exception("$key contêm um valor invalido [$value].");
+                    }
+                }
+                if ($r->type === 'string') {
+                    if (!preg_match("/{$r->regex}/", $value)) {
+                        throw new \Exception("$key contêm um valor invalido [$value].");
+                    } 
+                }
+            }
         }
     }
 }
