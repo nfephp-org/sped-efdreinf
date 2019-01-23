@@ -7,7 +7,7 @@ namespace NFePHP\EFDReinf;
  *
  * @category  API
  * @package   NFePHP\EFDReinf\Tools
- * @copyright Copyright (c) 2017
+ * @copyright Copyright (c) 2017-2019
  * @license   https://www.gnu.org/licenses/lgpl-3.0.txt LGPLv3
  * @license   https://www.gnu.org/licenses/gpl-3.0.txt GPLv3
  * @license   https://opensource.org/licenses/mit-license.php MIT
@@ -52,6 +52,10 @@ class Tools extends ToolsBase
      */
     public $soap;
     /**
+     * @var string
+     */
+    public $namespace = 'http://sped.fazenda.gov.br/';
+    /**
      * @var array
      */
     protected $soapnamespaces = [
@@ -70,9 +74,10 @@ class Tools extends ToolsBase
      * @var array
      */
     protected $uriconsulta = [
-        '1' => 'https://reinf.receita.fazenda.gov.br/WsREINF/ConsultasReinf.svc',
-        '2' => 'https://preprodefdreinf.receita.fazenda.gov.br/WsREINF/ConsultasReinf.svc'
+        '1' => 'https://reinf.receita.fazenda.gov.br/WsReinfConsultas/ConsultasReinf.svc',
+        '2' => 'https://preprodefdreinf.receita.fazenda.gov.br/WsReinfConsultas/ConsultasReinf.svc'
     ];
+    
     /**
      * @var string
      */
@@ -198,7 +203,7 @@ class Tools extends ToolsBase
         $this->validInputParameters($properties, $std);
         
         $this->method = "ConsultaInformacoesConsolidadas";
-        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
             . "<sped:tipoInscricaoContribuinte>{$std->tipoinscricaocontribuinte}</sped:tipoInscricaoContribuinte>"
             . "<sped:numeroInscricaoContribuinte>{$std->numeroinscricaocontribuinte}</sped:numeroInscricaoContribuinte>"
@@ -215,7 +220,7 @@ class Tools extends ToolsBase
     protected function consultR1($evt)
     {
         $this->method = "ConsultaReciboEvento{$evt}";
-        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
@@ -258,12 +263,12 @@ class Tools extends ToolsBase
         $this->validInputParameters($properties, $std);
         
         $this->method = "ConsultaReciboEvento{$evt}";
-        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $this->action = "{$this->namespace}/ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
             . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
-            . "<sped:perApur>{$std->perapur}</sped:dtApur>"
+            . "<sped:perApur>{$std->perapur}</sped:perApur>"
             . "<sped:tpInscEstab>{$std->tpinscestab}</sped:tpInscEstab>"
             . "<sped:nrInscEstab>{$std->nrinscestab}</sped:nrInscEstab>"
             . "<sped:cnpjPrestador>{$std->cnpjprestador}</sped:cnpjPrestador>"
@@ -305,12 +310,12 @@ class Tools extends ToolsBase
         $this->validInputParameters($properties, $std);
         
         $this->method = "ConsultaReciboEvento{$evt}";
-        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
             . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
-            . "<sped:perApur>{$std->perapur}</sped:dtApur>"
+            . "<sped:perApur>{$std->perapur}</sped:perApur>"
             . "<sped:nrInscEstabPrest>{$std->nrinscestabprest}</sped:nrInscEstabPrest>"
             . "<sped:tpInscTomador>{$std->tpinsctomador}</sped:tpInscTomador>"
             . "<sped:nrInscTomador>{$std->nrinsctomador}</sped:nrInscTomador>"
@@ -341,12 +346,12 @@ class Tools extends ToolsBase
         $this->validInputParameters($properties, $std);
         
         $this->method = "ConsultaReciboEvento{$evt}";
-        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
             . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
-            . "<sped:perApur>{$std->perapur}</sped:dtApur>"
+            . "<sped:perApur>{$std->perapur}</sped:perApur>"
             . "<sped:nrInscEstab>{$std->nrinscestab}</sped:nrInscEstab>"
             . "</sped:{$this->method}>";
         return $request;
@@ -386,12 +391,12 @@ class Tools extends ToolsBase
         $this->validInputParameters($properties, $std);
         
         $this->method = "ConsultaReciboEvento{$evt}";
-        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
             . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
-            . "<sped:perApur>{$std->perapur}</sped:dtApur>"
+            . "<sped:perApur>{$std->perapur}</sped:perApur>"
             . "<sped:tpInscEstab>{$std->tpinscestab}</sped:tpInscEstab>"
             . "<sped:nrInscEstab>{$std->nrinscestab}</sped:nrInscEstab>"
             . "</sped:{$this->method}>";
@@ -416,12 +421,12 @@ class Tools extends ToolsBase
         $this->validInputParameters($properties, $std);
         
         $this->method = "ConsultaReciboEvento{$evt}";
-        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
             . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
-            . "<sped:perApur>{$std->perapur}</sped:dtApur>"
+            . "<sped:perApur>{$std->perapur}</sped:perApur>"
             . "</sped:{$this->method}>";
         return $request;
     }
@@ -449,7 +454,7 @@ class Tools extends ToolsBase
         $this->validInputParameters($properties, $std);
         
         $this->method = "ConsultaReciboEvento{$evt}";
-        $this->action = "http://sped.fazenda.gov.br/ConsultasReinf/".$this->method;
+        $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
@@ -478,7 +483,7 @@ class Tools extends ToolsBase
             throw ProcessException::wrongArgument(2000, $nEvt);
         }
         $this->method = "ReceberLoteEventos";
-        $this->action = "http://sped.fazenda.gov.br/RecepcaoLoteReinf/ReceberLoteEventos";
+        $this->action = "{$this->namespace}RecepcaoLoteReinf/{$this->method}";
         $xml = "";
         foreach ($eventos as $evt) {
             if (!is_a($evt, '\NFePHP\EFDReinf\Common\FactoryInterface')) {
