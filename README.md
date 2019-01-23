@@ -1,4 +1,4 @@
-# sped-efdreinf (versão 1.0 - layout 1.4.0)
+# sped-efdreinf (versão 1.0 - layout 1.0.4)
 
 ## BETHA TESTS
 
