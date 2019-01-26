@@ -192,7 +192,7 @@ class Tools extends ToolsBase
             'numeroinscricaocontribuinte' => [
                 'required' => true,
                 'type' => 'string',
-                'regex' => '^[0-9]{11,14}$'
+                'regex' => '^[0-9]{8,14}$'
             ],
             'numeroprotocolofechamento' => [
                 'required' => true,
@@ -270,8 +270,12 @@ class Tools extends ToolsBase
             . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
             . "<sped:perApur>{$std->perapur}</sped:perApur>"
             . "<sped:tpInscEstab>{$std->tpinscestab}</sped:tpInscEstab>"
-            . "<sped:nrInscEstab>{$std->nrinscestab}</sped:nrInscEstab>"
-            . "<sped:cnpjPrestador>{$std->cnpjprestador}</sped:cnpjPrestador>"
+            . "<sped:nrInscEstab>"
+                . str_pad($std->nrinscestab, 14, '0', STR_PAD_LEFT)
+                . "</sped:nrInscEstab>"
+            . "<sped:cnpjPrestador>"
+                . str_pad($std->cnpjprestador, 14, '0', STR_PAD_LEFT)
+                . "</sped:cnpjPrestador>"
             . "</sped:{$this->method}>";
         return $request;
     }
@@ -299,7 +303,7 @@ class Tools extends ToolsBase
                 'required' => true,
                 'type' => 'integer',
                 'min' => 1,
-                'max' => 2
+                'max' => 4
             ],
             'nrinsctomador' => [
                 'required' => true,
@@ -318,7 +322,9 @@ class Tools extends ToolsBase
             . "<sped:perApur>{$std->perapur}</sped:perApur>"
             . "<sped:nrInscEstabPrest>{$std->nrinscestabprest}</sped:nrInscEstabPrest>"
             . "<sped:tpInscTomador>{$std->tpinsctomador}</sped:tpInscTomador>"
-            . "<sped:nrInscTomador>{$std->nrinsctomador}</sped:nrInscTomador>"
+            . "<sped:nrInscTomador>"
+                . str_pad($std->nrinsctomador, 14, '0', STR_PAD_LEFT)
+                . "</sped:nrInscTomador>"
             . "</sped:{$this->method}>";
         return $request;
     }
@@ -344,7 +350,12 @@ class Tools extends ToolsBase
             ],
         ];
         $this->validInputParameters($properties, $std);
-        
+        if ($this->tpInsc !== 1) {
+            throw new \InvalidArgumentException(
+                "Somente com CNPJ essa consulta pode ser realizada."
+                . " Seu config indica um CPF."
+            );
+        }
         $this->method = "ConsultaReciboEvento{$evt}";
         $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
@@ -352,7 +363,9 @@ class Tools extends ToolsBase
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
             . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
             . "<sped:perApur>{$std->perapur}</sped:perApur>"
-            . "<sped:nrInscEstab>{$std->nrinscestab}</sped:nrInscEstab>"
+            . "<sped:nrInscEstab>"
+                . str_pad($std->nrinscestab, 14, '0', STR_PAD_LEFT)
+                . "</sped:nrInscEstab>"
             . "</sped:{$this->method}>";
         return $request;
     }
@@ -398,7 +411,9 @@ class Tools extends ToolsBase
             . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
             . "<sped:perApur>{$std->perapur}</sped:perApur>"
             . "<sped:tpInscEstab>{$std->tpinscestab}</sped:tpInscEstab>"
-            . "<sped:nrInscEstab>{$std->nrinscestab}</sped:nrInscEstab>"
+            . "<sped:nrInscEstab>"
+                . str_pad($std->nrinscestab, 14, '0', STR_PAD_LEFT)
+                . "</sped:nrInscEstab>"
             . "</sped:{$this->method}>";
         return $request;
     }
@@ -452,7 +467,12 @@ class Tools extends ToolsBase
             ],
         ];
         $this->validInputParameters($properties, $std);
-        
+        if ($this->tpInsc !== 1) {
+            throw new \InvalidArgumentException(
+                "Somente com CNPJ essa consulta pode ser realizada."
+                . " Seu config indica um CPF."
+            );
+        }
         $this->method = "ConsultaReciboEvento{$evt}";
         $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
@@ -460,11 +480,12 @@ class Tools extends ToolsBase
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
             . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
             . "<sped:dtApur>{$std->dtapur}</sped:dtApur>"
-            . "<sped:nrInscEstabelecimento>{$std->nrinscestabelecimento}</sped:nrInscEstabelecimento>"
+            . "<sped:nrInscEstabelecimento>"
+                . str_pad($std->nrinscestabelecimento, 14, '0', STR_PAD_LEFT)
+                . "</sped:nrInscEstabelecimento>"
             . "</sped:{$this->method}>";
         return $request;
     }
-    
     
     /**
      * Send batch of events
