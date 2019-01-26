@@ -77,7 +77,7 @@ try {
     $std = new stdClass();
     $std->perapur = '2018-12';
     $std->nrinscestabprest = '12345678901234';
-    $std->tpinsctomador = 2;
+    $std->tpinsctomador = 4; //1 CNPJ ou 4 CNO
     $std->nrinsctomador = '12345678901';
     $response = $tools->consultar($tools::CONSULTA_R2020, $std); 
     
