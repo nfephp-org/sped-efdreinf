@@ -84,7 +84,7 @@ $jsonSchema = '{
             "pattern": "S|N"
         },
         "evtpgtos": {
-            "required": true,
+            "required": false,
             "type": "string",
             "pattern": "S|N"
         },
