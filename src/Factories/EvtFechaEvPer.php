@@ -42,7 +42,7 @@ class EvtFechaEvPer extends Factory implements FactoryInterface
         $params->evtAlias = 'R-2099';
         parent::__construct($config, $std, $params, $certificate, $data);
     }
-    
+
     /**
      * Node constructor
      */
@@ -77,7 +77,7 @@ class EvtFechaEvPer extends Factory implements FactoryInterface
             true
         );
         $this->node->insertBefore($ideEvento, $ideContri);
-        
+
         if (!empty($this->std->iderespinf)) {
             $ide = $this->std->iderespinf;
             $ideRespInf = $this->dom->createElement("ideRespInf");
@@ -107,8 +107,8 @@ class EvtFechaEvPer extends Factory implements FactoryInterface
             );
             $this->node->appendChild($ideRespInf);
         }
-        
-        
+
+
         $infoFech = $this->dom->createElement("infoFech");
         $this->dom->addChild(
             $infoFech,
@@ -146,12 +146,14 @@ class EvtFechaEvPer extends Factory implements FactoryInterface
             $this->std->evtcprb,
             true
         );
-        $this->dom->addChild(
-            $infoFech,
-            "evtPgtos",
-            $this->std->evtpgtos,
-            true
-        );
+        if (!empty($this->std->evtpgtos)) {
+            $this->dom->addChild(
+                $infoFech,
+                "evtPgtos",
+                $this->std->evtpgtos,
+                true
+            );
+        }
         $this->dom->addChild(
             $infoFech,
             "compSemMovto",
