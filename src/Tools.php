@@ -38,7 +38,7 @@ class Tools extends ToolsBase
     const CONSULTA_R2098 = 10;
     const CONSULTA_R2099 = 11;
     const CONSULTA_R3010 = 12;
-    
+
     /**
      * @var string
      */
@@ -68,7 +68,7 @@ class Tools extends ToolsBase
     protected $uri = [
         '1' => 'https://reinf.receita.fazenda.gov.br/WsREINF/RecepcaoLoteReinf.svc',
         '2' => 'https://preprodefdreinf.receita.fazenda.gov.br/WsREINF/RecepcaoLoteReinf.svc'
-        
+
     ];
     /**
      * @var array
@@ -77,7 +77,7 @@ class Tools extends ToolsBase
         '1' => 'https://reinf.receita.fazenda.gov.br/WsReinfConsultas/ConsultasReinf.svc',
         '2' => 'https://preprodefdreinf.receita.fazenda.gov.br/WsReinfConsultas/ConsultasReinf.svc'
     ];
-    
+
     /**
      * @var string
      */
@@ -86,7 +86,7 @@ class Tools extends ToolsBase
      * @var string
      */
     protected $method;
-    
+
     /**
      * Constructor
      * @param string $config
@@ -96,7 +96,7 @@ class Tools extends ToolsBase
     {
         parent::__construct($config, $certificate);
     }
-    
+
     /**
      * SOAP communication dependency injection
      * @param SoapInterface $soap
@@ -105,7 +105,7 @@ class Tools extends ToolsBase
     {
         $this->soap = $soap;
     }
-    
+
     /**
      * Run EFD-REINF Query
      * @param integer $mod
@@ -173,7 +173,7 @@ class Tools extends ToolsBase
         $this->lastResponse = $this->sendRequest($request);
         return $this->lastResponse;
     }
-    
+
     /**
      * Consultation of consolidated information
      * @param integer $evt
@@ -201,7 +201,7 @@ class Tools extends ToolsBase
             ],
         ];
         $this->validInputParameters($properties, $std);
-        
+
         $this->method = "ConsultaInformacoesConsolidadas";
         $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
@@ -211,7 +211,7 @@ class Tools extends ToolsBase
             . "</sped:{$this->method}>";
         return $request;
     }
-    
+
     /**
      * Consultation R1000 and R1070
      * @param integer $evt
@@ -228,7 +228,7 @@ class Tools extends ToolsBase
             . "</sped:{$this->method}>";
         return $request;
     }
-    
+
     /**
      * Consultation R2010
      * @param integer $evt
@@ -261,9 +261,9 @@ class Tools extends ToolsBase
             ],
         ];
         $this->validInputParameters($properties, $std);
-        
+
         $this->method = "ConsultaReciboEvento{$evt}";
-        $this->action = "{$this->namespace}/ConsultasReinf/{$this->method}";
+        $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
@@ -279,7 +279,7 @@ class Tools extends ToolsBase
             . "</sped:{$this->method}>";
         return $request;
     }
-    
+
     /**
      * Consultation R2020
      * @param integer $evt
@@ -312,7 +312,7 @@ class Tools extends ToolsBase
             ],
         ];
         $this->validInputParameters($properties, $std);
-        
+
         $this->method = "ConsultaReciboEvento{$evt}";
         $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
@@ -328,7 +328,7 @@ class Tools extends ToolsBase
             . "</sped:{$this->method}>";
         return $request;
     }
-    
+
     /**
      * Consultation R2030 and R2040 and R2050
      * @param integer $evt
@@ -369,7 +369,7 @@ class Tools extends ToolsBase
             . "</sped:{$this->method}>";
         return $request;
     }
-    
+
     /**
      * Consultation R2060
      * @param integer $evt
@@ -402,7 +402,7 @@ class Tools extends ToolsBase
             ],
         ];
         $this->validInputParameters($properties, $std);
-        
+
         $this->method = "ConsultaReciboEvento{$evt}";
         $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
@@ -417,7 +417,7 @@ class Tools extends ToolsBase
             . "</sped:{$this->method}>";
         return $request;
     }
-    
+
     /**
      * Consultation R2098 and R2099
      * @param integer $evt
@@ -434,7 +434,7 @@ class Tools extends ToolsBase
             ],
         ];
         $this->validInputParameters($properties, $std);
-        
+
         $this->method = "ConsultaReciboEvento{$evt}";
         $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
@@ -445,7 +445,7 @@ class Tools extends ToolsBase
             . "</sped:{$this->method}>";
         return $request;
     }
-   
+
     /**
      * Consultation R3010
      * @param integer $evt
@@ -486,7 +486,7 @@ class Tools extends ToolsBase
             . "</sped:{$this->method}>";
         return $request;
     }
-    
+
     /**
      * Send batch of events
      * @param  integer $grupo
@@ -543,7 +543,7 @@ class Tools extends ToolsBase
         $this->lastResponse = $this->sendRequest($body);
         return $this->lastResponse;
     }
-    
+
     /**
      * Send request to webservice
      * @param string $request
@@ -564,7 +564,7 @@ class Tools extends ToolsBase
             . $request
             . "</soapenv:Body>"
             . "</soapenv:Envelope>";
-        
+
         $msgSize = strlen($envelope);
         $parameters = [
             "Content-Type: text/xml;charset=UTF-8",
@@ -600,7 +600,7 @@ class Tools extends ToolsBase
             $evento->setCertificate($this->certificate);
         }
     }
-    
+
     protected function validInputParameters($properties, $std)
     {
         foreach ($properties as $key => $rules) {
