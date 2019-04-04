@@ -4,10 +4,11 @@ namespace NFePHP\EFDReinf\Factories;
 
 /**
  * Class EFD-Reinf EvtTotal Event R-5001 constructor
+ * NOTA: Alterado para R-9001 na versão 2.0.0
  *
  * @category  API
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017
+ * @copyright NFePHP Copyright (c) 2017-2019
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -40,6 +41,7 @@ class EvtTotal extends Factory implements FactoryInterface
         $params->evtName = 'evtTotal';
         $params->evtTag = 'evtTotal';
         $params->evtAlias = 'R-5001';
+        //$params->evtAlias = 'R-9001';
         parent::__construct($config, $std, $params, $certificate, $data);
     }
     

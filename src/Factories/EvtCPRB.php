@@ -160,6 +160,12 @@ class EvtCPRB extends Factory implements FactoryInterface
                 !empty($t->vlrcprbapur) ? $t->vlrcprbapur : null,
                 false
             );
+            $this->dom->addChild(
+                $tipoCod,
+                "observ",
+                !empty($t->observ) ? $t->observ : null,
+                false
+            );
             if (!empty($t->tipoajuste)) {
                 foreach ($t->tipoajuste as $a) {
                     $tipoAjuste = $this->dom->createElement("tipoAjuste");

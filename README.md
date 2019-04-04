@@ -1,6 +1,11 @@
-# sped-efdreinf (versão 1.0 - layout 1.0.4)
+# sped-efdreinf (versão 1.0 - layout 1.4)
 
 ## BETHA TESTS
+
+## NOTA Layout 2.0 (operação em 2020 apenas)
+
+> Foi publicado no Diário Oficial da União, de 11/03/2019, ATO DECLARATÓRIO EXECUTIVO COFIS Nº 10, DE 07 DE MARÇO DE 2019, que aprova a versão 2.0 dos leiautes dos arquivos que compõem a Escrituração Fiscal Digital de Retenções e Outras Informações Fiscais - EFD-Reinf, que será exigida para os eventos ocorridos a partir da competência de janeiro de 2020.
+
 
 *Utilize o chat do Gitter para iniciar discussões especificas sobre o desenvolvimento deste pacote.*
 
