@@ -59,4 +59,3 @@ class EvtRetPJ extends Factory implements FactoryInterface
         $this->sign($this->evtTag);
     }
 }
-

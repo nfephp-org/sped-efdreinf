@@ -5,7 +5,7 @@ namespace NFePHP\EFDReinf\Factories;
 /**
  * Class EFD-Reinf EvtTotal Event R-5001 constructor
  * NOTA: Alterado para R-9001 na versão 2.0.0
- * 
+ *
  * @category  API
  * @package   NFePHP\EFDReinf
  * @copyright NFePHP Copyright (c) 2017-2019

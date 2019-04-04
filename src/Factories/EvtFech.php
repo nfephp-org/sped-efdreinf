@@ -59,4 +59,3 @@ class EvtFech extends Factory implements FactoryInterface
         $this->sign($this->evtTag);
     }
 }
-
