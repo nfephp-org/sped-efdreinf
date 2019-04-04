@@ -84,7 +84,7 @@ try {
     $response = $tools->enviarLoteEventos($tools::EVT_INICIAIS, [$evento]);
     
     //retorna os dados que serão usados na conexão para conferência
-    echo FakePretty::prettyPrint($response, '');
+    echo FakePretty::prettyPrint($response, 'fake_envLoteEventos');
     
 } catch (\Exception $e) {
     echo $e->getMessage();
