@@ -288,45 +288,71 @@ class EvtTotal extends Factory implements FactoryInterface
             }
         }
         if (!empty($this->std->rcoml)) {
-            $rComl = $this->dom->createElement("RComl");
-            $r = $this->std->rcoml;
-            $this->dom->addChild(
-                $rComl,
-                "vlrCPApur",
-                number_format($r->vlrcpapur, 2, ',', ''),
-                true
-            );
-            $this->dom->addChild(
-                $rComl,
-                "vlrRatApur",
-                number_format($r->vlrratapur, 2, ',', ''),
-                true
-            );
-            $this->dom->addChild(
-                $rComl,
-                "vlrSenarApur",
-                number_format($r->vlrsenarapur, 2, ',', ''),
-                true
-            );
-            $this->dom->addChild(
-                $rComl,
-                "vlrCPSusp",
-                !empty($r->vlrcpsusp) ? number_format($r->vlrcpsusp, 2, ',', '') : null,
-                false
-            );
-            $this->dom->addChild(
-                $rComl,
-                "vlrRatSusp",
-                !empty($r->vlrratsusp) ? number_format($r->vlrratsusp, 2, ',', '') : null,
-                false
-            );
-            $this->dom->addChild(
-                $rComl,
-                "vlrSenarSusp",
-                !empty($r->vlrsenarsusp) ? number_format($r->vlrsenarsusp, 2, ',', '') : null,
-                false
-            );
-            $infoContrib->appendChild($rComl);
+            foreach($this->std->rcoml as $r) {
+                $rComl = $this->dom->createElement("RComl");
+                $this->dom->addChild(
+                    $rComl,
+                    "vlrCPApur",
+                    number_format($r->vlrcpapur, 2, ',', ''),
+                    true
+                );
+                $this->dom->addChild(
+                    $rComl,
+                    "vlrRatApur",
+                    number_format($r->vlrratapur, 2, ',', ''),
+                    true
+                );
+                $this->dom->addChild(
+                    $rComl,
+                    "vlrSenarApur",
+                    number_format($r->vlrsenarapur, 2, ',', ''),
+                    true
+                );
+                $this->dom->addChild(
+                    $rComl,
+                    "vlrCPSusp",
+                    !empty($r->vlrcpsusp) ? number_format($r->vlrcpsusp, 2, ',', '') : null,
+                    false
+                );
+                $this->dom->addChild(
+                    $rComl,
+                    "vlrRatSusp",
+                    !empty($r->vlrratsusp) ? number_format($r->vlrratsusp, 2, ',', '') : null,
+                    false
+                );
+                $this->dom->addChild(
+                    $rComl,
+                    "vlrSenarSusp",
+                    !empty($r->vlrsenarsusp) ? number_format($r->vlrsenarsusp, 2, ',', '') : null,
+                    false
+                );
+                $infoContrib->appendChild($rComl);
+            }    
+        }
+        if (!empty($this->std->raquis)) {
+            foreach ($this->std->raquis as $r) {
+                $rAQUIS = $this->dom->createElement("RAquis");
+                $this->dom->addChild(
+                    $rAQUIS,
+                    "CRAquis",
+                    $r->craquis,
+                    true
+                );
+                $this->dom->addChild(
+                    $rAQUIS,
+                    "vlrCRAquis",
+                    number_format($r->vlrcraquis, 2, ',', ''),
+                    true
+                );
+                $this->dom->addChild(
+                    $rAQUIS,
+                    "vlrCRAquisSusp",
+                    number_format($r->vlrcraquissusp, 2, ',', ''),
+                    true
+                );
+                $infoContrib->appendChild($rAQUIS);
+            }
+            
         }
         if (!empty($this->std->rcprb)) {
             foreach ($this->std->rcprb as $r) {
