@@ -1,0 +1,138 @@
+{
+    "title": "evtAssocDespRec",
+    "type": "object",
+    "properties": {
+        "sequencial": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 99999
+        },
+        "indretif": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2
+        },
+        "nrrecibo": {
+            "required": false,
+            "type": ["string","null"],
+            "maxLength": 52,
+            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18})$"
+        },
+        "perapur": {
+            "required": true,
+            "type": "string",
+            "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])$"
+        },
+        "tpinscestab": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1
+        },
+        "nrinscestab": {
+            "required": true,
+            "type": "string",
+            "maxLength": 14,
+            "pattern": "^[0-9]"
+        },
+        "recursosrec": {
+            "required": true,
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 500,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "cnpjorigrecurso": {
+                        "required": true,
+                        "type": "string",
+                        "maxLength": 14,
+                        "pattern": "^[0-9]"
+                    },    
+                    "vlrtotalrec": {
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
+                    },
+                    "vlrtotalret": {
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
+                    },
+                    "vlrtotalnret": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
+                    },
+                    "inforecurso": {
+                        "required": true,
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 500,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "tprepasse": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 5
+                                },
+                                "descrecurso": {
+                                    "required": true,
+                                    "type": "string",
+                                    "maxLength": 20
+                                },
+                                "vlrbruto": {
+                                    "required": true,
+                                    "type": "string",
+                                    "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
+                                },
+                                "vlrretapur": {
+                                    "required": true,
+                                    "type": "string",
+                                    "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
+                                }
+                            }
+                        }    
+                    },
+                    "infoproc": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
+                        "maxItems": 50,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "tpproc": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 2
+                                },
+                                "nrproc": {
+                                    "required": true,
+                                    "type": "string",
+                                    "maxLength": 21
+                                },
+                                "codsusp": {
+                                    "required": false,
+                                    "type": ["string","null"],
+                                    "maxLength": 14,
+                                    "pattern": "^[0-9]"
+                                },
+                                "vlrnret": {
+                                    "required": true,
+                                    "type": "string",
+                                    "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
