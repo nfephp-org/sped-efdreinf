@@ -288,7 +288,7 @@ class EvtTotal extends Factory implements FactoryInterface
             }
         }
         if (!empty($this->std->rcoml)) {
-            foreach($this->std->rcoml as $r) {
+            foreach ($this->std->rcoml as $r) {
                 $rComl = $this->dom->createElement("RComl");
                 $this->dom->addChild(
                     $rComl,
@@ -327,7 +327,7 @@ class EvtTotal extends Factory implements FactoryInterface
                     false
                 );
                 $infoContrib->appendChild($rComl);
-            }    
+            }
         }
         if (!empty($this->std->raquis)) {
             foreach ($this->std->raquis as $r) {
@@ -352,7 +352,6 @@ class EvtTotal extends Factory implements FactoryInterface
                 );
                 $infoContrib->appendChild($rAQUIS);
             }
-            
         }
         if (!empty($this->std->rcprb)) {
             foreach ($this->std->rcprb as $r) {
