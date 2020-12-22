@@ -1,12 +1,4 @@
-<<<<<<< HEAD
 # sped-efdreinf (versão 1.0 - layout 1.5)
-=======
-# sped-efdreinf (versão 1.0 - layout 1.4)
-
-## BETHA TESTS
-
-> NOTA Layout 2.0 [(CANCELADO)](http://sped.rfb.gov.br/pagina/show/4184)
->>>>>>> upstream/master
 
 > NOTA Layout 2.1 [(Minuta)](http://sped.rfb.gov.br/pasta/show/4135)
 
