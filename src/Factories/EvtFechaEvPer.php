@@ -154,7 +154,7 @@ class EvtFechaEvPer extends Factory implements FactoryInterface
                 $this->std->evtaquis,
                 true
             );
-        }    
+        }
         if (!empty($this->std->evtpgtos)) {
             $this->dom->addChild(
                 $infoFech,

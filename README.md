@@ -1,6 +1,5 @@
 # sped-efdreinf (versão 1.0 - layout 1.5)
 
-
 > NOTA Layout 2.1 [(Minuta)](http://sped.rfb.gov.br/pasta/show/4135)
 
 *Utilize o chat do Gitter para iniciar discussões especificas sobre o desenvolvimento deste pacote.*
