@@ -130,7 +130,7 @@ class EvtAqProd extends Factory implements FactoryInterface
             !empty($this->std->indopccp) ? $this->std->indopccp : null,
             false
         );
-        foreach($this->std->detaquis as $det) {
+        foreach ($this->std->detaquis as $det) {
             $detaq = $this->dom->createElement("detAquis");
             $this->dom->addChild(
                 $detaq,
@@ -162,7 +162,7 @@ class EvtAqProd extends Factory implements FactoryInterface
                 number_format($det->vlrsenardesc, 2, ',', ''),
                 true
             );
-            foreach($det->infoprocjud as $jud) {
+            foreach ($det->infoprocjud as $jud) {
                 $procjud = $this->dom->createElement("infoProcJud");
                 $this->dom->addChild(
                     $procjud,
