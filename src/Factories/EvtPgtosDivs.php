@@ -11,9 +11,9 @@ namespace NFePHP\EFDReinf\Factories;
 /**
  * Class EFD-Reinf EvtPgtosDivs Event R-2070 constructor
  *
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017
+ * @copyright NFePHP Copyright (c) 2017 - 2021
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -48,7 +48,7 @@ class EvtPgtosDivs extends Factory implements FactoryInterface
         $params->evtAlias = 'R-2070';
         parent::__construct($config, $std, $params, $certificate, $data);
     }
-    
+
     /**
      * Node constructor
      */
@@ -120,7 +120,7 @@ class EvtPgtosDivs extends Factory implements FactoryInterface
             $this->std->nmrazaobenef,
             true
         );
-        
+
         if (!empty($this->std->inforesidext)) {
             $info = $this->std->inforesidext;
             $infoResidExt = $this->dom->createElement("infoResidExt");
@@ -201,7 +201,7 @@ class EvtPgtosDivs extends Factory implements FactoryInterface
             );
             $ideBenef->appendChild($infoMolestia);
         }
-        
+
         $infoPgto = $this->dom->createElement("infoPgto");
         foreach ($this->std->ideestab as $stab) {
             $ideEstab = $this->dom->createElement("ideEstab");
@@ -335,7 +335,7 @@ class EvtPgtosDivs extends Factory implements FactoryInterface
                         );
                         $pgtoPF->appendChild($compJud);
                     }
-                    
+
                     if (!empty($ppf->inforra)) {
                         foreach ($ppf->inforra as $irra) {
                             $infoRRA = $this->dom->createElement("infoRRA");

@@ -5,9 +5,9 @@ namespace NFePHP\EFDReinf\Factories;
 /**
  * Class EFD-Reinf EvtComProd Event R-2050 constructor
  *
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017
+ * @copyright NFePHP Copyright (c) 2017 - 2021
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -42,7 +42,7 @@ class EvtComProd extends Factory implements FactoryInterface
         $params->evtAlias = 'R-2050';
         parent::__construct($config, $std, $params, $certificate, $data);
     }
-    
+
     /**
      * Node constructor
      */
@@ -89,7 +89,7 @@ class EvtComProd extends Factory implements FactoryInterface
             true
         );
         $this->node->insertBefore($ideEvento, $ideContri);
-        
+
         $info = $this->dom->createElement("infoComProd");
         $ideEstab = $this->dom->createElement("ideEstab");
         $this->dom->addChild(
@@ -204,7 +204,7 @@ class EvtComProd extends Factory implements FactoryInterface
             }
             $ideEstab->appendChild($tipoCom);
         }
-        
+
         $info->appendChild($ideEstab);
         $this->node->appendChild($info);
         $this->reinf->appendChild($this->node);

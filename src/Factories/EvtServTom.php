@@ -5,9 +5,9 @@ namespace NFePHP\EFDReinf\Factories;
 /**
  * Class EFD-Reinf EvtServTom Event R-2010 constructor
  *
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017
+ * @copyright NFePHP Copyright (c) 2017 - 2021
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -42,7 +42,7 @@ class EvtServTom extends Factory implements FactoryInterface
         $params->evtAlias = 'R-2010';
         parent::__construct($config, $std, $params, $certificate, $data);
     }
-    
+
     /**
      * Node constructor
      */
@@ -89,7 +89,7 @@ class EvtServTom extends Factory implements FactoryInterface
             true
         );
         $this->node->insertBefore($ideEvento, $ideContri);
-        
+
         $info = $this->dom->createElement("infoServTom");
         $ideEstabObra = $this->dom->createElement("ideEstabObra");
         $this->dom->addChild(
@@ -257,7 +257,7 @@ class EvtServTom extends Factory implements FactoryInterface
             }
             $idePrestServ->appendChild($nfs);
         }
-        
+
         if (!empty($this->std->infoprocretpr)) {
             foreach ($this->std->infoprocretpr as $irp) {
                 $infoProcRetPr = $this->dom->createElement("infoProcRetPr");

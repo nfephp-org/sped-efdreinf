@@ -102,6 +102,17 @@ try {
     //$response = $tools->consultar($tools::CONSULTA_R2050, $std); 
     
     //CONSULTAS
+    //R2055 
+    //$std = new stdClass();
+    //$std->perapur = '2018-12';
+    //$std->tpInscAdq = '12345678901234';
+    //$std->nrInscAdq = '111';
+    //$std->tpInscProd = '111';
+    //$std->nrInscProd = '1111';
+    //$response = $tools->consultar($tools::CONSULTA_R2055, $std); 
+    
+    
+    //CONSULTAS
     //R2060 
     //$std = new stdClass();
     //$std->perapur = '2018-12';

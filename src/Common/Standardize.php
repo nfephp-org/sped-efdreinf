@@ -8,7 +8,7 @@ namespace NFePHP\EFDReinf\Common;
  *
  * @category  library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017
+ * @copyright NFePHP Copyright (c) 2017 - 2021
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -41,12 +41,12 @@ class Standardize
         'evtTotal',
         'Reinf'
     ];
-    
+
     public function __construct($xml = null)
     {
         $this->toStd($xml);
     }
-    
+
     /**
      * Identify node and extract from XML for convertion type
      * @param string $xml
@@ -77,7 +77,7 @@ class Standardize
             "Este xml não pertence ao projeto eSocial."
         );
     }
-    
+
     /**
      * Returns extract node from XML
      * @return string
@@ -86,7 +86,7 @@ class Standardize
     {
         return $this->node;
     }
-    
+
     /**
      * Returns stdClass converted from xml
      * @param string $xml
@@ -105,7 +105,7 @@ class Standardize
         );
         return json_decode($this->json);
     }
-    
+
     /**
      * Retruns JSON string form XML
      * @param string $xml
@@ -118,7 +118,7 @@ class Standardize
         }
         return $this->json;
     }
-    
+
     /**
      * Returns array from XML
      * @param string $xml

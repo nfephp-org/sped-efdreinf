@@ -5,9 +5,9 @@ namespace NFePHP\EFDReinf\Factories;
 /**
  * Class EFD-Reinf EvtTabProcesso Event R-1070 constructor
  *
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017
+ * @copyright NFePHP Copyright (c) 2017 - 2021
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -42,7 +42,7 @@ class EvtTabProcesso extends Factory implements FactoryInterface
         $params->evtAlias = 'R-1070';
         parent::__construct($config, $std, $params, $certificate, $data);
     }
-    
+
     /**
      * Node constructor
      */
@@ -86,7 +86,7 @@ class EvtTabProcesso extends Factory implements FactoryInterface
             $this->std->nrproc,
             true
         );
-        
+
         if ($this->std->modo == 'INC') {
             //inclusao
             $node = $this->dom->createElement("inclusao");

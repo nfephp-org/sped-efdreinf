@@ -5,9 +5,9 @@ namespace NFePHP\EFDReinf\Common;
 /**
  * Class Common\Tools, basic structures
  *
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017
+ * @copyright NFePHP Copyright (c) 2017 - 2021
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -24,7 +24,7 @@ class Tools
     const EVT_INICIAIS = 1;
     const EVT_NAO_PERIODICOS = 2;
     const EVT_PERIODICOS = 3;
-    
+
     /**
      * @var string
      */
@@ -142,11 +142,11 @@ class Tools
         $this->transmissortpInsc = $stdConf->transmissor->tpInsc;
         $this->transmissornrInsc = $stdConf->transmissor->nrInsc;
         $this->certificate = $certificate;
-        
+
         $this->path = realpath(
             __DIR__ . '/../../'
         ).'/';
-        
+
         $this->serviceXsd = XsdSeeker::seek(
             $this->path . "schemes/comunicacao/v$this->serviceVersion/"
         );

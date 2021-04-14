@@ -5,9 +5,9 @@ namespace NFePHP\EFDReinf;
 /**
  * Classe Tools, performs communication with the EFDReinf webservice
  *
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf\Tools
- * @copyright Copyright (c) 2017-2019
+ * @copyright Copyright (c) 2017-2021
  * @license   https://www.gnu.org/licenses/lgpl-3.0.txt LGPLv3
  * @license   https://www.gnu.org/licenses/gpl-3.0.txt GPLv3
  * @license   https://opensource.org/licenses/mit-license.php MIT
@@ -34,6 +34,7 @@ class Tools extends ToolsBase
     const CONSULTA_R2030 = 6;
     const CONSULTA_R2040 = 7;
     const CONSULTA_R2050 = 8;
+    const CONSULTA_R2055 = 13;
     const CONSULTA_R2060 = 9;
     const CONSULTA_R2098 = 10;
     const CONSULTA_R2099 = 11;
@@ -166,6 +167,10 @@ class Tools extends ToolsBase
             case 12:
                 $evt = 3010;
                 $request = $this->consultR3010($evt, $std);
+                break;
+            case 13:
+                $evt = 2055;
+                $request = $this->consultR2055($evt, $std);
                 break;
             default:
                 throw ProcessException::wrongArgument(2003, '');
@@ -330,7 +335,7 @@ class Tools extends ToolsBase
     }
 
     /**
-     * Consultation R2030 and R2040 and R2050
+     * Consultation R2030, R2040, R2050
      * @param integer $evt
      * @param stdClass $std
      * @return string
@@ -369,6 +374,49 @@ class Tools extends ToolsBase
             . "</sped:{$this->method}>";
         return $request;
     }
+    
+    /**
+     * Consultation R2055
+     * @param integer $evt
+     * @param stdClass $std
+     * @return string
+     */
+    protected function consultR2055($evt, $std)
+    {
+        $properties = [
+            'perapur' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
+            ],
+            'nrinscestab' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => '^[0-9]{11,14}$'
+            ],
+        ];
+        $this->validInputParameters($properties, $std);
+        if ($this->tpInsc !== 1) {
+            throw new \InvalidArgumentException(
+                "Somente com CNPJ essa consulta pode ser realizada."
+                . " Seu config indica um CPF."
+            );
+        }
+        $this->method = "ConsultaReciboEvento{$evt}";
+        $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
+        $request = "<sped:{$this->method}>"
+            . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
+            . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
+            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
+            . "<sped:perApur>{$std->perapur}</sped:perApur>"
+            . "<sped:tpInscAdq>{$std->tpInscAdq}</sped:tpInscAdq>"
+            . "<sped:nrInscAdq>{$std->nrInscAdq}</sped:nrInscAdq>"
+            . "<sped:tpInscProd>{$std->tpInscProd}</sped:tpInscProd>"
+            . "<sped:nrInscProd>{$std->nrInscProd}</sped:nrInscProd>"
+            . "</sped:{$this->method}>";
+        return $request;
+    }
+
 
     /**
      * Consultation R2060

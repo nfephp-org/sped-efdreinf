@@ -4,9 +4,9 @@ namespace NFePHP\EFDReinf\Exception;
 /**
  * Class EventsException
  *
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017
+ * @copyright NFePHP Copyright (c) 2017 - 2021
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -26,13 +26,13 @@ class EventsException extends \InvalidArgumentException implements ExceptionInte
         1004 => "JSON does not validate. Violations:\n{{msg}}",
         1005 => ""
     ];
-    
+
     public static function wrongArgument($code, $msg = '')
     {
         $msg = self::replaceMsg(self::$list[$code], $msg);
         return new static($msg);
     }
-    
+
     private static function replaceMsg($input, $msg)
     {
         return str_replace('{{msg}}', $msg, $input);

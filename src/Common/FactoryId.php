@@ -5,9 +5,9 @@ namespace NFePHP\EFDReinf\Common;
 /**
  * Class FactoryId build ID event reference
  *
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017
+ * @copyright NFePHP Copyright (c) 2017 - 2021
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -15,7 +15,7 @@ namespace NFePHP\EFDReinf\Common;
  * @link      http://github.com/nfephp-org/sped-efdreinf for the canonical source repository
  */
 
-use DateTime;
+use \DateTime;
 
 class FactoryId
 {

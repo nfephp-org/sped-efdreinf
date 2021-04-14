@@ -5,9 +5,9 @@ namespace NFePHP\EFDReinf\Common;
 /**
  * Class XsdSeeker find XSD files for validations
  *
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017
+ * @copyright NFePHP Copyright (c) 2017 - 2021
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -24,7 +24,7 @@ class XsdSeeker
         'RetornoTotalizadorContribuinte' => ['version' => '', 'name' => ''],
         'RetornoProcessamentoLote' => ['version' => '', 'name' => '']
     ];
-    
+
     public static function seek($path)
     {
         $arr = scandir($path);
@@ -44,7 +44,7 @@ class XsdSeeker
         }
         return self::$list;
     }
-    
+
     public static function getVersion($filename)
     {
         $p = explode('-', $filename);

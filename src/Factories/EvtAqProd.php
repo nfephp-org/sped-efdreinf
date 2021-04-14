@@ -5,9 +5,9 @@ namespace NFePHP\EFDReinf\Factories;
 /**
  * Class EFD-Reinf EvtAqProd Event R-2055 constructor
  *
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017
+ * @copyright NFePHP Copyright (c) 2017 - 2021
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -42,7 +42,7 @@ class EvtAqProd extends Factory implements FactoryInterface
         $params->evtAlias = 'R-2055';
         parent::__construct($config, $std, $params, $certificate, $data);
     }
-    
+
     /**
      * Node constructor
      */
@@ -95,7 +95,7 @@ class EvtAqProd extends Factory implements FactoryInterface
             false
         );
         $this->node->insertBefore($ideEvento, $ideContri);
-        
+
         $info = $this->dom->createElement("infoAquisProd");
         $ideEstab = $this->dom->createElement("ideEstabAdquir");
         $this->dom->addChild(
@@ -110,7 +110,7 @@ class EvtAqProd extends Factory implements FactoryInterface
             $this->std->nrinscadq,
             true
         );
-        
+
         $ideprod = $this->dom->createElement("ideProdutor");
         $this->dom->addChild(
             $ideprod,
@@ -130,7 +130,7 @@ class EvtAqProd extends Factory implements FactoryInterface
             !empty($this->std->indopccp) ? $this->std->indopccp : null,
             false
         );
-        foreach($this->std->detaquis as $det) {
+        foreach ($this->std->detaquis as $det) {
             $detaq = $this->dom->createElement("detAquis");
             $this->dom->addChild(
                 $detaq,
@@ -162,7 +162,7 @@ class EvtAqProd extends Factory implements FactoryInterface
                 number_format($det->vlrsenardesc, 2, ',', ''),
                 true
             );
-            foreach($det->infoprocjud as $jud) {
+            foreach ($det->infoprocjud as $jud) {
                 $procjud = $this->dom->createElement("infoProcJud");
                 $this->dom->addChild(
                     $procjud,

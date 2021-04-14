@@ -5,9 +5,9 @@ namespace NFePHP\EFDReinf\Factories;
 /**
  * Class EFD-Reinf EvtTotalContrib Event R-5011 constructor
  * NOTA : Alterado para R-9011 na versão 2.0.0
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017-2019
+ * @copyright NFePHP Copyright (c) 2017 - 2021-2019
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -43,7 +43,7 @@ class EvtTotalContrib extends Factory implements FactoryInterface
         //$params->evtAlias = 'R-9011';
         parent::__construct($config, $std, $params, $certificate, $data);
     }
-    
+
     /**
      * Node constructor
      */
@@ -75,8 +75,8 @@ class EvtTotalContrib extends Factory implements FactoryInterface
             $this->std->descretorno,
             true
         );
-        
-        
+
+
         if (!empty($this->std->regocorrs)) {
             foreach ($this->std->regocorrs as $r) {
                 $regOcorrs = $this->dom->createElement("regOcorrs");
@@ -109,8 +109,8 @@ class EvtTotalContrib extends Factory implements FactoryInterface
         }
         $ideRecRetorno->appendChild($ideStatus);
         $this->node->appendChild($ideRecRetorno);
-        
-        
+
+
         $infoRecEv = $this->dom->createElement("infoRecEv");
         $this->dom->addChild(
             $infoRecEv,
@@ -137,7 +137,7 @@ class EvtTotalContrib extends Factory implements FactoryInterface
             true
         );
         $this->node->appendChild($infoRecEv);
-        
+
         if (!empty($this->std->infototalcontrib)) {
             foreach ($this->std->infototalcontrib as $info) {
                 $infoTotal = $this->dom->createElement("infoTotalContrib");
@@ -178,12 +178,12 @@ class EvtTotalContrib extends Factory implements FactoryInterface
             }
         }
         //$this->node->appendChild($infoContrib);
-        
+
         $this->reinf->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->reinf);
         $this->sign($this->evtTag);
     }
-    
+
     /**
      * Include RTom node
      * @param \DOMElement $info
@@ -237,7 +237,7 @@ class EvtTotalContrib extends Factory implements FactoryInterface
         }
         return $info;
     }
-    
+
     /**
      * Include RPrest node
      * @param \DOMElement $info
@@ -297,7 +297,7 @@ class EvtTotalContrib extends Factory implements FactoryInterface
         }
         return $info;
     }
-    
+
     /**
      * Include RRecRepAD node
      * @param \DOMElement $info
@@ -345,7 +345,7 @@ class EvtTotalContrib extends Factory implements FactoryInterface
         }
         return $info;
     }
-    
+
     /**
      * Include RComl node
      * @param \DOMElement $info
@@ -381,7 +381,7 @@ class EvtTotalContrib extends Factory implements FactoryInterface
         }
         return $info;
     }
-    
+
     /**
      * Include RCPRB node
      * @param \DOMElement $info
