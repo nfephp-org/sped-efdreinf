@@ -5,9 +5,9 @@ namespace NFePHP\EFDReinf\Factories;
 /**
  * Class EFD-Reinf EvtServPrest Event R-2020 constructor
  *
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017
+ * @copyright NFePHP Copyright (c) 2017 - 2021
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -42,7 +42,7 @@ class EvtServPrest extends Factory implements FactoryInterface
         $params->evtAlias = 'R-2020';
         parent::__construct($config, $std, $params, $certificate, $data);
     }
-    
+
     /**
      * Node constructor
      */
@@ -89,7 +89,7 @@ class EvtServPrest extends Factory implements FactoryInterface
             true
         );
         $this->node->insertBefore($ideEvento, $ideContri);
-        
+
         $info = $this->dom->createElement("infoServPrest");
         $ideEstabPrest = $this->dom->createElement("ideEstabPrest");
         $this->dom->addChild(
@@ -159,7 +159,7 @@ class EvtServPrest extends Factory implements FactoryInterface
             !empty($this->std->vlrtotalnretadic) ? number_format($this->std->vlrtotalnretadic, 2, ',', '') : null,
             false
         );
-        
+
         foreach ($this->std->nfs as $n) {
             $nfs = $this->dom->createElement("nfs");
             $this->dom->addChild(
@@ -192,7 +192,7 @@ class EvtServPrest extends Factory implements FactoryInterface
                 !empty($n->obs) ? $n->obs : null,
                 false
             );
-            
+
             foreach ($n->infotpserv as $its) {
                 $infoTpServ = $this->dom->createElement("infoTpServ");
                 $this->dom->addChild(

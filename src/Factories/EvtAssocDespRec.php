@@ -5,9 +5,9 @@ namespace NFePHP\EFDReinf\Factories;
 /**
  * Class EFD-Reinf EvtAssocDespRec Event R-2030 constructor
  *
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017
+ * @copyright NFePHP Copyright (c) 2017 - 2021
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -42,7 +42,7 @@ class EvtAssocDespRec extends Factory implements FactoryInterface
         $params->evtAlias = 'R-2030';
         parent::__construct($config, $std, $params, $certificate, $data);
     }
-    
+
     /**
      * Node constructor
      */
@@ -91,7 +91,7 @@ class EvtAssocDespRec extends Factory implements FactoryInterface
             true
         );
         $this->node->appendChild($ideEvento);
-        
+
         //cria novo ideContri
         $ideContri = $this->dom->createElement("ideContri");
         $this->dom->addChild(

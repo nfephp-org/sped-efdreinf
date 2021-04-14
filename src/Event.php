@@ -5,9 +5,9 @@ namespace NFePHP\EFDReinf;
 /**
  * Class efdReinf Event constructor
  *
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017
+ * @copyright NFePHP Copyright (c) 2017 - 2021
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -45,7 +45,7 @@ class Event
         'evtfech' => Factories\EvtFech::class,
         'evtretcons' => Factories\EvtRetCons::class,
     ];
-    
+
     /**
      * Relationship between the code of the event and its respective name
      * @var array
@@ -74,7 +74,7 @@ class Event
         'r9011' => 'evttotalcontrib',
         'r9012' => 'evtretCons',
     ];
-    
+
     /**
      * Call classes to build XML EFDReinf Event
      * @param string $name

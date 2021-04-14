@@ -5,9 +5,9 @@ namespace NFePHP\EFDReinf\Factories;
 /**
  * Class EFD-Reinf EvtEspDesportivo Event R-3010 constructor
  *
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017
+ * @copyright NFePHP Copyright (c) 2017 - 2021
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -42,7 +42,7 @@ class EvtEspDesportivo extends Factory implements FactoryInterface
         $params->evtAlias = 'R-3010';
         parent::__construct($config, $std, $params, $certificate, $data);
     }
-    
+
     /**
      * Node constructor
      */
@@ -117,7 +117,7 @@ class EvtEspDesportivo extends Factory implements FactoryInterface
                 $stab->nrinscestab,
                 true
             );
-            
+
             foreach ($stab->boletim as $bo) {
                 $boletim = $this->dom->createElement("boletim");
                 $this->dom->addChild(
@@ -198,7 +198,7 @@ class EvtEspDesportivo extends Factory implements FactoryInterface
                     $bo->qtdenaopagantes,
                     true
                 );
-                
+
                 foreach ($bo->receitaingressos as $rec) {
                     $recIng = $this->dom->createElement("receitaIngressos");
                     $this->dom->addChild(
@@ -245,7 +245,7 @@ class EvtEspDesportivo extends Factory implements FactoryInterface
                     );
                     $boletim->appendChild($recIng);
                 }
-                
+
                 if (!empty($bo->outrasreceitas)) {
                     foreach ($bo->outrasreceitas as $or) {
                         $oRec = $this->dom->createElement("outrasReceitas");
@@ -334,7 +334,7 @@ class EvtEspDesportivo extends Factory implements FactoryInterface
                     $recTot->appendChild($infoProc);
                 }
             }
-            
+
             $ideEstab->appendChild($recTot);
             $ideContri->appendChild($ideEstab);
         }

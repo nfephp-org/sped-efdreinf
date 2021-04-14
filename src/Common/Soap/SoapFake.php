@@ -7,7 +7,7 @@ namespace NFePHP\EFDReinf\Common\Soap;
  *
  * @category  NFePHP
  * @package   NFePHP\EFDReinf\Common\Soap\SoapFake
- * @copyright NFePHP Copyright (c) 2017
+ * @copyright NFePHP Copyright (c) 2017 - 2021
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -31,7 +31,7 @@ class SoapFake extends SoapBase implements SoapInterface
     {
         parent::__construct($certificate, $logger);
     }
-    
+
     public function send(
         $operation,
         $url,
@@ -41,7 +41,7 @@ class SoapFake extends SoapBase implements SoapInterface
     ) {
         $requestHead = implode("\n", $parameters);
         $requestBody = $envelope;
-        
+
         return json_encode([
             'url' => $url,
             'operation' => $operation,

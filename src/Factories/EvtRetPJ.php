@@ -5,9 +5,9 @@ namespace NFePHP\EFDReinf\Factories;
 /**
  * Class EFD-Reinf EvtRetPJ Event R-4020 constructor
  *
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017-2019
+ * @copyright NFePHP Copyright (c) 2017 - 2021-2019
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -42,7 +42,7 @@ class EvtRetPJ extends Factory implements FactoryInterface
         $params->evtAlias = 'R-4020';
         parent::__construct($config, $std, $params, $certificate, $data);
     }
-    
+
     /**
      * Node constructor
      */
@@ -52,8 +52,8 @@ class EvtRetPJ extends Factory implements FactoryInterface
         //o idEvento pode variar de evento para evento
         //então cada factory individualmente terá de construir o seu
         $ideEvento = $this->dom->createElement("ideEvento");
-        
-        
+
+
         $this->reinf->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->reinf);
         $this->sign($this->evtTag);

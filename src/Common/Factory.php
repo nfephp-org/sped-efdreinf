@@ -5,7 +5,7 @@ namespace NFePHP\EFDReinf\Common;
 /**
  * Classe Factory, performs build events
  *
- * @category  API
+ * @category  Library
  * @package   NFePHP\EFDReinf
  * @copyright Copyright (c) 2017
  * @license   https://www.gnu.org/licenses/lgpl-3.0.txt LGPLv3
@@ -86,7 +86,7 @@ abstract class Factory
      */
     public $evtAlias = '';
 
-    
+
     /**
      * @var string
      */
@@ -278,7 +278,7 @@ abstract class Factory
             $this->node->appendChild($ideContri);
         }
     }
-    
+
     /**
      * Returns alias of event
      * @return string
@@ -287,7 +287,7 @@ abstract class Factory
     {
         return $this->evtAlias;
     }
-    
+
     /**
      * Returns the Certificate::class
      * @return Certificate|null
@@ -296,7 +296,7 @@ abstract class Factory
     {
         return $this->certificate;
     }
-    
+
     /**
      * Insert Certificate::class
      * @param Certificate $certificate
@@ -305,7 +305,7 @@ abstract class Factory
     {
         $this->certificate = $certificate;
     }
-    
+
     /**
      * Recover calculate ID
      * @return string
