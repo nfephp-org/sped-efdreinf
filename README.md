@@ -30,17 +30,17 @@ Não deixe de se cadastrar no [grupo de discussão do NFePHP](http://groups.goog
 
 Estão obrigados a prestar informações por meio da EFD-Reinf 1 , exceto o empregador doméstico, os seguintes sujeitos passivos, ainda que imunes ou isentos:
 
-a. empresas que prestam e contratam serviços realizados mediante cessão de mão de obra, nos termos do art. 31 da Lei no 8.212, de 24 de julho de 1991;
-b. pessoas jurídicas a que se referem os arts. 30 e 34 da Lei no 10.833, de 29 de dezembro de 2003 e o art. 64 da Lei no 9.430, de 27 de dezembro de 1996, responsáveis pela retenção da Contribuição para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público (Contribuição para o PIS/Pasep), da Contribuição para o Financiamento da Seguridade Social (Cofins) e da Contribuição Social sobre o Lucro Líquido (CSLL);
-c. empresas optantes pelo recolhimento da contribuição previdenciária sobre a receita bruta (CPRB), nos termos da Lei no 12.546, de 14 de dezembro de 2011;
-d. produtor rural pessoa jurídica e agroindústria quando sujeitos a contribuição previdenciária substitutiva sobre a receita bruta proveniente da comercialização da produção rural nos termos do art. 25 da Lei no 8.870, de 15 de abril de 1994, na redação dada pela Lei no 10.256, de 9 de julho de 2001 e do art. 22A da Lei no 8.212, de 24 de julho de 1991, inserido pela Lei no 10.256, de 9 de julho de 2001, respectivamente;
-e. adquirente de produto rural nos termos do art. 30 da Lei no 8.212, de 1991, e do art. 11 da Lei no 11.718, de 20 de junho de 2008;
-f. associações desportivas que mantenham equipe de futebol profissional, que tenham recebido valores a título de patrocínio, licenciamento de uso de marcas e símbolos, publicidade, propaganda e transmissão de espetáculos desportivos;
-g. empresa ou entidade patrocinadora que tenha destinado recursos a associação desportiva que mantenha equipe de futebol profissional a título de patrocínio, licenciamento de uso de marcas e símbolos, publicidade, propaganda e transmissão de espetáculos desportivos;
-h. entidades promotoras de eventos desportivos realizados em território nacional, em qualquer modalidade desportiva, dos quais participe ao menos 1 (uma) associação desportiva que mantenha equipe de futebol profissional; e
-i. pessoas jurídicas e físicas que pagaram ou creditaram rendimentos sobre os quais haja retenção do Imposto sobre a Renda Retido na Fonte (IRRF), por si ou como representantes de terceiros.
+1. empresas que prestam e contratam serviços realizados mediante cessão de mão de obra, nos termos do art. 31 da Lei no 8.212, de 24 de julho de 1991;
+2. pessoas jurídicas a que se referem os arts. 30 e 34 da Lei no 10.833, de 29 de dezembro de 2003 e o art. 64 da Lei no 9.430, de 27 de dezembro de 1996, responsáveis pela retenção da Contribuição para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público (Contribuição para o PIS/Pasep), da Contribuição para o Financiamento da Seguridade Social (Cofins) e da Contribuição Social sobre o Lucro Líquido (CSLL);
+3. empresas optantes pelo recolhimento da contribuição previdenciária sobre a receita bruta (CPRB), nos termos da Lei no 12.546, de 14 de dezembro de 2011;
+4. produtor rural pessoa jurídica e agroindústria quando sujeitos a contribuição previdenciária substitutiva sobre a receita bruta proveniente da comercialização da produção rural nos termos do art. 25 da Lei no 8.870, de 15 de abril de 1994, na redação dada pela Lei no 10.256, de 9 de julho de 2001 e do art. 22A da Lei no 8.212, de 24 de julho de 1991, inserido pela Lei no 10.256, de 9 de julho de 2001, respectivamente;
+5. adquirente de produto rural nos termos do art. 30 da Lei no 8.212, de 1991, e do art. 11 da Lei no 11.718, de 20 de junho de 2008;
+6. associações desportivas que mantenham equipe de futebol profissional, que tenham recebido valores a título de patrocínio, licenciamento de uso de marcas e símbolos, publicidade, propaganda e transmissão de espetáculos desportivos;
+7. empresa ou entidade patrocinadora que tenha destinado recursos a associação desportiva que mantenha equipe de futebol profissional a título de patrocínio, licenciamento de uso de marcas e símbolos, publicidade, propaganda e transmissão de espetáculos desportivos;
+8. entidades promotoras de eventos desportivos realizados em território nacional, em qualquer modalidade desportiva, dos quais participe ao menos 1 (uma) associação desportiva que mantenha equipe de futebol profissional; e
+9. pessoas jurídicas e físicas que pagaram ou creditaram rendimentos sobre os quais haja retenção do Imposto sobre a Renda Retido na Fonte (IRRF), por si ou como representantes de terceiros.
 
-> Os sujeitos passivos das letras “b” e “i” acima somente passarão a ser obrigados ao envio de informações relativas à EFD-Reinf quando os eventos que substituirão a Declaração do Imposto de Renda Retido na Fonte - DIRF forem inseridos formalmente, com a antecedência e a publicidade devidas, nos leiautes daquela escrituração.
+> Os sujeitos passivos das itens “2” e “9” acima somente passarão a ser obrigados ao envio de informações relativas à EFD-Reinf quando os eventos que substituirão a Declaração do Imposto de Renda Retido na Fonte - DIRF forem inseridos formalmente, com a antecedência e a publicidade devidas, nos leiautes daquela escrituração.
 
 
 ## Contribuindo
