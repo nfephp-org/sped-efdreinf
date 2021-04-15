@@ -39,6 +39,7 @@ class Tools extends ToolsBase
     const CONSULTA_R2098 = 10;
     const CONSULTA_R2099 = 11;
     const CONSULTA_R3010 = 12;
+    const CONSULTA_FECHAMENTO = 14;
 
     /**
      * @var string
@@ -122,7 +123,7 @@ class Tools extends ToolsBase
         switch ($mod) {
             case 1:
                 $evt = 0;
-                $request = $this->consultConsolidadas($evt, $std);
+                $request = $this->consultConsolidadas($std);
                 break;
             case 2:
                 $evt = 1000;
@@ -172,6 +173,9 @@ class Tools extends ToolsBase
                 $evt = 2055;
                 $request = $this->consultR2055($evt, $std);
                 break;
+            case 14:
+                $request = $this->consultFechamento($std);
+                break;
             default:
                 throw ProcessException::wrongArgument(2003, '');
         }
@@ -181,11 +185,10 @@ class Tools extends ToolsBase
 
     /**
      * Consultation of consolidated information
-     * @param integer $evt
      * @param stdClass $std
      * @return string
      */
-    public function consultConsolidadas($evt, stdClass $std)
+    public function consultConsolidadas(stdClass $std)
     {
         $properties = [
             'numeroprotocolofechamento' => [
@@ -206,6 +209,31 @@ class Tools extends ToolsBase
         return $request;
     }
     
+    /**
+     * Consultation of Fachamento
+     * @param stdClass $std
+     * @return string
+     */
+    public function consultFechamento(stdClass $std)
+    {
+        $properties = [
+            'numeroprotocolofechamento' => [
+                'required' => true,
+                'type' => 'string',
+                'regex' => ''
+            ],
+        ];
+        $this->validInputParameters($properties, $std);
+
+        $this->method = "ConsultaResultadoFechamento2099";
+        $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
+        $request = "<sped:{$this->method}>"
+            . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
+            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
+            . "<sped:numeroProtocoloFechamento>{$std->numeroprotocolofechamento}</sped:numeroProtocoloFechamento>"
+            . "</sped:{$this->method}>";
+        return $request;
+    }
 
     /**
      * Consultation R1000 and R1070
