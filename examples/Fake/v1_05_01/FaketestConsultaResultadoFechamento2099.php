@@ -51,9 +51,7 @@ try {
     //Consolidada 
     $std = new stdClass();
     $std->numeroprotocolofechamento = '12345678901234';
-    $std->tipoinscricaocontribuinte = 1; //1-CNPJ, 2-CPF
-    $std->numeroinscricaocontribuinte = '12345678901234';
-    $response = $tools->consultar($tools::CONSULTA_CONSOLIDADA, $std); 
+    $response = $tools->consultar($tools::CONSULTA_FECHAMENTO, $std); 
     
     //CONSULTAS
     //R1000 

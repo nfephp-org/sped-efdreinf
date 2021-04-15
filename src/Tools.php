@@ -188,17 +188,6 @@ class Tools extends ToolsBase
     public function consultConsolidadas($evt, stdClass $std)
     {
         $properties = [
-            'tipoinscricaocontribuinte' => [
-                'required' => true,
-                'type' => 'integer',
-                'min' => 1,
-                'max' => 2
-            ],
-            'numeroinscricaocontribuinte' => [
-                'required' => true,
-                'type' => 'string',
-                'regex' => '^[0-9]{8,14}$'
-            ],
             'numeroprotocolofechamento' => [
                 'required' => true,
                 'type' => 'string',
@@ -210,12 +199,13 @@ class Tools extends ToolsBase
         $this->method = "ConsultaInformacoesConsolidadas";
         $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
-            . "<sped:tipoInscricaoContribuinte>{$std->tipoinscricaocontribuinte}</sped:tipoInscricaoContribuinte>"
-            . "<sped:numeroInscricaoContribuinte>{$std->numeroinscricaocontribuinte}</sped:numeroInscricaoContribuinte>"
+            . "<sped:tipoInscricaoContribuinte>{$this->tpInsc}</sped:tipoInscricaoContribuinte>"
+            . "<sped:numeroInscricaoContribuinte>{$this->nrInsc}</sped:numeroInscricaoContribuinte>"
             . "<sped:numeroProtocoloFechamento>{$std->numeroprotocolofechamento}</sped:numeroProtocoloFechamento>"
             . "</sped:{$this->method}>";
         return $request;
     }
+    
 
     /**
      * Consultation R1000 and R1070
@@ -244,8 +234,8 @@ class Tools extends ToolsBase
     {
         $properties = [
             'perapur' => [
-                'required' => true,
-                'type' => 'string',
+                'required' => false,
+                'type' => ['string',"null"],
                 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
             ],
             'tpinscestab' => [
@@ -272,9 +262,11 @@ class Tools extends ToolsBase
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
-            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
-            . "<sped:perApur>{$std->perapur}</sped:perApur>"
-            . "<sped:tpInscEstab>{$std->tpinscestab}</sped:tpInscEstab>"
+            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>";
+        if (!empty($std->perapur)) {    
+            $request .=  "<sped:perApur>{$std->perapur}</sped:perApur>";
+        }    
+        $request .= "<sped:tpInscEstab>{$std->tpinscestab}</sped:tpInscEstab>"
             . "<sped:nrInscEstab>"
                 . str_pad($std->nrinscestab, 14, '0', STR_PAD_LEFT)
                 . "</sped:nrInscEstab>"
@@ -295,8 +287,8 @@ class Tools extends ToolsBase
     {
         $properties = [
             'perapur' => [
-                'required' => true,
-                'type' => 'string',
+                'required' => false,
+                'type' => ['string',"null"],
                 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
              ],
             'nrinscestabprest' => [
@@ -323,9 +315,11 @@ class Tools extends ToolsBase
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
-            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
-            . "<sped:perApur>{$std->perapur}</sped:perApur>"
-            . "<sped:nrInscEstabPrest>{$std->nrinscestabprest}</sped:nrInscEstabPrest>"
+            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>";
+        if (!empty($std->perapur)) {    
+            $request .= "<sped:perApur>{$std->perapur}</sped:perApur>";
+        }
+        $request .= "<sped:nrInscEstabPrest>{$std->nrinscestabprest}</sped:nrInscEstabPrest>"
             . "<sped:tpInscTomador>{$std->tpinsctomador}</sped:tpInscTomador>"
             . "<sped:nrInscTomador>"
                 . str_pad($std->nrinsctomador, 14, '0', STR_PAD_LEFT)
@@ -344,8 +338,8 @@ class Tools extends ToolsBase
     {
         $properties = [
             'perapur' => [
-                'required' => true,
-                'type' => 'string',
+                'required' => false,
+                'type' => ['string',"null"],
                 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
             ],
             'nrinscestab' => [
@@ -366,9 +360,11 @@ class Tools extends ToolsBase
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
-            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
-            . "<sped:perApur>{$std->perapur}</sped:perApur>"
-            . "<sped:nrInscEstab>"
+            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>";
+        if (!empty($std->perapur)) {    
+            $request .= "<sped:perApur>{$std->perapur}</sped:perApur>";
+        }
+        $request .= "<sped:nrInscEstab>"
                 . str_pad($std->nrinscestab, 14, '0', STR_PAD_LEFT)
                 . "</sped:nrInscEstab>"
             . "</sped:{$this->method}>";
@@ -385,8 +381,8 @@ class Tools extends ToolsBase
     {
         $properties = [
             'perapur' => [
-                'required' => true,
-                'type' => 'string',
+                'required' => false,
+                'type' => ['string',"null"],
                 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
             ],
             'nrinscestab' => [
@@ -407,9 +403,11 @@ class Tools extends ToolsBase
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
-            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
-            . "<sped:perApur>{$std->perapur}</sped:perApur>"
-            . "<sped:tpInscAdq>{$std->tpInscAdq}</sped:tpInscAdq>"
+            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>";
+        if (!empty($std->perapur)) {    
+            $request .= "<sped:perApur>{$std->perapur}</sped:perApur>";
+        }
+        $request .= "<sped:tpInscAdq>{$std->tpInscAdq}</sped:tpInscAdq>"
             . "<sped:nrInscAdq>{$std->nrInscAdq}</sped:nrInscAdq>"
             . "<sped:tpInscProd>{$std->tpInscProd}</sped:tpInscProd>"
             . "<sped:nrInscProd>{$std->nrInscProd}</sped:nrInscProd>"
@@ -428,8 +426,8 @@ class Tools extends ToolsBase
     {
         $properties = [
             'perapur' => [
-                'required' => true,
-                'type' => 'string',
+                'required' => false,
+                'type' => ['string',"null"],
                 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
             ],
             'nrinscestabprest' => [
@@ -456,9 +454,11 @@ class Tools extends ToolsBase
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
-            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
-            . "<sped:perApur>{$std->perapur}</sped:perApur>"
-            . "<sped:tpInscEstab>{$std->tpinscestab}</sped:tpInscEstab>"
+            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>";
+        if (!empty($std->perapur)) {    
+            $request .= "<sped:perApur>{$std->perapur}</sped:perApur>";
+        }
+        $request .= "<sped:tpInscEstab>{$std->tpinscestab}</sped:tpInscEstab>"
             . "<sped:nrInscEstab>"
                 . str_pad($std->nrinscestab, 14, '0', STR_PAD_LEFT)
                 . "</sped:nrInscEstab>"
@@ -476,8 +476,8 @@ class Tools extends ToolsBase
     {
         $properties = [
             'perapur' => [
-                'required' => true,
-                'type' => 'string',
+                'required' => false,
+                'type' => ['string',"null"],
                 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
             ],
         ];
@@ -488,9 +488,11 @@ class Tools extends ToolsBase
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
-            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
-            . "<sped:perApur>{$std->perapur}</sped:perApur>"
-            . "</sped:{$this->method}>";
+            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>";
+        if (!empty($std->perapur)) {    
+            $request .= "<sped:perApur>{$std->perapur}</sped:perApur>";
+        }
+        $request .= "</sped:{$this->method}>";
         return $request;
     }
 

@@ -27,40 +27,21 @@ Este pacote é aderente com os [PSR-1], [PSR-2] e [PSR-4]. Se você observar neg
 Não deixe de se cadastrar no [grupo de discussão do NFePHP](http://groups.google.com/group/nfephp) para acompanhar o desenvolvimento e participar das discussões e tirar duvidas!
 
 ## Obrigatoriedade e entrega da EFD-Reinf
-A aplicação da EFD-Reinf atualizada pela Instrução Normativa 1.767, publicada no dia 14/12/17, determina o seguinte cronograma:
 
-I   para o 1º grupo, que compreende as entidades integrantes do “Grupo 2 – Entidades Empresariais”, com faturamento no ano de 2016 acima de R$ 78 milhões, **a partir de 1º de maio de 2018**, em relação aos fatos geradores ocorridos a partir dessa data;
+Estão obrigados a prestar informações por meio da EFD-Reinf 1 , exceto o empregador doméstico, os seguintes sujeitos passivos, ainda que imunes ou isentos:
 
-II  para o 2º grupo, que compreende os demais contribuintes, exceto os previstos no inciso III, **a partir de 1º de novembro de 2018**, em relação aos fatos geradores ocorridos a partir dessa data; e
+a. empresas que prestam e contratam serviços realizados mediante cessão de mão de obra, nos termos do art. 31 da Lei no 8.212, de 24 de julho de 1991;
+b. pessoas jurídicas a que se referem os arts. 30 e 34 da Lei no 10.833, de 29 de dezembro de 2003 e o art. 64 da Lei no 9.430, de 27 de dezembro de 1996, responsáveis pela retenção da Contribuição para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público (Contribuição para o PIS/Pasep), da Contribuição para o Financiamento da Seguridade Social (Cofins) e da Contribuição Social sobre o Lucro Líquido (CSLL);
+c. empresas optantes pelo recolhimento da contribuição previdenciária sobre a receita bruta (CPRB), nos termos da Lei no 12.546, de 14 de dezembro de 2011;
+d. produtor rural pessoa jurídica e agroindústria quando sujeitos a contribuição previdenciária substitutiva sobre a receita bruta proveniente da comercialização da produção rural nos termos do art. 25 da Lei no 8.870, de 15 de abril de 1994, na redação dada pela Lei no 10.256, de 9 de julho de 2001 e do art. 22A da Lei no 8.212, de 24 de julho de 1991, inserido pela Lei no 10.256, de 9 de julho de 2001, respectivamente;
+e. adquirente de produto rural nos termos do art. 30 da Lei no 8.212, de 1991, e do art. 11 da Lei no 11.718, de 20 de junho de 2008;
+f. associações desportivas que mantenham equipe de futebol profissional, que tenham recebido valores a título de patrocínio, licenciamento de uso de marcas e símbolos, publicidade, propaganda e transmissão de espetáculos desportivos;
+g. empresa ou entidade patrocinadora que tenha destinado recursos a associação desportiva que mantenha equipe de futebol profissional a título de patrocínio, licenciamento de uso de marcas e símbolos, publicidade, propaganda e transmissão de espetáculos desportivos;
+h. entidades promotoras de eventos desportivos realizados em território nacional, em qualquer modalidade desportiva, dos quais participe ao menos 1 (uma) associação desportiva que mantenha equipe de futebol profissional; e
+i. pessoas jurídicas e físicas que pagaram ou creditaram rendimentos sobre os quais haja retenção do Imposto sobre a Renda Retido na Fonte (IRRF), por si ou como representantes de terceiros.
 
-III para o 3º grupo, que compreende os entes públicos, integrantes do Grupo 1 – Administração Pública, a **partir de 1º de maio de 2019**, em relação aos fatos geradores ocorridos a partir dessa data.
+> Os sujeitos passivos das letras “b” e “i” acima somente passarão a ser obrigados ao envio de informações relativas à EFD-Reinf quando os eventos que substituirão a Declaração do Imposto de Renda Retido na Fonte - DIRF forem inseridos formalmente, com a antecedência e a publicidade devidas, nos leiautes daquela escrituração.
 
-Ressalte-se que o prazo de vencimento da obrigação foi alterado para até o dia 15 do mês subsequente.
-
-A referida obrigação será entregue via DCTFWeb, sistema utilizado para fechamento previdenciário, que permitirá: 
-
-- Apuração automática dos débitos tributários;
-- Vinculações dos débitos e créditos tributários e compensações;
-- Consulta e aproveitamento dos créditos tributários disponíveis;
-- Emissão eletrônica de DARF com código de barras.
-
-
-A Escrituração Fiscal Digital de Retenções e Outras Informações Fiscais EFD-Reinf é um dos módulos do Sistema Público de Escrituração Digital - SPED, a ser utilizado pelas pessoas jurídicas e físicas, em complemento ao Sistema de Escrituração Digital das Obrigações Fiscais, Previdenciárias e Trabalhistas – eSocial.
- 
-Tem por objeto a escrituração de rendimentos pagos e retenções de Imposto de Renda, Contribuição Social do contribuinte exceto aquelas relacionadas ao trabalho e informações sobre a receita bruta para a apuração das contribuições previdenciárias substituídas. Substituirá, portanto, o módulo da EFD-Contribuições que apura a Contribuição Previdenciária sobre a Receita Bruta (CPRB).
- 
-A EFD-Reinf junto ao eSocial, após o início de sua obrigatoriedade, abre espaço para substituição de informações solicitadas em outras obrigações acessórias, tais como a GFIP, a DIRF e também obrigações acessórias instituídas por outros órgãos de governo como a RAIS e o CAGED.
- 
-Esta escrituração está modularizada por eventos de informações, contemplando a possibilidade de múltiplas transmissões em períodos distintos, de acordo com a obrigatoriedade legal.
- 
-Dentre as informações prestadas através da EFD-Reinf, destacam-se aquelas associadas:
-
-- aos serviços tomados/prestados mediante cessão de mão de obra ou empreitada;
-- às retenções na fonte (IR, CSLL, COFINS, PIS/PASEP) incidentes sobre os pagamentos diversos efetuados a pessoas físicas e jurídicas;
-- aos recursos recebidos por / repassados para associação desportiva que mantenha equipe de futebol profissional;
-- à comercialização da produção e à apuração da contribuição previdenciária substituída pelas agroindústrias e demais produtores rurais pessoa jurídica;
-- às empresas que se sujeitam à CPRB (cf. Lei 12.546/2011);
-- às entidades promotoras de evento que envolva associação desportiva que mantenha clube de futebol profissional.
 
 ## Contribuindo
 Este é um projeto totalmente *OpenSource*, para usa-lo e modifica-lo você não paga absolutamente nada. Porém para continuarmos a mante-lo é necessário qua alguma contribuição seja feita, seja auxiliando na codificação, na documentação ou na realização de testes e identificação de falhas e BUGs.

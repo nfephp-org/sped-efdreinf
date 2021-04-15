@@ -24,12 +24,7 @@ $config = [
 ];
 $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
-$std = new \stdClass();
-$std->sequencial = 1;
-$std->tpevento = 'R-2010'; //R-2010 a R-2070 e R-3010
-//$std->nrrecevt = '121212-23-1245-55555-125498787888858552';
-$std->nrrecevt = '30795-08-2010-1805-30795';
-$std->perapur = '2017-11';
+
 
 try {
     
@@ -37,6 +32,13 @@ try {
     $content     = file_get_contents('expired_certificate.pfx');
     $password    = 'associacao';
     $certificate = Certificate::readPfx($content, $password);
+
+    $std = new \stdClass();
+    $std->sequencial = 1;
+    $std->tpevento = 'R-2010'; //R-2010 a R-2070 e R-3010
+    //$std->nrrecevt = '121212-23-1245-55555-125498787888858552';
+    $std->nrrecevt = '30795-08-2010-1805-30795';
+    $std->perapur = '2017-11';
     
     //cria o evento e retorna o XML assinado
     $xml = Event::evtExclusao(
@@ -47,7 +49,7 @@ try {
     )->toXml();
     
     //$xml = Event::r9000($configJson, $std, $certificate)->toXML();
-    //$json = Event::evtExclusao($configJson, $std, $certificate)->toJson();
+    $json = Event::evtExclusao($configJson, $std, $certificate);
     
     header('Content-type: text/xml; charset=UTF-8');
     echo $xml;
