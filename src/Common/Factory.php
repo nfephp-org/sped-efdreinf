@@ -85,8 +85,6 @@ abstract class Factory
      * @var string
      */
     public $evtAlias = '';
-
-
     /**
      * @var string
      */

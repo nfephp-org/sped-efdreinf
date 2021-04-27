@@ -18,6 +18,22 @@
             "type": ["string","null"],
             "pattern": "^20([0-9][0-9])-(0[1-9]|1[0-2])$"
         },
+        "novavalidade": {
+            "required": false,
+            "type": ["object","null"],
+            "properties": {
+                "inivalid": {
+                    "required": true,
+                    "type": "string",
+                    "pattern": "^20([0-9][0-9])-(0[1-9]|1[0-2])$"
+                },
+                "fimvalid": {
+                    "required": false,
+                    "type": ["string","null"],
+                    "pattern": "^20([0-9][0-9])-(0[1-9]|1[0-2])$"
+                }
+            }
+        },
         "modo": {
             "required": true,
             "type": "string",

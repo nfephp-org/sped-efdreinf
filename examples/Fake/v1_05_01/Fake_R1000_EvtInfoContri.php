@@ -9,7 +9,7 @@ use JsonSchema\Validator;
 
 $config = [
     'tpAmb' => 2, //tipo de ambiente 1 - Produção; 2 - Produção restrita
-    'verProc' => '0_1_4', //Versão do processo de emissão do evento. Informar a versão do aplicativo emissor do evento.
+    'verProc' => '0_1_5', //Versão do processo de emissão do evento. Informar a versão do aplicativo emissor do evento.
     'eventoVersion' => '1_05_01', //versão do layout do evento
     'serviceVersion' => '1_05_01',//versão do webservice
     'contribuinte' => [
@@ -26,9 +26,14 @@ $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
 $std = new \stdClass();
 $std->sequencial = 1;
-$std->modo = 'INC'; //INC-inclusão ALT-alteração ou EXC-exclusao
+$std->modo = 'EXC';
 $std->inivalid = '2017-01';
-$std->fimvalid = null; //opcional só é usada na alteração quando os dados apresentados não sejam mais validos 
+$std->fimvalid = null;
+
+//indicar somente quando for uma alteração com novo periodo de validade
+$std->novavalidade = new \stdClass(); //OPCIONAL
+$std->novavalidade->inivalid = '2017-02';
+$std->novavalidade->fimvalid = null;
 
 $std->infocadastro = new \stdClass();
 $std->infocadastro->classtrib = '01'; //Tabela 08 - Classificação tributária
@@ -62,10 +67,6 @@ $std->infocadastro->infoefr->cnpjefr = '12345678901234';
 
 $json = json_encode($std, JSON_PRETTY_PRINT);
 
-echo "<pre>";
-print_r($json);
-echo "</pre>";
-die;
 
 try {
     
