@@ -26,9 +26,14 @@ $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
 $std = new \stdClass();
 $std->sequencial = 1;
-$std->modo = 'INC';
+$std->modo = 'ALT';
 $std->inivalid = '2017-01';
-$std->fimvalid = '2017-12';
+$std->fimvalid = null;
+
+//indicar somente quando for uma alteração com novo periodo de validade
+$std->novavalidade = new \stdClass(); //OPCIONAL
+$std->novavalidade->inivalid = '2017-02';
+$std->novavalidade->fimvalid = null;
 
 $std->infocadastro = new \stdClass();
 $std->infocadastro->classtrib = '01';

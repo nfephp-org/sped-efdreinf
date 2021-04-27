@@ -81,6 +81,9 @@ class EvtInfoContri extends Factory implements FactoryInterface
             $this->std->inivalid,
             true
         );
+        if ($this->std->modo == 'INC') {
+            $this->std->fimvalid = null;
+        }
         $this->dom->addChild(
             $idePeriodo,
             "fimValid",
@@ -227,6 +230,23 @@ class EvtInfoContri extends Factory implements FactoryInterface
             $modo->appendChild($idePeriodo);
             if (!empty($infocadastro)) {
                 $modo->appendChild($infocadastro);
+            }
+            if (!empty($this->std->novavalidade)) {
+                $new = $this->std->novavalidade;
+                $nval = $this->dom->createElement("novaValidade");
+                $this->dom->addChild(
+                    $nval,
+                    "iniValid",
+                    $new->inivalid,
+                    true
+                );
+                $this->dom->addChild(
+                    $nval,
+                    "fimValid",
+                    !empty($new->fimvalid) ? $new->fimvalid : null,
+                    false
+                );
+                $modo->appendChild($nval);
             }
         } else {
             $modo = $this->dom->createElement("exclusao");

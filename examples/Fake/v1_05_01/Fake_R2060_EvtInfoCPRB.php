@@ -31,7 +31,7 @@ $std->nrrecibo = '1-00-1234-1234-1234556789012345';
 $std->perapur = '2017-11';
 $std->tpinscestab = 1;
 $std->nrinscestab = "123456789012";
-$std->vlrrecbrutatotal = '10000,00'; 
+$std->vlrrecbrutatotal = '10000,00';
 $std->vlrcpapurtotal = '1020,00';
 $std->vlrcprbsusptotal = '200,00';
 
