@@ -1,6 +1,6 @@
 # sped-efdreinf (versão 1.0 - layout 1.5.1)
 
-> NOTA: Ainda existem diferenças entre os ambientes de Produção e Pre-produção fique atento !!
+> NOTA: Ainda existem diferenças entre os ambientes de Produção e Pre-produção fique atento durante a transição de versões !!
 
 *Utilize o chat do Gitter para iniciar discussões especificas sobre o desenvolvimento deste pacote.*
 
