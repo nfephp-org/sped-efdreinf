@@ -33,7 +33,7 @@ Estes eventos devem ser enviados de forma periódica
 | R-2098 | EvtReabreEvPer | Reabertura dos Eventos Periódicos |
 | R-2099 | EvtFechaEvPer | Fechamento dos Eventos Periódicos |
 
-> NOTA: O evento R-2070 está suspenso até o final de 2018
+> NOTA: O evento R-2070 está suspenso e nbão consta da versão 1.5.1
 
 ## EVENTOS NÃO PERIÓDICOS
 
