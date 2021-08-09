@@ -32,7 +32,7 @@ class SoapCurl extends SoapBase implements SoapInterface
     {
         parent::__construct($certificate, $logger);
     }
-    
+
     /**
      * Send soap message to url
      * @param string $operation
@@ -53,7 +53,7 @@ class SoapCurl extends SoapBase implements SoapInterface
         $response = '';
         $this->requestHead = implode("\n", $parameters);
         $this->requestBody = $envelope;
-        
+
         try {
             $this->saveTemporarilyKeyFiles();
             $oCurl = curl_init();
@@ -103,17 +103,18 @@ class SoapCurl extends SoapBase implements SoapInterface
             throw SoapException::unableToLoadCurl($e->getMessage());
         }
         if ($this->soaperror != '') {
-            throw SoapException::soapFault($this->soaperror . " [$url]");
+            throw SoapException::soapFault($this->soaperror . " [$url]", $this->soaperror);
         }
         if ($httpcode != 200) {
             throw SoapException::soapFault(
                 " [$url] HTTP Error code: $httpcode - "
-                . $this->getFaultString($this->responseBody)
+                . $this->getFaultString($this->responseBody),
+                $httpcode
             );
         }
         return $this->responseBody;
     }
-    
+
     /**
      * Recover WSDL form given URL
      * @param string $url
@@ -149,7 +150,7 @@ class SoapCurl extends SoapBase implements SoapInterface
         }
         return $response;
     }
-    
+
     /**
      * Set proxy into cURL parameters
      * @param resource $oCurl
@@ -166,7 +167,7 @@ class SoapCurl extends SoapBase implements SoapInterface
             }
         }
     }
-    
+
     /**
      * Extract faultstring form response if exists
      * @param string $body
