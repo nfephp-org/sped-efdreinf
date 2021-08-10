@@ -34,8 +34,7 @@
         "nrinscestab": {
             "required": true,
             "type": "string",
-            "maxLength": 14,
-            "pattern": "^[0-9]"
+            "pattern": "^[0-9]{14}$"
         },
         "indobra": {
             "required": true,
@@ -46,12 +45,12 @@
         "cnpjprestador": {
             "required": true,
             "type": "string",
-            "maxLength": 14,
-            "pattern": "^[0-9]"
+            "pattern": "^[0-9]{14}$"
         },
         "vlrtotalbruto": {
             "required": true,
-            "type": "number"
+            "type": "number",
+            "multipleOf": 0.01
         },
         "vlrtotalbaseret": {
            "required": true,

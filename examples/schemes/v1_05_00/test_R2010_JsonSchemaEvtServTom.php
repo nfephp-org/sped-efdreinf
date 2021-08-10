@@ -47,8 +47,7 @@ $jsonSchema = '{
         "nrinscestab": {
             "required": true,
             "type": "string",
-            "maxLength": 14,
-            "pattern": "^[0-9]"
+            "pattern": "^[0-9]{14}$"
         },
         "indobra": {
             "required": true,
@@ -59,12 +58,12 @@ $jsonSchema = '{
         "cnpjprestador": {
             "required": true,
             "type": "string",
-            "maxLength": 14,
-            "pattern": "^[0-9]"
+            "pattern": "^[0-9]{14}$"
         },
         "vlrtotalbruto": {
             "required": true,
-            "type": "number"
+            "type": "number",
+            "multipleOf": 0.01
         },
         "vlrtotalbaseret": {
            "required": true,
@@ -257,7 +256,7 @@ $std->nrinscestab = '12345678901234';
 $std->indobra = '0';
 
 $std->cnpjprestador = '12345678901234';
-$std->vlrtotalbruto = 456.92;
+$std->vlrtotalbruto = '456.93';
 $std->vlrtotalbaseret = 45.80;
 $std->vlrtotalretprinc = 5;
 $std->vlrtotalretadic = 54.35;

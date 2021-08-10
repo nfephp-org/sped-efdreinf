@@ -35,10 +35,10 @@ class Standardize
      * @var array
      */
     public $rootTagList = [
-        'loteEventos',
         'retornoLoteEventos',
         'evtTotalContrib',
         'evtTotal',
+        'loteEventos',
         'Reinf'
     ];
 
