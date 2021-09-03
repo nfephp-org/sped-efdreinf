@@ -62,7 +62,7 @@ class EvtAqProd extends Factory implements FactoryInterface
             $ideEvento,
             "nrRecibo",
             !empty($this->std->nrrecibo) ? $this->std->nrrecibo : null,
-            true
+            false
         );
         $this->dom->addChild(
             $ideEvento,
@@ -162,39 +162,41 @@ class EvtAqProd extends Factory implements FactoryInterface
                 number_format($det->vlrsenardesc, 2, ',', ''),
                 true
             );
-            foreach ($det->infoprocjud as $jud) {
-                $procjud = $this->dom->createElement("infoProcJud");
-                $this->dom->addChild(
-                    $procjud,
-                    "nrProcJud",
-                    $jud->nrprocjud,
-                    true
-                );
-                $this->dom->addChild(
-                    $procjud,
-                    "codSusp",
-                    !empty($jud->codsusp) ? $jud->codsusp : null,
-                    false
-                );
-                $this->dom->addChild(
-                    $procjud,
-                    "vlrCPNRet",
-                    !empty($jud->vlrcpnret) ? number_format($jud->vlrcpnret, 2, ',', '') : null,
-                    false
-                );
-                $this->dom->addChild(
-                    $procjud,
-                    "vlrRatNRet",
-                    !empty($jud->vlrratnret) ? number_format($jud->vlrratnret, 2, ',', '') : null,
-                    false
-                );
-                $this->dom->addChild(
-                    $procjud,
-                    "vlrSenarNRet",
-                    !empty($jud->vlrsenarnret) ? number_format($jud->vlrsenarnret, 2, ',', '') : null,
-                    false
-                );
-                $detaq->appendChild($procjud);
+            if (!empty($det->infoprocjud)) {
+                foreach ($det->infoprocjud as $jud) {
+                    $procjud = $this->dom->createElement("infoProcJud");
+                    $this->dom->addChild(
+                        $procjud,
+                        "nrProcJud",
+                        $jud->nrprocjud,
+                        true
+                    );
+                    $this->dom->addChild(
+                        $procjud,
+                        "codSusp",
+                        !empty($jud->codsusp) ? $jud->codsusp : null,
+                        false
+                    );
+                    $this->dom->addChild(
+                        $procjud,
+                        "vlrCPNRet",
+                        !empty($jud->vlrcpnret) ? number_format($jud->vlrcpnret, 2, ',', '') : null,
+                        false
+                    );
+                    $this->dom->addChild(
+                        $procjud,
+                        "vlrRatNRet",
+                        !empty($jud->vlrratnret) ? number_format($jud->vlrratnret, 2, ',', '') : null,
+                        false
+                    );
+                    $this->dom->addChild(
+                        $procjud,
+                        "vlrSenarNRet",
+                        !empty($jud->vlrsenarnret) ? number_format($jud->vlrsenarnret, 2, ',', '') : null,
+                        false
+                    );
+                    $detaq->appendChild($procjud);
+                }
             }
             $ideprod->appendChild($detaq);
         }
