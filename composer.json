@@ -1,5 +1,5 @@
 {
-    "name": "nfephp-org/sped-efdreinf",
+    "name": "rlacerda83/sped-efdreinf",
     "type": "library",
     "description": "API para geração e comunicação dos eventos relativos ao projeto EFD-Reinf da Receita Federal do Brasil.",
     "keywords": ["nfe","nfce","sped","nfephp"],
