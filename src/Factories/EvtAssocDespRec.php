@@ -19,6 +19,7 @@ use NFePHP\EFDReinf\Common\Factory;
 use NFePHP\EFDReinf\Common\FactoryInterface;
 use NFePHP\EFDReinf\Common\FactoryId;
 use NFePHP\Common\Certificate;
+use NFePHP\Common\Strings;
 use stdClass;
 
 class EvtAssocDespRec extends Factory implements FactoryInterface
@@ -34,13 +35,16 @@ class EvtAssocDespRec extends Factory implements FactoryInterface
         $config,
         stdClass $std,
         Certificate $certificate = null,
-        $data = ''
+        $data = null
     ) {
         $params = new \stdClass();
         $params->evtName = 'evtRecursoRecebidoAssociacao';
         $params->evtTag = 'evtAssocDespRec';
         $params->evtAlias = 'R-2030';
         parent::__construct($config, $std, $params, $certificate, $data);
+        if ($this->tpInsc != 1) {
+            throw new Exception("Este evento é restrito a PESSOA JURIDICA.");
+        }
     }
 
     /**
@@ -60,6 +64,10 @@ class EvtAssocDespRec extends Factory implements FactoryInterface
             $this->std->indretif,
             true
         );
+        if ($this->std->indretif == 2 && empty($this->std->nrrecibo)) {
+            throw new \Exception("Para retificar o evento DEVE ser informado o "
+                . "número do RECIBO do evento anterior que está retificando.");
+        }
         $this->dom->addChild(
             $ideEvento,
             "nrRecibo",
@@ -97,7 +105,7 @@ class EvtAssocDespRec extends Factory implements FactoryInterface
         $this->dom->addChild(
             $ideContri,
             "tpInsc",
-            $this->tpInsc,
+            "1",
             true
         );
         $this->dom->addChild(
@@ -130,19 +138,19 @@ class EvtAssocDespRec extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $recursosRec,
                 "vlrTotalRec",
-                $r->vlrtotalrec,
+                number_format($r->vlrtotalrec, 2, ',', ''),
                 true
             );
             $this->dom->addChild(
                 $recursosRec,
                 "vlrTotalRet",
-                $r->vlrtotalret,
+                number_format($r->vlrtotalret, 2, ',', ''),
                 true
             );
             $this->dom->addChild(
                 $recursosRec,
                 "vlrTotalNRet",
-                !empty($r->vlrtotalnret) ? $r->vlrtotalnret : null,
+                !empty($r->vlrtotalnret) ?  number_format($r->vlrtotalnret, 2, ',', '') : null,
                 false
             );
             foreach ($r->inforecurso as $i) {
@@ -156,19 +164,19 @@ class EvtAssocDespRec extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoRecurso,
                     "descRecurso",
-                    $i->descrecurso,
+                    Strings::replaceUnacceptableCharacters($i->descrecurso),
                     true
                 );
                 $this->dom->addChild(
                     $infoRecurso,
                     "vlrBruto",
-                    $i->vlrbruto,
+                    number_format($i->vlrbruto, 2, ',', ''),
                     true
                 );
                 $this->dom->addChild(
                     $infoRecurso,
                     "vlrRetApur",
-                    $i->vlrretapur,
+                    number_format($i->vlrretapur, 2, ',', ''),
                     true
                 );
                 $recursosRec->appendChild($infoRecurso);
@@ -197,7 +205,7 @@ class EvtAssocDespRec extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $infoProc,
                         "vlrNRet",
-                        $i->vlrnret,
+                        number_format($i->vlrnret, 2, ',', ''),
                         true
                     );
                     $recursosRec->appendChild($infoProc);

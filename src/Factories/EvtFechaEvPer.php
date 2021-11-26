@@ -19,6 +19,7 @@ use NFePHP\EFDReinf\Common\Factory;
 use NFePHP\EFDReinf\Common\FactoryInterface;
 use NFePHP\EFDReinf\Common\FactoryId;
 use NFePHP\Common\Certificate;
+use NFePHP\Common\Strings;
 use stdClass;
 
 class EvtFechaEvPer extends Factory implements FactoryInterface
@@ -84,7 +85,7 @@ class EvtFechaEvPer extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $ideRespInf,
                 "nmResp",
-                $ide->nmresp,
+                Strings::replaceUnacceptableCharacters($ide->nmresp),
                 true
             );
             $this->dom->addChild(
@@ -102,13 +103,15 @@ class EvtFechaEvPer extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $ideRespInf,
                 "email",
-                !empty($ide->email) ? $ide->email : null,
+                !empty($ide->email)
+                ? Strings::replaceUnacceptableCharacters(
+                    strtolower($ide->email)
+                )
+                : null,
                 false
             );
             $this->node->appendChild($ideRespInf);
         }
-
-
         $infoFech = $this->dom->createElement("infoFech");
         $this->dom->addChild(
             $infoFech,

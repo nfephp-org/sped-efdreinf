@@ -34,13 +34,16 @@ class EvtComProd extends Factory implements FactoryInterface
         $config,
         stdClass $std,
         Certificate $certificate = null,
-        $data = ''
+        $data = null
     ) {
         $params = new \stdClass();
         $params->evtName = 'evtInfoProdRural';
         $params->evtTag = 'evtComProd';
         $params->evtAlias = 'R-2050';
         parent::__construct($config, $std, $params, $certificate, $data);
+        if ($this->tpInsc != 1) {
+            throw new Exception("Este evento é restrito a PESSOA JURIDICA.");
+        }
     }
 
     /**
@@ -58,11 +61,18 @@ class EvtComProd extends Factory implements FactoryInterface
             $this->std->indretif,
             true
         );
+        if ($this->std->indretif == 2 && empty($this->std->nrrecibo)) {
+            throw new \Exception("Para retificar o evento DEVE ser informado o "
+                . "número do RECIBO do evento anterior que está retificando.");
+        }
+        if ($this->std->indretif == 1) {
+            $this->std->nrrecibo = null;
+        }
         $this->dom->addChild(
             $ideEvento,
             "nrRecibo",
             !empty($this->std->nrrecibo) ? $this->std->nrrecibo : null,
-            $this->std->indretif == 2 ? true : false
+            false
         );
         $this->dom->addChild(
             $ideEvento,

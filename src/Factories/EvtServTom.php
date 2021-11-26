@@ -19,6 +19,7 @@ use NFePHP\EFDReinf\Common\Factory;
 use NFePHP\EFDReinf\Common\FactoryInterface;
 use NFePHP\EFDReinf\Common\FactoryId;
 use NFePHP\Common\Certificate;
+use NFePHP\Common\Strings;
 use stdClass;
 
 class EvtServTom extends Factory implements FactoryInterface
@@ -34,7 +35,7 @@ class EvtServTom extends Factory implements FactoryInterface
         $config,
         stdClass $std,
         Certificate $certificate = null,
-        $data = ''
+        $data = null
     ) {
         $params = new \stdClass();
         $params->evtName = 'evtTomadorServicos';
@@ -58,6 +59,10 @@ class EvtServTom extends Factory implements FactoryInterface
             $this->std->indretif,
             true
         );
+        if ($this->std->indretif == 2 && empty($this->std->nrrecibo)) {
+            throw new \Exception("Para retificar o evento DEVE ser informado o "
+                . "número do RECIBO do evento anterior que está retificando.");
+        }
         $this->dom->addChild(
             $ideEvento,
             "nrRecibo",
@@ -188,7 +193,7 @@ class EvtServTom extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $nfs,
                 "obs",
-                !empty($n->obs) ? $n->obs : null,
+                !empty($n->obs) ? Strings::replaceUnacceptableCharacters($n->obs) : null,
                 false
             );
             foreach ($n->infotpserv as $its) {

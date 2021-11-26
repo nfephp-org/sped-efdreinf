@@ -19,6 +19,7 @@ use NFePHP\EFDReinf\Common\Factory;
 use NFePHP\EFDReinf\Common\FactoryInterface;
 use NFePHP\EFDReinf\Common\FactoryId;
 use NFePHP\Common\Certificate;
+use NFePHP\Common\Strings;
 use stdClass;
 
 class EvtCPRB extends Factory implements FactoryInterface
@@ -34,13 +35,16 @@ class EvtCPRB extends Factory implements FactoryInterface
         $config,
         stdClass $std,
         Certificate $certificate = null,
-        $data = ''
+        $data = null
     ) {
         $params = new \stdClass();
         $params->evtName = 'evtInfoCPRB';
         $params->evtTag = 'evtCPRB';
         $params->evtAlias = 'R-2060';
         parent::__construct($config, $std, $params, $certificate, $data);
+        if ($this->tpInsc != 1) {
+            throw new Exception("Este evento é restrito a PESSOA JURIDICA.");
+        }
     }
 
     /**
@@ -58,11 +62,18 @@ class EvtCPRB extends Factory implements FactoryInterface
             $this->std->indretif,
             true
         );
+        if ($this->std->indretif == 2 && empty($this->std->nrrecibo)) {
+            throw new \Exception("Para retificar o evento DEVE ser informado o "
+                . "número do RECIBO do evento anterior que está retificando.");
+        }
+        if ($this->std->indretif == 1) {
+            $this->std->nrrecibo = null;
+        }
         $this->dom->addChild(
             $ideEvento,
             "nrRecibo",
             !empty($this->std->nrrecibo) ? $this->std->nrrecibo : null,
-            true
+            false
         );
         $this->dom->addChild(
             $ideEvento,
@@ -107,19 +118,19 @@ class EvtCPRB extends Factory implements FactoryInterface
         $this->dom->addChild(
             $ideEstab,
             "vlrRecBrutaTotal",
-            $this->std->vlrrecbrutatotal,
+            number_format($this->std->vlrrecbrutatotal, 2, ',', ''),
             true
         );
         $this->dom->addChild(
             $ideEstab,
             "vlrCPApurTotal",
-            $this->std->vlrcpapurtotal,
+            number_format($this->std->vlrcpapurtotal, 2, ',', ''),
             true
         );
         $this->dom->addChild(
             $ideEstab,
             "vlrCPRBSuspTotal",
-            !empty($this->std->vlrcprbsusptotal) ? $this->std->vlrcprbsusptotal : null,
+            !empty($this->std->vlrcprbsusptotal) ? number_format($this->std->vlrcprbsusptotal, 2, ',', '') : null,
             false
         );
         foreach ($this->std->tipocod as $t) {
@@ -133,37 +144,37 @@ class EvtCPRB extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $tipoCod,
                 "vlrRecBrutaAtiv",
-                $t->vlrrecbrutaativ,
+                number_format($t->vlrrecbrutaativ, 2, ',', ''),
                 true
             );
             $this->dom->addChild(
                 $tipoCod,
                 "vlrExcRecBruta",
-                $t->vlrexcrecbruta,
+                number_format($t->vlrexcrecbruta, 2, ',', ''),
                 true
             );
             $this->dom->addChild(
                 $tipoCod,
                 "vlrAdicRecBruta",
-                $t->vlradicrecbruta,
+                number_format($t->vlradicrecbruta, 2, ',', ''),
                 true
             );
             $this->dom->addChild(
                 $tipoCod,
                 "vlrBcCPRB",
-                $t->vlrbccprb,
+                number_format($t->vlrbccprb, 2, ',', ''),
                 true
             );
             $this->dom->addChild(
                 $tipoCod,
                 "vlrCPRBapur",
-                !empty($t->vlrcprbapur) ? $t->vlrcprbapur : null,
+                !empty($t->vlrcprbapur) ?  number_format($t->vlrcprbapur, 2, ',', '') : null,
                 false
             );
             $this->dom->addChild(
                 $tipoCod,
                 "observ",
-                !empty($t->observ) ? $t->observ : null,
+                !empty($t->observ) ? Strings::replaceUnacceptableCharacters($t->observ) : null,
                 false
             );
             if (!empty($t->tipoajuste)) {
@@ -184,7 +195,7 @@ class EvtCPRB extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $tipoAjuste,
                         "vlrAjuste",
-                        $a->vlrajuste,
+                        number_format($a->vlrajuste, 2, ',', ''),
                         true
                     );
                     $this->dom->addChild(
@@ -226,7 +237,7 @@ class EvtCPRB extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $infoProc,
                         "vlrCPRBSusp",
-                        $i->vlrcprbsusp,
+                        number_format($i->vlrcprbsusp, 2, ',', ''),
                         true
                     );
                     $tipoCod->appendChild($infoProc);

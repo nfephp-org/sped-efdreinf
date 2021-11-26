@@ -34,7 +34,7 @@ class EvtReabreEvPer extends Factory implements FactoryInterface
         $config,
         stdClass $std,
         Certificate $certificate = null,
-        $data = ''
+        $data = null
     ) {
         $params = new \stdClass();
         $params->evtName = 'evtReabreEvPer';

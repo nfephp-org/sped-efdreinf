@@ -13,8 +13,11 @@ $config = [
     'eventoVersion' => '1_05_01', //versão do layout do evento
     'serviceVersion' => '1_05_01',//versão do webservice
     'contribuinte' => [
+        //'admPublica' => false, //campo Opcional, deve ser true apenas se natureza 
+        //jurídica do contribuinte declarante for de administração pública 
+        //direta federal ([101-5], [104-0], [107-4], [116-3]
         'tpInsc' => 1,  //1-CNPJ, 2-CPF
-        'nrInsc' => '99999999', //numero do documento
+        'nrInsc' => '12345678901234', //numero do documento com 11 ou 14 digitos
         'nmRazao' => 'Razao Social'
     ],    
     'transmissor' => [
@@ -25,12 +28,12 @@ $config = [
 $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
 $std = new \stdClass();
-$std->sequencial = 1;
+//$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
 $std->perapur = '2017-11';
 $std->iderespinf= new \stdClass();
 $std->iderespinf->nmresp = 'Ciclano de Tal';
 $std->iderespinf->cpfresp = '12345678901';
-$std->iderespinf->telefone = '5555-5555';
+$std->iderespinf->telefone = '115555-5555';
 $std->iderespinf->email = 'ciclano@mail.com';
 
 $std->evtservtm = 'S';
