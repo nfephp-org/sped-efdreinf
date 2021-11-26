@@ -34,10 +34,10 @@ class EvtAqProd extends Factory implements FactoryInterface
         $config,
         stdClass $std,
         Certificate $certificate = null,
-        $data = ''
+        $data = null
     ) {
         $params = new \stdClass();
-        $params->evtName = 'evt2055AquisicaoProdRural';
+        $params->evtName = 'evtAquisicaoProdRural';
         $params->evtTag = 'evtAqProd';
         $params->evtAlias = 'R-2055';
         parent::__construct($config, $std, $params, $certificate, $data);

@@ -17,8 +17,11 @@ $config = [
     'eventoVersion' => '1_05_01', //versão do layout do evento
     'serviceVersion' => '1_05_01',//versão do webservice
     'contribuinte' => [
+        //'admPublica' => false, //campo Opcional, deve ser true apenas se natureza 
+        //jurídica do contribuinte declarante for de administração pública 
+        //direta federal ([101-5], [104-0], [107-4], [116-3]
         'tpInsc' => 1,  //1-CNPJ, 2-CPF
-        'nrInsc' => '99999999', //numero do documento
+        'nrInsc' => '12345678901234', //numero do documento com 11 ou 14 digitos
         'nmRazao' => 'Razao Social'
     ],    
     'transmissor' => [

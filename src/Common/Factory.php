@@ -30,6 +30,10 @@ use stdClass;
 abstract class Factory
 {
     /**
+     * @var bool
+     */
+    public $admpublica = false;
+    /**
      * @var int
      */
     public $tpInsc;
@@ -86,6 +90,10 @@ abstract class Factory
      */
     public $evtAlias = '';
     /**
+     * @var array
+     */
+    public $errors = [];
+    /**
      * @var string
      */
     protected $xmlns = "http://www.reinf.esocial.gov.br/schemas/";
@@ -131,17 +139,14 @@ abstract class Factory
         stdClass $std,
         stdClass $params,
         Certificate $certificate = null,
-        $date = ''
+        $date = null
     ) {
         //set properties from config
         $stdConf = json_decode($config);
-        $this->date = new DateTime();
-        if (!empty($date)) {
-            $this->date = new DateTime($date);
-        }
         $this->tpAmb = $stdConf->tpAmb;
         $this->verProc = $stdConf->verProc;
         $this->layout = $stdConf->eventoVersion;
+        $this->admpublica = $stdConf->contribuinte->admPublica ?? false;
         $this->tpInsc = $stdConf->contribuinte->tpInsc;
         $this->nrInsc = $stdConf->contribuinte->nrInsc;
         $this->nmRazao = $stdConf->contribuinte->nmRazao;
@@ -249,12 +254,18 @@ abstract class Factory
                 . "/$this->layoutStr\">"
                 . "</Reinf>";
             $this->dom->loadXML($xml);
+            $doc = $this->nrInsc;
+            if (!$this->admpublica && $this->tpInsc == 1) {
+                //nesse caso deixa apenas a raiz do CNPJ
+                $doc = substr($this->nrInsc, 0, 8);
+            }
             $this->reinf = $this->dom->getElementsByTagName('Reinf')->item(0);
+            
             $this->evtid = FactoryId::build(
                 $this->tpInsc,
-                $this->nrInsc,
-                $this->date,
-                $this->std->sequencial
+                $doc,
+                $this->date ?? null,
+                $this->std->sequencial ?? null
             );
             $this->node = $this->dom->createElement($this->evtTag);
             $att = $this->dom->createAttribute('id');
@@ -270,7 +281,7 @@ abstract class Factory
             $this->dom->addChild(
                 $ideContri,
                 "nrInsc",
-                $this->nrInsc,
+                $doc,
                 true
             );
             $this->node->appendChild($ideContri);
@@ -380,21 +391,6 @@ abstract class Factory
     {
         return json_decode($this->toJson());
     }
-
-    /**
-     * Adjust missing properties form original data according schema
-     * @param \stdClass $data
-     * @return \stdClass
-     */
-    //public function standardizeProperties(stdClass $data)
-    //{
-    //    if (!is_file($this->jsonschema)) {
-    //        return $data;
-    //    }
-    //    $jsonSchemaObj = json_decode(file_get_contents($this->jsonschema));
-    //    $sc = new ParamsStandardize($jsonSchemaObj);
-    //    return $sc->stdData($data);
-    //}
 
     /**
      * Sign and validate XML with XSD, can throw Exception

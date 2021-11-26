@@ -13,8 +13,11 @@ $config = [
     'eventoVersion' => '1_05_01', //versão do layout do evento
     'serviceVersion' => '1_05_01',//versão do webservice
     'contribuinte' => [
+        //'admPublica' => false, //campo Opcional, deve ser true apenas se natureza 
+        //jurídica do contribuinte declarante for de administração pública 
+        //direta federal ([101-5], [104-0], [107-4], [116-3]
         'tpInsc' => 1,  //1-CNPJ, 2-CPF
-        'nrInsc' => '99999999', //numero do documento
+        'nrInsc' => '12345678901234', //numero do documento com 11 ou 14 digitos
         'nmRazao' => 'Razao Social'
     ],    
     'transmissor' => [
@@ -25,28 +28,28 @@ $config = [
 $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
 $std = new \stdClass();
-$std->sequencial = 1;
+//$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
 $std->indretif = 1;
 $std->nrrecibo = '1-00-1234-1234-1234556789012345';
 $std->perapur = '2017-11';
-$std->tpinscestab = 1;
+$std->tpinscestab = "1";
 $std->nrinscestab = "123456789012";
-$std->vlrrecbrutatotal = '10000,00';
-$std->vlrcpapurtotal = '1020,00';
-$std->vlrcprbsusptotal = '200,00';
+$std->vlrrecbrutatotal = 10000.00;
+$std->vlrcpapurtotal = 1020.00;
+$std->vlrcprbsusptotal = 200.00;
 
 $std->tipocod[0] = new \stdClass();
-$std->tipocod[0]->codativecon = 'AB345678';
-$std->tipocod[0]->vlrrecbrutaativ = '4444,44';
-$std->tipocod[0]->vlrexcrecbruta = '3333,33';
-$std->tipocod[0]->vlradicrecbruta = '2222,22';
-$std->tipocod[0]->vlrbccprb = '1111,11';
-$std->tipocod[0]->vlrcprbapur = '2000,00';
+$std->tipocod[0]->codativecon = '12345678';
+$std->tipocod[0]->vlrrecbrutaativ = 4444.44;
+$std->tipocod[0]->vlrexcrecbruta = 3333.33;
+$std->tipocod[0]->vlradicrecbruta = 2222.22;
+$std->tipocod[0]->vlrbccprb = 1111.11;
+$std->tipocod[0]->vlrcprbapur = 2000.00;
 
 $std->tipocod[0]->tipoajuste[0] = new \stdClass();
 $std->tipocod[0]->tipoajuste[0]->tpajuste = 0;
 $std->tipocod[0]->tipoajuste[0]->codajuste = 11;
-$std->tipocod[0]->tipoajuste[0]->vlrajuste = '200,00';
+$std->tipocod[0]->tipoajuste[0]->vlrajuste = 200.00;
 $std->tipocod[0]->tipoajuste[0]->descajuste = 'sei la';
 $std->tipocod[0]->tipoajuste[0]->dtajuste = '2017-10';
 
@@ -54,7 +57,7 @@ $std->tipocod[0]->infoproc[0] = new \stdClass();
 $std->tipocod[0]->infoproc[0]->tpproc = 1;
 $std->tipocod[0]->infoproc[0]->nrproc = 'ABC21';
 $std->tipocod[0]->infoproc[0]->codsusp = '12345678901234';
-$std->tipocod[0]->infoproc[0]->vlrcprbsusp = '200,00';
+$std->tipocod[0]->infoproc[0]->vlrcprbsusp = 200.00;
 
 try {
     
@@ -67,8 +70,7 @@ try {
     $xml = Event::evtCPRB(
         $configJson,
         $std,
-        $certificate,
-        '2017-08-03 10:37:00'
+        $certificate
     )->toXml();
     
     //$xml = Evento::r2060($json, $std, $certificate)->toXML();

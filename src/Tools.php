@@ -198,12 +198,11 @@ class Tools extends ToolsBase
             ],
         ];
         $this->validInputParameters($properties, $std);
-
         $this->method = "ConsultaInformacoesConsolidadas";
         $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
             . "<sped:tipoInscricaoContribuinte>{$this->tpInsc}</sped:tipoInscricaoContribuinte>"
-            . "<sped:numeroInscricaoContribuinte>{$this->nrInsc}</sped:numeroInscricaoContribuinte>"
+            . "<sped:numeroInscricaoContribuinte>{$this->doc}</sped:numeroInscricaoContribuinte>"
             . "<sped:numeroProtocoloFechamento>{$std->numeroprotocolofechamento}</sped:numeroProtocoloFechamento>"
             . "</sped:{$this->method}>";
         return $request;
@@ -229,7 +228,7 @@ class Tools extends ToolsBase
         $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
         $request = "<sped:{$this->method}>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
-            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
+            . "<sped:nrInsc>{$this->doc}</sped:nrInsc>"
             . "<sped:numeroProtocoloFechamento>{$std->numeroprotocolofechamento}</sped:numeroProtocoloFechamento>"
             . "</sped:{$this->method}>";
         return $request;
@@ -247,7 +246,7 @@ class Tools extends ToolsBase
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
-            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
+            . "<sped:nrInsc>{$this->doc}</sped:nrInsc>"
             . "</sped:{$this->method}>";
         return $request;
     }
@@ -290,7 +289,7 @@ class Tools extends ToolsBase
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
-            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>";
+            . "<sped:nrInsc>{$this->doc}</sped:nrInsc>";
         if (!empty($std->perapur)) {
             $request .=  "<sped:perApur>{$std->perapur}</sped:perApur>";
         }
@@ -343,7 +342,7 @@ class Tools extends ToolsBase
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
-            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>";
+            . "<sped:nrInsc>{$this->doc}</sped:nrInsc>";
         if (!empty($std->perapur)) {
             $request .= "<sped:perApur>{$std->perapur}</sped:perApur>";
         }
@@ -388,7 +387,7 @@ class Tools extends ToolsBase
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
-            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>";
+            . "<sped:nrInsc>{$this->doc}</sped:nrInsc>";
         if (!empty($std->perapur)) {
             $request .= "<sped:perApur>{$std->perapur}</sped:perApur>";
         }
@@ -431,7 +430,7 @@ class Tools extends ToolsBase
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
-            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>";
+            . "<sped:nrInsc>{$this->doc}</sped:nrInsc>";
         if (!empty($std->perapur)) {
             $request .= "<sped:perApur>{$std->perapur}</sped:perApur>";
         }
@@ -482,7 +481,7 @@ class Tools extends ToolsBase
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
-            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>";
+            . "<sped:nrInsc>{$this->doc}</sped:nrInsc>";
         if (!empty($std->perapur)) {
             $request .= "<sped:perApur>{$std->perapur}</sped:perApur>";
         }
@@ -516,7 +515,7 @@ class Tools extends ToolsBase
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
-            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>";
+            . "<sped:nrInsc>{$this->cod}</sped:nrInsc>";
         if (!empty($std->perapur)) {
             $request .= "<sped:perApur>{$std->perapur}</sped:perApur>";
         }
@@ -556,7 +555,7 @@ class Tools extends ToolsBase
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
-            . "<sped:nrInsc>{$this->nrInsc}</sped:nrInsc>"
+            . "<sped:nrInsc>{$this->doc}</sped:nrInsc>"
             . "<sped:dtApur>{$std->dtapur}</sped:dtApur>"
             . "<sped:nrInscEstabelecimento>"
                 . str_pad($std->nrinscestabelecimento, 14, '0', STR_PAD_LEFT)

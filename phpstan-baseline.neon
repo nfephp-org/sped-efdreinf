@@ -1,0 +1,13 @@
+parameters:
+    ignoreErrors:
+        - 
+            message: "#Access to an undefined property [a-zA-Z0-9\\_]+::\\$name#"
+            path: src/Common/Soap/SoapBase.php
+
+        - 
+            message: "#Access to an undefined property [a-zA-Z0-9\\_]+::\\$data#"
+            path: src/Common/Soap/SoapBase.php
+
+        - 
+            message: "#Parameter \\#1 \\$key of function openssl_pkey_export expects resource, NFePHP\\\\Common\\\\Certificate\\\\PrivateKey given#"
+            path: src/Common/Soap/SoapBase.php

@@ -13,10 +13,13 @@ $config = [
     'eventoVersion' => '1_05_01', //versão do layout do evento
     'serviceVersion' => '1_05_01',//versão do webservice
     'contribuinte' => [
+        //'admPublica' => false, //campo Opcional, deve ser true apenas se natureza 
+        //jurídica do contribuinte declarante for de administração pública 
+        //direta federal ([101-5], [104-0], [107-4], [116-3]
         'tpInsc' => 1,  //1-CNPJ, 2-CPF
-        'nrInsc' => '99999999', //numero do documento
+        'nrInsc' => '12345678901234', //numero do documento com 11 ou 14 digitos
         'nmRazao' => 'Razao Social'
-    ],    
+    ],
     'transmissor' => [
         'tpInsc' => 1,  //1-CNPJ, 2-CPF
         'nrInsc' => '99999999999999' //numero do documento
@@ -25,7 +28,7 @@ $config = [
 $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
 $std = new \stdClass();
-$std->sequencial = 1;
+//$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
 $std->indretif = 1;
 $std->nrrecibo = '1-00-1234-1234-1234556789012345';
 $std->perapur = '2017-11';
@@ -34,21 +37,21 @@ $std->nrinscestab = '12345678901234';
 
 $std->recursosrec[0] = new \stdClass();
 $std->recursosrec[0]->cnpjorigrecurso = '12345678901234';
-$std->recursosrec[0]->vlrtotalrec = '1000,00';
-$std->recursosrec[0]->vlrtotalret = '100,00';
-$std->recursosrec[0]->vlrtotalnret = '10,00';
+$std->recursosrec[0]->vlrtotalrec = 1000.00;
+$std->recursosrec[0]->vlrtotalret = 100.00;
+$std->recursosrec[0]->vlrtotalnret = 10.00;
 
 $std->recursosrec[0]->inforecurso[0] = new \stdClass();
 $std->recursosrec[0]->inforecurso[0]->tprepasse = 3;
 $std->recursosrec[0]->inforecurso[0]->descrecurso = 'sei la';
-$std->recursosrec[0]->inforecurso[0]->vlrbruto = '5000,00';
-$std->recursosrec[0]->inforecurso[0]->vlrretapur = '500,00';
+$std->recursosrec[0]->inforecurso[0]->vlrbruto = 5000.00;
+$std->recursosrec[0]->inforecurso[0]->vlrretapur = 500.00;
 
 $std->recursosrec[0]->infoproc[0] = new \stdClass();
 $std->recursosrec[0]->infoproc[0]->tpproc = 1;
 $std->recursosrec[0]->infoproc[0]->nrproc = 'ABC21';
 $std->recursosrec[0]->infoproc[0]->codsusp = '12345678901234';
-$std->recursosrec[0]->infoproc[0]->vlrnret = '1000,66';
+$std->recursosrec[0]->infoproc[0]->vlrnret = 1000.66;
 
 try {
     

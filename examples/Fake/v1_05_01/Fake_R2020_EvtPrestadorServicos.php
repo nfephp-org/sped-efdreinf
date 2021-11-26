@@ -13,8 +13,11 @@ $config = [
     'eventoVersion' => '1_05_01', //versão do layout do evento
     'serviceVersion' => '1_05_01',//versão do webservice
     'contribuinte' => [
+        //'admPublica' => false, //campo Opcional, deve ser true apenas se natureza 
+        //jurídica do contribuinte declarante for de administração pública 
+        //direta federal ([101-5], [104-0], [107-4], [116-3]
         'tpInsc' => 1,  //1-CNPJ, 2-CPF
-        'nrInsc' => '99999999', //numero do documento
+        'nrInsc' => '12345678901234', //numero do documento com 11 ou 14 digitos
         'nmRazao' => 'Razao Social'
     ],    
     'transmissor' => [
@@ -25,13 +28,12 @@ $config = [
 $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
 $std = new \stdClass();
-$std->sequencial = 1;
+//$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
 $std->indretif = 1;
 $std->nrrecibo = '1-00-1234-1234-1234556789012345';
 $std->perapur = '2017-11';
-$std->tpinscestabprest = 1;
 $std->nrinscestabprest = '12345678901234';
-$std->tpinsctomador = 1;
+$std->tpinsctomador = "1";
 $std->nrinsctomador = '12345678901234';
 $std->indobra = 1;
 $std->vlrtotalbruto = 1;

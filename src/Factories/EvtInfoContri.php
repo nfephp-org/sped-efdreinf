@@ -19,6 +19,7 @@ use NFePHP\EFDReinf\Common\Factory;
 use NFePHP\EFDReinf\Common\FactoryInterface;
 use NFePHP\EFDReinf\Common\FactoryId;
 use NFePHP\Common\Certificate;
+use NFePHP\Common\Strings;
 use stdClass;
 
 class EvtInfoContri extends Factory implements FactoryInterface
@@ -84,6 +85,9 @@ class EvtInfoContri extends Factory implements FactoryInterface
         if ($this->std->modo == 'INC') {
             $this->std->fimvalid = null;
         }
+        if ($this->std->modo == 'ALT' && empty($this->std->fimvalid)) {
+            throw new \Exception("Numa alteração é obrigatório informar o FIM da VALIDADE do evento anterior.");
+        }
         $this->dom->addChild(
             $idePeriodo,
             "fimValid",
@@ -91,7 +95,11 @@ class EvtInfoContri extends Factory implements FactoryInterface
             false
         );
         $infocadastro = null;
-        if (!empty($this->std->infocadastro)) {
+        if ($this->std->modo != 'EXC' && empty($this->std->infocadastro)) {
+            throw new \Exception("Nos modos de INCLUSÃO e ALTERAÇÃO os dados de cadastro são OBRIGATÓRIOS");
+        }
+        if (!empty($this->std->infocadastro) && $this->std->modo != 'EXC') {
+            //se existe infocadastro e o modo não é exclusao
             $cad = $this->std->infocadastro;
             $infocadastro = $this->dom->createElement("infoCadastro");
             $this->dom->addChild(
@@ -118,21 +126,20 @@ class EvtInfoContri extends Factory implements FactoryInterface
                 $cad->indacordoisenmulta,
                 true
             );
-            $indsitpj = null;
-            if (isset($cad->indsitpj)) {
-                $indsitpj = $cad->indsitpj;
+            if ($this->tpInsc == 2) {
+                $cad->indsitpj = null;
             }
             $this->dom->addChild(
                 $infocadastro,
                 "indSitPJ",
-                $indsitpj,
+                isset($cad->indsitpj) ? $cad->indsitpj : null,
                 false
             );
             $contato = $this->dom->createElement("contato");
             $this->dom->addChild(
                 $contato,
                 "nmCtt",
-                $cad->contato->nmctt,
+                Strings::replaceUnacceptableCharacters($cad->contato->nmctt),
                 true
             );
             $this->dom->addChild(
@@ -161,13 +168,15 @@ class EvtInfoContri extends Factory implements FactoryInterface
                 $contato,
                 "email",
                 !empty($cad->contato->email)
-                    ? $cad->contato->email
+                    ? Strings::replaceUnacceptableCharacters(
+                        strtolower($cad->contato->email)
+                    )
                     : null,
                 false
             );
             $infocadastro->appendChild($contato);
-            if (!empty($cad->softhouse)) {
-                foreach ($cad->softhouse as $soft) {
+            if (!empty($this->std->softhouse)) {
+                foreach ($this->std->softhouse as $soft) {
                     $softhouse = $this->dom->createElement("softHouse");
                     $this->dom->addChild(
                         $softhouse,
@@ -178,13 +187,13 @@ class EvtInfoContri extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $softhouse,
                         "nmRazao",
-                        $soft->nmrazao,
+                        Strings::replaceUnacceptableCharacters($soft->nmrazao),
                         true
                     );
                     $this->dom->addChild(
                         $softhouse,
                         "nmCont",
-                        $soft->nmcont,
+                        Strings::replaceUnacceptableCharacters($soft->nmcont),
                         true
                     );
                     $this->dom->addChild(
@@ -196,24 +205,24 @@ class EvtInfoContri extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $softhouse,
                         "email",
-                        !empty($soft->email) ? $soft->email : null,
+                        !empty($soft->email) ? Strings::replaceUnacceptableCharacters($soft->email) : null,
                         false
                     );
                     $infocadastro->appendChild($softhouse);
                 }
             }
-            if (!empty($cad->infoefr)) {
+            if (!empty($this->std->infoefr)) {
                 $infoEFR = $this->dom->createElement("infoEFR");
                 $this->dom->addChild(
                     $infoEFR,
                     "ideEFR",
-                    $cad->infoefr->ideefr,
+                    $this->std->infoefr->ideefr,
                     true
                 );
                 $this->dom->addChild(
                     $infoEFR,
                     "cnpjEFR",
-                    !empty($cad->infoefr->cnpjefr) ? $cad->infoefr->cnpjefr : null,
+                    !empty($this->std->infoefr->cnpjefr) ? $this->std->infoefr->cnpjefr : null,
                     false
                 );
                 $infocadastro->appendChild($infoEFR);
@@ -230,6 +239,9 @@ class EvtInfoContri extends Factory implements FactoryInterface
             $modo->appendChild($idePeriodo);
             if (!empty($infocadastro)) {
                 $modo->appendChild($infocadastro);
+            }
+            if (empty($this->std->novavalidade)) {
+                throw new \Exception("Numa alteração é obrigatório indicar o inicio da NOVA validade.");
             }
             if (!empty($this->std->novavalidade)) {
                 $new = $this->std->novavalidade;

@@ -13,8 +13,11 @@ $config = [
     'eventoVersion' => '1_05_01', //versão do layout do evento
     'serviceVersion' => '1_05_01',//versão do webservice
     'contribuinte' => [
+        //'admPublica' => false, //campo Opcional, deve ser true apenas se natureza 
+        //jurídica do contribuinte declarante for de administração pública 
+        //direta federal ([101-5], [104-0], [107-4], [116-3]
         'tpInsc' => 1,  //1-CNPJ, 2-CPF
-        'nrInsc' => '99999999', //numero do documento
+        'nrInsc' => '12345678901234', //numero do documento com 11 ou 14 digitos
         'nmRazao' => 'Razao Social'
     ],    
     'transmissor' => [
@@ -25,12 +28,12 @@ $config = [
 $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
 $std = new \stdClass();
-$std->sequencial = 1;
+//$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
 $std->indretif = 1;
 $std->nrrecibo = '1-23-4567-8901-2345';
 $std->perapur = '2017-11';
 $std->retifs1250 = "S"; //null ou "S"
-$std->tpinscadq = 1; //1 cnpj ou 3 CAEPF
+$std->tpinscadq = "1"; //1 cnpj ou 3 CAEPF
 $std->nrinscadq = "12345678901234"; //cnpj ou caepf
 $std->tpinscprod = 1; //1-CNPJ 2-CPF
 $std->nrinscprod = '12345678901234'; //cnpj ou cpf
@@ -43,7 +46,7 @@ $std->detaquis[0]->vlrcpdescpr = 5000.56;
 $std->detaquis[0]->vlrratdescpr = 100.77;
 $std->detaquis[0]->vlrsenardesc = 50.88;
 $std->detaquis[0]->infoprocjud[0] = new \stdClass();    
-$std->detaquis[0]->infoprocjud[0]->nrprocjud = 'ksksksksksksksk';
+$std->detaquis[0]->infoprocjud[0]->nrprocjud = '123456';
 $std->detaquis[0]->infoprocjud[0]->codsusp = '9292929';
 $std->detaquis[0]->infoprocjud[0]->vlrcpnret = 1000.55;
 $std->detaquis[0]->infoprocjud[0]->vlrratnre = 101.02;
@@ -60,8 +63,7 @@ try {
     $xml = Event::evtAqProd(
         $configJson,
         $std,
-        $certificate,
-        '2017-08-03 10:37:00'
+        $certificate
     )->toXml();
     
     //$xml = Evento::r2050($json, $std, $certificate)->toXML();
