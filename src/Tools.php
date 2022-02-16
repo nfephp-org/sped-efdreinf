@@ -207,7 +207,7 @@ class Tools extends ToolsBase
             . "</sped:{$this->method}>";
         return $request;
     }
-    
+
     /**
      * Consultation of Fachamento
      * @param stdClass $std
@@ -397,7 +397,7 @@ class Tools extends ToolsBase
             . "</sped:{$this->method}>";
         return $request;
     }
-    
+
     /**
      * Consultation R2055
      * @param integer $evt
@@ -515,7 +515,7 @@ class Tools extends ToolsBase
         $request = "<sped:{$this->method}>"
             . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
-            . "<sped:nrInsc>{$this->cod}</sped:nrInsc>";
+            . "<sped:nrInsc>{$this->doc}</sped:nrInsc>";
         if (!empty($std->perapur)) {
             $request .= "<sped:perApur>{$std->perapur}</sped:perApur>";
         }
@@ -666,8 +666,10 @@ class Tools extends ToolsBase
     /**
      * Verify the availability of a digital certificate.
      * If available, place it where it is needed
+     *
      * @param FactoryInterface $evento
      * @throws RuntimeException
+     * @return void
      */
     protected function checkCertificate(FactoryInterface $evento)
     {
@@ -678,6 +680,14 @@ class Tools extends ToolsBase
         }
     }
 
+    /**
+     * Valid input parameters
+     *
+     * @param array $properties
+     * @param \stdClass $std
+     * @return void
+     * @throws \Exception
+     */
     protected function validInputParameters($properties, $std)
     {
         foreach ($properties as $key => $rules) {
