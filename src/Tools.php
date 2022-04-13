@@ -269,7 +269,7 @@ class Tools extends ToolsBase
                 'required' => true,
                 'type' => 'integer',
                 'min' => 1,
-                'max' => 2
+                'max' => 4
             ],
             'nrinscestab' => [
                 'required' => true,
@@ -466,7 +466,7 @@ class Tools extends ToolsBase
                 'required' => true,
                 'type' => 'integer',
                 'min' => 1,
-                'max' => 2
+                'max' => 4
             ],
             'nrinscestab' => [
                 'required' => true,
