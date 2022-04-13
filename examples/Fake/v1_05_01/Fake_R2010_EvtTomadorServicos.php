@@ -127,8 +127,7 @@ try {
     $xml = Event::evtServTom(
         $configJson,
         $std,
-        $certificate,
-        '2017-08-03 10:37:00'
+        $certificate       
     )->toXml();
     
     //$xml = Evento::r2010($json, $std, $certificate)->toXML();
