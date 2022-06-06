@@ -43,7 +43,7 @@ $jsonSchema = '{
                 "classtrib": {
                     "required": true,
                     "type": "string",
-                    "pattern": "^(01|02|03|04|06|07|08|09|10|11|13|14|21|22|60|70|80|85|99)$"
+                    "pattern": "^(00|01|02|03|04|06|07|08|09|10|11|13|14|21|22|60|70|80|85|99)$"
                 },
                 "indescrituracao": {
                     "required": true,
