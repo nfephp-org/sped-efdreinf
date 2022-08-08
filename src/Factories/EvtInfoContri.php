@@ -85,9 +85,6 @@ class EvtInfoContri extends Factory implements FactoryInterface
         if ($this->std->modo == 'INC') {
             $this->std->fimvalid = null;
         }
-        if ($this->std->modo == 'ALT' && empty($this->std->fimvalid)) {
-            throw new \Exception("Numa alteração é obrigatório informar o FIM da VALIDADE do evento anterior.");
-        }
         $this->dom->addChild(
             $idePeriodo,
             "fimValid",
