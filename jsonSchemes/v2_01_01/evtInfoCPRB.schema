@@ -1,5 +1,5 @@
 {
-    "title": "evtAssocDespRep",
+    "title": "evtCPRB",
     "type": "object",
     "properties": {
         "sequencial": {
@@ -27,14 +27,27 @@
         "tpinscestab": {
             "required": true,
             "type": "string",
-            "pattern": "^(1|2)$"
+            "pattern": "^(1|4)$"
         },
         "nrinscestab": {
             "required": true,
             "type": "string",
-            "pattern": "^[0-9]{14}$"
+            "pattern": "^[0-9]{12}|[0-9]{14}$"
         },
-        "recursosrep": {
+        "vlrrecbrutatotal": {
+            "required": true,
+            "type": "number",
+            "multipleOf": 0.01
+        },
+        "vlrcpapurtotal": {
+            "required": true,
+            "type": "number"
+        },
+        "vlrcprbsusptotal": {
+            "required": true,
+            "type": "number"
+        },
+        "tipocod": {
             "required": true,
             "type": "array",
             "minItems": 1,
@@ -42,56 +55,69 @@
             "items": {
                 "type": "object",
                 "properties": {
-                    "cnpjassocdesp": {
+                    "codativecon": {
                         "required": true,
                         "type": "string",
-                        "pattern": "^[0-9]{14}$"
+                        "pattern": "^[0-9]{8}$"
                     },
-                    "vlrtotalrep": {
-                        "required": true,
-                        "type": "number",
-                        "multipleOf": 0.01
-                    },
-                    "vlrtotalret": {
+                    "vlrrecbrutaativ": {
                         "required": true,
                         "type": "number"
                     },
-                    "vlrtotalnret": {
-                        "required": false,
-                        "type": ["number","null"]
-                    },
-                    "inforecurso": {
+                    "vlrexcrecbruta": {
                         "required": true,
-                        "type": "array",
-                        "minItems": 1,
-                        "maxItems": 500,
+                        "type": "number"
+                    },
+                    "vlradicrecbruta": {
+                        "required": true,
+                        "type": "number"
+                    },
+                    "vlrbccprb": {
+                        "required": true,
+                        "type": "number"
+                    },
+                    "vlrcprbapur": {
+                        "required": false,
+                        "type": "number"
+                    },
+                    "tipoajuste": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
                         "items": {
                             "type": "object",
                             "properties": {
-                                "tprepasse": {
+                                "tpajuste": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 1
+                                },
+                                "codajuste": {
                                     "required": true,
                                     "type": "integer",
                                     "minimum": 1,
-                                    "maximum": 5
+                                    "maximum": 11
                                 },
-                                "descrecurso": {
+                                "vlrajuste": {
+                                    "required": true,
+                                    "type": "number"
+                                },
+                                "descajuste": {
                                     "required": true,
                                     "type": "string",
                                     "minLength": 1,
                                     "maxLength": 20
                                 },
-                                "vlrbruto": {
+                                "dtajuste": {
                                     "required": true,
-                                    "type": "number"
-                                },
-                                "vlrretapur": {
-                                    "required": true,
-                                    "type": "number"
+                                    "type": "string",
+                                    "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])$"
                                 }
                             }
                         }
                     },
-                    "infoproc": {
+                    "infproc": {
                         "required": false,
                         "type": ["array","null"],
                         "minItems": 0,
@@ -114,12 +140,11 @@
                                 "codsusp": {
                                     "required": false,
                                     "type": ["string","null"],
-                                    "pattern": "^[0-9]{0,14}$"
+                                    "pattern": "^[0-9]{14}$"
                                 },
-                                "vlrnret": {
+                                "vlrcprbsusp": {
                                     "required": true,
-                                    "type": "number",
-                                    "multipleOf": 0.01
+                                    "type": "number"
                                 }
                             }
                         }

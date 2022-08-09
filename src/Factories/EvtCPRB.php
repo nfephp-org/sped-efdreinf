@@ -66,14 +66,11 @@ class EvtCPRB extends Factory implements FactoryInterface
             throw new \Exception("Para retificar o evento DEVE ser informado o "
                 . "número do RECIBO do evento anterior que está retificando.");
         }
-        if ($this->std->indretif == 1) {
-            $this->std->nrrecibo = null;
-        }
         $this->dom->addChild(
             $ideEvento,
             "nrRecibo",
             !empty($this->std->nrrecibo) ? $this->std->nrrecibo : null,
-            false
+            $this->std->indretif == 2 ? true : false
         );
         $this->dom->addChild(
             $ideEvento,

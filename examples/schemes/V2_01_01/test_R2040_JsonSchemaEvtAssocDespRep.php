@@ -9,7 +9,7 @@ use JsonSchema\SchemaStorage;
 use JsonSchema\Validator;
 
 $evento = 'evtRecursoRepassadoAssociacao';
-$version = '1_05_01';
+$version = '2_01_01';
 
 $jsonSchema = '{
     "title": "evtAssocDespRep",
@@ -36,11 +36,6 @@ $jsonSchema = '{
             "required": true,
             "type": "string",
             "pattern": "^20([0-9][0-9])-(0[1-9]|1[0-2])$"
-        },
-        "tpinscestab": {
-            "required": true,
-            "type": "string",
-            "pattern": "^(1|2)$"
         },
         "nrinscestab": {
             "required": true,
@@ -149,7 +144,6 @@ $std = new \stdClass();
 $std->indretif = 1;
 $std->nrrecibo = '1-00-1234-1234-1234556789012345';
 $std->perapur = '2017-11';
-$std->tpinscestab = '1';
 $std->nrinscestab = '12345678901234';
 
 $std->recursosrep[0] = new \stdClass();
@@ -169,6 +163,7 @@ $std->recursosrep[0]->infoproc[0]->tpproc = 1;
 $std->recursosrep[0]->infoproc[0]->nrproc = 'ABC21';
 $std->recursosrep[0]->infoproc[0]->codsusp = '12345678901234';
 $std->recursosrep[0]->infoproc[0]->vlrnret = 1000.66;
+
 
 
 // Schema must be decoded before it can be used for validation

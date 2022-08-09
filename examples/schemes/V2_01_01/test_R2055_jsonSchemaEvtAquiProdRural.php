@@ -8,11 +8,11 @@ use JsonSchema\Constraints\Factory;
 use JsonSchema\SchemaStorage;
 use JsonSchema\Validator;
 
-$evento = 'evtRecursoRepassadoAssociacao';
-$version = '1_05_01';
+$evento = 'evtAquisicaoProdRural';
+$version = '2_01_01';
 
 $jsonSchema = '{
-    "title": "evtAssocDespRep",
+    "title": "evtAqProd",
     "type": "object",
     "properties": {
         "sequencial": {
@@ -35,76 +35,71 @@ $jsonSchema = '{
         "perapur": {
             "required": true,
             "type": "string",
-            "pattern": "^20([0-9][0-9])-(0[1-9]|1[0-2])$"
+            "pattern": "^20([1-9][0-9])-(0[1-9]|1[0-2])$"
         },
-        "tpinscestab": {
+        "retifs1250": {
+            "required": false,
+            "type": ["string","null"],
+            "pattern": "^(S)$"
+        },
+        "tpinscadq": {
             "required": true,
             "type": "string",
-            "pattern": "^(1|2)$"
+            "pattern": "^(1|3)$"
         },
-        "nrinscestab": {
+        "nrinscadq": {
             "required": true,
             "type": "string",
             "pattern": "^[0-9]{14}$"
         },
-        "recursosrep": {
+        "tpinscprod": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2
+        },
+        "nrinscprod": {
+            "required": true,
+            "type": "string",
+            "pattern": "^([0-9]{11}|[0-9]{14})$"
+        },
+        "indopccp": {
+            "required": false,
+            "type": ["string","null"],
+            "pattern": "^(S)$"
+        },
+        "detaquis": {
             "required": true,
             "type": "array",
             "minItems": 1,
-            "maxItems": 500,
+            "maxItems": 6,
             "items": {
                 "type": "object",
                 "properties": {
-                    "cnpjassocdesp": {
+                    "indaquis": {
                         "required": true,
-                        "type": "string",
-                        "pattern": "^[0-9]{14}$"
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 7
                     },
-                    "vlrtotalrep": {
+                    "vlrbruto": {
                         "required": true,
                         "type": "number",
                         "multipleOf": 0.01
                     },
-                    "vlrtotalret": {
+                    "vlrcpdescpr": {
                         "required": true,
                         "type": "number"
                     },
-                    "vlrtotalnret": {
-                        "required": false,
-                        "type": ["number","null"]
-                    },
-                    "inforecurso": {
+                    "vlrratdescpr": {
                         "required": true,
-                        "type": "array",
-                        "minItems": 1,
-                        "maxItems": 500,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "tprepasse": {
-                                    "required": true,
-                                    "type": "integer",
-                                    "minimum": 1,
-                                    "maximum": 5
-                                },
-                                "descrecurso": {
-                                    "required": true,
-                                    "type": "string",
-                                    "minLength": 1,
-                                    "maxLength": 20
-                                },
-                                "vlrbruto": {
-                                    "required": true,
-                                    "type": "number"
-                                },
-                                "vlrretapur": {
-                                    "required": true,
-                                    "type": "number"
-                                }
-                            }
-                        }
+                        "type": "number"
                     },
-                    "infoproc": {
+                    "vlrsenardesc": {
+                        "required": true,
+                        "type": "number"
+                    },
+                    "infoprocjud": {
                         "required": false,
                         "type": ["array","null"],
                         "minItems": 0,
@@ -112,27 +107,27 @@ $jsonSchema = '{
                         "items": {
                             "type": "object",
                             "properties": {
-                                "tpproc": {
-                                    "required": true,
-                                    "type": "integer",
-                                    "minimum": 1,
-                                    "maximum": 2
-                                },
-                                "nrproc": {
+                                "nrprocjud": {
                                     "required": true,
                                     "type": "string",
-                                    "minLength": 1,
-                                    "maxLength": 21
+                                    "pattern": "^[0-9]{1,21}$"
                                 },
                                 "codsusp": {
                                     "required": false,
                                     "type": ["string","null"],
                                     "pattern": "^[0-9]{0,14}$"
                                 },
-                                "vlrnret": {
-                                    "required": true,
-                                    "type": "number",
-                                    "multipleOf": 0.01
+                                "vlrcpnret": {
+                                    "required": false,
+                                    "type": ["number", "null"]
+                                },
+                                "vlrratnret": {
+                                    "required": false,
+                                    "type": ["number", "null"]
+                                },
+                                "vlrsenarnret": {
+                                    "required": false,
+                                    "type": ["number", "null"]
                                 }
                             }
                         }
@@ -147,29 +142,27 @@ $jsonSchema = '{
 $std = new \stdClass();
 //$std->sequencial = 1;
 $std->indretif = 1;
-$std->nrrecibo = '1-00-1234-1234-1234556789012345';
+$std->nrrecibo = '1-23-4567-8901-2345';
 $std->perapur = '2017-11';
-$std->tpinscestab = '1';
-$std->nrinscestab = '12345678901234';
+$std->retifs1250 = "S"; //null ou "S"
+$std->tpinscadq = "1"; //1 cnpj ou 3 CAEPF
+$std->nrinscadq = "12345678901234"; //cnpj ou caepf
+$std->tpinscprod = 1; //1-CNPJ 2-CPF
+$std->nrinscprod = '12345678901234'; //cnpj ou cpf
+$std->indopccp = "S"; //null ou "S"
 
-$std->recursosrep[0] = new \stdClass();
-$std->recursosrep[0]->cnpjassocdesp = '12345678901234';
-$std->recursosrep[0]->vlrtotalrep = 1000.00;
-$std->recursosrep[0]->vlrtotalret = 100.00;
-$std->recursosrep[0]->vlrtotalnret = 10.00;
-
-$std->recursosrep[0]->inforecurso[0] = new \stdClass();
-$std->recursosrep[0]->inforecurso[0]->tprepasse = 3;
-$std->recursosrep[0]->inforecurso[0]->descrecurso = 'sei la';
-$std->recursosrep[0]->inforecurso[0]->vlrbruto = 5000.03;
-$std->recursosrep[0]->inforecurso[0]->vlrretapur = 500.99;
-
-$std->recursosrep[0]->infoproc[0] = new \stdClass();
-$std->recursosrep[0]->infoproc[0]->tpproc = 1;
-$std->recursosrep[0]->infoproc[0]->nrproc = 'ABC21';
-$std->recursosrep[0]->infoproc[0]->codsusp = '12345678901234';
-$std->recursosrep[0]->infoproc[0]->vlrnret = 1000.66;
-
+$std->detaquis[0] = new \stdClass();
+$std->detaquis[0]->indaquis = 1; //de 1 até 7
+$std->detaquis[0]->vlrbruto = 10000.00;
+$std->detaquis[0]->vlrcpdescpr = 5000.56;
+$std->detaquis[0]->vlrratdescpr = 100.77;
+$std->detaquis[0]->vlrsenardesc = 50.88;
+$std->detaquis[0]->infoprocjud[0] = new \stdClass();
+$std->detaquis[0]->infoprocjud[0]->nrprocjud = '123456';
+$std->detaquis[0]->infoprocjud[0]->codsusp = '9292929';
+$std->detaquis[0]->infoprocjud[0]->vlrcpnret = 1000.55;
+$std->detaquis[0]->infoprocjud[0]->vlrratnre = 101.02;
+$std->detaquis[0]->infoprocjud[0]->vlrsenarnret = 852.31;
 
 // Schema must be decoded before it can be used for validation
 $jsonSchemaObject = json_decode($jsonSchema);

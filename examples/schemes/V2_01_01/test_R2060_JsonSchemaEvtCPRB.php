@@ -8,11 +8,11 @@ use JsonSchema\Constraints\Factory;
 use JsonSchema\SchemaStorage;
 use JsonSchema\Validator;
 
-$evento = 'evtRecursoRepassadoAssociacao';
-$version = '1_05_01';
+$evento = 'evtInfoCPRB';
+$version = '2_01_01';
 
 $jsonSchema = '{
-    "title": "evtAssocDespRep",
+    "title": "evtCPRB",
     "type": "object",
     "properties": {
         "sequencial": {
@@ -40,14 +40,27 @@ $jsonSchema = '{
         "tpinscestab": {
             "required": true,
             "type": "string",
-            "pattern": "^(1|2)$"
+            "pattern": "^(1|4)$"
         },
         "nrinscestab": {
             "required": true,
             "type": "string",
-            "pattern": "^[0-9]{14}$"
+            "pattern": "^[0-9]{12}|[0-9]{14}$"
         },
-        "recursosrep": {
+        "vlrrecbrutatotal": {
+            "required": true,
+            "type": "number",
+            "multipleOf": 0.01
+        },
+        "vlrcpapurtotal": {
+            "required": true,
+            "type": "number"
+        },
+        "vlrcprbsusptotal": {
+            "required": true,
+            "type": "number"
+        },
+        "tipocod": {
             "required": true,
             "type": "array",
             "minItems": 1,
@@ -55,56 +68,69 @@ $jsonSchema = '{
             "items": {
                 "type": "object",
                 "properties": {
-                    "cnpjassocdesp": {
+                    "codativecon": {
                         "required": true,
                         "type": "string",
-                        "pattern": "^[0-9]{14}$"
+                        "pattern": "^[0-9]{8}$"
                     },
-                    "vlrtotalrep": {
-                        "required": true,
-                        "type": "number",
-                        "multipleOf": 0.01
-                    },
-                    "vlrtotalret": {
+                    "vlrrecbrutaativ": {
                         "required": true,
                         "type": "number"
                     },
-                    "vlrtotalnret": {
-                        "required": false,
-                        "type": ["number","null"]
-                    },
-                    "inforecurso": {
+                    "vlrexcrecbruta": {
                         "required": true,
-                        "type": "array",
-                        "minItems": 1,
-                        "maxItems": 500,
+                        "type": "number"
+                    },
+                    "vlradicrecbruta": {
+                        "required": true,
+                        "type": "number"
+                    },
+                    "vlrbccprb": {
+                        "required": true,
+                        "type": "number"
+                    },
+                    "vlrcprbapur": {
+                        "required": false,
+                        "type": "number"
+                    },
+                    "tipoajuste": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
                         "items": {
                             "type": "object",
                             "properties": {
-                                "tprepasse": {
+                                "tpajuste": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 1
+                                },
+                                "codajuste": {
                                     "required": true,
                                     "type": "integer",
                                     "minimum": 1,
-                                    "maximum": 5
+                                    "maximum": 11
                                 },
-                                "descrecurso": {
+                                "vlrajuste": {
+                                    "required": true,
+                                    "type": "number"
+                                },
+                                "descajuste": {
                                     "required": true,
                                     "type": "string",
                                     "minLength": 1,
                                     "maxLength": 20
                                 },
-                                "vlrbruto": {
+                                "dtajuste": {
                                     "required": true,
-                                    "type": "number"
-                                },
-                                "vlrretapur": {
-                                    "required": true,
-                                    "type": "number"
+                                    "type": "string",
+                                    "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])$"
                                 }
                             }
                         }
                     },
-                    "infoproc": {
+                    "infproc": {
                         "required": false,
                         "type": ["array","null"],
                         "minItems": 0,
@@ -127,12 +153,11 @@ $jsonSchema = '{
                                 "codsusp": {
                                     "required": false,
                                     "type": ["string","null"],
-                                    "pattern": "^[0-9]{0,14}$"
+                                    "pattern": "^[0-9]{14}$"
                                 },
-                                "vlrnret": {
+                                "vlrcprbsusp": {
                                     "required": true,
-                                    "type": "number",
-                                    "multipleOf": 0.01
+                                    "type": "number"
                                 }
                             }
                         }
@@ -149,26 +174,32 @@ $std = new \stdClass();
 $std->indretif = 1;
 $std->nrrecibo = '1-00-1234-1234-1234556789012345';
 $std->perapur = '2017-11';
-$std->tpinscestab = '1';
-$std->nrinscestab = '12345678901234';
+$std->tpinscestab = "1";
+$std->nrinscestab = "12345678901234";
+$std->vlrrecbrutatotal = 10000.00;
+$std->vlrcpapurtotal = 1020.00;
+$std->vlrcprbsusptotal = 200.00;
 
-$std->recursosrep[0] = new \stdClass();
-$std->recursosrep[0]->cnpjassocdesp = '12345678901234';
-$std->recursosrep[0]->vlrtotalrep = 1000.00;
-$std->recursosrep[0]->vlrtotalret = 100.00;
-$std->recursosrep[0]->vlrtotalnret = 10.00;
+$std->tipocod[0] = new \stdClass();
+$std->tipocod[0]->codativecon = '12345678';
+$std->tipocod[0]->vlrrecbrutaativ = 4444.44;
+$std->tipocod[0]->vlrexcrecbruta = 3333.33;
+$std->tipocod[0]->vlradicrecbruta = 2222.22;
+$std->tipocod[0]->vlrbccprb = 1111.11;
+$std->tipocod[0]->vlrcprbapur = 2000.00;
 
-$std->recursosrep[0]->inforecurso[0] = new \stdClass();
-$std->recursosrep[0]->inforecurso[0]->tprepasse = 3;
-$std->recursosrep[0]->inforecurso[0]->descrecurso = 'sei la';
-$std->recursosrep[0]->inforecurso[0]->vlrbruto = 5000.03;
-$std->recursosrep[0]->inforecurso[0]->vlrretapur = 500.99;
+$std->tipocod[0]->tipoajuste[0] = new \stdClass();
+$std->tipocod[0]->tipoajuste[0]->tpajuste = 0;
+$std->tipocod[0]->tipoajuste[0]->codajuste = 11;
+$std->tipocod[0]->tipoajuste[0]->vlrajuste = 200.00;
+$std->tipocod[0]->tipoajuste[0]->descajuste = 'sei la';
+$std->tipocod[0]->tipoajuste[0]->dtajuste = '2017-10';
 
-$std->recursosrep[0]->infoproc[0] = new \stdClass();
-$std->recursosrep[0]->infoproc[0]->tpproc = 1;
-$std->recursosrep[0]->infoproc[0]->nrproc = 'ABC21';
-$std->recursosrep[0]->infoproc[0]->codsusp = '12345678901234';
-$std->recursosrep[0]->infoproc[0]->vlrnret = 1000.66;
+$std->tipocod[0]->infoproc[0] = new \stdClass();
+$std->tipocod[0]->infoproc[0]->vlrcprbsusp = 200.00;
+$std->tipocod[0]->infoproc[0]->tpproc = 1;
+$std->tipocod[0]->infoproc[0]->nrproc = 'ABC21';
+$std->tipocod[0]->infoproc[0]->codsusp = '12345678901234';
 
 
 // Schema must be decoded before it can be used for validation
