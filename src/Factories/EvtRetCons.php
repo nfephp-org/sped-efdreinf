@@ -49,6 +49,5 @@ class EvtRetCons extends Factory implements FactoryInterface
      */
     protected function toNode()
     {
-
     }
 }

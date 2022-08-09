@@ -49,7 +49,5 @@ class EvtRetPJ extends Factory implements FactoryInterface
      */
     protected function toNode()
     {
-
     }
-
 }

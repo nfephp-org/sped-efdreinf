@@ -49,7 +49,5 @@ class EvtBenefNId extends Factory implements FactoryInterface
      */
     protected function toNode()
     {
-
     }
-
 }

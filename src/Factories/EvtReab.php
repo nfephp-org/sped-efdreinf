@@ -49,7 +49,5 @@ class EvtReab extends Factory implements FactoryInterface
      */
     protected function toNode()
     {
-
     }
-
 }
