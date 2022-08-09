@@ -4,7 +4,7 @@
 
 A nova versão dos layouts v2.1.1 entra em vigor a partir da competência de março/2023, até fevereiro de 2023 deve ser utilizada a versão 1.5.1.
 
-> NOTA: já está em andamento as alterações e inclusões para suportar a nova versão, concomitentemente com a versão 1.5.1.
+> NOTA: já está em andamento as alterações e inclusões para suportar a nova versão, concomitantemente com a versão 1.5.1.
 
 ### Alterações na nova versão v2.1.1
 
