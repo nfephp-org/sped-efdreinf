@@ -72,7 +72,7 @@ class EvtAssocDespRec extends Factory implements FactoryInterface
             $ideEvento,
             "nrRecibo",
             !empty($this->std->nrrecibo) ? $this->std->nrrecibo : null,
-            true
+            $this->std->indretif == 2 ? true : false
         );
         $this->dom->addChild(
             $ideEvento,

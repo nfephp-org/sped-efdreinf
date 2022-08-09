@@ -8,16 +8,16 @@ use JsonSchema\Constraints\Factory;
 use JsonSchema\SchemaStorage;
 use JsonSchema\Validator;
 
-$evento = 'evtRecursoRepassadoAssociacao';
-$version = '1_05_01';
+$evento = 'evtRecursoRecebidoAssociacao';
+$version = '2_01_01';
 
 $jsonSchema = '{
-    "title": "evtAssocDespRep",
+    "title": "evtAssocDespRec",
     "type": "object",
     "properties": {
         "sequencial": {
             "required": false,
-            "type": ["integer","null"],
+            "type": "integer",
             "minimum": 1,
             "maximum": 99999
         },
@@ -37,17 +37,12 @@ $jsonSchema = '{
             "type": "string",
             "pattern": "^20([0-9][0-9])-(0[1-9]|1[0-2])$"
         },
-        "tpinscestab": {
-            "required": true,
-            "type": "string",
-            "pattern": "^(1|2)$"
-        },
         "nrinscestab": {
             "required": true,
             "type": "string",
             "pattern": "^[0-9]{14}$"
         },
-        "recursosrep": {
+        "recursosrec": {
             "required": true,
             "type": "array",
             "minItems": 1,
@@ -55,12 +50,12 @@ $jsonSchema = '{
             "items": {
                 "type": "object",
                 "properties": {
-                    "cnpjassocdesp": {
+                    "cnpjorigrecurso": {
                         "required": true,
                         "type": "string",
                         "pattern": "^[0-9]{14}$"
                     },
-                    "vlrtotalrep": {
+                    "vlrtotalrec": {
                         "required": true,
                         "type": "number",
                         "multipleOf": 0.01
@@ -71,7 +66,7 @@ $jsonSchema = '{
                     },
                     "vlrtotalnret": {
                         "required": false,
-                        "type": ["number","null"]
+                        "type": "number"
                     },
                     "inforecurso": {
                         "required": true,
@@ -143,33 +138,31 @@ $jsonSchema = '{
     }
 }';
 
-
 $std = new \stdClass();
-//$std->sequencial = 1;
+$std->sequencial = 1;
 $std->indretif = 1;
 $std->nrrecibo = '1-00-1234-1234-1234556789012345';
 $std->perapur = '2017-11';
-$std->tpinscestab = '1';
+$std->tpinscestab = 1;
 $std->nrinscestab = '12345678901234';
 
-$std->recursosrep[0] = new \stdClass();
-$std->recursosrep[0]->cnpjassocdesp = '12345678901234';
-$std->recursosrep[0]->vlrtotalrep = 1000.00;
-$std->recursosrep[0]->vlrtotalret = 100.00;
-$std->recursosrep[0]->vlrtotalnret = 10.00;
+$std->recursosrec[0] = new \stdClass();
+$std->recursosrec[0]->cnpjorigrecurso = '12345678901234';
+$std->recursosrec[0]->vlrtotalrec = 1000.00;
+$std->recursosrec[0]->vlrtotalret = 100.00;
+$std->recursosrec[0]->vlrtotalnret = 10.00;
 
-$std->recursosrep[0]->inforecurso[0] = new \stdClass();
-$std->recursosrep[0]->inforecurso[0]->tprepasse = 3;
-$std->recursosrep[0]->inforecurso[0]->descrecurso = 'sei la';
-$std->recursosrep[0]->inforecurso[0]->vlrbruto = 5000.03;
-$std->recursosrep[0]->inforecurso[0]->vlrretapur = 500.99;
+$std->recursosrec[0]->inforecurso[0] = new \stdClass();
+$std->recursosrec[0]->inforecurso[0]->tprepasse = 3;
+$std->recursosrec[0]->inforecurso[0]->descrecurso = 'sei la';
+$std->recursosrec[0]->inforecurso[0]->vlrbruto = 5000.00;
+$std->recursosrec[0]->inforecurso[0]->vlrretapur = 500.00;
 
-$std->recursosrep[0]->infoproc[0] = new \stdClass();
-$std->recursosrep[0]->infoproc[0]->tpproc = 1;
-$std->recursosrep[0]->infoproc[0]->nrproc = 'ABC21';
-$std->recursosrep[0]->infoproc[0]->codsusp = '12345678901234';
-$std->recursosrep[0]->infoproc[0]->vlrnret = 1000.66;
-
+$std->recursosrec[0]->infoproc[0] = new \stdClass();
+$std->recursosrec[0]->infoproc[0]->tpproc = 1;
+$std->recursosrec[0]->infoproc[0]->nrproc = 'ABC21';
+$std->recursosrec[0]->infoproc[0]->codsusp = '12345678901234';
+$std->recursosrec[0]->infoproc[0]->vlrnret = 1000.66;
 
 // Schema must be decoded before it can be used for validation
 $jsonSchemaObject = json_decode($jsonSchema);

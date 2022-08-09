@@ -8,11 +8,11 @@ use JsonSchema\Constraints\Factory;
 use JsonSchema\SchemaStorage;
 use JsonSchema\Validator;
 
-$evento = 'evtRecursoRepassadoAssociacao';
-$version = '1_05_01';
+$evento = 'evtInfoProdRural';
+$version = '2_01_01';
 
 $jsonSchema = '{
-    "title": "evtAssocDespRep",
+    "title": "evtComProd",
     "type": "object",
     "properties": {
         "sequencial": {
@@ -37,72 +37,56 @@ $jsonSchema = '{
             "type": "string",
             "pattern": "^20([0-9][0-9])-(0[1-9]|1[0-2])$"
         },
-        "tpinscestab": {
-            "required": true,
-            "type": "string",
-            "pattern": "^(1|2)$"
-        },
         "nrinscestab": {
             "required": true,
             "type": "string",
             "pattern": "^[0-9]{14}$"
         },
-        "recursosrep": {
+        "vlrrecbrutatotal": {
+            "required": true,
+            "type": "number",
+            "multipleOf": 0.01
+        },
+        "vlrcpapur": {
+            "required": true,
+            "type": "number"
+        },
+        "vlrratapur": {
+            "required": true,
+            "type": "number"
+        },
+        "vlrsenarapur": {
+            "required": true,
+            "type": "number"
+        },
+        "vlrcpsusptotal": {
+            "required": false,
+            "type": ["number","null"]
+        },
+        "vlrratsusptotal": {
+            "required": false,
+            "type": ["number","null"]
+        },
+        "vlrsenarsusptotal": {
+            "required": false,
+            "type": ["number","null"]
+        },
+        "tipocom": {
             "required": true,
             "type": "array",
             "minItems": 1,
-            "maxItems": 500,
+            "maxItems": 3,
             "items": {
                 "type": "object",
                 "properties": {
-                    "cnpjassocdesp": {
+                    "indcom": {
                         "required": true,
                         "type": "string",
-                        "pattern": "^[0-9]{14}$"
+                        "pattern": "^(1|7|8|9)$"
                     },
-                    "vlrtotalrep": {
-                        "required": true,
-                        "type": "number",
-                        "multipleOf": 0.01
-                    },
-                    "vlrtotalret": {
+                    "vlrrecbruta": {
                         "required": true,
                         "type": "number"
-                    },
-                    "vlrtotalnret": {
-                        "required": false,
-                        "type": ["number","null"]
-                    },
-                    "inforecurso": {
-                        "required": true,
-                        "type": "array",
-                        "minItems": 1,
-                        "maxItems": 500,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "tprepasse": {
-                                    "required": true,
-                                    "type": "integer",
-                                    "minimum": 1,
-                                    "maximum": 5
-                                },
-                                "descrecurso": {
-                                    "required": true,
-                                    "type": "string",
-                                    "minLength": 1,
-                                    "maxLength": 20
-                                },
-                                "vlrbruto": {
-                                    "required": true,
-                                    "type": "number"
-                                },
-                                "vlrretapur": {
-                                    "required": true,
-                                    "type": "number"
-                                }
-                            }
-                        }
                     },
                     "infoproc": {
                         "required": false,
@@ -127,12 +111,19 @@ $jsonSchema = '{
                                 "codsusp": {
                                     "required": false,
                                     "type": ["string","null"],
-                                    "pattern": "^[0-9]{0,14}$"
+                                    "pattern": "^[0-9]{14}$"
                                 },
-                                "vlrnret": {
-                                    "required": true,
-                                    "type": "number",
-                                    "multipleOf": 0.01
+                                "vlrcpsusp": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlrratsusp": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlrsenarsusp": {
+                                    "required": false,
+                                    "type": ["number","null"]
                                 }
                             }
                         }
@@ -147,29 +138,28 @@ $jsonSchema = '{
 $std = new \stdClass();
 //$std->sequencial = 1;
 $std->indretif = 1;
-$std->nrrecibo = '1-00-1234-1234-1234556789012345';
+$std->nrrecibo = '1-23-4567-8901-2345';
 $std->perapur = '2017-11';
-$std->tpinscestab = '1';
-$std->nrinscestab = '12345678901234';
+$std->nrinscestab = "12345678901234";
+$std->vlrrecbrutatotal = 10000.00;
+$std->vlrcpapur = 1020;
+$std->vlrratapur = 200;
+$std->vlrsenarapur = 200;
+$std->vlrcpsusptotal = 1000;
+$std->vlrratsusptotal = 200;
+$std->vlrsenarsusptotal = 300;
 
-$std->recursosrep[0] = new \stdClass();
-$std->recursosrep[0]->cnpjassocdesp = '12345678901234';
-$std->recursosrep[0]->vlrtotalrep = 1000.00;
-$std->recursosrep[0]->vlrtotalret = 100.00;
-$std->recursosrep[0]->vlrtotalnret = 10.00;
+$std->tipocom[0] = new \stdClass();
+$std->tipocom[0]->indcom = "1";
+$std->tipocom[0]->vlrrecbruta = 200;
 
-$std->recursosrep[0]->inforecurso[0] = new \stdClass();
-$std->recursosrep[0]->inforecurso[0]->tprepasse = 3;
-$std->recursosrep[0]->inforecurso[0]->descrecurso = 'sei la';
-$std->recursosrep[0]->inforecurso[0]->vlrbruto = 5000.03;
-$std->recursosrep[0]->inforecurso[0]->vlrretapur = 500.99;
-
-$std->recursosrep[0]->infoproc[0] = new \stdClass();
-$std->recursosrep[0]->infoproc[0]->tpproc = 1;
-$std->recursosrep[0]->infoproc[0]->nrproc = 'ABC21';
-$std->recursosrep[0]->infoproc[0]->codsusp = '12345678901234';
-$std->recursosrep[0]->infoproc[0]->vlrnret = 1000.66;
-
+$std->tipocom[0]->infoproc[0] = new \stdClass();
+$std->tipocom[0]->infoproc[0]->tpproc = 1;
+$std->tipocom[0]->infoproc[0]->nrproc = 'ABC21';
+$std->tipocom[0]->infoproc[0]->codsusp = '12345678901234';
+$std->tipocom[0]->infoproc[0]->vlrcpsusp = 100;
+$std->tipocom[0]->infoproc[0]->vlrratsusp = 200;
+$std->tipocom[0]->infoproc[0]->vlrsenarsusp = 300;
 
 // Schema must be decoded before it can be used for validation
 $jsonSchemaObject = json_decode($jsonSchema);

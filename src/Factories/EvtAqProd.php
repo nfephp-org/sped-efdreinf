@@ -37,7 +37,7 @@ class EvtAqProd extends Factory implements FactoryInterface
         $data = null
     ) {
         $params = new \stdClass();
-        $params->evtName = 'evtAquisicaoProdRural';
+        $params->evtName = 'evt2055AquisicaoProdRural';
         $params->evtTag = 'evtAqProd';
         $params->evtAlias = 'R-2055';
         parent::__construct($config, $std, $params, $certificate, $data);
@@ -52,6 +52,10 @@ class EvtAqProd extends Factory implements FactoryInterface
         //o idEvento pode variar de evento para evento
         //então cada factory individualmente terá de construir o seu
         $ideEvento = $this->dom->createElement("ideEvento");
+        if ($this->std->indretif == 2 && empty($this->std->nrrecibo)) {
+            throw new \Exception("Para retificar o evento DEVE ser informado o "
+                . "número do RECIBO do evento anterior que está retificando.");
+        }
         $this->dom->addChild(
             $ideEvento,
             "indRetif",

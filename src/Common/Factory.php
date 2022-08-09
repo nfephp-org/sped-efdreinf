@@ -125,6 +125,10 @@ abstract class Factory
      * @var Certificate|null
      */
     protected $certificate;
+    /**
+     * @var
+     */
+    protected $config;
 
     /**
      * Constructor
@@ -155,6 +159,7 @@ abstract class Factory
         $this->evtTag = $params->evtTag;
         $this->evtName = $params->evtName;
         $this->evtAlias = $params->evtAlias;
+        $this->config = $stdConf;
         if (empty($std) || !is_object($std)) {
             throw EventsException::wrongArgument(1003, '');
         }
@@ -260,7 +265,7 @@ abstract class Factory
                 $doc = substr($this->nrInsc, 0, 8);
             }
             $this->reinf = $this->dom->getElementsByTagName('Reinf')->item(0);
-            
+
             $this->evtid = FactoryId::build(
                 $this->tpInsc,
                 $doc,
@@ -268,7 +273,14 @@ abstract class Factory
                 $this->std->sequencial ?? null
             );
             $this->node = $this->dom->createElement($this->evtTag);
-            $att = $this->dom->createAttribute('id');
+            if ($this->config->eventoVersion === '1_05_01') {
+                //na versão 1.5.1 o marcador ID está com letras minusculas
+                $tagIDname = 'id';
+            } else {
+                //na versão 2.1.1 o marcador ID está com a primeira letra maiuscula
+                $tagIDname = 'Id';
+            }
+            $att = $this->dom->createAttribute($tagIDname);
             $att->value = $this->evtid;
             $this->node->appendChild($att);
             $ideContri = $this->dom->createElement("ideContri");

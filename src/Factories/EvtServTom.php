@@ -67,7 +67,7 @@ class EvtServTom extends Factory implements FactoryInterface
             $ideEvento,
             "nrRecibo",
             !empty($this->std->nrrecibo) ? $this->std->nrrecibo : null,
-            false
+            $this->std->indretif == 2 ? true : false
         );
         $this->dom->addChild(
             $ideEvento,

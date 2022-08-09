@@ -1,5 +1,5 @@
 {
-    "title": "evtAssocDespRep",
+    "title": "evtComProd",
     "type": "object",
     "properties": {
         "sequencial": {
@@ -24,72 +24,56 @@
             "type": "string",
             "pattern": "^20([0-9][0-9])-(0[1-9]|1[0-2])$"
         },
-        "tpinscestab": {
-            "required": true,
-            "type": "string",
-            "pattern": "^(1|2)$"
-        },
         "nrinscestab": {
             "required": true,
             "type": "string",
             "pattern": "^[0-9]{14}$"
         },
-        "recursosrep": {
+        "vlrrecbrutatotal": {
+            "required": true,
+            "type": "number",
+            "multipleOf": 0.01
+        },
+        "vlrcpapur": {
+            "required": true,
+            "type": "number"
+        },
+        "vlrratapur": {
+            "required": true,
+            "type": "number"
+        },
+        "vlrsenarapur": {
+            "required": true,
+            "type": "number"
+        },
+        "vlrcpsusptotal": {
+            "required": false,
+            "type": ["number","null"]
+        },
+        "vlrratsusptotal": {
+            "required": false,
+            "type": ["number","null"]
+        },
+        "vlrsenarsusptotal": {
+            "required": false,
+            "type": ["number","null"]
+        },
+        "tipocom": {
             "required": true,
             "type": "array",
             "minItems": 1,
-            "maxItems": 500,
+            "maxItems": 3,
             "items": {
                 "type": "object",
                 "properties": {
-                    "cnpjassocdesp": {
+                    "indcom": {
                         "required": true,
                         "type": "string",
-                        "pattern": "^[0-9]{14}$"
+                        "pattern": "^(1|7|8|9)$"
                     },
-                    "vlrtotalrep": {
-                        "required": true,
-                        "type": "number",
-                        "multipleOf": 0.01
-                    },
-                    "vlrtotalret": {
+                    "vlrrecbruta": {
                         "required": true,
                         "type": "number"
-                    },
-                    "vlrtotalnret": {
-                        "required": false,
-                        "type": ["number","null"]
-                    },
-                    "inforecurso": {
-                        "required": true,
-                        "type": "array",
-                        "minItems": 1,
-                        "maxItems": 500,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "tprepasse": {
-                                    "required": true,
-                                    "type": "integer",
-                                    "minimum": 1,
-                                    "maximum": 5
-                                },
-                                "descrecurso": {
-                                    "required": true,
-                                    "type": "string",
-                                    "minLength": 1,
-                                    "maxLength": 20
-                                },
-                                "vlrbruto": {
-                                    "required": true,
-                                    "type": "number"
-                                },
-                                "vlrretapur": {
-                                    "required": true,
-                                    "type": "number"
-                                }
-                            }
-                        }
                     },
                     "infoproc": {
                         "required": false,
@@ -114,12 +98,19 @@
                                 "codsusp": {
                                     "required": false,
                                     "type": ["string","null"],
-                                    "pattern": "^[0-9]{0,14}$"
+                                    "pattern": "^[0-9]{14}$"
                                 },
-                                "vlrnret": {
-                                    "required": true,
-                                    "type": "number",
-                                    "multipleOf": 0.01
+                                "vlrcpsusp": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlrratsusp": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "vlrsenarsusp": {
+                                    "required": false,
+                                    "type": ["number","null"]
                                 }
                             }
                         }
