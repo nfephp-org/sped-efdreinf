@@ -2,6 +2,21 @@
 
 > NOTA: Existem muitos erros nos XSD da versão 2.1.1
 
+## Evento R-1070 versão 2.1.1 - ERRO NO XSD
+
+Na validação do campo **infoSusp.indSusp** é especificado um regex incorreto:
+
+```
+<xs:length value="2"/>
+<xs:pattern value="[01|02|03|04|05|08|09|10|11|12|13|90|92]"/>
+```
+
+**Correção**
+
+```
+<xs:pattern value="0[1-5]|0[8-9]|1[0-3]|90|92"/>
+```
+
 ## Evento R-2099 e R-4099 versão 2.1.1 - ERRO NO XSD
 
 No campo **ideRespInf.nmResp** (*Nome do responsável pelas informações*), o XSD **exige** que contenha EXATOS 70 caracteres.
@@ -18,7 +33,7 @@ Não é possivel usar os XSD fornecidos para realizar a validação do XML pois 
 - (Original) **evtRetPF-v2_01_01.xsd**  (Renomeado) **evt4010PagtoBeneficiarioPF-v2_01_01.xsd** 
 - (Original) **evtRetPJ-v2_01_01.xsd**  (Renomeado) **evt4020PagtoBeneficiarioPJ-v2_01_01.xsd**
 
-## Evento R-4040 - ERRO NO XSD
+## Evento R-4040 versão 2.1.1 - ERRO NO XSD
 
 Na validação do campo **ideNat.natRend** é especificado um regex incorreto:
 
