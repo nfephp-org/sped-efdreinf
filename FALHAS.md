@@ -11,7 +11,7 @@ Isso aparenta ser um erro nos XSD, portanto foi alterada a regra desses XSD, con
 
 ## Evento R-4010 e R-4020 versão 2.1.1 - ERRO NO XSD
 
-Não é possivel usar os XSD fornecidos para realizar a validação do XML pois os mesmos estão com erro de construção.
+Não é possivel usar os XSD fornecidos para realizar a validação do XML pois os mesmos estão com erro na sua construção.
 
 - (Original) **evtRetPF-v2_01_01.xsd**  (Renomeado) **evt4010PagtoBeneficiarioPF-v2_01_01.xsd** 
 - (Original) **evtRetPJ-v2_01_01.xsd**  (Renomeado) **evt4020PagtoBeneficiarioPJ-v2_01_01.xsd**
