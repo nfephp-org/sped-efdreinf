@@ -20,7 +20,7 @@ Não é possivel usar os XSD fornecidos para realizar a validação do XML pois 
 
 ## Evento R-4040 - ERRO NO XSD
 
-Na validação do campo ideNat.natRend é especificado um regex incorreto:
+Na validação do campo **ideNat.natRend** é especificado um regex incorreto:
 
 ```
 <xs:pattern value="[19001|19009]"/>
