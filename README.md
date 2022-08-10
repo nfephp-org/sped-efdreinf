@@ -6,7 +6,9 @@ A nova versão dos layouts v2.1.1 entra em vigor a partir da competência de mar
 
 > NOTA: já está em andamento as alterações e inclusões para suportar a nova versão, concomitantemente com a versão 1.5.1.
 
-### Alterações na nova versão v2.1.1
+## Alterações na nova versão v2.1.1 
+
+Vide [FALHAS](FALHAS.md) 
 
 1. Novos pacotes de XSD (lembrar de sempre renomear os xsd de acordo com os namespaces indicados nos próprios arquivos XSD).
 2. Devem haver algumas alterações em validações dos eventos anteriores e no número de ocorrências de alguns campos.
