@@ -1,5 +1,7 @@
 # Lista de PONTOS FALHOS
 
+> NOTA: Existem muitos erros nos XSD da versão 2.1.1
+
 ## Evento R-2099 e R-4099 versão 2.1.1 - ERRO NO XSD
 
 No campo **ideRespInf.nmResp** (*Nome do responsável pelas informações*), o XSD **exige** que contenha EXATOS 70 caracteres.
@@ -15,3 +17,17 @@ Não é possivel usar os XSD fornecidos para realizar a validação do XML pois 
 
 - (Original) **evtRetPF-v2_01_01.xsd**  (Renomeado) **evt4010PagtoBeneficiarioPF-v2_01_01.xsd** 
 - (Original) **evtRetPJ-v2_01_01.xsd**  (Renomeado) **evt4020PagtoBeneficiarioPJ-v2_01_01.xsd**
+
+## Evento R-4040 - ERRO NO XSD
+
+Na validação do campo ideNat.natRend é especificado um regex incorreto:
+
+```
+<xs:pattern value="[19001|19009]"/>
+```
+
+**Correção** 
+
+```
+<xs:pattern value="(19001|19009)"/>
+```
