@@ -108,8 +108,8 @@ class EvtFech4000 extends Factory implements FactoryInterface
                 "email",
                 !empty($ide->email)
                     ? Strings::replaceUnacceptableCharacters(
-                    strtolower($ide->email)
-                )
+                        strtolower($ide->email)
+                    )
                     : null,
                 false
             );

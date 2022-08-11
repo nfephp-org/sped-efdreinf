@@ -2,7 +2,6 @@
 
 namespace NFePHP\EFDReinf\Factories\Traits;
 
-
 trait FormatNumber
 {
     /**

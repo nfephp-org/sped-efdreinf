@@ -39,8 +39,7 @@ class EvtRetPF extends Factory implements FactoryInterface
         stdClass $std,
         Certificate $certificate = null,
         $data = ''
-    )
-    {
+    ) {
         $params = new \stdClass();
         $params->evtName = 'evt4010PagtoBeneficiarioPF';
         $params->evtTag = 'evtRetPF';

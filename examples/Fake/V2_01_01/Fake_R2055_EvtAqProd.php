@@ -67,7 +67,7 @@ try {
     )->toXml();
 
     //$xml = Evento::r2050($json, $std, $certificate)->toXML();
-    //$json = Event::evtComProd($configjson, $std, $certificate)->toJson();
+    //$json = Event::evtaqprod($configjson, $std, $certificate)->toJson();
 
     header('Content-type: text/xml; charset=UTF-8');
     echo $xml;

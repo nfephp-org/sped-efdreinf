@@ -39,8 +39,7 @@ class EvtFechaEvPer extends Factory implements FactoryInterface
         stdClass $std,
         Certificate $certificate = null,
         $data = ''
-    )
-    {
+    ) {
         $params = new \stdClass();
         $params->evtName = 'evtFechamento';
         $params->evtTag = 'evtFechaEvPer';
@@ -83,7 +82,6 @@ class EvtFechaEvPer extends Factory implements FactoryInterface
         );
         $this->node->insertBefore($ideEvento, $ideContri);
         if (!empty($this->std->iderespinf)) {
-
             $ide = $this->std->iderespinf;
             $ideRespInf = $this->dom->createElement("ideRespInf");
             //aplica TRAIT RegraNomeValido
@@ -111,8 +109,8 @@ class EvtFechaEvPer extends Factory implements FactoryInterface
                 "email",
                 !empty($ide->email)
                     ? Strings::replaceUnacceptableCharacters(
-                    strtolower($ide->email)
-                )
+                        strtolower($ide->email)
+                    )
                     : null,
                 false
             );

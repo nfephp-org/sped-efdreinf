@@ -113,7 +113,7 @@ class EvtBenefNId extends Factory implements FactoryInterface
             $this->std->nrinscestab,
             true
         );
-        foreach($this->std->idenat as $nat) {
+        foreach ($this->std->idenat as $nat) {
             $ideNat = $this->dom->createElement("ideNat");
             $this->dom->addChild(
                 $ideNat,

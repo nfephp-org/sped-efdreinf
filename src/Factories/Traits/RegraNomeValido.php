@@ -37,7 +37,7 @@ trait RegraNomeValido
             for ($x=0; $x<=14; $x++) {
                 //não permite parte com maisnde 21 caracteres (regra 6)
                 if (strlen($part[$x]) > 21) {
-                    $part[$x] = substr($part[$x],0, 21);
+                    $part[$x] = substr($part[$x], 0, 21);
                 }
                 $name .= $part[$x] . ' ';
             }

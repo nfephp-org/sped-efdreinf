@@ -144,8 +144,7 @@ abstract class Factory
         stdClass $params,
         Certificate $certificate = null,
         $date = null
-    )
-    {
+    ) {
         //set properties from config
         $stdConf = json_decode($config);
         $this->tpAmb = $stdConf->tpAmb;
@@ -216,7 +215,7 @@ abstract class Factory
             if ($value instanceof stdClass) {
                 $value = self::propertiesToLower($value);
             } elseif (is_array($value)) {
-                foreach($value as $k => $val) {
+                foreach ($value as $k => $val) {
                     if ($val instanceof stdClass) {
                         $val = self::propertiesToLower($val);
                     }

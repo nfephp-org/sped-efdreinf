@@ -120,7 +120,7 @@ class EvtRetRec extends Factory implements FactoryInterface
             $this->std->cnpjfont,
             true
         );
-        foreach($this->std->iderend as $rend) {
+        foreach ($this->std->iderend as $rend) {
             $ideRend = $this->dom->createElement("ideRend");
             $this->dom->addChild(
                 $ideRend,
@@ -134,7 +134,7 @@ class EvtRetRec extends Factory implements FactoryInterface
                 $rend->observ ?? null,
                 false
             );
-            foreach($rend->inforec as $rec) {
+            foreach ($rend->inforec as $rec) {
                 $infoRec = $this->dom->createElement("infoRec");
                 $this->dom->addChild(
                     $infoRec,
@@ -160,7 +160,7 @@ class EvtRetRec extends Factory implements FactoryInterface
                     $this->format($rec->vlrir),
                     true
                 );
-                foreach($rec->infoprocret as $proc) {
+                foreach ($rec->infoprocret as $proc) {
                     $infoProcRet = $this->dom->createElement("infoProcRet");
                     $this->dom->addChild(
                         $infoProcRet,

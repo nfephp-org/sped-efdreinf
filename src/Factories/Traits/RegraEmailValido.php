@@ -38,7 +38,7 @@ namespace NFePHP\EFDReinf\Factories\Traits;
            - Numéricos: 0–9 (ASCII: 48-57);
            - Caractere especial: _ (ASCII: 95);
            - Ponto (ASCII: 46), não pode ser o primeiro, nem o último caractere; não pode aparecer consecutivamente;
-           - É composto por uma série de nomes unidos por ponto; cada nome terá no máximo 63 caracteres; o tamanho máximo do domínio.
+           - É composto por uma série de nomes unidos por ponto; cada nome terá no máximo 63 caracteres
  */
 
 use NFePHP\Common\Strings;
