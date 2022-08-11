@@ -14,4 +14,4 @@ Traite RegraEmailValido
 
 Método estático **validateEmail($address)**
 
-Este método testa o endereço de email e dispara um throw Exceptionn caso esteja incorreto, se passar joga todo endereço para minusculas.  
+Este método testa o endereço de email e dispara um throw Exception caso esteja incorreto, se passar joga todo endereço para minusculas.  
