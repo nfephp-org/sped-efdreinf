@@ -4,14 +4,14 @@
 
 Trait RegraNomeValido
 
-Método estatico validateName($name)
+Método estático **validateName($name)**
 
-Este método simplesmente ajusta o nome informado âs regras estabelecidas pela receita, ou seja se forma passados caracteres inaceitáveis ou qualquer outra condição que não possa ser aceita, isso será corrigido de forma automatica pela biblioteca. 
+Este método simplesmente ajusta o nome informado às regras estabelecidas pela receita, ou seja, se forem passados caracteres inaceitáveis ou qualquer outra condição inaceitável, isso será corrigido de forma automática pela biblioteca. 
 
 ## Regra Email Valido
 
 Traite RegraEmailValido
 
-Método estatico validateEmail($address)
+Método estático **validateEmail($address)**
 
 Este método testa o endereço de email e dispara um throw Exceptionn caso esteja incorreto, se passar joga todo endereço para minusculas.  

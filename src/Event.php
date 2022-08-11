@@ -25,6 +25,7 @@ class Event
      */
     private static $available = [
         'evtinfocontri' => Factories\EvtInfoContri::class,
+        'evttablig' => Factories\EvtTabLig::class,
         'evttabprocesso' => Factories\EvtTabProcesso::class,
         'evtservtom' => Factories\EvtServTom::class,
         'evtservprest' => Factories\EvtServPrest::class,
@@ -52,6 +53,7 @@ class Event
      */
     private static $aliases = [
         'r1000' => 'evtinfocontri',
+        'r1050' => 'evttablig',
         'r1070' => 'evttabprocesso',
         'r2010' => 'evtservtom',
         'r2020' => 'evtservprest',
