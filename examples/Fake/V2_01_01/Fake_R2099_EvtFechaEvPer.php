@@ -31,7 +31,7 @@ $std = new \stdClass();
 //$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
 $std->perapur = '2017-11';
 $std->iderespinf= new \stdClass();
-$std->iderespinf->nmresp = 'Ciclano de Tal';
+$std->iderespinf->nmresp = 'Ciclano de Tal III';
 $std->iderespinf->cpfresp = '12345678901';
 $std->iderespinf->telefone = '115555-5555';
 $std->iderespinf->email = 'ciclano@mail.com';
@@ -43,8 +43,8 @@ $std->evtassdesprep = 'S';
 $std->evtcomprod = 'S';
 $std->evtcprb = 'S';
 $std->evtaquis = 'N'; //v1.05
-$std->evtpgtos = 'S';
-$std->compsemmovto = '2017-12';
+//$std->evtpgtos = 'S'; //Não exite na versão 2.1.1
+//$std->compsemmovto = '2017-12'; //Não exite na versão 2.1.1
 
 try {
 
