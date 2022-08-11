@@ -15,12 +15,12 @@ Vide [REGRAS](REGRAS.md)
 2. Devem haver algumas alterações em validações dos eventos anteriores e no número de ocorrências de alguns campos.
 3. Inclusão de novos eventos:
 
-- R-4010 Pagamentos/créditos a beneficiário pessoa física
-- R-4020 Pagamentos/créditos a beneficiário pessoa jurídica
-- R-4040 Pagamentos/créditos a beneficiários não identificados
-- R-4080 Retenção no recebimento
-- R-4098 Reabertura dos eventos da série R-4000
-- R-4099 Fechamento dos eventos da série R-4000
+- R-1050 Tabela de entidades ligadas (ok)
+- R-4010 Pagamentos/créditos a beneficiário pessoa física (está problemas no XSD, falta desenvolver jsoonschema e obter xsd corrgido)
+- R-4020 Pagamentos/créditos a beneficiário pessoa jurídica (está problemas no XSD, e falta desenvolver tudo e obter xsd corrgido)
+- R-4040 Pagamentos/créditos a beneficiários não identificados (ok)
+- R-4080 Retenção no recebimento (ok)
+- R-4099 Fechamento/Reabertura dos eventos da série R-4000 (ok)
 
 > NOTA: Ainda existem diferenças entre os ambientes de Produção e Pre-produção fique atento durante a transição de versões !!
 
