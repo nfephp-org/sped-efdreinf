@@ -29,31 +29,30 @@ $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
 $std = new \stdClass();
 //$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
-$std->indretif = 2;
-$std->nrrecibo = '1234567890123456789-23-4567-8901-1234567891234567899';
+$std->indretif = 1;
+//$std->nrrecibo = '1234567890123456789-23-4567-8901-1234567891234567899'; //Opcional indicar quando indretif = 2
 $std->perapur = '2017-11';
 
-$std->tpinscestab = "1"; //Opcional FIXO tipo de inscrição do estabelecimento contratante dos serviços: 1 - CNPJ;
+//$std->tpinscestab = "1"; //Opcional FIXO tipo de inscrição do estabelecimento contratante dos serviços: 1 - CNPJ;
 $std->nrinscestab = '12345678901234'; //Obrigatório numero de inscrição do estabelecimento contratante dos serviços
 
-$std->cnpjfont = '12345678901234';
-$std->ideRend[0] = new \stdClass();
-$std->ideRend[0]->natrend = '10001';
-$std->ideRend[0]->observ = 'blça bla bla';
+$std->idenat[0] = new stdClass(); //Obrigatório
+$std->idenat[0]->natrend = '19001'; //Obrigatório apenas 19001 e 19009 são permitidos
 
-$std->ideRend[0]->infoRec[0] = new \stdClass();
-$std->ideRend[0]->infoRec[0]->dtFG = '2022-08-12';
-$std->ideRend[0]->infoRec[0]->vlrBruto = 120000;
-$std->ideRend[0]->infoRec[0]->vlrBaseIR = 10000;
-$std->ideRend[0]->infoRec[0]->vlrIR = 2900;
+$std->idenat[0]->infopgto[0] = new stdClass(); //Obrigatório
+$std->idenat[0]->infopgto[0]->dtFG = '2022-07-30'; //Obrigatório
+$std->idenat[0]->infopgto[0]->vlrLiq = 1000; //Obrigatório
+$std->idenat[0]->infopgto[0]->vlrBaseIR = 2000; //Obrigatório
+$std->idenat[0]->infopgto[0]->vlrIR = 500; //Opcional
+$std->idenat[0]->infopgto[0]->descr = 'bla bla bla'; //Obrigatório
 
-$std->ideRend[0]->infoRec[0]->infoProcRet[0] = new \stdClass();
-$std->ideRend[0]->infoRec[0]->infoProcRet[0]->tpProcRet = '1';
-$std->ideRend[0]->infoRec[0]->infoProcRet[0]->nrProcRet = '123455';
-$std->ideRend[0]->infoRec[0]->infoProcRet[0]->codSusp = '123';
-$std->ideRend[0]->infoRec[0]->infoProcRet[0]->vlrbasesuspir = 20000;
-$std->ideRend[0]->infoRec[0]->infoProcRet[0]->vlrnir = 100;
-$std->ideRend[0]->infoRec[0]->infoProcRet[0]->vlrdepir = 10000;
+$std->idenat[0]->infopgto[0]->infoProcRet[0] = new stdClass(); //Opcional
+$std->idenat[0]->infopgto[0]->infoProcRet[0]->tpProcRet = '1'; //Obrigatório
+$std->idenat[0]->infopgto[0]->infoProcRet[0]->nrProcRet = '123344'; //Obrigatório
+$std->idenat[0]->infopgto[0]->infoProcRet[0]->codSusp = '12345'; //Opcional
+$std->idenat[0]->infopgto[0]->infoProcRet[0]->vlrBaseSuspIR = 1000; //Opcional
+$std->idenat[0]->infopgto[0]->infoProcRet[0]->vlrNIR = 234.55; //Opcional
+$std->idenat[0]->infopgto[0]->infoProcRet[0]->vlrDepIR = 654.33; //Opcional
 
 try {
 
@@ -63,15 +62,15 @@ try {
     $certificate = Certificate::readPfx($content, $password);
 
     //cria o evento e retorna o XML assinado
-    $xml = Event::evtRetRec(
+    $xml = Event::evtBenefNId(
         $configJson,
         $std,
         $certificate,
         '2017-08-03 10:37:00'
     )->toXml();
 
-    //$xml = Evento::r4080($json, $std, $certificate)->toXML();
-    //$json = Event::evtRetRec($configjson, $std, $certificate)->toJson();
+    //$xml = Evento::r4040($json, $std, $certificate)->toXML();
+    //$json = Event::evtBenefNId($configjson, $std, $certificate)->toJson();
 
     header('Content-type: text/xml; charset=UTF-8');
     echo $xml;

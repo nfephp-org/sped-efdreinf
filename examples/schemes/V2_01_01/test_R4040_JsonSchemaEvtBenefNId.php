@@ -8,11 +8,11 @@ use JsonSchema\Constraints\Factory;
 use JsonSchema\SchemaStorage;
 use JsonSchema\Validator;
 
-$evento = 'evt4080RetencaoRecebimento';
+$evento = 'evt4040PagtoBenefNaoIdentificado';
 $version = '2_01_01';
 
 $jsonSchema = '{
-    "title": "evt4080RetencaoRecebimento",
+    "title": "evt4040PagtoBenefNaoIdentificado",
     "type": "object",
     "properties": {
         "sequencial": {
@@ -29,7 +29,7 @@ $jsonSchema = '{
         },
         "nrrecibo": {
             "required": false,
-            "type": ["string", "null"],
+            "type": ["string","null"],
             "minLength": 52,
             "maxLength": 52
         },
@@ -48,35 +48,24 @@ $jsonSchema = '{
             "type": "string",
             "pattern": "^[0-9]{14}$"
         },
-        "cnpjfont": {
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9]{14}$"
-        },
-        "iderend": {
+        "idenat": {
             "required": true,
             "type": "array",
             "minItems": 1,
-            "maxItems": 100,
+            "maxItems": 2,
             "items": {
                 "type": "object",
                 "properties": {
                     "natrend": {
                         "required": true,
                         "type": "string",
-                        "pattern": "^[1-2]{1}[0-9]{4}$"
+                        "pattern": "^(19001|19009)$"
                     },
-                    "observ": {
-                        "required": false,
-                        "type": ["string","null"],
-                        "minxLength": 2,
-                        "maxLength": 200
-                    },
-                    "inforec": {
+                    "infopgto": {
                         "required": true,
                         "type": "array",
                         "minItems": 1,
-                        "maxItems": 999,
+                        "maxItems": 31,
                         "items": {
                             "type": "object",
                             "properties": {
@@ -85,7 +74,7 @@ $jsonSchema = '{
                                     "type": "string",
                                     "pattern": "^2{1}0{1}[0-9]{2}-[0-1]{1}[0-9]{1}-[0-3]{1}[0-9]{1}$"
                                 },
-                                "vlrbruto": {
+                                "vlrliq": {
                                     "required": true,
                                     "type": "number"
                                 },
@@ -94,13 +83,25 @@ $jsonSchema = '{
                                     "type": "number"
                                 },
                                 "vlrir": {
+                                    "required": false,
+                                    "type": [
+                                        "number",
+                                        "null"
+                                    ]
+                                },
+                                "descr": {
                                     "required": true,
-                                    "type": "number"
+                                    "type": "string",
+                                    "minLength": 2,
+                                    "maxLength": 200
                                 },
                                 "infoprocret": {
                                     "required": false,
-                                    "type": ["array","null"],
-                                    "minItems": 1,
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "minItems": 0,
                                     "maxItems": 50,
                                     "items": {
                                         "type": "object",
@@ -113,26 +114,38 @@ $jsonSchema = '{
                                             "nrprocret": {
                                                 "required": true,
                                                 "type": "string",
-                                                "minLength": 3,
+                                                "minLength": 2,
                                                 "maxLength": 21
                                             },
                                             "codsusp": {
                                                 "required": false,
-                                                "type": ["string","null"],
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
                                                 "minLength": 2,
                                                 "maxLength": 14
                                             },
-                                            "vlrbasesusoir": {
+                                            "vlrbasesuspir": {
                                                 "required": false,
-                                                "type": ["number", "null"]
+                                                "type": [
+                                                    "number",
+                                                    "null"
+                                                ]
                                             },
                                             "vlrnir": {
                                                 "required": false,
-                                                "type": ["number", "null"]
+                                                "type": [
+                                                    "number",
+                                                    "null"
+                                                ]
                                             },
                                             "vlrdepir": {
                                                 "required": false,
-                                                "type": ["number", "null"]
+                                                "type": [
+                                                    "number",
+                                                    "null"
+                                                ]
                                             }
                                         }
                                     }
@@ -149,31 +162,31 @@ $jsonSchema = '{
 
 $std = new \stdClass();
 //$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
-$std->indretif = 2;
-$std->nrrecibo = '1234567890123456789-23-4567-8901-1234567891234567899';
+$std->indretif = 1;
+//$std->nrrecibo = '1234567890123456789-23-4567-8901-1234567891234567899'; //Opcional indicar quando indretif = 2
 $std->perapur = '2017-11';
 
 $std->tpinscestab = "1"; //Opcional FIXO tipo de inscrição do estabelecimento contratante dos serviços: 1 - CNPJ;
 $std->nrinscestab = '12345678901234'; //Obrigatório numero de inscrição do estabelecimento contratante dos serviços
 
-$std->cnpjfont = '12345678901234';
-$std->iderend[0] = new \stdClass();
-$std->iderend[0]->natrend = '10001';
-$std->iderend[0]->observ = 'blça bla bla';
+$std->idenat[0] = new stdClass(); //Obrigatório
+$std->idenat[0]->natrend = '19001'; //Obrigatório apenas 19001 e 19009 são permitidos
 
-$std->iderend[0]->inforec[0] = new \stdClass();
-$std->iderend[0]->inforec[0]->dtfg = '2022-08-12';
-$std->iderend[0]->inforec[0]->vlrbruto = 120000;
-$std->iderend[0]->inforec[0]->vlrbaseir = 10000;
-$std->iderend[0]->inforec[0]->vlrir = 2900;
+$std->idenat[0]->infopgto[0] = new stdClass(); //Obrigatório
+$std->idenat[0]->infopgto[0]->dtfg = '2022-07-30'; //Obrigatório
+$std->idenat[0]->infopgto[0]->vlrliq = 1000; //Obrigatório
+$std->idenat[0]->infopgto[0]->vlrbaseir = 2000; //Obrigatório
+$std->idenat[0]->infopgto[0]->vlrir = 500; //Opcional
+$std->idenat[0]->infopgto[0]->descr = 'bla bla bla'; //Obrigatório
 
-$std->iderend[0]->inforec[0]->infoprocret[0] = new \stdClass();
-$std->iderend[0]->inforec[0]->infoprocret[0]->tpprocret = '1';
-$std->iderend[0]->inforec[0]->infoprocret[0]->nrprocret = '123455';
-$std->iderend[0]->inforec[0]->infoprocret[0]->codsusp = '123';
-$std->iderend[0]->inforec[0]->infoprocret[0]->vlrbasesuspir = 20000;
-$std->iderend[0]->inforec[0]->infoprocret[0]->vlrnir = 100;
-$std->iderend[0]->inforec[0]->infoprocret[0]->vlrdepir = 10000;
+$std->idenat[0]->infopgto[0]->infoprocret[0] = new stdClass(); //Opcional
+$std->idenat[0]->infopgto[0]->infoprocret[0]->tpprocret = '1'; //Obrigatório
+$std->idenat[0]->infopgto[0]->infoprocret[0]->nrprocret = '123344'; //Obrigatório
+$std->idenat[0]->infopgto[0]->infoprocret[0]->codsusp = '12345'; //Opcional
+$std->idenat[0]->infopgto[0]->infoprocret[0]->vlrbasesuspir = 1000; //Opcional
+$std->idenat[0]->infopgto[0]->infoprocret[0]->vlrnir = 234.55; //Opcional
+$std->idenat[0]->infopgto[0]->infoprocret[0]->vlrdepir = 654.33; //Opcional
+
 
 // Schema must be decoded before it can be used for validation
 $jsonSchemaObject = json_decode($jsonSchema);
