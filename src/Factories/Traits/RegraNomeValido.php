@@ -17,12 +17,17 @@ use NFePHP\Common\Strings;
 
 trait RegraNomeValido
 {
+    /**
+     * Ajusta o Nome fornecido as regras estabelecidas pela Receita
+     * @param string $name
+     * @return string
+     */
     protected static function validateName(string $name): string
     {
         //remome caracteres não UTF-8
         $name = Strings::normalize($name);
         //remove multiplos espaços
-        //$name = preg_replace('/(?:\s\s+)/', ' ', $name);
+        $name = preg_replace('/(?:\s\s+)/', ' ', $name);
         //remove os caracteres inaceitáveis (regra 1 e regra 2)
         $name = preg_replace('/[^a-zA-Z áÁàÀãÃâÂéÉêÊíÍóÓôÔõÕúÚüÜçÇ]/i', '', $name);
         //não permite mais que 15 partes separadas por espaços (regra 3)

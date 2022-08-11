@@ -33,4 +33,6 @@ interface FactoryInterface
     public function getCertificate();
 
     public function setCertificate(Certificate $certificate);
+
+    //public function format($value = null, $decimals = 2);
 }

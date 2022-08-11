@@ -144,7 +144,8 @@ abstract class Factory
         stdClass $params,
         Certificate $certificate = null,
         $date = null
-    ) {
+    )
+    {
         //set properties from config
         $stdConf = json_decode($config);
         $this->tpAmb = $stdConf->tpAmb;
@@ -214,6 +215,14 @@ abstract class Factory
         foreach ($properties as $key => $value) {
             if ($value instanceof stdClass) {
                 $value = self::propertiesToLower($value);
+            } elseif (is_array($value)) {
+                foreach($value as $k => $val) {
+                    if ($val instanceof stdClass) {
+                        $val = self::propertiesToLower($val);
+                    }
+                    $k = strtolower($k);
+                    $value[$k] = $val;
+                }
             }
             $nk = strtolower($key);
             $clone->{$nk} = $value;
@@ -287,7 +296,7 @@ abstract class Factory
             $this->dom->addChild(
                 $ideContri,
                 "tpInsc",
-                (string) $this->tpInsc,
+                (string)$this->tpInsc,
                 true
             );
             $this->dom->addChild(

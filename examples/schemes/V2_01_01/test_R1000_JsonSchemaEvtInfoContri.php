@@ -69,6 +69,22 @@ $jsonSchema = '{
                     "minimum": 0,
                     "maximum": 4
                 },
+                "induniao": {
+                    "required": false,
+                    "type": ["integer","null"],
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "dttransffinslucr": {
+                    "required": false,
+                    "type": ["string","null"],
+                    "pattern": "^20[0-9]{2}-[0-1][0-9]-[0-3][0-9]$"
+                },
+                "dtobito": {
+                    "required": false,
+                    "type": ["string","null"],
+                    "pattern": "^(19|20)[0-9]{2}-(0[1-9]|1[0-2])-[0-3][0-9]$"
+                },
                 "contato": {
                     "required": true,
                     "type": "object",
@@ -176,6 +192,9 @@ $std->infocadastro->indescrituracao = 0;
 $std->infocadastro->inddesoneracao = 0;
 $std->infocadastro->indacordoisenmulta = 0;
 $std->infocadastro->indsitpj = 0;
+$std->infocadastro->induniao = 0;
+$std->infocadastro->dttransffinslucr = '2021-10-12';
+$std->infocadastro->dtobito = '2021-12-31';
 
 $std->infocadastro->contato = new \stdClass();
 $std->infocadastro->contato->nmctt = 'Fulano de Tal';

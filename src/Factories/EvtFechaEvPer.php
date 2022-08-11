@@ -20,10 +20,13 @@ use NFePHP\EFDReinf\Common\FactoryInterface;
 use NFePHP\EFDReinf\Common\FactoryId;
 use NFePHP\Common\Certificate;
 use NFePHP\Common\Strings;
+use NFePHP\EFDReinf\Factories\Traits\RegraNomeValido;
 use stdClass;
 
 class EvtFechaEvPer extends Factory implements FactoryInterface
 {
+    use RegraNomeValido;
+
     /**
      * Constructor
      * @param string $config
@@ -36,7 +39,8 @@ class EvtFechaEvPer extends Factory implements FactoryInterface
         stdClass $std,
         Certificate $certificate = null,
         $data = ''
-    ) {
+    )
+    {
         $params = new \stdClass();
         $params->evtName = 'evtFechamento';
         $params->evtTag = 'evtFechaEvPer';
@@ -78,14 +82,16 @@ class EvtFechaEvPer extends Factory implements FactoryInterface
             true
         );
         $this->node->insertBefore($ideEvento, $ideContri);
-
         if (!empty($this->std->iderespinf)) {
+
             $ide = $this->std->iderespinf;
             $ideRespInf = $this->dom->createElement("ideRespInf");
+            //aplica TRAIT RegraNomeValido
+            $nome = self::validateName($ide->nmresp);
             $this->dom->addChild(
                 $ideRespInf,
                 "nmResp",
-                Strings::replaceUnacceptableCharacters($ide->nmresp),
+                $nome,
                 true
             );
             $this->dom->addChild(
@@ -104,10 +110,10 @@ class EvtFechaEvPer extends Factory implements FactoryInterface
                 $ideRespInf,
                 "email",
                 !empty($ide->email)
-                ? Strings::replaceUnacceptableCharacters(
+                    ? Strings::replaceUnacceptableCharacters(
                     strtolower($ide->email)
                 )
-                : null,
+                    : null,
                 false
             );
             $this->node->appendChild($ideRespInf);
@@ -149,29 +155,29 @@ class EvtFechaEvPer extends Factory implements FactoryInterface
             $this->std->evtcprb,
             true
         );
-        //v1.05 09/12/2020
-        if (!empty($this->std->evtaquis)) {
-            $this->dom->addChild(
-                $infoFech,
-                "evtAquis",
-                $this->std->evtaquis,
-                true
-            );
-        }
-        if (!empty($this->std->evtpgtos)) {
-            $this->dom->addChild(
-                $infoFech,
-                "evtPgtos",
-                $this->std->evtpgtos,
-                true
-            );
-        }
         $this->dom->addChild(
             $infoFech,
-            "compSemMovto",
-            !empty($this->std->compsemmovto) ? $this->std->compsemmovto : null,
-            false
+            "evtAquis",
+            $this->std->evtaquis,
+            true
         );
+        //estes campos não existem na versão 2.1.1
+        if ($this->config->eventoVersion === '1_05_01') {
+            if (!empty($this->std->evtpgtos)) {
+                $this->dom->addChild(
+                    $infoFech,
+                    "evtPgtos",
+                    $this->std->evtpgtos,
+                    true
+                );
+            }
+            $this->dom->addChild(
+                $infoFech,
+                "compSemMovto",
+                !empty($this->std->compsemmovto) ? $this->std->compsemmovto : null,
+                false
+            );
+        }
         $this->node->appendChild($infoFech);
         $this->reinf->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->reinf);

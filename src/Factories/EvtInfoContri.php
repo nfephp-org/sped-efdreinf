@@ -20,10 +20,14 @@ use NFePHP\EFDReinf\Common\FactoryInterface;
 use NFePHP\EFDReinf\Common\FactoryId;
 use NFePHP\Common\Certificate;
 use NFePHP\Common\Strings;
+use NFePHP\EFDReinf\Factories\Traits\RegraEmailValido;
+use NFePHP\EFDReinf\Factories\Traits\RegraNomeValido;
 use stdClass;
 
 class EvtInfoContri extends Factory implements FactoryInterface
 {
+    use RegraNomeValido, RegraEmailValido;
+
     /**
      * Constructor
      * @param string $config
@@ -88,7 +92,7 @@ class EvtInfoContri extends Factory implements FactoryInterface
         $this->dom->addChild(
             $idePeriodo,
             "fimValid",
-            !empty($this->std->fimvalid) ? $this->std->fimvalid : null,
+            $this->std->fimvalid ?? null,
             false
         );
         $infocadastro = null;
@@ -129,14 +133,34 @@ class EvtInfoContri extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $infocadastro,
                 "indSitPJ",
-                isset($cad->indsitpj) ? $cad->indsitpj : null,
+                $cad->indsitpj ?? null,
+                false
+            );
+            $this->dom->addChild(
+                $infocadastro,
+                "indUniao",
+                $cad->induniao ?? null,
+                false
+            );
+            $this->dom->addChild(
+                $infocadastro,
+                "dtTransfFinsLucr",
+                $cad->dttransffinslucr ?? null,
+                false
+            );
+            $this->dom->addChild(
+                $infocadastro,
+                "dtObito",
+                $cad->dtobito ?? null,
                 false
             );
             $contato = $this->dom->createElement("contato");
+            //regra nome valido
+            $nome = self::validateName($cad->contato->nmctt);
             $this->dom->addChild(
                 $contato,
                 "nmCtt",
-                Strings::replaceUnacceptableCharacters($cad->contato->nmctt),
+                $nome,
                 true
             );
             $this->dom->addChild(
@@ -148,27 +172,20 @@ class EvtInfoContri extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $contato,
                 "foneFixo",
-                !empty($cad->contato->fonefixo)
-                    ? $cad->contato->fonefixo
-                    : null,
+                $cad->contato->fonefixo ?? null,
                 false
             );
             $this->dom->addChild(
                 $contato,
                 "foneCel",
-                !empty($cad->contato->fonecel)
-                    ? $cad->contato->fonecel
-                    : null,
+                $cad->contato->fonecel ?? null,
                 false
             );
+            $email = self::validateEmail($cad->contato->email);
             $this->dom->addChild(
                 $contato,
                 "email",
-                !empty($cad->contato->email)
-                    ? Strings::replaceUnacceptableCharacters(
-                        strtolower($cad->contato->email)
-                    )
-                    : null,
+                $email,
                 false
             );
             $infocadastro->appendChild($contato);
@@ -196,13 +213,14 @@ class EvtInfoContri extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $softhouse,
                         "telefone",
-                        !empty($soft->telefone) ? $soft->telefone : null,
+                        $soft->telefone ?? null,
                         false
                     );
+                    $softmail = self::validateEmail($soft->email);
                     $this->dom->addChild(
                         $softhouse,
                         "email",
-                        !empty($soft->email) ? Strings::replaceUnacceptableCharacters($soft->email) : null,
+                        $softmail,
                         false
                     );
                     $infocadastro->appendChild($softhouse);
@@ -219,7 +237,7 @@ class EvtInfoContri extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoEFR,
                     "cnpjEFR",
-                    !empty($this->std->infoefr->cnpjefr) ? $this->std->infoefr->cnpjefr : null,
+                    $this->std->infoefr->cnpjefr ?? null,
                     false
                 );
                 $infocadastro->appendChild($infoEFR);
@@ -252,7 +270,7 @@ class EvtInfoContri extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $nval,
                     "fimValid",
-                    !empty($new->fimvalid) ? $new->fimvalid : null,
+                    $new->fimvalid ?? null,
                     false
                 );
                 $modo->appendChild($nval);
