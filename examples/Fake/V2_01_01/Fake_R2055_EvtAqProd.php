@@ -29,22 +29,28 @@ $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
 $std = new \stdClass();
 //$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
+$std->indretif = 1;
+$std->nrrecibo = '1-23-4567-8901-2345';
 $std->perapur = '2017-11';
-$std->iderespinf= new \stdClass();
-$std->iderespinf->nmresp = 'Ciclano de Tal III';
-$std->iderespinf->cpfresp = '12345678901';
-$std->iderespinf->telefone = '115555-5555';
-$std->iderespinf->email = 'ciclano@mail.com';
+$std->retifs1250 = "S"; //null ou "S"
+$std->tpinscadq = "1"; //1 cnpj ou 3 CAEPF
+$std->nrinscadq = "12345678901234"; //cnpj ou caepf
+$std->tpinscprod = 1; //1-CNPJ 2-CPF
+$std->nrinscprod = '12345678901234'; //cnpj ou cpf
+$std->indopccp = "S"; //null ou "S"
 
-$std->evtservtm = 'S';
-$std->evtservpr = 'S';
-$std->evtassdesprec = 'S';
-$std->evtassdesprep = 'S';
-$std->evtcomprod = 'S';
-$std->evtcprb = 'S';
-$std->evtaquis = 'N'; //v1.05
-//$std->evtpgtos = 'S'; //Não exite na versão 2.1.1
-//$std->compsemmovto = '2017-12'; //Não exite na versão 2.1.1
+$std->detaquis[0] = new \stdClass();
+$std->detaquis[0]->indaquis = 1; //de 1 até 7
+$std->detaquis[0]->vlrbruto = 10000.00;
+$std->detaquis[0]->vlrcpdescpr = 5000.56;
+$std->detaquis[0]->vlrratdescpr = 100.77;
+$std->detaquis[0]->vlrsenardesc = 50.88;
+$std->detaquis[0]->infoprocjud[0] = new \stdClass();
+$std->detaquis[0]->infoprocjud[0]->nrprocjud = '123456';
+$std->detaquis[0]->infoprocjud[0]->codsusp = '9292929';
+$std->detaquis[0]->infoprocjud[0]->vlrcpnret = 1000.55;
+$std->detaquis[0]->infoprocjud[0]->vlrratnre = 101.02;
+$std->detaquis[0]->infoprocjud[0]->vlrsenarnret = 852.31;
 
 try {
 
@@ -54,15 +60,14 @@ try {
     $certificate = Certificate::readPfx($content, $password);
 
     //cria o evento e retorna o XML assinado
-    $xml = Event::evtFechaEvPer(
+    $xml = Event::evtAqProd(
         $configJson,
         $std,
-        $certificate,
-        '2017-08-03 10:37:00'
+        $certificate
     )->toXml();
 
-    //$xml = Evento::r2099($json, $std, $certificate)->toXML();
-    //$json = Event::evtFechaEvPer($configjson, $std, $certificate)->toJson();
+    //$xml = Evento::r2050($json, $std, $certificate)->toXML();
+    //$json = Event::evtaqprod($configjson, $std, $certificate)->toJson();
 
     header('Content-type: text/xml; charset=UTF-8');
     echo $xml;

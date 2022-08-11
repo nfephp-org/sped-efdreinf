@@ -32,7 +32,8 @@
                           <xs:documentation>Responsavel pelas informacoes</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:string">
-                          <xs:length value="70"/>
+                            <xs:minLength value="1"/>
+                            <xs:maxLength value="70"/>
                           <xs:whiteSpace value="preserve"/>
                         </xs:restriction>
                       </xs:simpleType>

@@ -3,7 +3,7 @@
 namespace NFePHP\EFDReinf\Factories;
 
 /**
- * Class EFD-Reinf EvtRetCons Event R-4040 constructor
+ * Class EFD-Reinf EvtRetCons Event R-4098 constructor
  *
  * @category  Library
  * @package   NFePHP\EFDReinf
@@ -23,7 +23,7 @@ use NFePHP\Common\Strings;
 use NFePHP\EFDReinf\Factories\Traits\FormatNumber;
 use stdClass;
 
-class EvtBenefNId extends Factory implements FactoryInterface
+class EvtRetRec extends Factory implements FactoryInterface
 {
     use FormatNumber;
 
@@ -41,9 +41,9 @@ class EvtBenefNId extends Factory implements FactoryInterface
         $data = ''
     ) {
         $params = new \stdClass();
-        $params->evtName = 'evt4040PagtoBenefNaoIdentificado';
-        $params->evtTag = 'evtBenefNId';
-        $params->evtAlias = 'R-4040';
+        $params->evtName = 'evt4080RetencaoRecebimento';
+        $params->evtTag = 'evtRetRec';
+        $params->evtAlias = 'R-4080';
         parent::__construct($config, $std, $params, $certificate, $data);
     }
 
@@ -113,90 +113,98 @@ class EvtBenefNId extends Factory implements FactoryInterface
             $this->std->nrinscestab,
             true
         );
-        foreach ($this->std->idenat as $nat) {
-            $ideNat = $this->dom->createElement("ideNat");
+        $ideFont = $this->dom->createElement("ideFont");
+        $this->dom->addChild(
+            $ideFont,
+            "cnpjFont",
+            $this->std->cnpjfont,
+            true
+        );
+        foreach ($this->std->iderend as $rend) {
+            $ideRend = $this->dom->createElement("ideRend");
             $this->dom->addChild(
-                $ideNat,
+                $ideRend,
                 "natRend",
-                $nat->natrend,
+                $rend->natrend,
                 true
             );
-            foreach ($nat->infopgto as $pgto) {
-                $infoPgto = $this->dom->createElement("infoPgto");
+            $this->dom->addChild(
+                $ideRend,
+                "observ",
+                $rend->observ ?? null,
+                false
+            );
+            foreach ($rend->inforec as $rec) {
+                $infoRec = $this->dom->createElement("infoRec");
                 $this->dom->addChild(
-                    $infoPgto,
+                    $infoRec,
                     "dtFG",
-                    $pgto->dtfg,
+                    $rec->dtfg,
                     true
                 );
                 $this->dom->addChild(
-                    $infoPgto,
-                    "vlrLiq",
-                    $this->format($pgto->vlrliq),
+                    $infoRec,
+                    "vlrBruto",
+                    $this->format($rec->vlrbruto),
                     true
                 );
                 $this->dom->addChild(
-                    $infoPgto,
+                    $infoRec,
                     "vlrBaseIR",
-                    $this->format($pgto->vlrbaseir),
+                    $this->format($rec->vlrbaseir),
                     true
                 );
                 $this->dom->addChild(
-                    $infoPgto,
+                    $infoRec,
                     "vlrIR",
-                    $this->format($pgto->vlrir ?? null),
-                    false
-                );
-                $this->dom->addChild(
-                    $infoPgto,
-                    "descr",
-                    $pgto->descr,
+                    $this->format($rec->vlrir),
                     true
                 );
-                foreach ($pgto->infoprocret as $ret) {
+                foreach ($rec->infoprocret as $proc) {
                     $infoProcRet = $this->dom->createElement("infoProcRet");
                     $this->dom->addChild(
                         $infoProcRet,
                         "tpProcRet",
-                        $ret->tpprocret,
+                        $proc->tpprocret,
                         true
                     );
                     $this->dom->addChild(
                         $infoProcRet,
                         "nrProcRet",
-                        $ret->nrprocret,
+                        $proc->nrprocret,
                         true
                     );
                     $this->dom->addChild(
                         $infoProcRet,
                         "codSusp",
-                        $ret->codsusp ?? null,
+                        $proc->codsusp ?? null,
                         false
                     );
                     $this->dom->addChild(
                         $infoProcRet,
                         "vlrBaseSuspIR",
-                        $this->format($ret->vlrbasesuspir ?? null),
+                        $this->format($proc->vlrbasesuspir ?? null),
                         false
                     );
                     $this->dom->addChild(
                         $infoProcRet,
                         "vlrNIR",
-                        $this->format($ret->vlrnir ?? null),
+                        $this->format($proc->vlrnir ?? null),
                         false
                     );
                     $this->dom->addChild(
                         $infoProcRet,
-                        "vlrDepNIR",
-                        $this->format($ret->vlrdepnir ?? null),
+                        "vlrDepIR",
+                        $this->format($proc->vlrdepir ?? null),
                         false
                     );
-                    $infoPgto->appendChild($infoProcRet);
+                    $infoRec->appendChild($infoProcRet);
                 }
-                $ideNat->appendChild($infoPgto);
+                $ideRend->appendChild($infoRec);
             }
-            $ideEstab->appendChild($ideNat);
+            $ideFont->appendChild($ideRend);
         }
+        $ideEstab->appendChild($ideFont);
         $this->node->appendChild($ideEstab);
         $this->reinf->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->reinf);

@@ -29,45 +29,49 @@ $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
 $std = new \stdClass();
 //$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
-$std->indretif = 1;
-$std->nrrecibo = '1-23-4567-8901-2345';
+$std->indretif = 2;
+$std->nrrecibo = '1234567890123456789-23-4567-8901-1234567891234567899';
 $std->perapur = '2017-11';
-$std->retifs1250 = "S"; //null ou "S"
-$std->tpinscadq = "1"; //1 cnpj ou 3 CAEPF
-$std->nrinscadq = "12345678901234"; //cnpj ou caepf
-$std->tpinscprod = 1; //1-CNPJ 2-CPF
-$std->nrinscprod = '12345678901234'; //cnpj ou cpf
-$std->indopccp = "S"; //null ou "S"
 
-$std->detaquis[0] = new \stdClass();
-$std->detaquis[0]->indaquis = 1; //de 1 até 7
-$std->detaquis[0]->vlrbruto = 10000.00;
-$std->detaquis[0]->vlrcpdescpr = 5000.56;
-$std->detaquis[0]->vlrratdescpr = 100.77;
-$std->detaquis[0]->vlrsenardesc = 50.88;
-$std->detaquis[0]->infoprocjud[0] = new \stdClass();
-$std->detaquis[0]->infoprocjud[0]->nrprocjud = '123456';
-$std->detaquis[0]->infoprocjud[0]->codsusp = '9292929';
-$std->detaquis[0]->infoprocjud[0]->vlrcpnret = 1000.55;
-$std->detaquis[0]->infoprocjud[0]->vlrratnre = 101.02;
-$std->detaquis[0]->infoprocjud[0]->vlrsenarnret = 852.31;
+$std->tpinscestab = "1"; //Opcional FIXO tipo de inscrição do estabelecimento contratante dos serviços: 1 - CNPJ;
+$std->nrinscestab = '12345678901234'; //Obrigatório numero de inscrição do estabelecimento contratante dos serviços
+
+$std->cnpjfont = '12345678901234';
+$std->ideRend[0] = new \stdClass();
+$std->ideRend[0]->natrend = '10001';
+$std->ideRend[0]->observ = 'blça bla bla';
+
+$std->ideRend[0]->infoRec[0] = new \stdClass();
+$std->ideRend[0]->infoRec[0]->dtFG = '2022-08-12';
+$std->ideRend[0]->infoRec[0]->vlrBruto = 120000;
+$std->ideRend[0]->infoRec[0]->vlrBaseIR = 10000;
+$std->ideRend[0]->infoRec[0]->vlrIR = 2900;
+
+$std->ideRend[0]->infoRec[0]->infoProcRet[0] = new \stdClass();
+$std->ideRend[0]->infoRec[0]->infoProcRet[0]->tpProcRet = '1';
+$std->ideRend[0]->infoRec[0]->infoProcRet[0]->nrProcRet = '123455';
+$std->ideRend[0]->infoRec[0]->infoProcRet[0]->codSusp = '123';
+$std->ideRend[0]->infoRec[0]->infoProcRet[0]->vlrbasesuspir = 20000;
+$std->ideRend[0]->infoRec[0]->infoProcRet[0]->vlrnir = 100;
+$std->ideRend[0]->infoRec[0]->infoProcRet[0]->vlrdepir = 10000;
 
 try {
 
    //carrega a classe responsavel por lidar com os certificados
-    $content     = file_get_contents('expired_certificate.pfx');
-    $password    = 'associacao';
+    $content  = file_get_contents('expired_certificate.pfx');
+    $password = 'associacao';
     $certificate = Certificate::readPfx($content, $password);
 
     //cria o evento e retorna o XML assinado
-    $xml = Event::evtAqProd(
+    $xml = Event::evtRetRec(
         $configJson,
         $std,
-        $certificate
+        $certificate,
+        '2017-08-03 10:37:00'
     )->toXml();
 
-    //$xml = Evento::r2050($json, $std, $certificate)->toXML();
-    //$json = Event::evtComProd($configjson, $std, $certificate)->toJson();
+    //$xml = Evento::r4080($json, $std, $certificate)->toXML();
+    //$json = Event::evtRetRec($configjson, $std, $certificate)->toJson();
 
     header('Content-type: text/xml; charset=UTF-8');
     echo $xml;

@@ -31,38 +31,31 @@ $std = new \stdClass();
 //$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
 $std->perapur = '2017-11';
 $std->iderespinf= new \stdClass();
-$std->iderespinf->nmresp = 'Ciclano de Tal III';
+$std->iderespinf->nmresp = str_pad('Ciclano de Tal', 70, '_', STR_PAD_RIGHT);
 $std->iderespinf->cpfresp = '12345678901';
 $std->iderespinf->telefone = '115555-5555';
 $std->iderespinf->email = 'ciclano@mail.com';
 
-$std->evtservtm = 'S';
-$std->evtservpr = 'S';
-$std->evtassdesprec = 'S';
-$std->evtassdesprep = 'S';
-$std->evtcomprod = 'S';
-$std->evtcprb = 'S';
-$std->evtaquis = 'N'; //v1.05
-//$std->evtpgtos = 'S'; //Não exite na versão 2.1.1
-//$std->compsemmovto = '2017-12'; //Não exite na versão 2.1.1
+$std->fechret = '0'; //0-fecha ou 1-reabre
+
 
 try {
 
    //carrega a classe responsavel por lidar com os certificados
-    $content     = file_get_contents('expired_certificate.pfx');
-    $password    = 'associacao';
+    $content  = file_get_contents('expired_certificate.pfx');
+    $password = 'associacao';
     $certificate = Certificate::readPfx($content, $password);
 
     //cria o evento e retorna o XML assinado
-    $xml = Event::evtFechaEvPer(
+    $xml = Event::evtFech4000(
         $configJson,
         $std,
         $certificate,
         '2017-08-03 10:37:00'
     )->toXml();
 
-    //$xml = Evento::r2099($json, $std, $certificate)->toXML();
-    //$json = Event::evtFechaEvPer($configjson, $std, $certificate)->toJson();
+    //$xml = Evento::r4099($json, $std, $certificate)->toXML();
+    //$json = Event::evtFech4000($configjson, $std, $certificate)->toJson();
 
     header('Content-type: text/xml; charset=UTF-8');
     echo $xml;

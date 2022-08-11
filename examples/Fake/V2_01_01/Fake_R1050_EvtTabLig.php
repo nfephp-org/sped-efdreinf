@@ -8,10 +8,10 @@ use NFePHP\Common\Certificate;
 use JsonSchema\Validator;
 
 $config = [
-    'tpAmb' => 2, //tipo de ambiente 1 - Produção; 2 - Produção restrita
+    'tpAmb' => 2, //tipo de ambiente 1 - Produção; 2 - Produção restrita (homologação)
     'verProc' => '0_2_1_1', //Versão do processo de emissão do evento. Informar a versão do aplicativo emissor do evento.
     'eventoVersion' => '2_01_01', //versão do layout do evento
-    'serviceVersion' => '1_05_01',//versão do webservice
+    'serviceVersion' => '1_05_01', //versão do webservice
     'contribuinte' => [
         //'admPublica' => false, //campo Opcional, deve ser true apenas se natureza
         //jurídica do contribuinte declarante for de administração pública
@@ -20,7 +20,7 @@ $config = [
         'nrInsc' => '12345678901234', //numero do documento com 11 ou 14 digitos
         'nmRazao' => 'Razao Social'
     ],
-    'transmissor' => [
+    'transmissor' => [  //refere ao proprietario do certificado digital usado
         'tpInsc' => 1,  //1-CNPJ, 2-CPF
         'nrInsc' => '99999999999999' //numero do documento
     ]
@@ -29,22 +29,20 @@ $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
 $std = new \stdClass();
 //$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
-$std->perapur = '2017-11';
-$std->iderespinf= new \stdClass();
-$std->iderespinf->nmresp = 'Ciclano de Tal III';
-$std->iderespinf->cpfresp = '12345678901';
-$std->iderespinf->telefone = '115555-5555';
-$std->iderespinf->email = 'ciclano@mail.com';
+$std->modo = 'EXC'; //Obrigatório INC-inclusao ALT-alteração EXC-exclusao
+$std->tpentlig = 1; //Opcional
+$std->cnpjlig = '12345678901234'; //Obrigatório
+$std->inivalid = '2017-01'; //Obrigatório inicio da validade data de inicio da OBRIGATORIEDADE da declaração
+$std->fimvalid = '2017-02'; //Opcional somente deve ser passado caso seja uma alteração de dados
 
-$std->evtservtm = 'S';
-$std->evtservpr = 'S';
-$std->evtassdesprec = 'S';
-$std->evtassdesprep = 'S';
-$std->evtcomprod = 'S';
-$std->evtcprb = 'S';
-$std->evtaquis = 'N'; //v1.05
-//$std->evtpgtos = 'S'; //Não exite na versão 2.1.1
-//$std->compsemmovto = '2017-12'; //Não exite na versão 2.1.1
+//indicar somente quando for uma alteração com novo periodo de validade
+$std->novavalidade = new \stdClass(); //Opcional
+$std->novavalidade->inivalid = '2017-02'; //Obrigatório inicio da validade dessa nova informação
+$std->novavalidade->fimvalid = null; //Opcional não deve ser declarado o fim da validade, isso é usado em casos RAROS onde se sabe a data que o evento será modificado
+
+
+$json = json_encode($std, JSON_PRETTY_PRINT);
+
 
 try {
 
@@ -54,15 +52,14 @@ try {
     $certificate = Certificate::readPfx($content, $password);
 
     //cria o evento e retorna o XML assinado
-    $xml = Event::evtFechaEvPer(
+    $xml = Event::evtTabLig(
         $configJson,
         $std,
-        $certificate,
-        '2017-08-03 10:37:00'
+        $certificate
     )->toXml();
 
-    //$xml = Evento::r2099($json, $std, $certificate)->toXML();
-    //$json = Event::evtFechaEvPer($configjson, $std, $certificate)->toJson();
+    //$xml = Event::r1050($configJson, $std, $certificate)->toXML();
+    //$json = Event::evtItablig($configJson, $std, $certificate)->toJson();
 
     header('Content-type: text/xml; charset=UTF-8');
     echo $xml;

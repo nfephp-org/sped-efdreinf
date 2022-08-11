@@ -58,7 +58,7 @@
                                 <xs:documentation>Natureza do rendimento</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:integer">
-                                <xs:pattern value="[19001|19009]"/>
+                                <xs:pattern value="(19001|19009)"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>

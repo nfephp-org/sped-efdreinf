@@ -49,6 +49,17 @@ $std->infocadastro->indsitpj = 0; //Opcional exclusiva para pessoa jurídica, no
                                     //2 - Fusão;
                                     //3 - Cisão;
                                     //4 - Incorporação.
+$std->infocadastro->induniao = 0; //Opcional
+// 0 - Não aplicável;
+// 1 - Órgão da Administração Pública Federal Direta, autarquias e fundações da
+//   Administração Pública Federal, empresas públicas, sociedades de economia
+//   mista, ou demais entidades em que a que União detenha maioria do capital
+//   social sujeito a voto, recebe recursos do Tesouro Nacional e está obrigada a
+//   registrar a execução orçamentária no Siafi.
+
+$std->infocadastro->dttransffinslucr = '2021-10-12'; //Opcional
+
+$std->infocadastro->dtobito = '2021-12-31'; //Opcional Data do óbito do contribuinte, se falecido
 
 $std->infocadastro->contato = new \stdClass(); //Obrigatório
 $std->infocadastro->contato->nmctt = 'Fulano de Tal'; //Obrigatório Nome do contato no contribuinte relativamente à EFD-Reinf.
@@ -73,9 +84,9 @@ $std->softhouse[1]->telefone = '0115555555'; //Opcional
 $std->softhouse[1]->email = 'fulano@email.com'; //Opcional
 
 //Informações de órgãos públicos estaduais e municipais relativas a Ente Federativo Responsável - EFR
-//$std->infoefr = new \stdClass(); //Opcional
-//$std->infoefr->ideefr = 'N'; //Obrigatório
-//$std->infoefr->cnpjefr = '12345678901234'; //Opcional
+$std->infoefr = new \stdClass(); //Opcional
+$std->infoefr->ideefr = 'N'; //Obrigatório
+$std->infoefr->cnpjefr = '12345678901234'; //Opcional
 
 $json = json_encode($std, JSON_PRETTY_PRINT);
 

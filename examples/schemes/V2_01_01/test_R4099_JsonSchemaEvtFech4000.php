@@ -8,44 +8,71 @@ use JsonSchema\Constraints\Factory;
 use JsonSchema\SchemaStorage;
 use JsonSchema\Validator;
 
-$evento = 'evtRetPF';
+$evento = 'evtFech4000';
 $version = '2_01_01';
 
 $jsonSchema = '{
-    "title": "evtRetPF",
+    "title": "evtFech4000",
     "type": "object",
     "properties": {
         "sequencial": {
             "required": false,
-            "type": ["integer", "null"],
+            "type": ["integer","null"],
             "minimum": 1,
             "maximum": 99999
-        },
-        "indretif": {
-            "required": true,
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 2
-        },
-        "nrrecibo": {
-            "required": false,
-            "type": ["string", "null"],
-            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{6}[-][0-9]{1,18})$"
         },
         "perapur": {
             "required": true,
             "type": "string",
             "pattern": "^20([0-9][0-9])-(0[1-9]|1[0-2])$"
+        },
+        "iderespinf": {
+            "required": false,
+            "type": ["object","null"],
+            "properties": {
+                "nmresp": {
+                    "required": true,
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 70
+                },
+                "cpfresp": {
+                    "required": true,
+                    "type": "string",
+                    "pattern": "^[0-9]{11}$"
+                },
+                "telefone": {
+                    "required": false,
+                    "type": ["string","null"],
+                    "pattern": "^[0-9 ()-]{1,13}$"
+                },
+                "email": {
+                    "required": false,
+                    "type": ["string","null"],
+                    "minLength": 5,
+                    "maxLength": 60
+                }
+            }
+        },
+        "fechret": {
+            "required": true,
+            "type": "string",
+            "pattern": "^(0|1)$"
         }
     }
 }';
 
 
 $std = new \stdClass();
-//$std->sequencial = 1;
-$std->indretif = 1;
-$std->nrrecibo = '1-12-1234-123456-123456576';
-$std->perapur = '2017-12-01';
+//$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
+$std->perapur = '2017-11';
+$std->iderespinf= new \stdClass();
+$std->iderespinf->nmresp = str_pad('Ciclano de Tal', 70, '_', STR_PAD_RIGHT);
+$std->iderespinf->cpfresp = '12345678901';
+$std->iderespinf->telefone = '115555-5555';
+$std->iderespinf->email = 'ciclano@mail.com';
+$std->fechret = '0'; //0-fecha ou 1-reabre
+
 
 
 // Schema must be decoded before it can be used for validation
