@@ -493,7 +493,9 @@
             <xs:documentation>Recibo arquivo a ser retificado</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:length value="52"/>
+              <xs:minLength value="16"/>
+              <xs:maxLength value="52" />
+              <xs:pattern value="[0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>

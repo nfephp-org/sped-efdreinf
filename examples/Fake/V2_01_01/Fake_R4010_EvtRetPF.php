@@ -31,7 +31,7 @@ $std = new \stdClass();
 //$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
 $std->indretif = 1;
 $std->nrrecibo = '1-12-1234-123456-123456576';
-$std->perapur = '2017-12-01';
+$std->perapur = '2017-12';
 
 $std->natjur = '1234'; //infoComplContri/natJur
 $std->tpinscestab = '1';

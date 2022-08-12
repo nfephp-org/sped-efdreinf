@@ -192,19 +192,19 @@ class EvtRetPF extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoPgto,
                     "vlrRendBruto",
-                    $this->format($info->vlrrendbruto),
+                    self::format($info->vlrrendbruto),
                     true
                 );
                 $this->dom->addChild(
                     $infoPgto,
                     "vlrRendTrib",
-                    $this->format($info->vlrrendtrib),
+                    self::format($info->vlrrendtrib),
                     false
                 );
                 $this->dom->addChild(
                     $infoPgto,
                     "vlrIR",
-                    $this->format($info->vlrir),
+                    self::format($info->vlrir),
                     false
                 );
                 $this->dom->addChild(
@@ -254,7 +254,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $detDed,
                         "vlrDeducao",
-                        $this->format($ded->vlrdeducao),
+                        self::format($ded->vlrdeducao),
                         true
                     );
                     $this->dom->addChild(
@@ -272,7 +272,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $detDed,
                         "vlrPatrocFunp",
-                        $this->format($ded->vlrpatrocfunp),
+                        self::format($ded->vlrpatrocfunp),
                         false
                     );
                     foreach ($ded->benefpen as $pen) {
@@ -286,7 +286,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                         $this->dom->addChild(
                             $benefPen,
                             "cpfDep",
-                            $this->format($pen->vlrdepen),
+                            self::format($pen->vlrdepen),
                             true
                         );
                         $detDed->appendChild($benefPen);
@@ -304,7 +304,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $rendIsento,
                         "vlrIsento",
-                        $this->format($isento->vlrisento),
+                        self::format($isento->vlrisento),
                         true
                     );
                     $this->dom->addChild(
@@ -344,31 +344,31 @@ class EvtRetPF extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $infoProcRet,
                         "vlrNRetido",
-                        $this->format($ret->vlrnretido ?? null),
+                        self::format($ret->vlrnretido ?? null),
                         false
                     );
                     $this->dom->addChild(
                         $infoProcRet,
                         "vlrDepJud",
-                        $this->format($ret->vlrdepjud ?? null),
+                        self::format($ret->vlrdepjud ?? null),
                         false
                     );
                     $this->dom->addChild(
                         $infoProcRet,
                         "vlrCmpAnoCal",
-                        $this->format($ret->vlrcmpanocal ?? null),
+                        self::format($ret->vlrcmpanocal ?? null),
                         false
                     );
                     $this->dom->addChild(
                         $infoProcRet,
                         "vlrCmpAnoAnt",
-                        $this->format($ret->vlrcmpanoant ?? null),
+                        self::format($ret->vlrcmpanoant ?? null),
                         false
                     );
                     $this->dom->addChild(
                         $infoProcRet,
                         "vlrRendSusp",
-                        $this->format($ret->vlrrendsusp ?? null),
+                        self::format($ret->vlrrendsusp ?? null),
                         false
                     );
                     foreach ($ret->dedsusp as $susp) {
@@ -382,7 +382,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                         $this->dom->addChild(
                             $dedSusp,
                             "vlrDedSusp",
-                            $this->format($susp->vlrDedSusp ?? null),
+                            self::format($susp->vlrDedSusp ?? null),
                             false
                         );
                         foreach ($susp->benefpen as $bpen) {
@@ -396,7 +396,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                             $this->dom->addChild(
                                 $benefPen,
                                 "cpfDep",
-                                $this->format($bpen->vlrdepensusp),
+                                self::format($bpen->vlrdepensusp),
                                 true
                             );
                             $dedSusp->appendChild($benefPen);
@@ -450,13 +450,13 @@ class EvtRetPF extends Factory implements FactoryInterface
                         $this->dom->addChild(
                             $despProcJud,
                             "vlrDespCustas",
-                            $this->format($dpj->vlrdespcustas),
+                            self::format($dpj->vlrdespcustas),
                             true
                         );
                         $this->dom->addChild(
                             $despProcJud,
                             "vlrDespAdvogados",
-                            $this->format($dpj->vlrdespadvogados),
+                            self::format($dpj->vlrdespadvogados),
                             true
                         );
                         foreach ($dpj->ideadv as $adv) {
@@ -476,7 +476,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                             $this->dom->addChild(
                                 $ideAdv,
                                 "vlrAdv",
-                                $this->format($adv->vlradv ?? null),
+                                self::format($adv->vlradv ?? null),
                                 false
                             );
                             $despProcJud->appendChild($ideAdv);
@@ -518,13 +518,13 @@ class EvtRetPF extends Factory implements FactoryInterface
                         $this->dom->addChild(
                             $despProcJud,
                             "vlrDespCustas",
-                            $this->format($djud->vlrdespcustas),
+                            self::format($djud->vlrdespcustas),
                             true
                         );
                         $this->dom->addChild(
                             $despProcJud,
                             "vlrDespAdvogados",
-                            $this->format($djud->vlrdespadvogados),
+                            self::format($djud->vlrdespadvogados),
                             true
                         );
                         foreach ($djud->ideadv as $adv) {
@@ -544,7 +544,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                             $this->dom->addChild(
                                 $ideAdv,
                                 "vlrAdv",
-                                $this->format($adv->vlradv ?? null),
+                                self::format($adv->vlradv ?? null),
                                 false
                             );
                             $despProcJud->appendChild($ideAdv);
@@ -650,7 +650,7 @@ class EvtRetPF extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $ideOpSaude,
                 "vlrSaude",
-                $this->format($sau->vlrsaude),
+                self::format($sau->vlrsaude),
                 true
             );
             foreach ($sau->inforeemb as $reem) {
@@ -670,13 +670,13 @@ class EvtRetPF extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoReemb,
                     "vlrReemb",
-                    $this->format($reem->vlrreemb ?? null),
+                    self::format($reem->vlrreemb ?? null),
                     false
                 );
                 $this->dom->addChild(
                     $infoReemb,
                     "vlrReembAnt",
-                    $this->format($reem->vlrreembant ?? null),
+                    self::format($reem->vlrreembant ?? null),
                     false
                 );
                 $ideOpSaude->appendChild($infoReemb);
@@ -692,7 +692,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoDependPl,
                     "vlrSaude",
-                    $this->format($dpl->vlrsaude),
+                    self::format($dpl->vlrsaude),
                     true
                 );
                 foreach ($dpl->inforeembdep as $reedep) {
@@ -712,13 +712,13 @@ class EvtRetPF extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $infoReembDep,
                         "vlrReemb",
-                        $this->format($reedep->vlrreemb ?? null),
+                        self::format($reedep->vlrreemb ?? null),
                         false
                     );
                     $this->dom->addChild(
                         $infoReembDep,
                         "vlrReembAnt",
-                        $this->format($reedep->vlrreembant ?? null),
+                        self::format($reedep->vlrreembant ?? null),
                         false
                     );
                     $infoDependPl->appendChild($infoReembDep);

@@ -10,7 +10,7 @@ trait FormatNumber
      * @param $decimals
      * @return string|null
      */
-    protected function format($value = null, $decimals = 2)
+    protected static function format($value = null, $decimals = 2, $separator = ',')
     {
         if ($value === null) {
             return null;
@@ -18,6 +18,6 @@ trait FormatNumber
         if (empty($value)) {
             $value = 0;
         }
-        return number_format($value, $decimals, '.', '');
+        return number_format($value, $decimals, $separator, '');
     }
 }
