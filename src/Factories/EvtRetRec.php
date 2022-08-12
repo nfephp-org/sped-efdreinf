@@ -145,19 +145,19 @@ class EvtRetRec extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoRec,
                     "vlrBruto",
-                    $this->format($rec->vlrbruto),
+                    self::format($rec->vlrbruto),
                     true
                 );
                 $this->dom->addChild(
                     $infoRec,
                     "vlrBaseIR",
-                    $this->format($rec->vlrbaseir),
+                    self::format($rec->vlrbaseir),
                     true
                 );
                 $this->dom->addChild(
                     $infoRec,
                     "vlrIR",
-                    $this->format($rec->vlrir),
+                    self::format($rec->vlrir),
                     true
                 );
                 foreach ($rec->infoprocret as $proc) {
@@ -183,19 +183,19 @@ class EvtRetRec extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $infoProcRet,
                         "vlrBaseSuspIR",
-                        $this->format($proc->vlrbasesuspir ?? null),
+                        self::format($proc->vlrbasesuspir ?? null),
                         false
                     );
                     $this->dom->addChild(
                         $infoProcRet,
                         "vlrNIR",
-                        $this->format($proc->vlrnir ?? null),
+                        self::format($proc->vlrnir ?? null),
                         false
                     );
                     $this->dom->addChild(
                         $infoProcRet,
                         "vlrDepIR",
-                        $this->format($proc->vlrdepir ?? null),
+                        self::format($proc->vlrdepir ?? null),
                         false
                     );
                     $infoRec->appendChild($infoProcRet);

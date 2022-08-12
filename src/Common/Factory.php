@@ -129,6 +129,10 @@ abstract class Factory
      * @var
      */
     protected $config;
+    /**
+     * @var string
+     */
+    protected $decimalSeparator = ',';
 
     /**
      * Constructor
@@ -176,6 +180,13 @@ abstract class Factory
             . "-" . $this->layoutStr
             . ".xsd"
         );
+        if ($this->config->eventoVersion === '1_05_01') {
+            //na versão 1.5.1 os XSD exige numericos com virgula
+            $this->decimalSeparator = ',';
+        } else {
+            //na versão 2.1.1 os XSD exige numericos com ponto
+            $this->decimalSeparator = '.';
+        }
         //convert all data fields to lower case
         $this->std = $this->propertiesToLower($std);
         //validate input data with schema

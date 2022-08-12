@@ -132,19 +132,19 @@ class EvtBenefNId extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoPgto,
                     "vlrLiq",
-                    $this->format($pgto->vlrliq),
+                    self::format($pgto->vlrliq),
                     true
                 );
                 $this->dom->addChild(
                     $infoPgto,
                     "vlrBaseIR",
-                    $this->format($pgto->vlrbaseir),
+                    self::format($pgto->vlrbaseir),
                     true
                 );
                 $this->dom->addChild(
                     $infoPgto,
                     "vlrIR",
-                    $this->format($pgto->vlrir ?? null),
+                    self::format($pgto->vlrir ?? null),
                     false
                 );
                 $this->dom->addChild(
@@ -176,19 +176,19 @@ class EvtBenefNId extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $infoProcRet,
                         "vlrBaseSuspIR",
-                        $this->format($ret->vlrbasesuspir ?? null),
+                        self::format($ret->vlrbasesuspir ?? null),
                         false
                     );
                     $this->dom->addChild(
                         $infoProcRet,
                         "vlrNIR",
-                        $this->format($ret->vlrnir ?? null),
+                        self::format($ret->vlrnir ?? null),
                         false
                     );
                     $this->dom->addChild(
                         $infoProcRet,
                         "vlrDepNIR",
-                        $this->format($ret->vlrdepnir ?? null),
+                        self::format($ret->vlrdepnir ?? null),
                         false
                     );
                     $infoPgto->appendChild($infoProcRet);
