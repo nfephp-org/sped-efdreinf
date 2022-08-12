@@ -263,7 +263,7 @@ class EvtRetPJ extends Factory implements FactoryInterface
                     );
                     $infoPgto->appendChild($retencoes);
                 }
-                foreach($info->infoprocret as $ret) {
+                foreach ($info->infoprocret as $ret) {
                     $infoProcRet = $this->dom->createElement('infoProcRet');
                     $this->dom->addChild(
                         $infoProcRet,
@@ -357,7 +357,7 @@ class EvtRetPJ extends Factory implements FactoryInterface
                     );
                     $infoPgto->appendChild($infoProcRet);
                 }
-                If (!empty($info->infoprocjud)) {
+                if (!empty($info->infoprocjud)) {
                     $jud = $info->infoprocjud;
                     $infoProcJud = $this->dom->createElement('infoProcJud');
                     $this->dom->addChild(
