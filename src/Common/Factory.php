@@ -429,6 +429,14 @@ abstract class Factory
      */
     protected function sign($tagsigned = '')
     {
+        if ($this->config->eventoVersion === '1_05_01') {
+            //na versão 1.5.1 o marcador ID está com letras minusculas
+            $tagIDname = 'id';
+        } else {
+            //na versão 2.1.1 o marcador ID está com a primeira letra maiuscula
+            $tagIDname = 'Id';
+        }
+
         $xml = $this->dom->saveXML($this->reinf);
         $xml = Strings::clearXmlString($xml);
         if (!empty($this->certificate)) {
@@ -436,7 +444,7 @@ abstract class Factory
                 $this->certificate,
                 $xml,
                 $tagsigned,
-                'id',
+                $tagIDname,
                 OPENSSL_ALGO_SHA256,
                 [true, false, null, null]
             );
