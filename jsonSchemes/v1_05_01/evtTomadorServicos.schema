@@ -3,8 +3,8 @@
     "type": "object",
     "properties": {
         "sequencial": {
-            "required": true,
-            "type": "integer",
+            "required": false,
+            "type": ["integer","null"],
             "minimum": 1,
             "maximum": 99999
         },
@@ -17,25 +17,22 @@
         "nrrecibo": {
             "required": false,
             "type": ["string","null"],
-            "maxLength": 52,
             "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18})$"
         },
         "perapur": {
             "required": true,
             "type": "string",
-            "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])$"
+            "pattern": "^20([0-9][0-9])-(0[1-9]|1[0-2])$"
         },
         "tpinscestab": {
             "required": true,
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 4
+            "type": "string",
+            "pattern": "^(1|4)$"
         },
         "nrinscestab": {
             "required": true,
             "type": "string",
-            "maxLength": 14,
-            "pattern": "^[0-9]"
+            "pattern": "^[0-9]{12}|[0-9]{14}$"
         },
         "indobra": {
             "required": true,
@@ -46,12 +43,12 @@
         "cnpjprestador": {
             "required": true,
             "type": "string",
-            "maxLength": 14,
-            "pattern": "^[0-9]"
+            "pattern": "^[0-9]{14}$"
         },
         "vlrtotalbruto": {
             "required": true,
-            "type": "number"
+            "type": "number",
+            "multipleOf": 0.01
         },
         "vlrtotalbaseret": {
            "required": true,
@@ -77,7 +74,7 @@
             "required": true,
             "type": "integer",
             "minimum": 0,
-            "maximum": 2
+            "maximum": 1
         },    
         "nfs": {
            "required": true,
@@ -90,11 +87,13 @@
                     "serie": {
                         "required": true,
                         "type": "string",
+                        "minLength": 1,
                         "maxLength": 5
                     },
                     "numdocto": {
                         "required": true,
                         "type": "string",
+                        "minLength": 1,
                         "maxLength": 15
                     },
                     "dtemissaonf": {
@@ -104,11 +103,13 @@
                     },
                     "vlrbruto": {
                         "required": true,
-                        "type": "number"
+                        "type": "number",
+                        "multipleOf": 0.01
                     },
                     "obs": {
                         "required": false,
                         "type": ["string","null"],
+                        "minLength": 1,
                         "maxLength": 250
                     },
                     "infotpserv": {
@@ -122,8 +123,7 @@
                                 "tpservico": {
                                     "required": true,
                                     "type": "string",
-                                    "maxLength": 9,
-                                    "pattern": "^[0-9]"
+                                    "pattern": "^[0-9]{9}$"
                                 },
                                 "vlrbaseret": {
                                     "required": true,
@@ -184,17 +184,18 @@
                     "nrprocretprinc": {
                         "required": true,
                         "type": "string",
+                        "minLength": 1,
                         "maxLength": 21
                     },
                     "codsuspprinc": {
                         "required": false,
                         "type": ["string","null"],
-                        "maxLength": 14,
-                        "pattern": "^[0-9]"
+                        "pattern": "^[0-9]{0,14}$"
                     },
                     "valorprinc": {
                         "required": true,
-                        "type": "number"
+                        "type": "number",
+                        "multipleOf": 0.01
                     }                
                 }
             }
@@ -216,17 +217,18 @@
                     "nrprocretadic": {
                         "required": true,
                         "type": "string",
+                        "minLength": 1,
                         "maxLength": 21
                     },
                     "codsuspadic": {
                         "required": false,
                         "type": ["string","null"],
-                        "maxLength": 14,
-                        "pattern": "^[0-9]"
+                        "pattern": "^[0-9]{0,14}$"
                     },
                     "valoradic": {
                         "required": true,
-                        "type": "number"
+                        "type": "number",
+                        "multipleOf": 0.01
                     }                
                 }
             }    

@@ -34,7 +34,7 @@ class EvtTabProcesso extends Factory implements FactoryInterface
         $config,
         stdClass $std,
         Certificate $certificate = null,
-        $data = ''
+        $data = null
     ) {
         $params = new \stdClass();
         $params->evtName = 'evtTabProcesso';
@@ -99,7 +99,7 @@ class EvtTabProcesso extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $ideProcesso,
                 "fimValid",
-                !empty($this->std->fimvalid) ? $this->std->fimvalid : null,
+                null,
                 false
             );
             $this->dom->addChild(
@@ -110,6 +110,9 @@ class EvtTabProcesso extends Factory implements FactoryInterface
             );
         } elseif ($this->std->modo == 'ALT') {
             //alteracao
+            if (empty($this->std->fimvalid)) {
+                throw new \Exception("Numa alteração é obrigatório informar o FIM da VALIDADE do evento anterior.");
+            }
             $node = $this->dom->createElement("alteracao");
             $this->dom->addChild(
                 $ideProcesso,
@@ -201,6 +204,9 @@ class EvtTabProcesso extends Factory implements FactoryInterface
             }
         }
         $node->appendChild($ideProcesso);
+        if ($this->std->modo == 'ALT' && empty($this->std->novavalidade)) {
+            throw new \Exception("Numa alteração é obrigatório indicar o inicio da NOVA validade.");
+        }
         if (!empty($this->std->novavalidade) && $this->std->modo == 'ALT') {
             $novaValidade = $this->dom->createElement("novaValidade");
             $n = $this->std->novavalidade;

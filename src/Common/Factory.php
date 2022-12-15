@@ -30,6 +30,10 @@ use stdClass;
 abstract class Factory
 {
     /**
+     * @var bool
+     */
+    public $admpublica = false;
+    /**
      * @var int
      */
     public $tpInsc;
@@ -86,6 +90,10 @@ abstract class Factory
      */
     public $evtAlias = '';
     /**
+     * @var array
+     */
+    public $errors = [];
+    /**
      * @var string
      */
     protected $xmlns = "http://www.reinf.esocial.gov.br/schemas/";
@@ -117,6 +125,14 @@ abstract class Factory
      * @var Certificate|null
      */
     protected $certificate;
+    /**
+     * @var
+     */
+    protected $config;
+    /**
+     * @var string
+     */
+    protected $decimalSeparator = ',';
 
     /**
      * Constructor
@@ -131,17 +147,14 @@ abstract class Factory
         stdClass $std,
         stdClass $params,
         Certificate $certificate = null,
-        $date = ''
+        $date = null
     ) {
         //set properties from config
         $stdConf = json_decode($config);
-        $this->date = new DateTime();
-        if (!empty($date)) {
-            $this->date = new DateTime($date);
-        }
         $this->tpAmb = $stdConf->tpAmb;
         $this->verProc = $stdConf->verProc;
         $this->layout = $stdConf->eventoVersion;
+        $this->admpublica = $stdConf->contribuinte->admPublica ?? false;
         $this->tpInsc = $stdConf->contribuinte->tpInsc;
         $this->nrInsc = $stdConf->contribuinte->nrInsc;
         $this->nmRazao = $stdConf->contribuinte->nmRazao;
@@ -150,6 +163,7 @@ abstract class Factory
         $this->evtTag = $params->evtTag;
         $this->evtName = $params->evtName;
         $this->evtAlias = $params->evtAlias;
+        $this->config = $stdConf;
         if (empty($std) || !is_object($std)) {
             throw EventsException::wrongArgument(1003, '');
         }
@@ -166,6 +180,13 @@ abstract class Factory
             . "-" . $this->layoutStr
             . ".xsd"
         );
+        if ($this->config->eventoVersion === '1_05_01') {
+            //na versão 1.5.1 os XSD exige numericos com virgula
+            $this->decimalSeparator = ',';
+        } else {
+            //na versão 2.1.1 os XSD exige numericos com ponto
+            $this->decimalSeparator = '.';
+        }
         //convert all data fields to lower case
         $this->std = $this->propertiesToLower($std);
         //validate input data with schema
@@ -204,6 +225,14 @@ abstract class Factory
         foreach ($properties as $key => $value) {
             if ($value instanceof stdClass) {
                 $value = self::propertiesToLower($value);
+            } elseif (is_array($value)) {
+                foreach ($value as $k => $val) {
+                    if ($val instanceof stdClass) {
+                        $val = self::propertiesToLower($val);
+                    }
+                    $k = strtolower($k);
+                    $value[$k] = $val;
+                }
             }
             $nk = strtolower($key);
             $clone->{$nk} = $value;
@@ -249,28 +278,41 @@ abstract class Factory
                 . "/$this->layoutStr\">"
                 . "</Reinf>";
             $this->dom->loadXML($xml);
+            $doc = $this->nrInsc;
+            if (!$this->admpublica && $this->tpInsc == 1) {
+                //nesse caso deixa apenas a raiz do CNPJ
+                $doc = substr($this->nrInsc, 0, 8);
+            }
             $this->reinf = $this->dom->getElementsByTagName('Reinf')->item(0);
+
             $this->evtid = FactoryId::build(
                 $this->tpInsc,
-                $this->nrInsc,
-                $this->date,
-                $this->std->sequencial
+                $doc,
+                $this->date ?? null,
+                $this->std->sequencial ?? null
             );
             $this->node = $this->dom->createElement($this->evtTag);
-            $att = $this->dom->createAttribute('id');
+            if ($this->config->eventoVersion === '1_05_01') {
+                //na versão 1.5.1 o marcador ID está com letras minusculas
+                $tagIDname = 'id';
+            } else {
+                //na versão 2.1.1 o marcador ID está com a primeira letra maiuscula
+                $tagIDname = 'Id';
+            }
+            $att = $this->dom->createAttribute($tagIDname);
             $att->value = $this->evtid;
             $this->node->appendChild($att);
             $ideContri = $this->dom->createElement("ideContri");
             $this->dom->addChild(
                 $ideContri,
                 "tpInsc",
-                (string) $this->tpInsc,
+                (string)$this->tpInsc,
                 true
             );
             $this->dom->addChild(
                 $ideContri,
                 "nrInsc",
-                $this->nrInsc,
+                $doc,
                 true
             );
             $this->node->appendChild($ideContri);
@@ -382,26 +424,19 @@ abstract class Factory
     }
 
     /**
-     * Adjust missing properties form original data according schema
-     * @param \stdClass $data
-     * @return \stdClass
-     */
-    //public function standardizeProperties(stdClass $data)
-    //{
-    //    if (!is_file($this->jsonschema)) {
-    //        return $data;
-    //    }
-    //    $jsonSchemaObj = json_decode(file_get_contents($this->jsonschema));
-    //    $sc = new ParamsStandardize($jsonSchemaObj);
-    //    return $sc->stdData($data);
-    //}
-
-    /**
      * Sign and validate XML with XSD, can throw Exception
      * @param string $tagsigned tag to be base of signature
      */
     protected function sign($tagsigned = '')
     {
+        if ($this->config->eventoVersion === '1_05_01') {
+            //na versão 1.5.1 o marcador ID está com letras minusculas
+            $tagIDname = 'id';
+        } else {
+            //na versão 2.1.1 o marcador ID está com a primeira letra maiuscula
+            $tagIDname = 'Id';
+        }
+
         $xml = $this->dom->saveXML($this->reinf);
         $xml = Strings::clearXmlString($xml);
         if (!empty($this->certificate)) {
@@ -409,7 +444,7 @@ abstract class Factory
                 $this->certificate,
                 $xml,
                 $tagsigned,
-                'id',
+                $tagIDname,
                 OPENSSL_ALGO_SHA256,
                 [true, false, null, null]
             );

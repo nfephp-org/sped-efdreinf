@@ -1,0 +1,249 @@
+{
+    "title": "evtEspDesportivo",
+    "type": "object",
+    "properties": {
+        "sequencial": {
+            "required": false,
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99999
+        },
+        "indretif": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2
+        },
+        "nrrecibo": {
+            "required": false,
+            "type": ["string", "null"],
+            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{6}[-][0-9]{1,18})$"
+        },
+        "dtapuracao": {
+            "required": true,
+            "type": "string",
+            "pattern": "^2{1}0{1}[0-9]{2}-[0-1]{1}[0-9]{1}-[0-3]{1}[0-9]{1}$"
+        },
+        "nrinscestab": {
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]{14}$"
+        },
+        "boletim": {
+            "required": true,
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 500,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "nrboletim": {
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[0-9]{4}$"
+                    },
+                    "tpcompeticao": {
+                        "required": true,
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2
+                    },
+                    "categevento": {
+                        "required": true,
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 4
+                    },
+                    "moddesportiva": {
+                        "required": true,
+                        "type": "string",
+                        "maxLength": 100
+                    },
+                    "nomecompeticao": {
+                        "required": true,
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                    },
+                    "cnpjmandante": {
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[0-9]{14}$"
+                    },
+                    "cnpjvisitante": {
+                        "required": false,
+                        "type": ["string", "null"],
+                        "pattern": "^[0-9]{14}$"
+                    },
+                    "nomevisitante": {
+                        "required": true,
+                        "type": "string",
+                        "maxLength": 80
+                    },
+                    "pracadesportiva": {
+                        "required": true,
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                    },
+                    "codmunic": {
+                        "required": false,
+                        "type": ["string", "null"],
+                        "pattern": "^[0-9]{7}$"
+                    },
+                    "uf": {
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^(AC|AL|AM|AP|BA|CE|DF|ES|GO|MA|MG|MS|MT|PA|PB|PE|PI|PR|RJ|RN|RO|RR|RS|SC|SE|SP|TO)$"
+                    },
+                    "qtdepagantes": {
+                        "required": true,
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 999999
+                    },
+                    "qtdenaopagantes": {
+                        "required": true,
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 999999
+                    },
+                    "receitaingressos": {
+                        "required": true,
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 999,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "tpingresso": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 4
+                                },
+                                "descingr": {
+                                    "required": true,
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 30
+                                },
+                                "qtdeingrvenda": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 999999
+                                },
+                                "qtdeingrvendidos": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 999999
+                                },
+                                "qtdeingrdev": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 999999
+                                },
+                                "precoindiv": {
+                                    "required": true,
+                                    "type": "number"
+                                },
+                                "vlrtotal": {
+                                    "required": true,
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    },
+                    "outrasreceitas": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 1,
+                        "maxItems": 999,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "tpreceita": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 5
+                                },
+                                "vlrreceita": {
+                                    "required": true,
+                                    "type": "number"
+                                },
+                                "descreceita": {
+                                    "required": true,
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 20
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "receitatotal": {
+            "required": true,
+            "type": "object",
+            "properties": {
+                "vlrreceitatotal": {
+                    "required": true,
+                    "type": "number"
+                },
+                "vlrcp": {
+                    "required": true,
+                    "type": "number"
+                },
+                "vlrcpsusptotal": {
+                    "required": false,
+                    "type": ["number", "null"]
+                },
+                "vlrreceitaclubes": {
+                    "required": true,
+                    "type": "number"
+                },
+                "vlrretparc": {
+                    "required": true,
+                    "type": "number"
+                },
+                "infoproc": {
+                    "required": false,
+                    "type": ["array", "null"],
+                    "minItems": 1,
+                    "maxItems": 50,
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "tpproc": {
+                                "required": true,
+                                "type": "integer",
+                                "minimum": 1,
+                                "maximum": 2
+                            },
+                            "nrproc": {
+                                "required": true,
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 21
+                            },
+                            "codsusp": {
+                                "required": false,
+                                "type": ["string", "null"],
+                                "pattern": "^[0-9]{14}$"
+                            },
+                            "vlrcpsusp": {
+                                "required": true,
+                                "type": "number"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

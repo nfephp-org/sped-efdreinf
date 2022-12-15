@@ -25,6 +25,7 @@ class Event
      */
     private static $available = [
         'evtinfocontri' => Factories\EvtInfoContri::class,
+        'evttablig' => Factories\EvtTabLig::class,
         'evttabprocesso' => Factories\EvtTabProcesso::class,
         'evtservtom' => Factories\EvtServTom::class,
         'evtservprest' => Factories\EvtServPrest::class,
@@ -41,8 +42,8 @@ class Event
         'evtretpf' => Factories\EvtRetPF::class,
         'evtretpj' => Factories\EvtRetPJ::class,
         'evtbenefnid' => Factories\EvtBenefNId::class,
-        'evtreab' => Factories\EvtReab::class,
-        'evtfech' => Factories\EvtFech::class,
+        'evtretrec' => Factories\EvtRetRec::class,
+        'evtfech4000' => Factories\EvtFech4000::class,
         'evtretcons' => Factories\EvtRetCons::class,
     ];
 
@@ -52,6 +53,7 @@ class Event
      */
     private static $aliases = [
         'r1000' => 'evtinfocontri',
+        'r1050' => 'evttablig',
         'r1070' => 'evttabprocesso',
         'r2010' => 'evtservtom',
         'r2020' => 'evtservprest',
@@ -67,8 +69,8 @@ class Event
         'r4010' => 'evtretpf',
         'r4020' => 'evtretpj',
         'r4040' => 'evtbenefnid',
-        'r4098' => 'evtreab',
-        'r4099' => 'evtfech',
+        'r4080' => 'evtretrec',
+        'r4099' => 'evtfech4000',
         'r9000' => 'evtexclusao',
         'r9001' => 'evttotal',
         'r9011' => 'evttotalcontrib',

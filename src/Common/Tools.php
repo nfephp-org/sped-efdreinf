@@ -34,6 +34,10 @@ class Tools
      */
     protected $date;
     /**
+     * @var bool
+     */
+    protected $admpublica = false;
+    /**
      * @var int
      */
     protected $tpInsc;
@@ -41,6 +45,10 @@ class Tools
      * @var string
      */
     protected $nrInsc;
+    /**
+     * @var string
+     */
+    protected $doc;
     /**
      * @var string
      */
@@ -137,13 +145,18 @@ class Tools
         $this->eventoVersion = $stdConf->eventoVersion;
         $this->serviceVersion = $stdConf->serviceVersion;
         $this->date = new DateTime();
+        $this->admpublica = $stdConf->contribuinte->admPublica ?? false;
         $this->tpInsc = $stdConf->contribuinte->tpInsc;
         $this->nrInsc = $stdConf->contribuinte->nrInsc;
         $this->nmRazao = $stdConf->contribuinte->nmRazao;
         $this->transmissortpInsc = $stdConf->transmissor->tpInsc;
         $this->transmissornrInsc = $stdConf->transmissor->nrInsc;
         $this->certificate = $certificate;
-
+        $this->doc = $this->nrInsc;
+        if ($this->tpInsc == 1 && !$this->admpublica) {
+            $this->doc = substr($this->nrInsc, 0, 8);
+        }
+        
         $this->path = realpath(
             __DIR__ . '/../../'
         ).'/';

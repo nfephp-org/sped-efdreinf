@@ -7,7 +7,7 @@ namespace NFePHP\EFDReinf\Factories;
  *
  * @category  Library
  * @package   NFePHP\EFDReinf
- * @copyright NFePHP Copyright (c) 2017 - 2021-2019
+ * @copyright NFePHP Copyright (c) 2017 - 2022
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
@@ -19,6 +19,7 @@ use NFePHP\EFDReinf\Common\Factory;
 use NFePHP\EFDReinf\Common\FactoryInterface;
 use NFePHP\EFDReinf\Common\FactoryId;
 use NFePHP\Common\Certificate;
+use NFePHP\Common\Strings;
 use stdClass;
 
 class EvtRetCons extends Factory implements FactoryInterface
@@ -48,14 +49,5 @@ class EvtRetCons extends Factory implements FactoryInterface
      */
     protected function toNode()
     {
-        $ideContri = $this->node->getElementsByTagName('ideContri')->item(0);
-        //o idEvento pode variar de evento para evento
-        //então cada factory individualmente terá de construir o seu
-        $ideEvento = $this->dom->createElement("ideEvento");
-
-
-        $this->reinf->appendChild($this->node);
-        //$this->xml = $this->dom->saveXML($this->reinf);
-        $this->sign($this->evtTag);
     }
 }

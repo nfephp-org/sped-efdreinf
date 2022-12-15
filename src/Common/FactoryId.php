@@ -23,18 +23,22 @@ class FactoryId
      * Build Id for EFDReinf event
      * @param int $tpInsc
      * @param string $nrInsc
-     * @param DateTime $date
-     * @param int $sequential
+     * @param DateTime|null $date
+     * @param int|null $sequential
      * @return string
      */
     public static function build(
         $tpInsc,
         $nrInsc,
-        DateTime $date,
-        $sequential = 1
+        DateTime $date = null,
+        $sequential = null
     ) {
         if (empty($sequential)) {
-            $sequential = 1;
+            $mt = str_replace('.', '', (string) microtime(true));
+            $sequential = rand(0, 9) . substr($mt, -4);
+        }
+        if (empty($date)) {
+            $date = new DateTime();
         }
         return "ID"
             . $tpInsc

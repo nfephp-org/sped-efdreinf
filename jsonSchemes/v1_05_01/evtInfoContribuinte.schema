@@ -3,8 +3,8 @@
     "type": "object",
     "properties": {
         "sequencial": {
-            "required": true,
-            "type": "integer",
+            "required": false,
+            "type": ["integer","null"],
             "minimum": 1,
             "maximum": 99999
         },
@@ -18,37 +18,19 @@
             "type": ["string","null"],
             "pattern": "^20([0-9][0-9])-(0[1-9]|1[0-2])$"
         },
-        "novavalidade": {
-            "required": false,
-            "type": ["object","null"],
-            "properties": {
-                "inivalid": {
-                    "required": true,
-                    "type": "string",
-                    "pattern": "^20([0-9][0-9])-(0[1-9]|1[0-2])$"
-                },
-                "fimvalid": {
-                    "required": false,
-                    "type": ["string","null"],
-                    "pattern": "^20([0-9][0-9])-(0[1-9]|1[0-2])$"
-                }
-            }
-        },
         "modo": {
             "required": true,
             "type": "string",
-            "pattern": "INC|ALT|EXC"
+            "pattern": "^(INC|ALT|EXC)$"
         },
-        "infoCadastro": {
-            "required": false,
-            "type": ["object","null"],
+        "infocadastro": {
+            "required": true,
+            "type": "object",
             "properties": {
                 "classtrib": {
                     "required": true,
                     "type": "string",
-                    "minLength": 2,
-                    "maxLength": 2,
-                    "pattern": "^[0-9]"
+                    "pattern": "^(00|01|02|03|04|06|07|08|09|10|11|13|14|21|22|60|70|80|85|99)$"
                 },
                 "indescrituracao": {
                     "required": true,
@@ -81,92 +63,89 @@
                         "nmctt": {
                             "required": true,
                             "type": "string",
+                            "minLength": 1,
                             "maxLength": 70
                         },
                         "cpfctt": {
                             "required": true,
                             "type": "string",
-                            "maxLength": 11,
-                            "pattern": "^[0-9]"
+                            "pattern": "^[0-9]{11}$"
                         },
                         "fonefixo": {
                             "required": false,
                             "type": ["string","null"],
-                            "minLength": 10,
-                            "maxLength": 13,
-                            "pattern": "^[0-9]"
+                            "pattern": "^[0-9 ()-]{1,13}$"
                         },
                         "fonecel": {
                             "required": false,
                             "type": ["string","null"],
-                            "minLength": 10,
-                            "maxLength": 13,
-                            "pattern": "^[0-9]"
+                            "pattern": "^[0-9 ()-]{1,13}$"
                         },
                         "email": {
                             "required": false,
                             "type": ["string","null"],
+                            "minLength": 5,
                             "maxLength": 60
                         }
                     }
-                },
-                "softwarehouse": {
-                    "required": false,
-                    "type": ["array","null"],
-                    "minItems": 0,
-                    "maxItems": 99,
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "cnpjsofthouse": {
-                                "required": true,
-                                "type": "string",
-                                "maxLength": 14,
-                                "pattern": "^[0-9]"
-                            },
-                            "nmrazao": {
-                                "required": true,
-                                "type": "string",
-                                "maxLength": 115
-                            },
-                            "nmcont": {
-                                "required": true,
-                                "type": "string",
-                                "maxLength": 70
-                            },
-                            "telefone": {
-                                "required": true,
-                                "type": "string",
-                                "minLength": 10,
-                                "maxLength": 13,
-                                "pattern": "^[0-9]"
-                            },
-                            "email": {
-                                "required": false,
-                                "type": ["string","null"],
-                                "maxLength": 60
-                            }
-                        }
-                    }    
-                },
-                "infoefr": {
-                    "required": false,
-                    "type": ["object","null"],
-                    "properties": {
-                        "ideefr": {
-                            "required": true,
-                            "type": "string",
-                            "pattern": "S|N"
-                        },
-                        "cnpjefr": {
-                            "required": false,
-                            "type": ["string","null"],
-                            "maxLength": 14,
-                            "pattern": "^[0-9]"
-                        }
+                }
+            }    
+        },
+        "softwarehouses": {
+            "required": false,
+            "type": ["array","null"],
+            "minItems": 0,
+            "maxItems": 99,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "cnpjsofthouse": {
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[0-9]{14}$"
+                    },
+                    "nmrazao": {
+                        "required": true,
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 115
+                    },
+                    "nmcont": {
+                        "required": true,
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 70
+                    },
+                    "telefone": {
+                        "required": true,
+                        "type": "string",
+                        "minLength": 10,
+                        "maxLength": 13,
+                        "pattern": "^[0-9 ()-]{1,13}$"
+                    },
+                    "email": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "maxLength": 60
                     }
                 }
             }
-        }    
+        },
+        "infoefr": {
+            "required": false,
+            "type": ["object","null"],
+            "properties": {
+                "ideefr": {
+                    "required": true,
+                    "type": "string",
+                    "pattern": "^(S|N)$"
+                },
+                "cnpjefr": {
+                    "required": false,
+                    "type": ["string","null"],
+                    "pattern": "^[0-9]{14}$"
+                }
+            }
+        }
     }
 }

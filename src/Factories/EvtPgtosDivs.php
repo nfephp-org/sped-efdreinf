@@ -40,7 +40,7 @@ class EvtPgtosDivs extends Factory implements FactoryInterface
         $config,
         stdClass $std,
         Certificate $certificate = null,
-        $data = ''
+        $data = null
     ) {
         $params = new \stdClass();
         $params->evtName = 'evtPagtoDivs';
@@ -64,11 +64,15 @@ class EvtPgtosDivs extends Factory implements FactoryInterface
             $this->std->indretif,
             true
         );
+        if ($this->std->indretif == 2 && empty($this->std->nrrecibo)) {
+            throw new \Exception("Para retificar o evento DEVE ser informado o "
+                . "número do RECIBO do evento anterior que está retificando.");
+        }
         $this->dom->addChild(
             $ideEvento,
             "nrRecibo",
             !empty($this->std->nrrecibo) ? $this->std->nrrecibo : null,
-            true
+            $this->std->indretif == 2 ? true : false
         );
         $this->dom->addChild(
             $ideEvento,

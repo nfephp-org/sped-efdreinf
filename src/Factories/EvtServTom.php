@@ -19,10 +19,15 @@ use NFePHP\EFDReinf\Common\Factory;
 use NFePHP\EFDReinf\Common\FactoryInterface;
 use NFePHP\EFDReinf\Common\FactoryId;
 use NFePHP\Common\Certificate;
+use NFePHP\Common\Strings;
+use NFePHP\EFDReinf\Factories\Traits\FormatNumber;
+use NFePHP\EFDReinf\Factories\Traits\RegraNomeValido;
 use stdClass;
 
 class EvtServTom extends Factory implements FactoryInterface
 {
+    use FormatNumber, RegraNomeValido;
+
     /**
      * Constructor
      * @param string $config
@@ -34,7 +39,7 @@ class EvtServTom extends Factory implements FactoryInterface
         $config,
         stdClass $std,
         Certificate $certificate = null,
-        $data = ''
+        $data = null
     ) {
         $params = new \stdClass();
         $params->evtName = 'evtTomadorServicos';
@@ -58,11 +63,15 @@ class EvtServTom extends Factory implements FactoryInterface
             $this->std->indretif,
             true
         );
+        if ($this->std->indretif == 2 && empty($this->std->nrrecibo)) {
+            throw new \Exception("Para retificar o evento DEVE ser informado o "
+                . "número do RECIBO do evento anterior que está retificando.");
+        }
         $this->dom->addChild(
             $ideEvento,
             "nrRecibo",
             !empty($this->std->nrrecibo) ? $this->std->nrrecibo : null,
-            false
+            $this->std->indretif == 2 ? true : false
         );
         $this->dom->addChild(
             $ideEvento,
@@ -89,7 +98,6 @@ class EvtServTom extends Factory implements FactoryInterface
             true
         );
         $this->node->insertBefore($ideEvento, $ideContri);
-
         $info = $this->dom->createElement("infoServTom");
         $ideEstabObra = $this->dom->createElement("ideEstabObra");
         $this->dom->addChild(
@@ -120,37 +128,37 @@ class EvtServTom extends Factory implements FactoryInterface
         $this->dom->addChild(
             $idePrestServ,
             "vlrTotalBruto",
-            number_format($this->std->vlrtotalbruto, 2, ',', ''),
+            self::format($this->std->vlrtotalbruto, 2, $this->decimalSeparator),
             true
         );
         $this->dom->addChild(
             $idePrestServ,
             "vlrTotalBaseRet",
-            number_format($this->std->vlrtotalbaseret, 2, ',', ''),
+            self::format($this->std->vlrtotalbaseret, 2, $this->decimalSeparator),
             true
         );
         $this->dom->addChild(
             $idePrestServ,
             "vlrTotalRetPrinc",
-            number_format($this->std->vlrtotalretprinc, 2, ',', ''),
+            self::format($this->std->vlrtotalretprinc, 2, $this->decimalSeparator),
             true
         );
         $this->dom->addChild(
             $idePrestServ,
             "vlrTotalRetAdic",
-            !empty($this->std->vlrtotalretadic) ? number_format($this->std->vlrtotalretadic, 2, ',', '') : null,
+            self::format($this->std->vlrtotalretadic ?? null, 2, $this->decimalSeparator),
             false
         );
         $this->dom->addChild(
             $idePrestServ,
             "vlrTotalNRetPrinc",
-            !empty($this->std->vlrtotalnretprinc) ? number_format($this->std->vlrtotalnretprinc, 2, ',', '') : null,
+            self::format($this->std->vlrtotalnretprinc ?? null, 2, $this->decimalSeparator),
             false
         );
         $this->dom->addChild(
             $idePrestServ,
             "vlrTotalNRetAdic",
-            !empty($this->std->vlrtotalnretadic) ? number_format($this->std->vlrtotalnretadic, 2, ',', '') : null,
+            self::format($this->std->vlrtotalnretadic ?? null, 2, $this->decimalSeparator),
             false
         );
         $this->dom->addChild(
@@ -182,13 +190,13 @@ class EvtServTom extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $nfs,
                 "vlrBruto",
-                number_format($n->vlrbruto, 2, ',', ''),
+                self::format($n->vlrbruto, 2, $this->decimalSeparator),
                 true
             );
             $this->dom->addChild(
                 $nfs,
                 "obs",
-                !empty($n->obs) ? $n->obs : null,
+                !empty($n->obs) ? Strings::replaceUnacceptableCharacters($n->obs) : null,
                 false
             );
             foreach ($n->infotpserv as $its) {
@@ -202,55 +210,55 @@ class EvtServTom extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoTpServ,
                     "vlrBaseRet",
-                    number_format($its->vlrbaseret, 2, ',', ''),
+                    self::format($its->vlrbaseret, 2, $this->decimalSeparator),
                     true
                 );
                 $this->dom->addChild(
                     $infoTpServ,
                     "vlrRetencao",
-                    number_format($its->vlrretencao, 2, ',', ''),
+                    self::format($its->vlrretencao, 2, $this->decimalSeparator),
                     true
                 );
                 $this->dom->addChild(
                     $infoTpServ,
                     "vlrRetSub",
-                    !empty($its->vlrretsub) ? number_format($its->vlrretsub, 2, ',', '') : null,
+                    self::format($its->vlrretsub ?? null, 2, $this->decimalSeparator),
                     false
                 );
                 $this->dom->addChild(
                     $infoTpServ,
                     "vlrNRetPrinc",
-                    !empty($its->vlrnretprinc) ? number_format($its->vlrnretprinc, 2, ',', '') : null,
+                    self::format($its->vlrnretprinc ?? null, 2, $this->decimalSeparator),
                     false
                 );
                 $this->dom->addChild(
                     $infoTpServ,
                     "vlrServicos15",
-                    !empty($its->vlrservicos15) ? number_format($its->vlrservicos15, 2, ',', '') : null,
+                    self::format($its->vlrservicos15 ?? null, 2, $this->decimalSeparator),
                     false
                 );
                 $this->dom->addChild(
                     $infoTpServ,
                     "vlrServicos20",
-                    !empty($its->vlrservicos20) ? number_format($its->vlrservicos20, 2, ',', '') : null,
+                    self::format($its->vlrservicos20 ?? null, 2, $this->decimalSeparator),
                     false
                 );
                 $this->dom->addChild(
                     $infoTpServ,
                     "vlrServicos25",
-                    !empty($its->vlrservicos25) ? number_format($its->vlrservicos25, 2, ',', '') : null,
+                    self::format($its->vlrservicos25 ?? null, 2, $this->decimalSeparator),
                     false
                 );
                 $this->dom->addChild(
                     $infoTpServ,
                     "vlrAdicional",
-                    !empty($its->vlradicional) ? number_format($its->vlradicional, 2, ',', '') : null,
+                    self::format($its->vlradicional ?? null, 2, $this->decimalSeparator),
                     false
                 );
                 $this->dom->addChild(
                     $infoTpServ,
                     "vlrNRetAdic",
-                    !empty($its->vlrnretadic) ? number_format($its->vlrnretadic, 2, ',', '') : null,
+                    self::format($its->vlrnretadic ?? null, 2, $this->decimalSeparator),
                     false
                 );
                 $nfs->appendChild($infoTpServ);
@@ -282,7 +290,7 @@ class EvtServTom extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoProcRetPr,
                     "valorPrinc",
-                    number_format($irp->valorprinc, 2, ',', ''),
+                    self::format($irp->valorprinc, 2, $this->decimalSeparator),
                     true
                 );
                 $idePrestServ->appendChild($infoProcRetPr);
@@ -312,7 +320,7 @@ class EvtServTom extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoProcRetAd,
                     "valorAdic",
-                    number_format($rad->valoradic, 2, ',', ''),
+                    self::format($rad->valoradic),
                     true
                 );
                 $idePrestServ->appendChild($infoProcRetAd);

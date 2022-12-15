@@ -1,5 +1,27 @@
 # sped-efdreinf (versão 1.0 - layout 1.5.1)
 
+## NOVA VERSÃO ENTRA EM OPERAÇÃO EM MARÇO/2023
+
+A nova versão dos layouts v2.1.1 entra em vigor a partir da competência de março/2023, até fevereiro de 2023 deve ser utilizada a versão 1.5.1.
+
+> NOTA: já está em andamento as alterações e inclusões para suportar a nova versão, concomitantemente com a versão 1.5.1.
+
+## Alterações na nova versão v2.1.1 
+
+Vide [FALHAS](FALHAS.md)                       
+Vide [REGRAS](REGRAS.md)
+
+1. Novos pacotes de XSD (lembrar de sempre renomear os xsd de acordo com os namespaces indicados nos próprios arquivos XSD).
+2. Devem haver algumas alterações em validações dos eventos anteriores e no número de ocorrências de alguns campos.
+3. Inclusão de novos eventos:
+
+- R-1050 Tabela de entidades ligadas (ok)
+- R-4010 Pagamentos/créditos a beneficiário pessoa física (está problemas no XSD, falta desenvolver jsoonschema e obter xsd corrgido)
+- R-4020 Pagamentos/créditos a beneficiário pessoa jurídica (está problemas no XSD, e falta desenvolver tudo e obter xsd corrgido)
+- R-4040 Pagamentos/créditos a beneficiários não identificados (ok)
+- R-4080 Retenção no recebimento (ok)
+- R-4099 Fechamento/Reabertura dos eventos da série R-4000 (ok)
+
 > NOTA: Ainda existem diferenças entre os ambientes de Produção e Pre-produção fique atento durante a transição de versões !!
 
 *Utilize o chat do Gitter para iniciar discussões especificas sobre o desenvolvimento deste pacote.*

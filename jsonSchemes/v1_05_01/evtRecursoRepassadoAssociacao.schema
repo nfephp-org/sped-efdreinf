@@ -3,8 +3,8 @@
     "type": "object",
     "properties": {
         "sequencial": {
-            "required": true,
-            "type": "integer",
+            "required": false,
+            "type": ["integer","null"],
             "minimum": 1,
             "maximum": 99999
         },
@@ -17,25 +17,22 @@
         "nrrecibo": {
             "required": false,
             "type": ["string","null"],
-            "maxLength": 52,
             "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18})$"
         },
         "perapur": {
             "required": true,
             "type": "string",
-            "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])$"
+            "pattern": "^20([0-9][0-9])-(0[1-9]|1[0-2])$"
         },
         "tpinscestab": {
             "required": true,
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 4
+            "type": "string",
+            "pattern": "^(1|2)$"
         },
         "nrinscestab": {
             "required": true,
             "type": "string",
-            "maxLength": 14,
-            "pattern": "^[0-9]"
+            "pattern": "^[0-9]{14}$"
         },
         "recursosrep": {
             "required": true,
@@ -48,23 +45,20 @@
                     "cnpjassocdesp": {
                         "required": true,
                         "type": "string",
-                        "maxLength": 14,
-                        "pattern": "^[0-9]"
-                    },    
+                        "pattern": "^[0-9]{14}$"
+                    },
                     "vlrtotalrep": {
                         "required": true,
-                        "type": "string",
-                        "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
+                        "type": "number",
+                        "multipleOf": 0.01
                     },
                     "vlrtotalret": {
                         "required": true,
-                        "type": "string",
-                        "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
+                        "type": "number"
                     },
                     "vlrtotalnret": {
                         "required": false,
-                        "type": ["string","null"],
-                        "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
+                        "type": ["number","null"]
                     },
                     "inforecurso": {
                         "required": true,
@@ -83,20 +77,19 @@
                                 "descrecurso": {
                                     "required": true,
                                     "type": "string",
+                                    "minLength": 1,
                                     "maxLength": 20
                                 },
                                 "vlrbruto": {
                                     "required": true,
-                                    "type": "string",
-                                    "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
+                                    "type": "number"
                                 },
                                 "vlrretapur": {
                                     "required": true,
-                                    "type": "string",
-                                    "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
+                                    "type": "number"
                                 }
                             }
-                        }    
+                        }
                     },
                     "infoproc": {
                         "required": false,
@@ -115,24 +108,24 @@
                                 "nrproc": {
                                     "required": true,
                                     "type": "string",
+                                    "minLength": 1,
                                     "maxLength": 21
                                 },
                                 "codsusp": {
                                     "required": false,
                                     "type": ["string","null"],
-                                    "maxLength": 14,
-                                    "pattern": "^[0-9]"
+                                    "pattern": "^[0-9]{0,14}$"
                                 },
                                 "vlrnret": {
                                     "required": true,
-                                    "type": "string",
-                                    "pattern": "^([0-9]{1,14}[,][0-9]{2})$"
+                                    "type": "number",
+                                    "multipleOf": 0.01
                                 }
                             }
                         }
                     }
                 }
             }
-        }    
+        }
     }
 }
