@@ -701,126 +701,123 @@ $std->idepgto[0]->natrend = '10001';
 $std->idepgto[0]->observ = 'bla bla bla';
 
 $std->idepgto[0]->infopgto[0] = new stdclass();
-$std->idepgto[0]->infopgto[0]->dtFG = '2022-07-15';
-$std->idepgto[0]->infopgto[0]->compFP = '2022';
-$std->idepgto[0]->infopgto[0]->indDecTerc = 'S';
-$std->idepgto[0]->infopgto[0]->vlrRendBruto = 7834.45;
-$std->idepgto[0]->infopgto[0]->vlrRendTrib = 4324.56;
-$std->idepgto[0]->infopgto[0]->vlrIR = 400.33;
-$std->idepgto[0]->infopgto[0]->indRRA = 'S';
-$std->idepgto[0]->infopgto[0]->indFciScp = '1';
-$std->idepgto[0]->infopgto[0]->nrInscFciScp = '12345678901234';
-$std->idepgto[0]->infopgto[0]->percSCP = 20;
-$std->idepgto[0]->infopgto[0]->indJud = 'N';
-$std->idepgto[0]->infopgto[0]->paisResidExt = '169';
+$std->idepgto[0]->infopgto[0]->dtgf = '2022-07-15';
+$std->idepgto[0]->infopgto[0]->compfp = '2022';
+$std->idepgto[0]->infopgto[0]->inddecterc = 'S';
+$std->idepgto[0]->infopgto[0]->vlrrendbruto = 7834.45;
+$std->idepgto[0]->infopgto[0]->vlrrendtrib = 4324.56;
+$std->idepgto[0]->infopgto[0]->vlrir = 400.33;
+$std->idepgto[0]->infopgto[0]->indrra = 'S';
+$std->idepgto[0]->infopgto[0]->indfciscp = '1';
+$std->idepgto[0]->infopgto[0]->nrinscfciscp = '12345678901234';
+$std->idepgto[0]->infopgto[0]->percscp = 20;
+$std->idepgto[0]->infopgto[0]->indjud = 'N';
+$std->idepgto[0]->infopgto[0]->paisresidext = '169';
 
-$std->idepgto[0]->infopgto[0]->detDed[0] = new stdclass();
-$std->idepgto[0]->infopgto[0]->detDed[0]->indTpDeducao = '1';
-$std->idepgto[0]->infopgto[0]->detDed[0]->vlrDeducao = 1230.67;
-$std->idepgto[0]->infopgto[0]->detDed[0]->infoEntid = 'S';
-$std->idepgto[0]->infopgto[0]->detDed[0]->nrInscPrevComp = '12345678901234';
-$std->idepgto[0]->infopgto[0]->detDed[0]->vlrPatrocFunp = 987.44;
+$std->idepgto[0]->infopgto[0]->detded[0] = new stdclass();
+$std->idepgto[0]->infopgto[0]->detded[0]->indtpdeducao = '1';
+$std->idepgto[0]->infopgto[0]->detded[0]->vlrdeducao = 1230.67;
+$std->idepgto[0]->infopgto[0]->detded[0]->infoentid = 'S';
+$std->idepgto[0]->infopgto[0]->detded[0]->nrinscprevcomp = '12345678901234';
+$std->idepgto[0]->infopgto[0]->detded[0]->vlrpatrocfunp = 987.44;
 
-$std->idepgto[0]->infopgto[0]->detDed[0]->benefPen[0] = new stdclass();
-$std->idepgto[0]->infopgto[0]->detDed[0]->benefPen[0]->cpfDep = '12345678901';
-$std->idepgto[0]->infopgto[0]->detDed[0]->benefPen[0]->vlrDepen = 874.55;
+$std->idepgto[0]->infopgto[0]->detded[0]->benefpen[0] = new stdclass();
+$std->idepgto[0]->infopgto[0]->detded[0]->benefpen[0]->cpfdep = '12345678901';
+$std->idepgto[0]->infopgto[0]->detded[0]->benefpen[0]->vlrdepen = 874.55;
 
-$std->idepgto[0]->infopgto[0]->rendIsento[0] = new stdclass();
-$std->idepgto[0]->infopgto[0]->rendIsento[0]->tpIsencao = '1';
-$std->idepgto[0]->infopgto[0]->rendIsento[0]->vlrIsento = 2345.22;
-$std->idepgto[0]->infopgto[0]->rendIsento[0]->descRendimento = 'bla bla bla';
-$std->idepgto[0]->infopgto[0]->rendIsento[0]->dtLaudo = '2021-01-15';
+$std->idepgto[0]->infopgto[0]->rendisento[0] = new stdclass();
+$std->idepgto[0]->infopgto[0]->rendisento[0]->tpisencao = '1';
+$std->idepgto[0]->infopgto[0]->rendisento[0]->vlrisento = 2345.22;
+$std->idepgto[0]->infopgto[0]->rendisento[0]->descrendimento = 'bla bla bla';
+$std->idepgto[0]->infopgto[0]->rendisento[0]->dtlaudo = '2021-01-15';
 
-$std->idepgto[0]->infopgto[0]->infoProcRet[0] = new stdclass();
-$std->idepgto[0]->infopgto[0]->infoProcRet[0]->tpProcRet = '1';
-$std->idepgto[0]->infopgto[0]->infoProcRet[0]->nrProcRet = '22222222';
-$std->idepgto[0]->infopgto[0]->infoProcRet[0]->codSusp = '12345';
-$std->idepgto[0]->infopgto[0]->infoProcRet[0]->vlrNRetido = 200.00;
-$std->idepgto[0]->infopgto[0]->infoProcRet[0]->vlrDepJud = 10.00;
-$std->idepgto[0]->infopgto[0]->infoProcRet[0]->vlrCmpAnoCal = 456.78;
-$std->idepgto[0]->infopgto[0]->infoProcRet[0]->vlrCmpAnoAnt = 0.00;
-$std->idepgto[0]->infopgto[0]->infoProcRet[0]->vlrRendSusp = 10.11;
+$std->idepgto[0]->infopgto[0]->infoprocret[0] = new stdclass();
+$std->idepgto[0]->infopgto[0]->infoprocret[0]->tpprocret = '1';
+$std->idepgto[0]->infopgto[0]->infoprocret[0]->nrprocret = '22222222';
+$std->idepgto[0]->infopgto[0]->infoprocret[0]->codsusp = '12345';
+$std->idepgto[0]->infopgto[0]->infoprocret[0]->vlrnretido = 200.00;
+$std->idepgto[0]->infopgto[0]->infoprocret[0]->vlrdepjud = 10.00;
+$std->idepgto[0]->infopgto[0]->infoprocret[0]->vlrCmpanocal = 456.78;
+$std->idepgto[0]->infopgto[0]->infoprocret[0]->vlrvmpanoant = 0.00;
+$std->idepgto[0]->infopgto[0]->infoprocret[0]->vlrrendsusp = 10.11;
 
-$std->idepgto[0]->infopgto[0]->infoProcRet[0]->dedSusp[0] = new stdclass();
-$std->idepgto[0]->infopgto[0]->infoProcRet[0]->dedSusp[0]->indTpDeducao = '5';
-$std->idepgto[0]->infopgto[0]->infoProcRet[0]->dedSusp[0]->vlrDedSusp = 2500.25;
+$std->idepgto[0]->infopgto[0]->infoprocret[0]->dedsusp[0] = new stdclass();
+$std->idepgto[0]->infopgto[0]->infoprocret[0]->dedsusp[0]->indtpdeducao = '5';
+$std->idepgto[0]->infopgto[0]->infoprocret[0]->dedsusp[0]->vlrdedsusp = 2500.25;
 
-$std->idepgto[0]->infopgto[0]->infoProcRet[0]->dedSusp[0]->benefPen[0] = new stdclass();
-$std->idepgto[0]->infopgto[0]->infoProcRet[0]->dedSusp[0]->benefPen[0]->cpfDep = '12345678901';
-$std->idepgto[0]->infopgto[0]->infoProcRet[0]->dedSusp[0]->benefPen[0]->vlrDepenSusp = 2500.25;
+$std->idepgto[0]->infopgto[0]->infoprocret[0]->dedsusp[0]->benefpen[0] = new stdclass();
+$std->idepgto[0]->infopgto[0]->infoprocret[0]->dedsusp[0]->benefpen[0]->cpfdep = '12345678901';
+$std->idepgto[0]->infopgto[0]->infoprocret[0]->dedsusp[0]->benefpen[0]->vlrdepensusp = 2500.25;
 
-$std->idepgto[0]->infopgto[0]->infoRRA = new stdclass();
-$std->idepgto[0]->infopgto[0]->infoRRA->tpProcRRA = '1';
-$std->idepgto[0]->infopgto[0]->infoRRA->nrProcRRA = '122344';
-$std->idepgto[0]->infopgto[0]->infoRRA->indOrigRec = '1';
-$std->idepgto[0]->infopgto[0]->infoRRA->descRRA = 'bla bla bla';
-$std->idepgto[0]->infopgto[0]->infoRRA->qtdMesesRRA = 6;
-$std->idepgto[0]->infopgto[0]->infoRRA->cnpjOrigRecurso = '12345678901234';
+$std->idepgto[0]->infopgto[0]->inforra = new stdclass();
+$std->idepgto[0]->infopgto[0]->inforra->tpprocrra = '1';
+$std->idepgto[0]->infopgto[0]->inforra->nrprocrra = '122344';
+$std->idepgto[0]->infopgto[0]->inforra->indorigrec = '1';
+$std->idepgto[0]->infopgto[0]->inforra->descrra = 'bla bla bla';
+$std->idepgto[0]->infopgto[0]->inforra->qtdmesesrra = 6;
+$std->idepgto[0]->infopgto[0]->inforra->cnpjorigrecurso = '12345678901234';
 
-$std->idepgto[0]->infopgto[0]->infoRRA->despProcJud = new stdclass();
-$std->idepgto[0]->infopgto[0]->infoRRA->despProcJud->vlrDespCustas = 1234.55;
-$std->idepgto[0]->infopgto[0]->infoRRA->despProcJud->vlrDespAdvogados = 342.66;
+$std->idepgto[0]->infopgto[0]->inforra->despprocjud = new stdclass();
+$std->idepgto[0]->infopgto[0]->inforra->despprocjud->vlrdespcustas = 1234.55;
+$std->idepgto[0]->infopgto[0]->inforra->despprocjud->vlrdespadvogados = 342.66;
 
-$std->idepgto[0]->infopgto[0]->infoRRA->despProcJud->ideAdv[0] = new stdclass();
-$std->idepgto[0]->infopgto[0]->infoRRA->despProcJud->ideAdv[0]->tpInscAdv = '1';
-$std->idepgto[0]->infopgto[0]->infoRRA->despProcJud->ideAdv[0]->nrInscAdv = '12345678901234';
-$std->idepgto[0]->infopgto[0]->infoRRA->despProcJud->ideAdv[0]->vlrAdv = 342.66;
+$std->idepgto[0]->infopgto[0]->inforra->despprocjud->ideadv[0] = new stdclass();
+$std->idepgto[0]->infopgto[0]->inforra->despprocjud->ideadv[0]->tpinscadv = '1';
+$std->idepgto[0]->infopgto[0]->inforra->despprocjud->ideadv[0]->nrinscadv = '12345678901234';
+$std->idepgto[0]->infopgto[0]->inforra->despprocjud->ideadv[0]->vlradv = 342.66;
 
-$std->idepgto[0]->infopgto[0]->infoProcJud = new stdclass();
-$std->idepgto[0]->infopgto[0]->infoProcJud->nrProc = '123456';
-$std->idepgto[0]->infopgto[0]->infoProcJud->indOrigRec = '1';
-$std->idepgto[0]->infopgto[0]->infoProcJud->cnpjOrigRecurso = '12345678901234';
-$std->idepgto[0]->infopgto[0]->infoProcJud->desc = 'blça bla bla';
+$std->idepgto[0]->infopgto[0]->infoprocjud = new stdclass();
+$std->idepgto[0]->infopgto[0]->infoprocjud->nrproc = '123456';
+$std->idepgto[0]->infopgto[0]->infoprocjud->indorigrec = '1';
+$std->idepgto[0]->infopgto[0]->infoprocjud->cnpjorigrecurso = '12345678901234';
+$std->idepgto[0]->infopgto[0]->infoprocjud->desc = 'blça bla bla';
 
-$std->idepgto[0]->infopgto[0]->infoProcJud->despProcJud = new stdclass();
-$std->idepgto[0]->infopgto[0]->infoProcJud->despProcJud->vlrDespCustas = 1234.55;
-$std->idepgto[0]->infopgto[0]->infoProcJud->despProcJud->vlrDespAdvogados = 342.66;
+$std->idepgto[0]->infopgto[0]->infoprocjud->despprocjud = new stdclass();
+$std->idepgto[0]->infopgto[0]->infoprocjud->despprocjud->vlrdespcustas = 1234.55;
+$std->idepgto[0]->infopgto[0]->infoprocjud->despprocjud->vlrdespadvogados = 342.66;
 
-$std->idepgto[0]->infopgto[0]->infoProcJud->despProcJud->ideAdv[0] = new stdclass();
-$std->idepgto[0]->infopgto[0]->infoProcJud->despProcJud->ideAdv[0]->tpInscAdv = '1';
-$std->idepgto[0]->infopgto[0]->infoProcJud->despProcJud->ideAdv[0]->nrInscAdv = '12345678901234';
-$std->idepgto[0]->infopgto[0]->infoProcJud->despProcJud->ideAdv[0]->vlrAdv = 342.66;
-
-
-$std->idepgto[0]->infopgto[0]->infoPgtoExt = new stdclass();
-$std->idepgto[0]->infopgto[0]->infoPgtoExt->indNIF = '1';
-$std->idepgto[0]->infopgto[0]->infoPgtoExt->nifBenef = '123456';
-$std->idepgto[0]->infopgto[0]->infoPgtoExt->frmTribut = '10';
-
-$std->idepgto[0]->infopgto[0]->infoPgtoExt->endExt = new stdclass();
-$std->idepgto[0]->infopgto[0]->infoPgtoExt->endExt->dscLograd = 'logradouro';
-$std->idepgto[0]->infopgto[0]->infoPgtoExt->endExt->nrLograd = '100';
-$std->idepgto[0]->infopgto[0]->infoPgtoExt->endExt->complem = 'SALA 100';
-$std->idepgto[0]->infopgto[0]->infoPgtoExt->endExt->bairro = 'bairro';
-$std->idepgto[0]->infopgto[0]->infoPgtoExt->endExt->cidade = 'cidade';
-$std->idepgto[0]->infopgto[0]->infoPgtoExt->endExt->estado = 'estado';
-$std->idepgto[0]->infopgto[0]->infoPgtoExt->endExt->codPostal = 'codPostal';
-$std->idepgto[0]->infopgto[0]->infoPgtoExt->endExt->telef = '12345678901';
+$std->idepgto[0]->infopgto[0]->infoprocjud->despprocjud->ideadv[0] = new stdclass();
+$std->idepgto[0]->infopgto[0]->infoprocjud->despprocjud->ideadv[0]->tpinscadv = '1';
+$std->idepgto[0]->infopgto[0]->infoprocjud->despprocjud->ideadv[0]->nrinscadv = '12345678901234';
+$std->idepgto[0]->infopgto[0]->infoprocjud->despprocjud->ideadv[0]->vlradv = 342.66;
 
 
-$std->ideOpSaude[0] = new stdclass();
-$std->ideOpSaude[0]->nrInsc = '12345678901234';
-$std->ideOpSaude[0]->regANS = '123456';
-$std->ideOpSaude[0]->vlrSaude = 1893.22;
+$std->idepgto[0]->infopgto[0]->infopgtoext = new stdclass();
+$std->idepgto[0]->infopgto[0]->infopgtoext->indnif = '1';
+$std->idepgto[0]->infopgto[0]->infopgtoext->nifbenef = '123456';
+$std->idepgto[0]->infopgto[0]->infopgtoext->frmtribut = '10';
 
-$std->ideOpSaude[0]->infoReemb[0] = new stdclass();
-$std->ideOpSaude[0]->infoReemb[0]->tpInsc = '1';
-$std->ideOpSaude[0]->infoReemb[0]->nrInsc = '12345678901234';
-$std->ideOpSaude[0]->infoReemb[0]->vlrReemb = 2000.00;
-$std->ideOpSaude[0]->infoReemb[0]->vlrReembAnt = 1000.00;
-
-$std->ideOpSaude[0]->infoDependPl[0] = new stdclass();
-$std->ideOpSaude[0]->infoDependPl[0]->cpfDep = '12345678901';
-$std->ideOpSaude[0]->infoDependPl[0]->vlrSaude = 543.22;
-
-$std->ideOpSaude[0]->infoDependPl[0]->infoReembDep[0] = new stdclass();
-$std->ideOpSaude[0]->infoDependPl[0]->infoReembDep[0]->tpInsc = '1';
-$std->ideOpSaude[0]->infoDependPl[0]->infoReembDep[0]->nrInsc = '12345678901234';
-$std->ideOpSaude[0]->infoDependPl[0]->infoReembDep[0]->vlrReemb = 222.00;
-$std->ideOpSaude[0]->infoDependPl[0]->infoReembDep[0]->vlrReembAnt = 10.00;
+$std->idepgto[0]->infopgto[0]->infopgtoext->endext = new stdclass();
+$std->idepgto[0]->infopgto[0]->infopgtoext->endext->dscLograd = 'logradouro';
+$std->idepgto[0]->infopgto[0]->infopgtoext->endext->nrLograd = '100';
+$std->idepgto[0]->infopgto[0]->infopgtoext->endext->complem = 'SALA 100';
+$std->idepgto[0]->infopgto[0]->infopgtoext->endext->bairro = 'bairro';
+$std->idepgto[0]->infopgto[0]->infopgtoext->endext->cidade = 'cidade';
+$std->idepgto[0]->infopgto[0]->infopgtoext->endext->estado = 'estado';
+$std->idepgto[0]->infopgto[0]->infopgtoext->endext->codpostal = 'codPostal';
+$std->idepgto[0]->infopgto[0]->infopgtoext->endext->telef = '12345678901';
 
 
+$std->ideopsaude[0] = new stdclass();
+$std->ideopsaude[0]->nrinsc = '12345678901234';
+$std->ideopsaude[0]->regans = '123456';
+$std->ideopsaude[0]->vlrsaude = 1893.22;
 
+$std->ideopsaude[0]->inforeemb[0] = new stdclass();
+$std->ideopsaude[0]->inforeemb[0]->tpinsc = '1';
+$std->ideopsaude[0]->inforeemb[0]->nrinsc = '12345678901234';
+$std->ideopsaude[0]->inforeemb[0]->vlrreemb = 2000.00;
+$std->ideopsaude[0]->inforeemb[0]->vlrreembant = 1000.00;
+
+$std->ideopsaude[0]->infodependpl[0] = new stdclass();
+$std->ideopsaude[0]->infodependpl[0]->cpfdep = '12345678901';
+$std->ideopsaude[0]->infodependpl[0]->vlrsaude = 543.22;
+
+$std->ideopsaude[0]->infodependpl[0]->inforeembdep[0] = new stdclass();
+$std->ideopsaude[0]->infodependpl[0]->inforeembdep[0]->tpinsc = '1';
+$std->ideopsaude[0]->infodependpl[0]->inforeembdep[0]->nrinsc = '12345678901234';
+$std->ideopsaude[0]->infodependpl[0]->inforeembdep[0]->vlrreemb = 222.00;
+$std->ideopsaude[0]->infodependpl[0]->inforeembdep[0]->vlrreembant = 10.00;
 
 // Schema must be decoded before it can be used for validation
 $jsonSchemaObject = json_decode($jsonSchema);

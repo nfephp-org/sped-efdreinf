@@ -121,6 +121,7 @@ class EvtRetPJ extends Factory implements FactoryInterface
             $this->std->nrinscestab,
             true
         );
+
         $ideBenef = $this->dom->createElement('ideBenef');
         $this->dom->addChild(
             $ideBenef,
@@ -136,7 +137,7 @@ class EvtRetPJ extends Factory implements FactoryInterface
             false
         );
         $this->dom->addChild(
-            $ideEstab,
+            $ideBenef,
             "isenImun",
             $this->std->idebenef->isenimun,
             true
@@ -511,9 +512,10 @@ class EvtRetPJ extends Factory implements FactoryInterface
             }
             $ideBenef->appendChild($idePgto);
         }
+        $this->node->appendChild($ideEstab);
         $this->node->appendChild($ideBenef);
         $this->reinf->appendChild($this->node);
-        //$this->xml = $this->dom->saveXML($this->reinf);
-        $this->sign($this->evtTag);
+        $this->xml = $this->dom->saveXML($this->reinf);
+        //$this->sign($this->evtTag);
     }
 }

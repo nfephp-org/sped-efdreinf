@@ -43,7 +43,7 @@ class EvtAssocDespRep extends Factory implements FactoryInterface
         $params->evtAlias = 'R-2040';
         parent::__construct($config, $std, $params, $certificate, $data);
         if ($this->tpInsc != 1) {
-            throw new Exception("Este evento é restrito a PESSOA JURIDICA.");
+            throw new \Exception("Este evento é restrito a PESSOA JURIDICA.");
         }
     }
 

@@ -30,7 +30,7 @@ $configJson = json_encode($config, JSON_PRETTY_PRINT);
 $std = new \stdClass();
 //$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
 $std->indretif = 2;
-$std->nrrecibo = '1234567890123456789-23-4567-8901-1234567891234567899';
+$std->nrrecibo = '1-12-1234-123456-123456576';
 $std->perapur = '2017-11';
 
 $std->tpinscestab = "1"; //Opcional FIXO tipo de inscrição do estabelecimento contratante dos serviços: 1 - CNPJ;

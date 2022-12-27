@@ -41,7 +41,7 @@ class EvtFech4000 extends Factory implements FactoryInterface
         $data = ''
     ) {
         $params = new \stdClass();
-        $params->evtName = 'evtFech4000';
+        $params->evtName = 'evt4099FechamentoDirf';
         $params->evtTag = 'evtFech';
         $params->evtAlias = 'R-4099';
         parent::__construct($config, $std, $params, $certificate, $data);

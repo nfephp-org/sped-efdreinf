@@ -140,8 +140,8 @@ try {
         $certificate
     )->toXml();
 
-    //$xml = Event::r4010($configJson, $std, $certificate)->toXML();
-    //$json = Event::evtRetPF($configJson, $std, $certificate)->toJson();
+    //$xml = Event::r4020($configJson, $std, $certificate)->toXML();
+    //$json = Event::evtRetPJ($configJson, $std, $certificate)->toJson();
 
     header('Content-type: text/xml; charset=UTF-8');
     echo $xml;

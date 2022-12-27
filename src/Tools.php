@@ -16,6 +16,7 @@ namespace NFePHP\EFDReinf;
  */
 use NFePHP\Common\Certificate;
 use NFePHP\Common\Validator;
+use NFePHP\EFDReinf\Common\Rest;
 use NFePHP\EFDReinf\Common\Tools as ToolsBase;
 use NFePHP\EFDReinf\Common\FactoryInterface;
 use NFePHP\EFDReinf\Common\Soap\SoapCurl;
@@ -80,6 +81,17 @@ class Tools extends ToolsBase
         '2' => 'https://preprodefdreinf.receita.fazenda.gov.br/WsReinfConsultas/ConsultasReinf.svc'
     ];
 
+    protected $urlloteassincrono = [
+        '1' => 'https://reinf.receita.economia.gov.br/recepcao/lotes',
+        '2' => 'https://pre-reinf.receita.economia.gov.br/recepcao/lotes',
+    ];
+
+    protected $urlconsultaassincrono = [
+        '1' => 'https://reinf.receita.economia.gov.br/consulta/lotes',
+        '2' => 'https://pre-reinf.receita.economia.gov.br/consulta/lotes'
+    ];
+
+
     /**
      * @var string
      */
@@ -110,11 +122,11 @@ class Tools extends ToolsBase
 
     /**
      * Run EFD-REINF Query
-     * @param integer $mod
-     * @param stdClass $std
-     * @throws ProcessException
+     * @param $mod
+     * @param stdClass|null $std
+     * @return string
      */
-    public function consultar($mod, stdClass $std = null)
+    public function consultar($mod, stdClass $std = null): string
     {
         if (isset($std)) {
             //converte os nomes das propriedades do stdClass para caixa baixa
@@ -188,7 +200,7 @@ class Tools extends ToolsBase
      * @param stdClass $std
      * @return string
      */
-    public function consultConsolidadas(stdClass $std)
+    public function consultConsolidadas(stdClass $std): string
     {
         $properties = [
             'numeroprotocolofechamento' => [
@@ -213,7 +225,7 @@ class Tools extends ToolsBase
      * @param stdClass $std
      * @return string
      */
-    public function consultFechamento(stdClass $std)
+    public function consultFechamento(stdClass $std): string
     {
         $properties = [
             'numeroprotocolofechamento' => [
@@ -239,7 +251,7 @@ class Tools extends ToolsBase
      * @param integer $evt
      * @return string
      */
-    protected function consultR1($evt)
+    protected function consultR1($evt): string
     {
         $this->method = "ConsultaReciboEvento{$evt}";
         $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
@@ -257,7 +269,7 @@ class Tools extends ToolsBase
      * @param stdClass $std
      * @return string
      */
-    protected function consultR2010($evt, $std)
+    protected function consultR2010($evt, $std): string
     {
         $properties = [
             'perapur' => [
@@ -310,7 +322,7 @@ class Tools extends ToolsBase
      * @param stdClass $std
      * @return string
      */
-    protected function consultR2020($evt, $std)
+    protected function consultR2020($evt, stdClass $std)
     {
         $properties = [
             'perapur' => [
@@ -361,7 +373,7 @@ class Tools extends ToolsBase
      * @param stdClass $std
      * @return string
      */
-    protected function consultR20($evt, $std)
+    protected function consultR20(int $evt, stdClass $std): string
     {
         $properties = [
             'perapur' => [
@@ -404,7 +416,7 @@ class Tools extends ToolsBase
      * @param stdClass $std
      * @return string
      */
-    protected function consultR2055($evt, $std)
+    protected function consultR2055(int $evt, stdClass $std): string
     {
         $properties = [
             'perapur' => [
@@ -449,7 +461,7 @@ class Tools extends ToolsBase
      * @param stdClass $std
      * @return string
      */
-    protected function consultR2060($evt, $std)
+    protected function consultR2060(int $evt, stdClass $std): string
     {
         $properties = [
             'perapur' => [
@@ -499,7 +511,7 @@ class Tools extends ToolsBase
      * @param stdClass $std
      * @return string
      */
-    protected function consultR209($evt, $std)
+    protected function consultR209(int $evt, stdClass $std): string
     {
         $properties = [
             'perapur' => [
@@ -529,7 +541,7 @@ class Tools extends ToolsBase
      * @param stdClass $std
      * @return string
      */
-    protected function consultR3010($evt, $std)
+    protected function consultR3010(int $evt, stdClass $std): string
     {
         $properties = [
             'dtapur' => [
@@ -570,7 +582,7 @@ class Tools extends ToolsBase
      * @param array $eventos
      * @return string
      */
-    public function enviarLoteEventos($grupo, $eventos = [])
+    public function enviarLoteEventos(int $grupo, array $eventos = []): string
     {
         if (empty($eventos)) {
             return '';
@@ -622,11 +634,74 @@ class Tools extends ToolsBase
     }
 
     /**
+     * Envia lote Assincrono por API REST
+     * @param int $grupo
+     * @param array $eventos
+     * @return string
+     */
+    public function enviaLoteAssincrono(int $grupo, array $eventos = []): string
+    {
+        if (empty($eventos)) {
+            return '';
+        }
+        //check number of events
+        $nEvt = count($eventos);
+        if ($nEvt > 100) {
+            throw ProcessException::wrongArgument(2000, $nEvt);
+        }
+        $xml = '';
+        foreach ($eventos as $evt) {
+            if (!is_a($evt, '\NFePHP\EFDReinf\Common\FactoryInterface')) {
+                throw ProcessException::wrongArgument(2002, '');
+            }
+            //verifica se o evento pertence ao grupo indicado
+            if (! in_array($evt->alias(), $this->grupos[$grupo])) {
+                throw new \RuntimeException(
+                    'O evento ' . $evt->alias() . ' não pertence a este grupo [ '
+                    . $this->eventGroup[$grupo] . ' ].'
+                );
+            }
+            $this->checkCertificate($evt);
+            $xml .= "<evento id=\"".$evt->getId()."\">";
+            $xml .= $evt->toXML();
+            $xml .= "</evento>";
+        }
+        $content = "<Reinf xmlns=\"http://www.reinf.esocial.gov.br/schemas/envioLoteEventosAssincrono/v1_00_00\">"
+            . "<envioLoteEventos>"
+            . "<ideContribuinte>"
+            . "<tpInsc>{$this->tpInsc}</tpInsc>"
+            . "<nrInsc>{$this->nrInsc}</nrInsc>"
+            . "</ideContribuinte>"
+            . "<eventos>"
+            . $xml
+            . "</eventos>"
+            . "</envioLoteEventos>"
+            . "</Reinf>";
+
+        $url = $this->urlloteassincrono[$this->tpAmb];
+        $rest = new Rest($this->certificate);
+        $this->lastResponse = $rest->sendApi('POST', $url, $content);
+        return $this->lastResponse;
+    }
+
+    /**
+     * @param string $protocolo
+     * @return string
+     */
+    public function consultaLoteAssincrono(string $protocolo): string
+    {
+        $url = $this->urlconsultaassincrono[$this->tpAmb] . "/$protocolo";
+        $rest = new Rest($this->certificate);
+        $this->lastResponse = $rest->sendApi('GET', $url, '');
+        return $this->lastResponse;
+    }
+
+    /**
      * Send request to webservice
      * @param string $request
      * @return string
      */
-    protected function sendRequest($request)
+    protected function sendRequest(string $request): string
     {
         if (empty($this->soap)) {
             $this->soap = new SoapCurl($this->certificate);
@@ -648,7 +723,7 @@ class Tools extends ToolsBase
             "SOAPAction: \"$this->action\"",
             "Content-length: $msgSize"
         ];
-        if ($this->method == 'ReceberLoteEventos') {
+        if ($this->method === 'ReceberLoteEventos') {
             $url = $this->uri[$this->tpAmb];
         } else {
             $url = $this->uriconsulta[$this->tpAmb];
@@ -666,9 +741,7 @@ class Tools extends ToolsBase
     /**
      * Verify the availability of a digital certificate.
      * If available, place it where it is needed
-     *
      * @param FactoryInterface $evento
-     * @throws RuntimeException
      * @return void
      */
     protected function checkCertificate(FactoryInterface $evento)
@@ -682,13 +755,12 @@ class Tools extends ToolsBase
 
     /**
      * Valid input parameters
-     *
      * @param array $properties
-     * @param \stdClass $std
+     * @param stdClass $std
      * @return void
      * @throws \Exception
      */
-    protected function validInputParameters($properties, $std)
+    protected function validInputParameters(array $properties, stdClass $std)
     {
         foreach ($properties as $key => $rules) {
             $r = json_decode(json_encode($rules));
