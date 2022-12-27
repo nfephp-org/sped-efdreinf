@@ -17,9 +17,7 @@ namespace NFePHP\EFDReinf\Factories;
 
 use NFePHP\EFDReinf\Common\Factory;
 use NFePHP\EFDReinf\Common\FactoryInterface;
-use NFePHP\EFDReinf\Common\FactoryId;
 use NFePHP\Common\Certificate;
-use NFePHP\Common\Strings;
 use NFePHP\EFDReinf\Factories\Traits\FormatNumber;
 use stdClass;
 
@@ -129,7 +127,7 @@ class EvtRetPF extends Factory implements FactoryInterface
         );
         $this->dom->addChild(
             $ideBenef,
-            "nmfBenef",
+            "nmBenef",
             $this->std->idebenef->nmbenef ?? null,
             false
         );
@@ -150,7 +148,7 @@ class EvtRetPF extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $ideDep,
                 "descrDep",
-                $dep->descrdep ?? null,
+                $dep->descdep ?? null,
                 false
             );
             $ideBenef->appendChild($ideDep);
@@ -228,7 +226,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoPgto,
                     "percSCP",
-                    !empty($info->percscp) ? $info->percscp : null,
+                    !empty($info->percscp) ? self::format($info->percscp, 1) : null,
                     false
                 );
                 $this->dom->addChild(
@@ -285,7 +283,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                         );
                         $this->dom->addChild(
                             $benefPen,
-                            "cpfDep",
+                            "vlrDepen",
                             self::format($pen->vlrdepen),
                             true
                         );
@@ -310,7 +308,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $rendIsento,
                         "descRendimento",
-                        $isento->descRendimento ?? null,
+                        $isento->descrendimento ?? null,
                         false
                     );
                     $this->dom->addChild(
@@ -382,7 +380,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                         $this->dom->addChild(
                             $dedSusp,
                             "vlrDedSusp",
-                            self::format($susp->vlrDedSusp ?? null),
+                            self::format($susp->vlrdedsusp ?? null),
                             false
                         );
                         foreach ($susp->benefpen as $bpen) {
@@ -395,7 +393,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                             );
                             $this->dom->addChild(
                                 $benefPen,
-                                "cpfDep",
+                                "vlrDepenSusp",
                                 self::format($bpen->vlrdepensusp),
                                 true
                             );
@@ -435,7 +433,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $infoRRA,
                         "qtdMesesRRA",
-                        $rra->qtdmesesrra,
+                        self::format($rra->qtdmesesrra, 1),
                         true
                     );
                     $this->dom->addChild(
@@ -728,9 +726,11 @@ class EvtRetPF extends Factory implements FactoryInterface
             $ideBenef->appendChild($ideOpSaude);
         }
         //finalização do xml
-        $this->node->appendChild($ideBenef);
+        $ideEstab->appendChild($ideBenef);
+        $this->node->appendChild($ideEstab);
+        //$this->node->appendChild($ideBenef);
         $this->reinf->appendChild($this->node);
-        $this->xml = $this->dom->saveXML($this->reinf);
-        //$this->sign($this->evtTag);
+        //$this->xml = $this->dom->saveXML($this->reinf);
+        $this->sign($this->evtTag);
     }
 }

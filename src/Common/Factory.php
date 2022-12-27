@@ -173,6 +173,7 @@ abstract class Factory
             . $this->evtName
             . ".schema"
         );
+
         $this->schema = realpath(
             __DIR__
             . "/../../schemes/$this->layoutStr/"
@@ -180,13 +181,7 @@ abstract class Factory
             . "-" . $this->layoutStr
             . ".xsd"
         );
-        if ($this->config->eventoVersion === '1_05_01') {
-            //na versão 1.5.1 os XSD exige numericos com virgula
-            $this->decimalSeparator = ',';
-        } else {
-            //na versão 2.1.1 os XSD exige numericos com ponto
-            $this->decimalSeparator = '.';
-        }
+        $this->decimalSeparator = ',';
         //convert all data fields to lower case
         $this->std = $this->propertiesToLower($std);
         //validate input data with schema
@@ -292,13 +287,15 @@ abstract class Factory
                 $this->std->sequencial ?? null
             );
             $this->node = $this->dom->createElement($this->evtTag);
+            $tagIDname = 'id';
+            /*
             if ($this->config->eventoVersion === '1_05_01') {
                 //na versão 1.5.1 o marcador ID está com letras minusculas
                 $tagIDname = 'id';
             } else {
                 //na versão 2.1.1 o marcador ID está com a primeira letra maiuscula
-                $tagIDname = 'Id';
-            }
+                $tagIDname = 'id';
+            }*/
             $att = $this->dom->createAttribute($tagIDname);
             $att->value = $this->evtid;
             $this->node->appendChild($att);
@@ -429,14 +426,7 @@ abstract class Factory
      */
     protected function sign($tagsigned = '')
     {
-        if ($this->config->eventoVersion === '1_05_01') {
-            //na versão 1.5.1 o marcador ID está com letras minusculas
-            $tagIDname = 'id';
-        } else {
-            //na versão 2.1.1 o marcador ID está com a primeira letra maiuscula
-            $tagIDname = 'Id';
-        }
-
+        $tagIDname = 'id';
         $xml = $this->dom->saveXML($this->reinf);
         $xml = Strings::clearXmlString($xml);
         if (!empty($this->certificate)) {
@@ -449,6 +439,9 @@ abstract class Factory
                 [true, false, null, null]
             );
             //validation by XSD schema throw Exception if dont pass
+            if (empty($this->schema)) {
+                throw new \Exception("XSD não localizado");
+            }
             if ($this->schema) {
                 Validator::isValid($xml, $this->schema);
             }

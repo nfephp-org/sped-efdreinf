@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.reinf.esocial.gov.br/schemas/evtExclusao/v2_01_01" targetNamespace="http://www.reinf.esocial.gov.br/schemas/evtExclusao/v2_01_01" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.reinf.esocial.gov.br/schemas/evt4099FechamentoDirf/v2_01_01" targetNamespace="http://www.reinf.esocial.gov.br/schemas/evt4099FechamentoDirf/v2_01_01" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="./xmldsig-core-schema.xsd"/>
   <xs:element name="Reinf">
     <xs:annotation>
@@ -7,18 +7,28 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="evtExclusao" minOccurs="1" maxOccurs="1">
+        <xs:element name="evtFech" minOccurs="1" maxOccurs="1">
           <xs:annotation>
-            <xs:documentation>Evento de exclusao</xs:documentation>
+            <xs:documentation>Evento de fechamento</xs:documentation>
           </xs:annotation>
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ideEvento" minOccurs="1" maxOccurs="1">
                 <xs:annotation>
-                  <xs:documentation>Informacoes de identificacao do evento</xs:documentation>
+                  <xs:documentation>Informacoes de Identificacao do Evento</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
+                    <xs:element name="perApur" minOccurs="1" maxOccurs="1">
+                      <xs:annotation>
+                        <xs:documentation>Periodo de apuracao</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:gYearMonth">
+                          <xs:pattern value="20([1-9][0-9])-(0[1-9]|1[0-2])"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
                     <xs:element name="tpAmb" minOccurs="1" maxOccurs="1">
                       <xs:annotation>
                         <xs:documentation>Tipo de ambiente</xs:documentation>
@@ -82,51 +92,74 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="infoExclusao" minOccurs="1" maxOccurs="1">
+              <xs:element name="ideRespInf" minOccurs="0" maxOccurs="1">
                 <xs:annotation>
-                  <xs:documentation>Registro que identifica o evento objeto da exclusao</xs:documentation>
+                  <xs:documentation>Responsavel pelas informacoes</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="tpEvento" minOccurs="1" maxOccurs="1">
+                    <xs:element name="nmResp" minOccurs="1" maxOccurs="1">
                       <xs:annotation>
-                        <xs:documentation>Tipo de Evento</xs:documentation>
+                        <xs:documentation>Responsavel pelas informacoes</xs:documentation>
                       </xs:annotation>
                       <xs:simpleType>
                         <xs:restriction base="xs:string">
-                          <xs:pattern value="[Rr]{1}-{1}[\d]{4}"/>
+                          <xs:minLength value="2"/>
+                          <xs:maxLength value="70"/>
+                          <xs:whiteSpace value="preserve"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
-                    <xs:element name="nrRecEvt" minOccurs="1" maxOccurs="1">
+                    <xs:element name="cpfResp" minOccurs="1" maxOccurs="1">
                       <xs:annotation>
-                        <xs:documentation>Numero do recibo do evento</xs:documentation>
+                        <xs:documentation>Numero de Inscricao no CPF</xs:documentation>
                       </xs:annotation>
                       <xs:simpleType>
                         <xs:restriction base="xs:string">
-                          <xs:minLength value="16"/>
-                          <xs:maxLength value="52"/>
-                          <xs:pattern value="[0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4,6}[-][0-9]{1,18}"/>
+                          <xs:pattern value="\d{11}"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
-                    <xs:element name="perApur" minOccurs="1" maxOccurs="1">
+                    <xs:element name="telefone" minOccurs="0" maxOccurs="1">
                       <xs:annotation>
-                        <xs:documentation>Periodo de apuracao</xs:documentation>
+                        <xs:documentation>Numero do telefone com DDD</xs:documentation>
                       </xs:annotation>
                       <xs:simpleType>
-                        <xs:union>
-                          <xs:simpleType>
-                            <xs:restriction base="xs:gYearMonth">
-                              <xs:pattern value="2{1}[0-9]{3}-{1}[0-1]{1}[0-9]{1}"/>
-                            </xs:restriction>
-                          </xs:simpleType>
-                          <xs:simpleType>
-                            <xs:restriction base="xs:date">
-                              <xs:pattern value="2{1}[0-9]{3}-{1}[0-1]{1}[0-9]{1}-{1}[0-3]{1}[0-9]{1}"/>
-                            </xs:restriction>
-                          </xs:simpleType>
-                        </xs:union>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="8"/>
+                          <xs:maxLength value="13"/>
+                          <xs:whiteSpace value="preserve"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="email" minOccurs="0" maxOccurs="1">
+                      <xs:annotation>
+                        <xs:documentation>Endereco eletronico</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="6"/>
+                          <xs:maxLength value="60"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="infoFech" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                  <xs:documentation>Fechamento/reabertura do PA relativo as retencoes na fonte</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="fechRet" minOccurs="1" maxOccurs="1">
+                      <xs:annotation>
+                        <xs:documentation>Indicativo de fechamento/reabertura</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:unsignedByte">
+                          <xs:pattern value="0|1"/>
+                        </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
                   </xs:sequence>

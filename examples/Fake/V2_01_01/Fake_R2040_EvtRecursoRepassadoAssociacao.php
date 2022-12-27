@@ -32,6 +32,8 @@ $std = new \stdClass();
 $std->indretif = 1;
 $std->nrrecibo = '1-00-1234-1234-1234556789012345';
 $std->perapur = '2017-11';
+
+$std->tpinscestab = '1';
 $std->nrinscestab = '12345678901234';
 
 $std->recursosrep[0] = new \stdClass();

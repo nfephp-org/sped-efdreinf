@@ -528,12 +528,8 @@ $jsonSchema = '{
                                                 },
                                                 "codpostal": {
                                                     "required": false,
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ],
-                                                    "minLength": 4,
-                                                    "maxLength": 12
+                                                    "type": ["string", "null"],
+                                                    "pattern": "^[0-9]{4,12}$"
                                                 },
                                                 "telef": {
                                                     "required": false,
@@ -642,7 +638,7 @@ $std->idepgto[0]->infopgto[0]->infopgtoext->endext->complem = 'SALA 100';
 $std->idepgto[0]->infopgto[0]->infopgtoext->endext->bairro = 'bairro';
 $std->idepgto[0]->infopgto[0]->infopgtoext->endext->cidade = 'cidade';
 $std->idepgto[0]->infopgto[0]->infopgtoext->endext->estado = 'estado';
-$std->idepgto[0]->infopgto[0]->infopgtoext->endext->codpostal = 'codPostal';
+$std->idepgto[0]->infopgto[0]->infopgtoext->endext->codpostal = '9999';
 $std->idepgto[0]->infopgto[0]->infopgtoext->endext->telef = '12345678901';
 
 
