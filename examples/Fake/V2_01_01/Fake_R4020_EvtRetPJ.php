@@ -51,7 +51,7 @@ $std->idepgto[0]->infopgto[0]->dtFG = '2022-07-15';
 $std->idepgto[0]->infopgto[0]->vlrBruto = 7834.45;
 $std->idepgto[0]->infopgto[0]->indFciScp = '1';
 $std->idepgto[0]->infopgto[0]->nrInscFciScp = '12345678901234';
-$std->idepgto[0]->infopgto[0]->percSCP = 20;
+$std->idepgto[0]->infopgto[0]->percscp = 2.0;
 $std->idepgto[0]->infopgto[0]->indJud = 'N';
 $std->idepgto[0]->infopgto[0]->paisResidExt = '169';
 
@@ -112,7 +112,7 @@ $std->idepgto[0]->infopgto[0]->infopgtoext->endExt->complem = 'SALA 100';
 $std->idepgto[0]->infopgto[0]->infopgtoext->endExt->bairro = 'bairro';
 $std->idepgto[0]->infopgto[0]->infopgtoext->endExt->cidade = 'cidade';
 $std->idepgto[0]->infopgto[0]->infopgtoext->endExt->estado = 'estado';
-$std->idepgto[0]->infopgto[0]->infopgtoext->endExt->codPostal = 'codPostal';
+$std->idepgto[0]->infopgto[0]->infopgtoext->endExt->codPostal = '1234';
 $std->idepgto[0]->infopgto[0]->infopgtoext->endExt->telef = '12345678901';
 
 /*

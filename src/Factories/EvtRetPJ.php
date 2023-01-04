@@ -132,7 +132,7 @@ class EvtRetPJ extends Factory implements FactoryInterface
         $nome = self::validateName($this->std->idebenef->nmbenef ?? null);
         $this->dom->addChild(
             $ideBenef,
-            "nmfBenef",
+            "nmBenef",
             $nome,
             false
         );
@@ -185,7 +185,7 @@ class EvtRetPJ extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoPgto,
                     "percSCP",
-                    self::format($info->percscp ?? null, 0),
+                    self::format($info->percscp ?? null, 1),
                     false
                 );
                 $this->dom->addChild(
@@ -512,10 +512,10 @@ class EvtRetPJ extends Factory implements FactoryInterface
             }
             $ideBenef->appendChild($idePgto);
         }
+        $ideEstab->appendChild($ideBenef);
         $this->node->appendChild($ideEstab);
-        $this->node->appendChild($ideBenef);
         $this->reinf->appendChild($this->node);
-        $this->xml = $this->dom->saveXML($this->reinf);
-        //$this->sign($this->evtTag);
+        //$this->xml = $this->dom->saveXML($this->reinf);
+        $this->sign($this->evtTag);
     }
 }
