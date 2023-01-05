@@ -1,13 +1,14 @@
 <?php
+
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 require_once '../../../bootstrap.php';
 
 use NFePHP\Common\Certificate;
-use NFePHP\EFDReinf\Event;
 use NFePHP\EFDReinf\Tools;
 use NFePHP\EFDReinf\Common\FakePretty;
-use NFePHP\EFDReinf\Common\Soap\SoapFake;
+use NFePHP\EFDReinf\Common\Restful\RestFake;
+use NFePHP\EFDReinf\Event;
 
 $config = [
     'tpAmb' => 2, //tipo de ambiente 1 - Produção; 2 - Produção restrita
@@ -29,7 +30,6 @@ $config = [
 ];
 $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
-
 try {
     //carrega a classe responsavel por lidar com os certificados
     $content = file_get_contents('expired_certificate.pfx');
@@ -37,10 +37,17 @@ try {
     $certificate = Certificate::readPfx($content, $password);
 
     //usar a classe Fake para não tentar enviar apenas ver o resultado da chamada
-    $soap = new SoapFake();
+    $rest = new RestFake();
     //desativa a validação da validade do certificado
     //estamos usando um certificado vencido nesse teste
-    $soap->disableCertValidation(true);
+    $rest->disableCertValidation(true);
+    $rest->loadCertificate($certificate);
+
+    //instancia a classe responsável pela comunicação
+    $tools = new Tools($configJson, $certificate);
+    //carrega a classe responsável pelo envio SOAP
+    //nesse caso um envio falso
+    $tools->loadRestClass($rest);
 
     //cria o evento
     $std = new \stdClass();
@@ -76,14 +83,7 @@ try {
 
     $evento = Event::evtInfoContri($configJson, $std);
 
-    //instancia a classe responsável pela comunicação
-    $tools = new Tools($configJson, $certificate);
-    //carrega a classe responsável pelo envio SOAP
-    //nesse caso um envio falso
-    $tools->loadSoapClass($soap);
-
-    //executa o envio
-    $response = $tools->enviarLoteEventos($tools::EVT_INICIAIS, [$evento]);
+    $response = $tools->enviaLoteAssincrono($tools::EVT_INICIAIS, [$evento]);
 
     //retorna os dados que serão usados na conexão para conferência
     echo FakePretty::prettyPrint($response, '');

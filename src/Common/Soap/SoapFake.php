@@ -14,34 +14,27 @@ namespace NFePHP\EFDReinf\Common\Soap;
  * @author    Roberto L. Machado <linux.rlm at gmail dot com>
  * @link      http://github.com/nfephp-org/sped-efdreinf for the canonical source repository
  */
-use NFePHP\EFDReinf\Common\Soap\SoapBase;
-use NFePHP\EFDReinf\Common\Soap\SoapInterface;
-use NFePHP\Common\Exception\SoapException;
-use NFePHP\Common\Certificate;
-use Psr\Log\LoggerInterface;
 
 class SoapFake extends SoapBase implements SoapInterface
 {
+
     /**
-     * Constructor
-     * @param Certificate $certificate
-     * @param LoggerInterface $logger
+     * @param string $operation
+     * @param string $url
+     * @param string $action
+     * @param string $envelope
+     * @param array $parameters
+     * @return string
      */
-    public function __construct(Certificate $certificate = null, LoggerInterface $logger = null)
-    {
-        parent::__construct($certificate, $logger);
-    }
-
     public function send(
-        $operation,
-        $url,
-        $action,
-        $envelope,
-        $parameters
-    ) {
+        string $operation,
+        string $url,
+        string $action,
+        string $envelope,
+        array $parameters
+    ): string {
         $requestHead = implode("\n", $parameters);
-        $requestBody = $envelope;
-
+        $requestBody = base64_encode($envelope);
         return json_encode([
             'url' => $url,
             'operation' => $operation,
@@ -49,7 +42,6 @@ class SoapFake extends SoapBase implements SoapInterface
             'soapver' => '1.1',
             'parameters' => $parameters,
             'header' => $requestHead,
-            'namespaces' => [],
             'body' => $requestBody
         ], JSON_PRETTY_PRINT);
     }

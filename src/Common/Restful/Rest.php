@@ -1,17 +1,16 @@
 <?php
 
-namespace NFePHP\EFDReinf\Common;
+namespace NFePHP\EFDReinf\Common\Restful;
 
 use NFePHP\Common\Certificate;
 use NFePHP\Common\Exception\SoapException;
 use NFePHP\EFDReinf\Common\Soap\SoapBase;
-use Psr\Log\LoggerInterface;
 
-class Rest extends SoapBase
+class Rest extends SoapBase implements RestInterface
 {
-    public function __construct(Certificate $certificate = null, LoggerInterface $logger = null)
+    public function __construct(Certificate $certificate = null)
     {
-        parent::__construct($certificate, $logger);
+        parent::__construct($certificate);
     }
 
     public function sendApi(string $method, string $url, string $content)
@@ -58,12 +57,16 @@ class Rest extends SoapBase
         if ($this->soaperror != '') {
             throw SoapException::soapFault($this->soaperror . " [$url]", $num);
         }
-        if ($httpcode != 200) {
-            throw SoapException::soapFault(
-                " [$url] HTTP Error code: $httpcode - {$this->responseBody}",
-                $httpcode
-            );
+        if (in_array($httpcode, [200, 201, 422])) {
+            return $this->responseBody;
         }
-        return $this->responseBody;
+        if (in_array($httpcode, [495, 496])) {
+            throw SoapException::soapFault("ERRO $httpcode : "
+                . "Certificado INVALIDO (não reconhecido, expirado ou revogado)", $httpcode);
+        }
+        throw SoapException::soapFault(
+            " [$url] HTTP Error code: $httpcode - {$this->responseBody}",
+            $httpcode
+        );
     }
 }

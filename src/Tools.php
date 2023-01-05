@@ -14,16 +14,18 @@ namespace NFePHP\EFDReinf;
  * @author    Roberto L. Machado <linux.rlm at gmail dot com>
  * @link      http://github.com/nfephp-org/sped-efdreinf for the canonical source repository
  */
+
 use NFePHP\Common\Certificate;
 use NFePHP\Common\Validator;
-use NFePHP\EFDReinf\Common\Rest;
-use NFePHP\EFDReinf\Common\Tools as ToolsBase;
+use NFePHP\EFDReinf\Common\Factory;
 use NFePHP\EFDReinf\Common\FactoryInterface;
+use NFePHP\EFDReinf\Common\Restful\Rest;
 use NFePHP\EFDReinf\Common\Soap\SoapCurl;
 use NFePHP\EFDReinf\Common\Soap\SoapInterface;
+use NFePHP\EFDReinf\Common\Tools as ToolsBase;
 use NFePHP\EFDReinf\Exception\ProcessException;
+use NFePHP\EFDReinf\Common\Restful\RestInterface;
 use stdClass;
-use NFePHP\EFDReinf\Common\Factory;
 
 class Tools extends ToolsBase
 {
@@ -54,6 +56,10 @@ class Tools extends ToolsBase
      * @var SoapInterface
      */
     public $soap;
+    /**
+     * @var RestInterface
+     */
+    public $restclass;
     /**
      * @var string
      */
@@ -91,7 +97,6 @@ class Tools extends ToolsBase
         '2' => 'https://pre-reinf.receita.economia.gov.br/consulta/lotes'
     ];
 
-
     /**
      * @var string
      */
@@ -118,6 +123,11 @@ class Tools extends ToolsBase
     public function loadSoapClass(SoapInterface $soap)
     {
         $this->soap = $soap;
+    }
+
+    public function loadRestClass(RestInterface $rest)
+    {
+        $this->restclass = $rest;
     }
 
     /**
@@ -646,7 +656,7 @@ class Tools extends ToolsBase
         }
         //check number of events
         $nEvt = count($eventos);
-        if ($nEvt > 100) {
+        if ($nEvt > 50) {
             throw ProcessException::wrongArgument(2000, $nEvt);
         }
         $xml = '';
@@ -679,8 +689,7 @@ class Tools extends ToolsBase
             . "</Reinf>";
 
         $url = $this->urlloteassincrono[$this->tpAmb];
-        $rest = new Rest($this->certificate);
-        $this->lastResponse = $rest->sendApi('POST', $url, $content);
+        $this->lastResponse = $this->sendApi('POST', $url, $content);
         return $this->lastResponse;
     }
 
@@ -691,95 +700,7 @@ class Tools extends ToolsBase
     public function consultaLoteAssincrono(string $protocolo): string
     {
         $url = $this->urlconsultaassincrono[$this->tpAmb] . "/$protocolo";
-        $rest = new Rest($this->certificate);
-        $this->lastResponse = $rest->sendApi('GET', $url, '');
+        $this->lastResponse = $this->sendApi('GET', $url, '');
         return $this->lastResponse;
-    }
-
-    /**
-     * Send request to webservice
-     * @param string $request
-     * @return string
-     */
-    protected function sendRequest(string $request): string
-    {
-        if (empty($this->soap)) {
-            $this->soap = new SoapCurl($this->certificate);
-        }
-        $envelope = "<soapenv:Envelope ";
-        foreach ($this->soapnamespaces as $key => $xmlns) {
-            $envelope .= "$key = \"$xmlns\" ";
-        }
-        $envelope .= ">"
-            . "<soapenv:Header/>"
-            . "<soapenv:Body>"
-            . $request
-            . "</soapenv:Body>"
-            . "</soapenv:Envelope>";
-
-        $msgSize = strlen($envelope);
-        $parameters = [
-            "Content-Type: text/xml;charset=UTF-8",
-            "SOAPAction: \"$this->action\"",
-            "Content-length: $msgSize"
-        ];
-        if ($this->method === 'ReceberLoteEventos') {
-            $url = $this->uri[$this->tpAmb];
-        } else {
-            $url = $this->uriconsulta[$this->tpAmb];
-        }
-        $this->lastRequest = $envelope;
-        return (string) $this->soap->send(
-            $this->method,
-            $url,
-            $this->action,
-            $envelope,
-            $parameters
-        );
-    }
-
-    /**
-     * Verify the availability of a digital certificate.
-     * If available, place it where it is needed
-     * @param FactoryInterface $evento
-     * @return void
-     */
-    protected function checkCertificate(FactoryInterface $evento)
-    {
-        //try to get certificate from event
-        $certificate = $evento->getCertificate();
-        if (empty($certificate)) {
-            $evento->setCertificate($this->certificate);
-        }
-    }
-
-    /**
-     * Valid input parameters
-     * @param array $properties
-     * @param stdClass $std
-     * @return void
-     * @throws \Exception
-     */
-    protected function validInputParameters(array $properties, stdClass $std)
-    {
-        foreach ($properties as $key => $rules) {
-            $r = json_decode(json_encode($rules));
-            if ($r->required) {
-                if (!isset($std->$key)) {
-                    throw new \Exception("$key não foi passado como parâmetro e é obrigatório.");
-                }
-                $value = $std->$key;
-                if ($r->type === 'integer') {
-                    if ($value < $r->min || $value > $r->max) {
-                        throw new \Exception("$key contêm um valor invalido [$value].");
-                    }
-                }
-                if ($r->type === 'string') {
-                    if (!preg_match("/{$r->regex}/", $value)) {
-                        throw new \Exception("$key contêm um valor invalido [$value].");
-                    }
-                }
-            }
-        }
     }
 }

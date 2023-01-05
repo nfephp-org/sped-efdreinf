@@ -14,7 +14,6 @@ namespace NFePHP\EFDReinf\Common;
  * @author    Roberto L. Machado <linux.rlm at gmail dot com>
  * @link      http://github.com/nfephp-org/sped-efdreinf for the canonical source repository
  */
-
 class FakePretty
 {
     public static function prettyPrint($response, $save = '')
@@ -23,56 +22,62 @@ class FakePretty
             $html = "Sem resposta";
             return $html;
         }
-        $std = json_decode($response);
-        if (!empty($save)) {
+        $std = json_decode($response, true);
+
+        if (!empty($save) && !empty($std['body'])) {
             file_put_contents(
                 "/var/www/sped/sped-efdreinf/tests/fixtures/xml/$save.xml",
-                $std->body
+                base64_decode($std['body'])
             );
         }
-        $doc = new \DOMDocument('1.0', 'UTF-8');
-        $doc->preserveWhiteSpace = false;
-        $doc->formatOutput = true;
-        $doc->loadXML($std->body);
-
-        $html = "<pre>";
-        $html .= '<h2>url</h2>';
-        $html .= $std->url;
-        $html .= "<br>";
-        $html .= '<h2>operation</h2>';
-        $html .= "<br>";
-        $html .= $std->operation;
-        $html .= "<br>";
-        $html .= '<h2>action</h2>';
-        $html .= $std->action;
-        $html .= "<br>";
-        $html .= '<h2>soapver</h2>';
-        $html .= $std->soapver;
-        $html .= "<br>";
-        $html .= '<h2>parameters</h2>';
-        foreach ($std->parameters as $key => $param) {
-            $html .= "[$key] => $param <br>";
+        if (!empty($std['body'])) {
+            $doc = new \DOMDocument('1.0', 'UTF-8');
+            $doc->preserveWhiteSpace = false;
+            $doc->formatOutput = true;
+            $doc->loadXML(base64_decode($std['body']));
         }
-        $html .= "<br>";
-        $html .= '<h2>header</h2>';
-        $html .= $std->header;
-        $html .= "<br>";
-        $html .= '<h2>namespaces</h2>';
-        $an = json_decode(json_encode($std->namespaces), true);
-        foreach ($an as $key => $nam) {
-            $html .= "[$key] => $nam <br>";
+        $keys = array_keys($std);
+        $html = "<h1>Dados de Envio SOAP</h1><pre>";
+        if (in_array('method', $keys)) {
+            $html = "<h1>Dados de Envio REST ASSINCRONO</h1><pre>";
         }
-        $html .= "<br>";
-        $html .= '<h2>body</h2>';
-        $html .= str_replace(
-            ['<', '>'],
-            ['&lt;','&gt;'],
-            str_replace(
-                '<?xml version="1.0"?>',
-                '<?xml version="1.0" encoding="UTF-8"?>',
-                $doc->saveXML()
-            )
-        );
+        foreach ($keys as $key) {
+            if ($key === 'parameters') {
+                $html .= "<h2>{$key}</h2>";
+                foreach ($std['parameters'] as $chave => $param) {
+                    $html .= "[$chave] => $param <br>";
+                }
+                continue;
+            }
+            if ($key === 'namespeces') {
+                $html .= "<h2>{$key}</h2>";
+                $an = json_decode(json_encode($std['namespaces']), true);
+                foreach ($an as $chave => $nam) {
+                    $html .= "[$chave] => $nam <br>";
+                }
+                $html .= "<br>";
+                continue;
+            }
+            if ($key === 'body') {
+                $html .= "<h2>{$key}</h2>";
+                if (!empty($std['body'])) {
+                    $html .= str_replace(
+                        ['<', '>'],
+                        ['&lt;', '&gt;'],
+                        $doc->saveXML($doc->documentElement)
+                    );
+                }
+                continue;
+            }
+            $html .= "<h2>{$key}</h2>";
+            if (is_array($std[$key])) {
+                foreach ($std[$key] as $chave => $content) {
+                    $html .= "[$chave] => $content <br>";
+                }
+                continue;
+            }
+            $html .= $std[$key];
+        }
         $html .= "</pre>";
         return $html;
     }
