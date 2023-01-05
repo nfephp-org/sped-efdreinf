@@ -10,7 +10,6 @@ use NFePHP\EFDReinf\Event;
 use NFePHP\EFDReinf\Tools;
 use NFePHP\EFDReinf\Common\FakePretty;
 use NFePHP\EFDReinf\Common\Soap\SoapFake;
-use stdClass;
 
 $config = [
     'tpAmb' => 2, //tipo de ambiente 1 - Produção; 2 - Produção restrita

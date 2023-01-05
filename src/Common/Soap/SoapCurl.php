@@ -32,7 +32,7 @@ class SoapCurl extends SoapBase implements SoapInterface
     {
         parent::__construct($certificate, $logger);
     }
-    
+
     /**
      * Send soap message to url
      * @param string $operation
@@ -53,7 +53,7 @@ class SoapCurl extends SoapBase implements SoapInterface
         $response = '';
         $this->requestHead = implode("\n", $parameters);
         $this->requestBody = $envelope;
-        
+
         try {
             $this->saveTemporarilyKeyFiles();
             $oCurl = curl_init();
@@ -115,7 +115,7 @@ class SoapCurl extends SoapBase implements SoapInterface
         }
         return $this->responseBody;
     }
-    
+
     /**
      * Recover WSDL form given URL
      * @param string $url
@@ -151,24 +151,7 @@ class SoapCurl extends SoapBase implements SoapInterface
         }
         return $response;
     }
-    
-    /**
-     * Set proxy into cURL parameters
-     * @param resource $oCurl
-     */
-    private function setCurlProxy(&$oCurl)
-    {
-        if ($this->proxyIP != '') {
-            curl_setopt($oCurl, CURLOPT_HTTPPROXYTUNNEL, 1);
-            curl_setopt($oCurl, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
-            curl_setopt($oCurl, CURLOPT_PROXY, $this->proxyIP.':'.$this->proxyPort);
-            if ($this->proxyUser != '') {
-                curl_setopt($oCurl, CURLOPT_PROXYUSERPWD, $this->proxyUser.':'.$this->proxyPass);
-                curl_setopt($oCurl, CURLOPT_PROXYAUTH, CURLAUTH_BASIC);
-            }
-        }
-    }
-    
+
     /**
      * Extract faultstring form response if exists
      * @param string $body
