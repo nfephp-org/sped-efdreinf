@@ -105,6 +105,10 @@ class Tools extends ToolsBase
      * @var string
      */
     protected $method;
+    /**
+     * @var string
+     */
+    protected $xsdassincrono;
 
     /**
      * Constructor
@@ -114,6 +118,7 @@ class Tools extends ToolsBase
     public function __construct($config, Certificate $certificate)
     {
         parent::__construct($config, $certificate);
+        $this->xsdassincrono = __DIR__.'/../schemes/v2_01_01/envioLoteEventosAssincrono-v1_00_00.xsd';
     }
 
     /**
@@ -672,11 +677,12 @@ class Tools extends ToolsBase
                 );
             }
             $this->checkCertificate($evt);
-            $xml .= "<evento id=\"".$evt->getId()."\">";
+            $xml .= "<evento Id=\"".$evt->getId()."\">";
             $xml .= $evt->toXML();
             $xml .= "</evento>";
         }
-        $content = "<Reinf xmlns=\"http://www.reinf.esocial.gov.br/schemas/envioLoteEventosAssincrono/v1_00_00\">"
+        $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            . "<Reinf xmlns=\"http://www.reinf.esocial.gov.br/schemas/envioLoteEventosAssincrono/v1_00_00\">"
             . "<envioLoteEventos>"
             . "<ideContribuinte>"
             . "<tpInsc>{$this->tpInsc}</tpInsc>"
@@ -687,7 +693,7 @@ class Tools extends ToolsBase
             . "</eventos>"
             . "</envioLoteEventos>"
             . "</Reinf>";
-
+        Validator::isValid($content, $this->xsdassincrono);
         $url = $this->urlloteassincrono[$this->tpAmb];
         $this->lastResponse = $this->sendApi('POST', $url, $content);
         return $this->lastResponse;
