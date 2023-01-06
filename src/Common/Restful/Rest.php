@@ -15,6 +15,11 @@ class Rest extends SoapBase implements RestInterface
 
     public function sendApi(string $method, string $url, string $content)
     {
+        $msgSize = strlen($content);
+        $parameters = [
+            "Content-Type: application/xml",
+            "Content-length: $msgSize"
+        ];
         try {
             $this->saveTemporarilyKeyFiles();
             $oCurl = curl_init();
@@ -36,6 +41,8 @@ class Rest extends SoapBase implements RestInterface
             if ($method === 'POST') {
                 curl_setopt($oCurl, CURLOPT_POST, true);
                 curl_setopt($oCurl, CURLOPT_POSTFIELDS, $content);
+                curl_setopt($oCurl, CURLOPT_HEADER, 1);
+                curl_setopt($oCurl, CURLOPT_HTTPHEADER, $parameters);
             } else {
                 curl_setopt($oCurl, CURLOPT_CUSTOMREQUEST, 'GET');
             }
