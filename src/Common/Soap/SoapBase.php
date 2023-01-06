@@ -17,9 +17,9 @@ namespace NFePHP\EFDReinf\Common\Soap;
 
 use NFePHP\Common\Certificate;
 use NFePHP\Common\Exception\RuntimeException;
+use NFePHP\Common\Exception\SoapException;
 use NFePHP\Common\Strings;
 use NFePHP\Common\Files;
-
 
 abstract class SoapBase
 {
@@ -373,21 +373,22 @@ abstract class SoapBase
                 $this->temppass
             );
         }
-        $ret &= $this->filesystem->put(
-            $this->prifile,
-            $private
-        );
-        $ret &= $this->filesystem->put(
-            $this->pubfile,
-            $this->certificate->publicKey
-        );
-        $ret &= $this->filesystem->put(
-            $this->certfile,
-            $private."{$this->certificate}"
-        );
-        if (!$ret) {
-            throw new RuntimeException(
-                'Unable to save temporary key files in folder.'
+        try {
+            $ret &= $this->filesystem->put(
+                $this->prifile,
+                $private
+            );
+            $ret &= $this->filesystem->put(
+                $this->pubfile,
+                $this->certificate->publicKey
+            );
+            $ret &= $this->filesystem->put(
+                $this->certfile,
+                $private . "{$this->certificate}"
+            );
+        } catch (\Exception $e) {
+            throw new SoapException(
+                'Falha ao salvar temporariamente o certificado. ' . $e->getMessage()
             );
         }
     }
@@ -397,8 +398,6 @@ abstract class SoapBase
      */
     public function removeTemporarilyFiles()
     {
-        echo $this->certsdir;
-        die;
         $contents = $this->filesystem->listContents($this->certsdir, true);
         //define um limite de $waitingTime min, ou seja qualquer arquivo criado a mais
         //de $waitingTime min será removido
