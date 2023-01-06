@@ -21,7 +21,6 @@ use NFePHP\Common\Exception\SoapException;
 use NFePHP\Common\Strings;
 use NFePHP\Common\Files;
 
-
 abstract class SoapBase
 {
     //constants
@@ -387,7 +386,7 @@ abstract class SoapBase
                 $this->certfile,
                 $private . "{$this->certificate}"
             );
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw new SoapException(
                 'Falha ao salvar temporariamente o certificado. ' . $e->getMessage()
             );
