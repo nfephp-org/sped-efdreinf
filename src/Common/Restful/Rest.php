@@ -56,8 +56,7 @@ class Rest extends SoapBase implements RestInterface
             $headsize = curl_getinfo($oCurl, CURLINFO_HEADER_SIZE);
             $httpcode = curl_getinfo($oCurl, CURLINFO_HTTP_CODE);
             curl_close($oCurl);
-            $this->responseHead = trim(substr($response, 0, $headsize));
-            $this->responseBody = trim(substr($response, $headsize));
+            $this->responseBody = $response;
         } catch (\Exception $e) {
             throw SoapException::unableToLoadCurl($e->getMessage());
         }
