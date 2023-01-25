@@ -44,12 +44,12 @@ class SoapCurl extends SoapBase implements SoapInterface
      * @throws \NFePHP\Common\Exception\SoapException
      */
     public function send(
-        $operation,
-        $url,
-        $action,
-        $envelope,
-        $parameters
-    ) {
+        string $operation,
+        string $url,
+        string $action,
+        string $envelope,
+        string $parameters
+    ): string {
         $response = '';
         $this->requestHead = implode("\n", $parameters);
         $this->requestBody = $envelope;
