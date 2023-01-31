@@ -109,12 +109,11 @@ class Tools
     protected $grupos = [
         1 => [ //EVENTOS INICIAIS grupo [1]
             'R-1000',
+            'R-1050',
             'R-1070'
         ],
         2 => [ //EVENTOS NÃO PERIÓDICOS grupo [2]
             'R-3010',
-            'R-5001',
-            'R-5011',
             'R-9000'
         ],
         3 => [ //EVENTOS PERIÓDICOS grupo [3]
@@ -127,10 +126,10 @@ class Tools
             'R-2060',
             'R-2070',
             'R-2098',
-            'R-2099',
             'R-4010',
             'R-4020',
-            'R-4040'
+            'R-4040',
+            'R-4080'
         ],
         4 => [ //EVENTOS FINAIS grupo [4]
             'R-2099',
