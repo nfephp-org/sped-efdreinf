@@ -398,7 +398,7 @@ abstract class SoapBase
      */
     public function removeTemporarilyFiles()
     {
-        $contents = $this->filesystem->listContents($this->certsdir, true);
+        $contents = $this->filesystem->listContents($this->certsdir ?? '');
         //define um limite de $waitingTime min, ou seja qualquer arquivo criado a mais
         //de $waitingTime min será removido
         //NOTA: quando ocorre algum erro interno na execução do script, alguns

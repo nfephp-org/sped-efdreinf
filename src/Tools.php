@@ -682,7 +682,8 @@ class Tools extends ToolsBase
             $xml .= "</evento>";
         }
         $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-            . "<Reinf xmlns=\"http://www.reinf.esocial.gov.br/schemas/envioLoteEventosAssincrono/v1_00_00\">"
+            . "<Reinf xmlns=\"http://www.reinf.esocial.gov.br/schemas/envioLoteEventosAssincrono/v"
+            . $this->serviceVersion."\">"
             . "<envioLoteEventos>"
             . "<ideContribuinte>"
             . "<tpInsc>{$this->tpInsc}</tpInsc>"
@@ -693,7 +694,74 @@ class Tools extends ToolsBase
             . "</eventos>"
             . "</envioLoteEventos>"
             . "</Reinf>";
-        Validator::isValid($content, $this->xsdassincrono);
+        //validate requisition with XSD
+        $xsd = $this->path
+            . "schemes/comunicacao/v$this->serviceVersion/"
+            . $this->serviceXsd['EnvioLoteEventos']['name'];
+        Validator::isValid($content, $xsd);
+        $url = $this->urlloteassincrono[$this->tpAmb];
+        $this->lastResponse = $this->sendApi('POST', $url, $content);
+        return $this->lastResponse;
+    }
+
+    /**
+     * Envio Assincrono por API REST de lote de eventos em XML assindado
+     * @param int $grupo
+     * @param array $eventos
+     * @return string
+     */
+    public function enviaLoteXmlAssincrono(int $grupo, array $eventos = []): string
+    {
+        if (empty($eventos)) {
+            return '';
+        }
+        //check number of events
+        $nEvt = count($eventos);
+        if ($nEvt > 50) {
+            throw ProcessException::wrongArgument(2000, $nEvt);
+        }
+        $xml = '';
+        $grp = null;
+        foreach ($eventos as $evt) {
+            $resp = $this->getIdFromXml($evt);
+            if (empty($resp['id'])) {
+                throw new \RuntimeException(
+                    'Falha na localização do ID do evento.'
+                );
+            }
+            if (empty($grp)) {
+                $grp = $resp['grupo'];
+            }
+            if ($grp !== $resp['grupo']) {
+                throw new \RuntimeException('Devem ser enviados em um lote apenas eventos '
+                    . 'pertencentes ao mesmo grupo');
+            }
+            if ($grp !== $grupo) {
+                throw new \RuntimeException('O grupo correto deve ser declarado e não pode diferir'
+                    . 'do grupo dos eventos');
+            }
+            $id = $resp['id'];
+            $xml .= "<evento Id=\"$id\">";
+            $xml .= $evt;
+            $xml .= "</evento>";
+        }
+        $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            . "<Reinf xmlns=\"http://www.reinf.esocial.gov.br/schemas/envioLoteEventosAssincrono/v"
+            . $this->serviceVersion."\">"
+            . "<envioLoteEventos>"
+            . "<ideContribuinte>"
+            . "<tpInsc>{$this->tpInsc}</tpInsc>"
+            . "<nrInsc>{$this->nrInsc}</nrInsc>"
+            . "</ideContribuinte>"
+            . "<eventos>"
+            . $xml
+            . "</eventos>"
+            . "</envioLoteEventos>"
+            . "</Reinf>";
+        $xsd = $this->path
+            . "schemes/comunicacao/v$this->serviceVersion/"
+            . $this->serviceXsd['EnvioLoteEventos']['name'];
+        Validator::isValid($content, $xsd);
         $url = $this->urlloteassincrono[$this->tpAmb];
         $this->lastResponse = $this->sendApi('POST', $url, $content);
         return $this->lastResponse;
@@ -708,5 +776,49 @@ class Tools extends ToolsBase
         $url = $this->urlconsultaassincrono[$this->tpAmb] . "/$protocolo";
         $this->lastResponse = $this->sendApi('GET', $url, '');
         return $this->lastResponse;
+    }
+
+    /**
+     *
+     * @param string $xml
+     * @return mixed
+     */
+    protected function getIdFromXml(string $xml)
+    {
+        $possibles = [
+            'evtInfoContri' => 1,
+            'evtTabLig' => 1,
+            'evtTabProcesso' => 1,
+            'evtServTom' => 2,
+            'evtServPrest' => 2,
+            'evtAssocDespRec' => 2,
+            'evtAssocDespRep' => 2,
+            'evtComProd' => 2,
+            'evtAqProd' => 2,
+            'evtCPRB' => 2,
+            'evtReabreEvPer' => 2,
+            'evtFechaEvPer' => 4,
+            'evtEspDesportivo' => 3,
+            'evtRetPF' => 2,
+            'evtRetPJ' => 2,
+            'evtBenefNId' => 2,
+            'evtRetRec' => 2,
+            'evtFech' => 4,
+            'evtExclusao' => 3
+        ];
+        $dom = new \DOMDocument();
+        $dom->loadXML($xml);
+        $keys = array_keys($possibles);
+        $id = null;
+        $grupo = null;
+        foreach ($keys as $tagname) {
+            if (!empty($dom->getElementsByTagName($tagname)->item(0))) {
+                $tag = $dom->getElementsByTagName($tagname)->item(0);
+                $id = $tag->getAttribute('id');
+                $grupo = $possibles[$tagname];
+                break;
+            }
+        }
+        return ['id' => $id, 'grupo' => $grupo];
     }
 }
