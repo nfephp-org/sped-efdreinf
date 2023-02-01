@@ -17,7 +17,6 @@ namespace NFePHP\EFDReinf\Common;
 
 use DateTime;
 use DOMDocument;
-use DOMElement;
 use JsonSchema\Validator as JsonValid;
 use NFePHP\Common\Certificate;
 use NFePHP\Common\DOMImproved as Dom;
@@ -46,9 +45,9 @@ abstract class Factory
      */
     public $nmRazao;
     /**
-     * @var DateTime
+     * @var DateTime|null
      */
-    public $date;
+    public $date = null;
     /**
      * @var int
      */
@@ -126,7 +125,7 @@ abstract class Factory
      */
     protected $certificate;
     /**
-     * @var
+     * @var string
      */
     protected $config;
     /**
@@ -164,6 +163,10 @@ abstract class Factory
         $this->evtName = $params->evtName;
         $this->evtAlias = $params->evtAlias;
         $this->config = $stdConf;
+        $this->date = null;
+        if (!empty($date)) {
+            $this->date = DateTime::createFromFormat('Y-m-d H:i:s', $date);
+        }
         if (empty($std) || !is_object($std)) {
             throw EventsException::wrongArgument(1003, '');
         }

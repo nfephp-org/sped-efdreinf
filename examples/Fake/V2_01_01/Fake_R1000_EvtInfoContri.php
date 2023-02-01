@@ -102,7 +102,8 @@ try {
     $xml = Event::evtInfoContri(
         $configJson,
         $std,
-        $certificate
+        $certificate,
+        "2023-01-22 10:10:10" //para forçar um datetime especifico
     )->toXml();
 
     //$xml = Event::r1000($configJson, $std, $certificate)->toXML();
