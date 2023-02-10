@@ -268,4 +268,78 @@ class Tools
             }
         }
     }
+
+    /**
+     * Converte para lower case todas as propriedades do stdClass
+     * @param stdClass $std
+     * @return stdClass
+     */
+    protected static function propertiesToLower(stdClass $std): stdClass
+    {
+        $array = json_decode(json_encode($std), true);
+        $lkarray = self::arrayKeysToLowerRecursive($array);
+        if (empty($lkarray)) {
+            throw new \RuntimeException("Deve ser passado pelo menos um campo no com valor "
+                . "diferente de null ou vazio.");
+        }
+        return (object) $lkarray;
+    }
+
+    /**
+     * Converte as chaves de um array para lowercase
+     * @param array $array
+     * @return array
+     */
+    protected static function arrayKeysToLowerRecursive(array $array): array
+    {
+        return array_map(
+            static function ($item) {
+                if (is_array($item)) {
+                    $item = self::arrayKeysToLowerRecursive($item);
+                }
+                return $item;
+            },
+            self::keyFilter($array)
+        );
+    }
+
+    /**
+     * Remove espaços extras das chaves de um array
+     * @param $array
+     * @return array
+     */
+    protected static function keyFilter($array)
+    {
+        $new = [];
+        foreach ($array as $key => $value) {
+            $key = preg_replace('/(?:\s\s+)/', ' ', $key);
+            $key = strtolower(trim($key)); //converte para caixa baixa
+            $new[$key] = $value;
+        }
+        return $new;
+    }
+
+    /**
+     * Valida os dados passados para as consultas assincronas
+     * @param array $required
+     * @param stdClass $std
+     * @return array
+     */
+    protected static function validateConsultData(array $required, stdClass $std): array
+    {
+        $errors = [];
+        $status = true;
+        foreach ($required as $rec => $regex) {
+            $value = trim($std->$rec);
+            if (empty($value)) {
+                $errors[] = "O campo {$rec}, deve ser informado.";
+                $status = false;
+            }
+            if (!preg_match_all($regex, $value, $matchs)) {
+                $errors[] = "O valor {$value} é um conteúdo incorreto para o campo {$rec}.";
+                $status = false;
+            }
+        }
+        return ['status' => $status, 'errors' => $errors];
+    }
 }
