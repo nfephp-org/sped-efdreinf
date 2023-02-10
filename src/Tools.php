@@ -16,6 +16,7 @@ namespace NFePHP\EFDReinf;
  */
 
 use NFePHP\Common\Certificate;
+use NFePHP\Common\Strings;
 use NFePHP\Common\Validator;
 use NFePHP\EFDReinf\Common\Factory;
 use NFePHP\EFDReinf\Common\FactoryInterface;
@@ -69,7 +70,7 @@ class Tools extends ToolsBase
      */
     protected $soapnamespaces = [
         'xmlns:soapenv' => "http://schemas.xmlsoap.org/soap/envelope/",
-        'xmlns:sped'=> "http://sped.fazenda.gov.br/"
+        'xmlns:sped' => "http://sped.fazenda.gov.br/"
     ];
     /**
      * @var array
@@ -87,14 +88,28 @@ class Tools extends ToolsBase
         '2' => 'https://preprodefdreinf.receita.fazenda.gov.br/WsReinfConsultas/ConsultasReinf.svc'
     ];
 
+    /**
+     * @var string[]
+     */
     protected $urlloteassincrono = [
         '1' => 'https://reinf.receita.economia.gov.br/recepcao/lotes',
         '2' => 'https://pre-reinf.receita.economia.gov.br/recepcao/lotes',
     ];
 
+    /**
+     * @var string[]
+     */
     protected $urlconsultaassincrono = [
         '1' => 'https://reinf.receita.economia.gov.br/consulta/lotes',
         '2' => 'https://pre-reinf.receita.economia.gov.br/consulta/lotes'
+    ];
+
+    /**
+     * @var string[]
+     */
+    protected $urlconsultaeventoassincrono = [
+        '1' => 'https://reinf.receita.economia.gov.br/consulta/reciboevento',
+        '2' => 'https://pre-reinf.receita.economia.gov.br/consulta/reciboevento'
     ];
 
     /**
@@ -118,7 +133,7 @@ class Tools extends ToolsBase
     public function __construct($config, Certificate $certificate)
     {
         parent::__construct($config, $certificate);
-        $this->xsdassincrono = __DIR__.'/../schemes/v2_01_01/envioLoteEventosAssincrono-v1_00_00.xsd';
+        $this->xsdassincrono = __DIR__ . '/../schemes/v2_01_01/envioLoteEventosAssincrono-v1_00_00.xsd';
     }
 
     /**
@@ -289,7 +304,7 @@ class Tools extends ToolsBase
         $properties = [
             'perapur' => [
                 'required' => false,
-                'type' => ['string',"null"],
+                'type' => ['string', "null"],
                 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
             ],
             'tpinscestab' => [
@@ -318,15 +333,15 @@ class Tools extends ToolsBase
             . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
             . "<sped:nrInsc>{$this->doc}</sped:nrInsc>";
         if (!empty($std->perapur)) {
-            $request .=  "<sped:perApur>{$std->perapur}</sped:perApur>";
+            $request .= "<sped:perApur>{$std->perapur}</sped:perApur>";
         }
         $request .= "<sped:tpInscEstab>{$std->tpinscestab}</sped:tpInscEstab>"
             . "<sped:nrInscEstab>"
-                . str_pad($std->nrinscestab, 14, '0', STR_PAD_LEFT)
-                . "</sped:nrInscEstab>"
+            . str_pad($std->nrinscestab, 14, '0', STR_PAD_LEFT)
+            . "</sped:nrInscEstab>"
             . "<sped:cnpjPrestador>"
-                . str_pad($std->cnpjprestador, 14, '0', STR_PAD_LEFT)
-                . "</sped:cnpjPrestador>"
+            . str_pad($std->cnpjprestador, 14, '0', STR_PAD_LEFT)
+            . "</sped:cnpjPrestador>"
             . "</sped:{$this->method}>";
         return $request;
     }
@@ -342,9 +357,9 @@ class Tools extends ToolsBase
         $properties = [
             'perapur' => [
                 'required' => false,
-                'type' => ['string',"null"],
+                'type' => ['string', "null"],
                 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
-             ],
+            ],
             'nrinscestabprest' => [
                 'required' => true,
                 'type' => 'string',
@@ -376,8 +391,8 @@ class Tools extends ToolsBase
         $request .= "<sped:nrInscEstabPrest>{$std->nrinscestabprest}</sped:nrInscEstabPrest>"
             . "<sped:tpInscTomador>{$std->tpinsctomador}</sped:tpInscTomador>"
             . "<sped:nrInscTomador>"
-                . str_pad($std->nrinsctomador, 14, '0', STR_PAD_LEFT)
-                . "</sped:nrInscTomador>"
+            . str_pad($std->nrinsctomador, 14, '0', STR_PAD_LEFT)
+            . "</sped:nrInscTomador>"
             . "</sped:{$this->method}>";
         return $request;
     }
@@ -393,7 +408,7 @@ class Tools extends ToolsBase
         $properties = [
             'perapur' => [
                 'required' => false,
-                'type' => ['string',"null"],
+                'type' => ['string', "null"],
                 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
             ],
             'nrinscestab' => [
@@ -419,8 +434,8 @@ class Tools extends ToolsBase
             $request .= "<sped:perApur>{$std->perapur}</sped:perApur>";
         }
         $request .= "<sped:nrInscEstab>"
-                . str_pad($std->nrinscestab, 14, '0', STR_PAD_LEFT)
-                . "</sped:nrInscEstab>"
+            . str_pad($std->nrinscestab, 14, '0', STR_PAD_LEFT)
+            . "</sped:nrInscEstab>"
             . "</sped:{$this->method}>";
         return $request;
     }
@@ -436,7 +451,7 @@ class Tools extends ToolsBase
         $properties = [
             'perapur' => [
                 'required' => false,
-                'type' => ['string',"null"],
+                'type' => ['string', "null"],
                 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
             ],
             'nrinscestab' => [
@@ -481,7 +496,7 @@ class Tools extends ToolsBase
         $properties = [
             'perapur' => [
                 'required' => false,
-                'type' => ['string',"null"],
+                'type' => ['string', "null"],
                 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
             ],
             'nrinscestabprest' => [
@@ -514,8 +529,8 @@ class Tools extends ToolsBase
         }
         $request .= "<sped:tpInscEstab>{$std->tpinscestab}</sped:tpInscEstab>"
             . "<sped:nrInscEstab>"
-                . str_pad($std->nrinscestab, 14, '0', STR_PAD_LEFT)
-                . "</sped:nrInscEstab>"
+            . str_pad($std->nrinscestab, 14, '0', STR_PAD_LEFT)
+            . "</sped:nrInscEstab>"
             . "</sped:{$this->method}>";
         return $request;
     }
@@ -531,7 +546,7 @@ class Tools extends ToolsBase
         $properties = [
             'perapur' => [
                 'required' => false,
-                'type' => ['string',"null"],
+                'type' => ['string', "null"],
                 'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
             ],
         ];
@@ -585,15 +600,15 @@ class Tools extends ToolsBase
             . "<sped:nrInsc>{$this->doc}</sped:nrInsc>"
             . "<sped:dtApur>{$std->dtapur}</sped:dtApur>"
             . "<sped:nrInscEstabelecimento>"
-                . str_pad($std->nrinscestabelecimento, 14, '0', STR_PAD_LEFT)
-                . "</sped:nrInscEstabelecimento>"
+            . str_pad($std->nrinscestabelecimento, 14, '0', STR_PAD_LEFT)
+            . "</sped:nrInscEstabelecimento>"
             . "</sped:{$this->method}>";
         return $request;
     }
 
     /**
      * Send batch of events
-     * @param  integer $grupo
+     * @param integer $grupo
      * @param array $eventos
      * @return string
      */
@@ -615,20 +630,20 @@ class Tools extends ToolsBase
                 throw ProcessException::wrongArgument(2002, '');
             }
             //verifica se o evento pertence ao grupo indicado
-            if (! in_array($evt->alias(), $this->grupos[$grupo])) {
+            if (!in_array($evt->alias(), $this->grupos[$grupo])) {
                 throw new \RuntimeException(
                     'O evento ' . $evt->alias() . ' não pertence a este grupo [ '
                     . $this->eventGroup[$grupo] . ' ].'
                 );
             }
             $this->checkCertificate($evt);
-            $xml .= "<evento id=\"".$evt->getId()."\">";
+            $xml .= "<evento id=\"" . $evt->getId() . "\">";
             $xml .= $evt->toXML();
             $xml .= "</evento>";
         }
         //build request
         $request = "<Reinf xmlns=\"http://www.reinf.esocial.gov.br/schemas/envioLoteEventos/v"
-            . $this->serviceVersion."\" >"
+            . $this->serviceVersion . "\" >"
             . "<loteEventos>"
             . $xml
             . "</loteEventos>"
@@ -670,20 +685,20 @@ class Tools extends ToolsBase
                 throw ProcessException::wrongArgument(2002, '');
             }
             //verifica se o evento pertence ao grupo indicado
-            if (! in_array($evt->alias(), $this->grupos[$grupo])) {
+            if (!in_array($evt->alias(), $this->grupos[$grupo])) {
                 throw new \RuntimeException(
                     'O evento ' . $evt->alias() . ' não pertence a este grupo [ '
                     . $this->eventGroup[$grupo] . ' ].'
                 );
             }
             $this->checkCertificate($evt);
-            $xml .= "<evento Id=\"".$evt->getId()."\">";
+            $xml .= "<evento Id=\"" . $evt->getId() . "\">";
             $xml .= $evt->toXML();
             $xml .= "</evento>";
         }
         $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
             . "<Reinf xmlns=\"http://www.reinf.esocial.gov.br/schemas/envioLoteEventosAssincrono/v"
-            . $this->serviceVersion."\">"
+            . $this->serviceVersion . "\">"
             . "<envioLoteEventos>"
             . "<ideContribuinte>"
             . "<tpInsc>{$this->tpInsc}</tpInsc>"
@@ -701,80 +716,6 @@ class Tools extends ToolsBase
         Validator::isValid($content, $xsd);
         $url = $this->urlloteassincrono[$this->tpAmb];
         $this->lastResponse = $this->sendApi('POST', $url, $content);
-        return $this->lastResponse;
-    }
-
-    /**
-     * Envio Assincrono por API REST de lote de eventos em XML assindado
-     * @param int $grupo
-     * @param array $eventos
-     * @return string
-     */
-    public function enviaLoteXmlAssincrono(int $grupo, array $eventos = []): string
-    {
-        if (empty($eventos)) {
-            return '';
-        }
-        //check number of events
-        $nEvt = count($eventos);
-        if ($nEvt > 50) {
-            throw ProcessException::wrongArgument(2000, $nEvt);
-        }
-        $xml = '';
-        $grp = null;
-        foreach ($eventos as $evt) {
-            $resp = $this->getIdFromXml($evt);
-            if (empty($resp['id'])) {
-                throw new \RuntimeException(
-                    'Falha na localização do ID do evento.'
-                );
-            }
-            if (empty($grp)) {
-                $grp = $resp['grupo'];
-            }
-            if ($grp !== $resp['grupo']) {
-                throw new \RuntimeException('Devem ser enviados em um lote apenas eventos '
-                    . 'pertencentes ao mesmo grupo');
-            }
-            if ($grp !== $grupo) {
-                throw new \RuntimeException('O grupo correto deve ser declarado e não pode diferir'
-                    . 'do grupo dos eventos');
-            }
-            $id = $resp['id'];
-            $xml .= "<evento Id=\"$id\">";
-            $xml .= $evt;
-            $xml .= "</evento>";
-        }
-        $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-            . "<Reinf xmlns=\"http://www.reinf.esocial.gov.br/schemas/envioLoteEventosAssincrono/v"
-            . $this->serviceVersion."\">"
-            . "<envioLoteEventos>"
-            . "<ideContribuinte>"
-            . "<tpInsc>{$this->tpInsc}</tpInsc>"
-            . "<nrInsc>{$this->nrInsc}</nrInsc>"
-            . "</ideContribuinte>"
-            . "<eventos>"
-            . $xml
-            . "</eventos>"
-            . "</envioLoteEventos>"
-            . "</Reinf>";
-        $xsd = $this->path
-            . "schemes/comunicacao/v$this->serviceVersion/"
-            . $this->serviceXsd['EnvioLoteEventos']['name'];
-        Validator::isValid($content, $xsd);
-        $url = $this->urlloteassincrono[$this->tpAmb];
-        $this->lastResponse = $this->sendApi('POST', $url, $content);
-        return $this->lastResponse;
-    }
-
-    /**
-     * @param string $protocolo
-     * @return string
-     */
-    public function consultaLoteAssincrono(string $protocolo): string
-    {
-        $url = $this->urlconsultaassincrono[$this->tpAmb] . "/$protocolo";
-        $this->lastResponse = $this->sendApi('GET', $url, '');
         return $this->lastResponse;
     }
 
@@ -820,5 +761,444 @@ class Tools extends ToolsBase
             }
         }
         return ['id' => $id, 'grupo' => $grupo];
+    }
+
+    /**
+     * Envio Assincrono por API REST de lote de eventos em XML assindado
+     * @param int $grupo
+     * @param array $eventos
+     * @return string
+     */
+    public function enviaLoteXmlAssincrono(int $grupo, array $eventos = []): string
+    {
+        if (empty($eventos)) {
+            return '';
+        }
+        //check number of events
+        $nEvt = count($eventos);
+        if ($nEvt > 50) {
+            throw ProcessException::wrongArgument(2000, $nEvt);
+        }
+        $xml = '';
+        $grp = null;
+        foreach ($eventos as $evt) {
+            $resp = $this->getIdFromXml($evt);
+            if (empty($resp['id'])) {
+                throw new \RuntimeException(
+                    'Falha na localização do ID do evento.'
+                );
+            }
+            if (empty($grp)) {
+                $grp = $resp['grupo'];
+            }
+            if ($grp !== $resp['grupo']) {
+                throw new \RuntimeException('Devem ser enviados em um lote apenas eventos '
+                    . 'pertencentes ao mesmo grupo');
+            }
+            if ($grp !== $grupo) {
+                throw new \RuntimeException('O grupo correto deve ser declarado e não pode diferir'
+                    . 'do grupo dos eventos');
+            }
+            $id = $resp['id'];
+            $xml .= "<evento Id=\"$id\">";
+            $xml .= $evt;
+            $xml .= "</evento>";
+        }
+        $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            . "<Reinf xmlns=\"http://www.reinf.esocial.gov.br/schemas/envioLoteEventosAssincrono/v"
+            . $this->serviceVersion . "\">"
+            . "<envioLoteEventos>"
+            . "<ideContribuinte>"
+            . "<tpInsc>{$this->tpInsc}</tpInsc>"
+            . "<nrInsc>{$this->nrInsc}</nrInsc>"
+            . "</ideContribuinte>"
+            . "<eventos>"
+            . $xml
+            . "</eventos>"
+            . "</envioLoteEventos>"
+            . "</Reinf>";
+        $xsd = $this->path
+            . "schemes/comunicacao/v$this->serviceVersion/"
+            . $this->serviceXsd['EnvioLoteEventos']['name'];
+        Validator::isValid($content, $xsd);
+        $url = $this->urlloteassincrono[$this->tpAmb];
+        $this->lastResponse = $this->sendApi('POST', $url, $content);
+        return $this->lastResponse;
+    }
+
+    /**
+     * @param string $protocolo
+     * @return string
+     */
+    public function consultaLoteAssincrono(string $protocolo): string
+    {
+        $url = $this->urlconsultaassincrono[$this->tpAmb] . "/$protocolo";
+        $this->lastResponse = $this->sendApi('GET', $url, '');
+        return $this->lastResponse;
+    }
+
+    /**
+     * @param stdClass $std
+     * @return bool|string
+     */
+    public function consultarEventoAssincono(stdClass $std): string
+    {
+        $possibleevents = [
+            '1000',
+            '1050',
+            '1070',
+            '2010',
+            '2020',
+            '2030',
+            '2040',
+            '2050',
+            '2055',
+            '2060',
+            '2098',
+            '2099',
+            '3010',
+            '4010',
+            '4020',
+            '4040',
+            '4080',
+            '4099'
+        ];
+        if (empty($std->evento)) {
+            throw new \RuntimeException("Deve ser passada a variável evento.");
+        }
+        $evento = (string) preg_replace("/[^0-9]/", "", $std->evento);
+        if (!in_array($evento, $possibleevents)) {
+            throw new \RuntimeException("Esse evento [$evento] é desconhecido para uma consulta");
+        }
+        $std->evento = $evento;
+        $url = $this->buildUrlConsultaAssincona($std);
+        $this->lastResponse = $this->sendApi('GET', $url, '');
+        return $this->lastResponse;
+    }
+
+    /**
+     * @param string $evento
+     * @param stdClass $std
+     * @return string
+     */
+    private function buildUrlConsultaAssincona(stdClass $std): string
+    {
+        $evento = (string) $std->evento;
+        $baseurl = $this->urlconsultaeventoassincrono[$this->tpAmb];
+        $proc = "urlR$evento";
+        $std->baseurl = $baseurl;
+        $std->tpinsc = $this->tpInsc;
+        $std->nrinsc = $this->nrInsc;
+        return self::$proc($std);
+    }
+
+    /**
+     * GET R1000 Assincrono
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR1000(stdClass $std): string
+    {
+        return self::urlbase($std);
+    }
+
+    /**
+     * GET R1050 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR1050(stdClass $std): string
+    {
+        return self::urlbase($std);
+    }
+
+    /**
+     * GET R1070 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR1070(stdClass $std): string
+    {
+        return self::urlbase($std);
+    }
+
+    /**
+     * GET R2010 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR2010(stdClass $std): string
+    {
+        $required = [
+            'perapur' => '/^20([0-9][0-9])-(0[1-9]|1[0-2])$/',
+            'tpinscestab' => '/^(1|4)$/',
+            'nrinscestab' => '/^[0-9]{12}|[0-9]{14}$/',
+            'cnpjprestador' => '/^[0-9]{14}$/'
+        ];
+        return self::complement($required, $std);
+    }
+
+    /**
+     * GET R2020 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR2020(stdClass $std): string
+    {
+        $required = [
+            'perapur' => '/^20([0-9][0-9])-(0[1-9]|1[0-2])$/',
+            'nrinscestabprest' => '/^[0-9]{14}$/',
+            'tpinsctomador' => '/^(1|4)$/',
+            'nrinsctomador' => '/^[0-9]{12}|[0-9]{14}$/',
+        ];
+        return self::complement($required, $std);
+    }
+
+    /**
+     * GET R2030 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR2030(stdClass $std): string
+    {
+        $required = [
+            'perapur' => '/^20([0-9][0-9])-(0[1-9]|1[0-2])$/',
+            'nrinscestab' => '/^[0-9]{14}$/',
+        ];
+        return self::complement($required, $std);
+    }
+
+    /**
+     * GET R2040 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR2040(stdClass $std): string
+    {
+        $required = [
+            'perapur' => '/^20([0-9][0-9])-(0[1-9]|1[0-2])$/',
+            'nrinscestab' => '/^[0-9]{14}$/',
+        ];
+        return self::complement($required, $std);
+    }
+
+    /**
+     * GET R2050 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR2050(stdClass $std): string
+    {
+        $required = [
+            'perapur' => '/^20([0-9][0-9])-(0[1-9]|1[0-2])$/',
+            'nrinscestab' => '/^[0-9]{14}$/',
+        ];
+        return self::complement($required, $std);
+    }
+
+    /**
+     * GET R2055 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR2055(stdClass $std): string
+    {
+        $required = [
+            'perapur' => '/^20([0-9][0-9])-(0[1-9]|1[0-2])$/',
+            'tpinscadq' => '/^(1|3)$/',
+            'nrinscadq' => '/^[0-9]{14}$/',
+            'tpinscprod' => '/^(1|2)$/',
+            'nrinscprod' => '/^[0-9]{11}|[0-9]{14}$/',
+        ];
+        return self::complement($required, $std);
+    }
+
+    /**
+     * GET R2060 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR2060(stdClass $std): string
+    {
+        $required = [
+            'perapur' => '/^20([0-9][0-9])-(0[1-9]|1[0-2])$/',
+            'tpinscestab' => '/^(1|4)$/',
+            'nrinscestab' => '/^[0-9]{12}|[0-9]{14}$/',
+        ];
+        return self::complement($required, $std);
+    }
+
+    /**
+     * GET R2098 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR2098(stdClass $std): string
+    {
+        $required = [
+            'perapur' => '/^20([0-9][0-9])-(0[1-9]|1[0-2])$/',
+        ];
+        return self::complement($required, $std);
+    }
+
+    /**
+     * GET R2099 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR2099(stdClass $std): string
+    {
+        $required = [
+            'perapur' => '/^20([0-9][0-9])-(0[1-9]|1[0-2])$/',
+        ];
+        return self::complement($required, $std);
+    }
+
+    /**
+     * GET R3010 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR3010(stdClass $std): string
+    {
+        $required = [
+            'dtapur' => '/^20([1-9][0-9])-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/',
+            'nrinscestabelecimento' => '/^[0-9]{14}/'
+        ];
+        return self::complement($required, $std);
+    }
+
+    /**
+     * GET R4010 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR4010(stdClass $std): string
+    {
+        $required = [
+            'perapur' => '/^20([0-9][0-9])-(0[1-9]|1[0-2])$/',
+            'tpinscestab' => '/^(1|4)$/',
+            'nrinscestab' => '/^[0-9]{12}|[0-9]{14}$/',
+        ];
+        $std = self::propertiesToLower($std);
+        if (!empty($std->cpfbenef)) {
+            $required['cpfbenef'] = '/^[0-9]{11}$/';
+        }
+        $val = self::validateConsultData($required, $std);
+        if (!$val['status']) {
+            $message = implode("\n", $val['errors']);
+            throw new \RuntimeException('Campos foram passados com erro para a consulta. ' . $message);
+        }
+        $base = self::urlbase($std);
+        if (!empty($std->cpfbenef)) {
+            return "{$base}/{$std->perapur}/{$std->tpinscestab}/{$std->nrinscestab}/{$std->cpfbenef}";
+        }
+        return "{$std->baseurl}/R4010/semCpfBeneficiario/{$std->tpinsc}/{$std->nrinsc}/{$std->perapur}"
+            . "/{$std->tpinscestab}/{$std->nrinscestab}";
+    }
+
+    /**
+     * GET R4020 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR4020(stdClass $std): string
+    {
+        $required = [
+            'perapur' => '/^20([0-9][0-9])-(0[1-9]|1[0-2])$/',
+            'tpinscestab' => '/^(1|4)$/',
+            'nrinscestab' => '/^[0-9]{12}|[0-9]{14}$/',
+        ];
+        $std = self::propertiesToLower($std);
+        if (!empty($std->cpfbenef)) {
+            $required['cpfbenef'] = '/^[0-9]{11}$/';
+        }
+        $val = self::validateConsultData($required, $std);
+        if (!$val['status']) {
+            $message = implode("\n", $val['errors']);
+            throw new \RuntimeException('Campos foram passados com erro para a consulta. ' . $message);
+        }
+        $base = self::urlbase($std);
+        if (!empty($std->cpfbenef)) {
+            return "{$base}/{$std->perapur}/{$std->tpinscestab}/{$std->nrinscestab}/{$std->cpfbenef}";
+        }
+        return "{$std->baseurl}/R4020/semCpfBeneficiario/{$std->tpinsc}/{$std->nrinsc}/{$std->perapur}"
+            . "/{$std->tpinscestab}/{$std->nrinscestab}";
+    }
+
+    /**
+     * GET R4040 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR4040(stdClass $std): string
+    {
+        $required = [
+            'perapur' => '/^20([0-9][0-9])-(0[1-9]|1[0-2])$/',
+            'tpinscestab' => '/^(1|4)$/',
+            'nrinscestab' => '/^[0-9]{12}|[0-9]{14}$/',
+        ];
+        return self::complement($required, $std);
+    }
+
+    /**
+     * GET R4080 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR4080(stdClass $std): string
+    {
+        $required = [
+            'perapur' => '/^20([0-9][0-9])-(0[1-9]|1[0-2])$/',
+            'tpinscestab' => '/^(1|4)$/',
+            'nrinscestab' => '/^[0-9]{12}|[0-9]{14}$/',
+            'cnpjfonte' => '/^[0-9]{14}$/',
+        ];
+        return self::complement($required, $std);
+    }
+
+    /**
+     * GET R4099 Assincrona
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlR4099(stdClass $std): string
+    {
+        $required = [
+            'perapur' => '/^20([0-9][0-9])-(0[1-9]|1[0-2])$/',
+        ];
+        return self::complement($required, $std);
+    }
+
+    /**
+     * Monta a URL basica
+     * @param stdClass $std
+     * @return string
+     */
+    private static function urlbase(stdClass $std): string
+    {
+        return "{$std->baseurl}/R{$std->evento}/{$std->tpinsc}/{$std->nrinsc}";
+    }
+
+    /**
+     * Monta a URL completa, com os campos adicionais
+     * @param array $required
+     * @param stdClass $std
+     * @return false|string
+     */
+    private static function complement(array $required, stdClass $std)
+    {
+        $std = self::propertiesToLower($std);
+        $val = self::validateConsultData($required, $std);
+        if (!$val['status']) {
+            $message = implode("\n", $val['errors']);
+            throw new \RuntimeException('Campos foram passados com erro para a consulta. ' . $message);
+        }
+        $base = self::urlbase($std);
+        $compl = "$base/";
+        foreach ($required as $key => $regex) {
+            $compl .= $std->$key . '/';
+        }
+        return substr($compl, 0, strlen($compl)-1);
     }
 }
