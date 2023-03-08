@@ -48,7 +48,7 @@ class SoapCurl extends SoapBase implements SoapInterface
         string $url,
         string $action,
         string $envelope,
-        string $parameters
+        array $parameters
     ): string {
         $response = '';
         $this->requestHead = implode("\n", $parameters);
