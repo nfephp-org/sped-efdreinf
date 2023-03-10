@@ -26,6 +26,7 @@ class Tools
     const EVT_INICIAIS = 1;
     const EVT_NAO_PERIODICOS = 2;
     const EVT_PERIODICOS = 3;
+    const EVT_FINAIS = 4;
 
     /**
      * @var string
