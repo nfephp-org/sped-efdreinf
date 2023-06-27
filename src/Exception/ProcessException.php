@@ -19,7 +19,8 @@ use NFePHP\EFDReinf\Exception\ExceptionInterface;
 class ProcessException extends \InvalidArgumentException implements ExceptionInterface
 {
     public static $list = [
-        2000 => "Ultrapassado o número máximo de eventos por lote, você está tentando enviar {{msg}} eventos, consulte a documentação!",
+        2000 => "Ultrapassado o número máximo de eventos por lote, você está tentando enviar {{msg}} eventos"
+            . ", consulte a documentação!",
         2001 => "Não temos um certificado disponível!",
         2002 => "Não foi passado um evento válido.",
         2003 => "Não foi passada uma consulta válida",
