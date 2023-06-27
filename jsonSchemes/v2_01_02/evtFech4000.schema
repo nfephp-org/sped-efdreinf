@@ -1,0 +1,50 @@
+{
+    "title": "evtFech4000",
+    "type": "object",
+    "properties": {
+        "sequencial": {
+            "required": false,
+            "type": ["integer","null"],
+            "minimum": 1,
+            "maximum": 99999
+        },
+        "perapur": {
+            "required": true,
+            "type": "string",
+            "pattern": "^20([0-9][0-9])-(0[1-9]|1[0-2])$"
+        },
+        "iderespinf": {
+            "required": false,
+            "type": ["object","null"],
+            "properties": {
+                "nmresp": {
+                    "required": true,
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 70
+                },
+                "cpfresp": {
+                    "required": true,
+                    "type": "string",
+                    "pattern": "^[0-9]{11}$"
+                },
+                "telefone": {
+                    "required": false,
+                    "type": ["string","null"],
+                    "pattern": "^[0-9 ()-]{1,13}$"
+                },
+                "email": {
+                    "required": false,
+                    "type": ["string","null"],
+                    "minLength": 5,
+                    "maxLength": 60
+                }
+            }
+        },
+        "fechret": {
+            "required": true,
+            "type": "string",
+            "pattern": "^(0|1)$"
+        }
+    }
+}

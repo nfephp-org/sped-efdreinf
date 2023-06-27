@@ -131,7 +131,12 @@ class EvtRetPF extends Factory implements FactoryInterface
             $this->std->idebenef->nmbenef ?? null,
             false
         );
-        
+        $this->dom->addChild(
+            $ideBenef,
+            "ideEvtAdic",
+            $this->std->idebenef->ideevtadic ?? null,
+            false
+        );
         if (!empty($this->std->idedep)) {
             foreach ($this->std->idedep as $dep) {
                 $ideDep = $this->dom->createElement('ideDep');
@@ -156,7 +161,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                 $ideBenef->appendChild($ideDep);
             }
         }
-            
+
         foreach ($this->std->idepgto as $pgto) {
             $idePgto = $this->dom->createElement('idePgto');
             $this->dom->addChild(
@@ -245,7 +250,19 @@ class EvtRetPF extends Factory implements FactoryInterface
                     $info->paisresidext ?? null,
                     false
                 );
-                
+                $this->dom->addChild(
+                    $infoPgto,
+                    "dtEscrCont",
+                    $info->dtescrcont ?? null,
+                    false
+                );
+                $this->dom->addChild(
+                    $infoPgto,
+                    "observ",
+                    $info->observ ?? null,
+                    false
+                );
+
                 if (!empty($this->detded)) {
                     foreach ($info->detded as $ded) {
                         $detDed = $this->dom->createElement('detDed');
@@ -298,7 +315,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                         $infoPgto->appendChild($detDed);
                     }
                 }
-                    
+
                 if (!empty($this->rendisento)) {
                     foreach ($info->rendisento as $isento) {
                         $rendIsento = $this->dom->createElement('rendIsento');
@@ -645,7 +662,7 @@ class EvtRetPF extends Factory implements FactoryInterface
             }
             $ideBenef->appendChild($idePgto);
         }
-        
+
         if (!empty($this->std->ideopsaude)) {
             foreach ($this->std->ideopsaude as $sau) {
                 $ideOpSaude = $this->dom->createElement('ideOpSaude');
@@ -742,7 +759,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                 $ideBenef->appendChild($ideOpSaude);
             }
         }
-            
+
         //finalização do xml
         $ideEstab->appendChild($ideBenef);
         $this->node->appendChild($ideEstab);

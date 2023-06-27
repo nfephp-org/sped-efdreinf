@@ -113,6 +113,12 @@ class EvtBenefNId extends Factory implements FactoryInterface
             $this->std->nrinscestab,
             true
         );
+        $this->dom->addChild(
+            $ideEstab,
+            "ideEvtAdic",
+            $this->std->ideevtadic ?? null,
+            false
+        );
         foreach ($this->std->idenat as $nat) {
             $ideNat = $this->dom->createElement("ideNat");
             $this->dom->addChild(
@@ -132,8 +138,8 @@ class EvtBenefNId extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoPgto,
                     "vlrLiq",
-                    self::format($pgto->vlrliq),
-                    true
+                    !empty($pgto->vlrliq) ? self::format($pgto->vlrliq) : null,
+                    false
                 );
                 $this->dom->addChild(
                     $infoPgto,
@@ -145,6 +151,12 @@ class EvtBenefNId extends Factory implements FactoryInterface
                     $infoPgto,
                     "vlrIR",
                     self::format($pgto->vlrir ?? null),
+                    false
+                );
+                $this->dom->addChild(
+                    $infoPgto,
+                    "dtEscrCont",
+                    $pgto->dtescrcont ?? null,
                     false
                 );
                 $this->dom->addChild(

@@ -1,18 +1,13 @@
 # sped-efdreinf
 
-## NOVA VERSÃO 2.1.1 ENTRA EM PRODUÇÃO EM MARÇO/2023
-
-A nova versão dos layouts v2.1.1 entra em vigor a partir da competência de março/2023, até fevereiro de 2023 deve ser utilizada a versão 1.5.1.
-
 >NOTA: o envio dos lotes passará a ser ASSINCRONO !!, e portanto serão necessárias DUAS operações "ENVIO DO LOTE" e posteriormente a "CONSULTA DO LOTE"
 
->NOTA: A versão 2.1.1 já está em testes, concomitantemente com a versão 1.5.1.
+>NOTA: a cada novo conjunto de XSD, são alterados os nomes nos arquivos XSD referentes a cada evento. CUIDADO ao atualizar verificar se podem ser localizados.
 
 ## NOVA VERSÃO 2.1.2 ENTRA EM PRODUÇÃO EM SETEMBRO/2023  
 
 ### Eventos com alteração de 2.1.1 para 2.1.2
 
-- R-1000
 - R-2030
 - R-4010
 - R-4020
@@ -24,7 +19,14 @@ A nova versão dos layouts v2.1.1 entra em vigor a partir da competência de mar
 - R-9015
 
 
-## Alterações na nova versão v2.1.1 
+## Alterações na nova versão v2.1.1
+
+## NOVA VERSÃO 2.1.1 ENTRA EM PRODUÇÃO EM MARÇO/2023
+
+>NOTA: A versão 2.1.1 já está em testes, concomitantemente com a versão 1.5.1.
+
+A nova versão dos layouts v2.1.1 entra em vigor a partir da competência de março/2023, até fevereiro de 2023 deve ser utilizada a versão 1.5.1.
+
 
 Vide [FALHAS](FALHAS.md)                       
 Vide [REGRAS](REGRAS.md)

@@ -141,8 +141,14 @@ class EvtRetPJ extends Factory implements FactoryInterface
         $this->dom->addChild(
             $ideBenef,
             "isenImun",
-            $this->std->idebenef->isenimun,
-            true
+            $this->std->idebenef->isenimun ?? null,
+            false
+        );
+        $this->dom->addChild(
+            $ideBenef,
+            "ideEvtAdic",
+            $this->std->idebenef->ideevtadic ?? null,
+            false
         );
         foreach ($this->std->idepgto as $pgto) {
             $idePgto = $this->dom->createElement('idePgto');
@@ -200,6 +206,18 @@ class EvtRetPJ extends Factory implements FactoryInterface
                     $infoPgto,
                     "paisResidExt",
                     $info->paisresidext ?? null,
+                    false
+                );
+                $this->dom->addChild(
+                    $infoPgto,
+                    "dtEscrCont",
+                    $info->dtescrcont ?? null,
+                    false
+                );
+                $this->dom->addChild(
+                    $infoPgto,
+                    "observ",
+                    $info->observ ?? null,
                     false
                 );
                 if (!empty($info->retencoes)) {
