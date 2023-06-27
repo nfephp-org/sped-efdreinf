@@ -177,13 +177,27 @@ abstract class Factory
             . ".schema"
         );
 
+        $this->schema = null;
+        $schema = dirname(dirname(__DIR__)) . "/schemes/$this->layoutStr/";
+        if (is_dir($schema)) {
+            $file = $schema . $this->evtName . "-" . $this->layoutStr . ".xsd";
+            if (!is_file($file)) {
+                $file = $schema . $this->evtAlias . "-" . $this->evtName . "-" . $this->layoutStr . "-" . ".xsd";
+                if (is_file($file)) {
+                    $this->schema = $file;
+                }
+            } else {
+                $this->schema = $file;
+            }
+        }
+        /*
         $this->schema = realpath(
             __DIR__
             . "/../../schemes/$this->layoutStr/"
             . $this->evtName
             . "-" . $this->layoutStr
             . ".xsd"
-        );
+        );*/
         $this->decimalSeparator = ',';
         //convert all data fields to lower case
         $this->std = $this->propertiesToLower($std);

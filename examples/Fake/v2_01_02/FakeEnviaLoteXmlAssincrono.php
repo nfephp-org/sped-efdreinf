@@ -11,9 +11,9 @@ use NFePHP\EFDReinf\Common\Restful\RestFake;
 use NFePHP\EFDReinf\Event;
 
 $config = [
-    'tpAmb' => 1, //tipo de ambiente 1 - Produção; 2 - Produção restrita
-    'verProc' => '0_2_1_1', //Versão do processo de emissão do evento. Informar a versão do aplicativo emissor do evento.
-    'eventoVersion' => '2_01_01', //versão do layout do evento
+    'tpAmb' => 2, //tipo de ambiente 1 - Produção; 2 - Produção restrita
+    'verProc' => '0_2_1_2', //Versão do processo de emissão do evento. Informar a versão do aplicativo emissor do evento.
+    'eventoVersion' => '2_01_02', //versão do layout do evento
     'serviceVersion' => '1_00_00',//versão do webservice
     'contribuinte' => [
         //'admPublica' => false, //campo Opcional, deve ser true apenas se natureza
@@ -81,9 +81,32 @@ try {
     $std->infocadastro->infoefr->ideefr = 'N';
     $std->infocadastro->infoefr->cnpjefr = '12345678901234';
 
-    $evento = Event::evtInfoContri($configJson, $std);
+    $xml = Event::evtInfoContri(
+        $configJson,
+        $std,
+        $certificate
+    )->toXml();
 
-    $response = $tools->enviaLoteAssincrono($tools::EVT_INICIAIS, [$evento]);
+    $axml[] = $xml;
+
+    /*
+    $std = new \stdClass();
+    //$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
+    $std->tpevento = 'R-2010'; //R-2010 a R-2070 e R-3010
+    //$std->nrrecevt = '121212-23-1245-55555-125498787888858552';
+    $std->nrrecevt = '30795-08-2010-1805-30795';
+    $std->perapur = '2017-11';
+
+    //cria o evento e retorna o XML assinado
+    $xml = Event::evtExclusao(
+        $configJson,
+        $std,
+        $certificate
+    )->toXml();
+
+    $axml[] = $xml;
+    */
+    $response = $tools->enviaLoteXmlAssincrono($tools::EVT_INICIAIS, $axml);
 
     //retorna os dados que serão usados na conexão para conferência
     echo FakePretty::prettyPrint($response, '');
