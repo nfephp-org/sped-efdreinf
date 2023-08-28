@@ -547,12 +547,8 @@ $jsonSchema = '{
                                                 },
                                                 "telef": {
                                                     "required": false,
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ],
-                                                    "minLength": 8,
-                                                    "maxLength": 15
+                                                    "type": ["string","null"],
+                                                    "pattern": "^[0-9]{0,15}$"
                                                 }
                                             }
                                         }

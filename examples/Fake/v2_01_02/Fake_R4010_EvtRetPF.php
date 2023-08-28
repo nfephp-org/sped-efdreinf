@@ -107,7 +107,7 @@ $std->idepgto[0]->infopgto[0]->infoRRA->tpProcRRA = '1';
 $std->idepgto[0]->infopgto[0]->infoRRA->nrProcRRA = '122344';
 $std->idepgto[0]->infopgto[0]->infoRRA->indOrigRec = '1';
 $std->idepgto[0]->infopgto[0]->infoRRA->descRRA = 'bla bla bla';
-$std->idepgto[0]->infopgto[0]->infoRRA->qtdMesesRRA = 6.0;
+$std->idepgto[0]->infopgto[0]->infoRRA->qtdMesesRRA = 123;
 $std->idepgto[0]->infopgto[0]->infoRRA->cnpjOrigRecurso = '12345678901234';
 
 $std->idepgto[0]->infopgto[0]->infoRRA->despProcJud = new stdclass();
