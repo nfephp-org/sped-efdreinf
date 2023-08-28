@@ -30,7 +30,7 @@ $jsonSchema = '{
         "nrproc": {
             "required": true,
             "type": "string",
-            "maxLength": 21
+            "pattern": "^[0-9]{1,21}$"
         },
         "inivalid": {
             "required": true,
@@ -127,7 +127,7 @@ $jsonSchema = '{
 $std = new \stdClass();
 $std->sequencial = 1;
 $std->tpproc = 1;
-$std->nrproc = 'apc123455678';
+$std->nrproc = '123455678';
 $std->inivalid = '2017-11';
 $std->fimvalid = null;
 $std->indautoria = 1;

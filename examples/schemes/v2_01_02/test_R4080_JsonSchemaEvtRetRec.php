@@ -30,7 +30,7 @@ $jsonSchema = '{
         "nrrecibo": {
             "required": false,
             "type": ["string", "null"],
-            "pattern": "^[0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4,6}[-][0-9]{1,18}$"
+            "pattern": "^[0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18}$"
         },
         "perapur": {
             "required": true,
@@ -149,7 +149,7 @@ $jsonSchema = '{
 $std = new \stdClass();
 //$std->sequencial = 1; //Opcional se não informado será gerado automaticamente
 $std->indretif = 2;
-$std->nrrecibo = '1-12-1234-123456-123456576';
+$std->nrrecibo = '1-12-1234-1234-123456576';
 $std->perapur = '2017-11';
 
 $std->tpinscestab = "1"; //Opcional FIXO tipo de inscrição do estabelecimento contratante dos serviços: 1 - CNPJ;

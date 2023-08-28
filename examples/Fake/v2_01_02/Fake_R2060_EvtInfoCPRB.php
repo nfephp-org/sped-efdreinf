@@ -55,7 +55,7 @@ $std->tipocod[0]->tipoajuste[0]->dtajuste = '2017-10';
 
 $std->tipocod[0]->infoproc[0] = new \stdClass();
 $std->tipocod[0]->infoproc[0]->tpproc = 1;
-$std->tipocod[0]->infoproc[0]->nrproc = 'ABC21';
+$std->tipocod[0]->infoproc[0]->nrproc = '21';
 $std->tipocod[0]->infoproc[0]->codsusp = '12345678901234';
 $std->tipocod[0]->infoproc[0]->vlrcprbsusp = 200.00;
 

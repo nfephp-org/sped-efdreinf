@@ -182,7 +182,7 @@ abstract class Factory
         if (is_dir($schema)) {
             $file = $schema . $this->evtName . "-" . $this->layoutStr . ".xsd";
             if (!is_file($file)) {
-                $file = $schema . $this->evtAlias . "-" . $this->evtName . "-" . $this->layoutStr . "-" . ".xsd";
+                $file = $schema . $this->evtAlias . "-" . $this->evtName . "-" . $this->layoutStr . "_B" . ".xsd";
                 if (is_file($file)) {
                     $this->schema = $file;
                 }
@@ -190,14 +190,6 @@ abstract class Factory
                 $this->schema = $file;
             }
         }
-        /*
-        $this->schema = realpath(
-            __DIR__
-            . "/../../schemes/$this->layoutStr/"
-            . $this->evtName
-            . "-" . $this->layoutStr
-            . ".xsd"
-        );*/
         $this->decimalSeparator = ',';
         //convert all data fields to lower case
         $this->std = $this->propertiesToLower($std);
