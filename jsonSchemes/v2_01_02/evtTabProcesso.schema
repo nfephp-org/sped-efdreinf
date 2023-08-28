@@ -17,7 +17,7 @@
         "nrproc": {
             "required": true,
             "type": "string",
-            "maxLength": 21
+            "pattern": "^[0-9]{1,21}$"
         },
         "inivalid": {
             "required": true,

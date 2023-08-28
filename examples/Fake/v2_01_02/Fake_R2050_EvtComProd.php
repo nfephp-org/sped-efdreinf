@@ -48,7 +48,7 @@ $std->tipocom[0]->vlrrecbruta = 200;
 
 $std->tipocom[0]->infoproc[0] = new \stdClass();
 $std->tipocom[0]->infoproc[0]->tpproc = 1;
-$std->tipocom[0]->infoproc[0]->nrproc = 'ABC21';
+$std->tipocom[0]->infoproc[0]->nrproc = '21';
 $std->tipocom[0]->infoproc[0]->codsusp = '12345678901234';
 $std->tipocom[0]->infoproc[0]->vlrcpsusp = 100;
 $std->tipocom[0]->infoproc[0]->vlrratsusp = 200;

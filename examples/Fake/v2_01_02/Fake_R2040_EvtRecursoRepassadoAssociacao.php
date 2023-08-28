@@ -50,7 +50,7 @@ $std->recursosrep[0]->inforecurso[0]->vlrretapur = 500.99;
 
 $std->recursosrep[0]->infoproc[0] = new \stdClass();
 $std->recursosrep[0]->infoproc[0]->tpproc = 1;
-$std->recursosrep[0]->infoproc[0]->nrproc = 'ABC21';
+$std->recursosrep[0]->infoproc[0]->nrproc = '21';
 $std->recursosrep[0]->infoproc[0]->codsusp = '12345678901234';
 $std->recursosrep[0]->infoproc[0]->vlrnret = 1000.66;
 

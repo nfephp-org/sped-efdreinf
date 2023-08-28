@@ -35,7 +35,7 @@ $jsonSchema = '{
         "nrrecibo": {
             "required": false,
             "type": ["string","null"],
-            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18})$"
+            "pattern": "^[0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18}$"
         },
         "natjur": {
             "required": false,
@@ -255,7 +255,7 @@ $jsonSchema = '{
                                     "tpisencao": {
                                         "required": true,
                                         "type": "string",
-                                        "pattern": "^([1-9]{1}|99)$"
+                                        "pattern": "^(1|2|3|4|5|6|7|8|10|11|99)$"
                                     },
                                     "vlrisento": {
                                         "required": true,
@@ -576,8 +576,7 @@ $jsonSchema = '{
                                         "telef": {
                                             "required": false,
                                             "type": ["string","null"],
-                                            "minLength": 8,
-                                            "maxLength": 15
+                                            "pattern": "^[0-9]{0,15}$"
                                         }
                                     }
                                 }

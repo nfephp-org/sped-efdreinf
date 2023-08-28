@@ -30,7 +30,7 @@ $jsonSchema = '{
         "nrrecibo": {
             "required": false,
             "type": ["string","null"],
-            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18})$"
+            "pattern": "^[0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18}$"
         },
         "perapur": {
             "required": true,
@@ -127,8 +127,7 @@ $jsonSchema = '{
                                 "nrproc": {
                                     "required": true,
                                     "type": "string",
-                                    "minLength": 1,
-                                    "maxLength": 21
+                                    "pattern": "^[0-9]{1,21}$"
                                 },
                                 "codsusp": {
                                     "required": false,
@@ -173,7 +172,7 @@ $std->recursosrec[0]->inforecurso[0]->vlrretapur = 500.00;
 
 $std->recursosrec[0]->infoproc[0] = new \stdClass();
 $std->recursosrec[0]->infoproc[0]->tpproc = 1;
-$std->recursosrec[0]->infoproc[0]->nrproc = 'ABC21';
+$std->recursosrec[0]->infoproc[0]->nrproc = '21';
 $std->recursosrec[0]->infoproc[0]->codsusp = '12345678901234';
 $std->recursosrec[0]->infoproc[0]->vlrnret = 1000.66;
 

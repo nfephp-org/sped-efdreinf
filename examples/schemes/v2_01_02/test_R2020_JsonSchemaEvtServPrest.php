@@ -30,7 +30,7 @@ $jsonSchema = '{
         "nrrecibo": {
             "required": false,
             "type": ["string","null"],
-            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18})$"
+            "pattern": "^[0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18}$"
         },
         "perapur": {
             "required": true,
@@ -191,8 +191,7 @@ $jsonSchema = '{
                     "nrprocretprinc": {
                         "required": true,
                         "type": "string",
-                        "minLength": 1,
-                        "maxLength": 21
+                        "pattern": "^[0-9]{1,21}$"
                     },
                     "codsuspprinc": {
                         "required": false,
@@ -224,8 +223,7 @@ $jsonSchema = '{
                     "nrprocretadic": {
                         "required": true,
                         "type": "string",
-                        "minLength": 1,
-                        "maxLength": 21
+                        "pattern": "^[0-9]{1,21}$"
                     },
                     "codsuspadic": {
                         "required": false,
@@ -281,13 +279,13 @@ $std->nfs[0]->infotpserv[0]->vlrnretadic = 1.55;
 
 $std->infoprocretpr[0] = new \stdClass();
 $std->infoprocretpr[0]->tpprocretprinc = 1;
-$std->infoprocretpr[0]->nrprocretprinc = 'ZYX987';
+$std->infoprocretpr[0]->nrprocretprinc = '987';
 $std->infoprocretpr[0]->codsuspprinc = '12345678901234';
 $std->infoprocretpr[0]->valorprinc = 200.98;
 
 $std->infoprocretad[0] = new \stdClass();
 $std->infoprocretad[0]->tpprocretadic = 1;
-$std->infoprocretad[0]->nrprocretadic = 'ACB21';
+$std->infoprocretad[0]->nrprocretadic = '21';
 $std->infoprocretad[0]->codsuspadic = '12345678901234';
 $std->infoprocretad[0]->valoradic = 1000.23;
 

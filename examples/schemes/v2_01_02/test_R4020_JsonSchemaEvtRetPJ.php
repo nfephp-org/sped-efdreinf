@@ -30,7 +30,7 @@ $jsonSchema = '{
         "nrrecibo": {
             "required": false,
             "type": ["string","null"],
-            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18})$"
+            "pattern": "^[0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18}$"
         },
         "perapur": {
             "required": true,
@@ -547,12 +547,8 @@ $jsonSchema = '{
                                                 },
                                                 "telef": {
                                                     "required": false,
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ],
-                                                    "minLength": 8,
-                                                    "maxLength": 15
+                                                    "type": ["string","null"],
+                                                    "pattern": "^[0-9]{0,15}$"
                                                 }
                                             }
                                         }
