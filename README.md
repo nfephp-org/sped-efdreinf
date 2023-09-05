@@ -1,12 +1,32 @@
-# sped-efdreinf (versão 1.0 - layout 1.5.1)
+# sped-efdreinf
 
-## NOVA VERSÃO ENTRA EM OPERAÇÃO EM MARÇO/2023
+>NOTA: o envio dos lotes passará a ser ASSINCRONO !!, e portanto serão necessárias DUAS operações "ENVIO DO LOTE" e posteriormente a "CONSULTA DO LOTE"
+
+>NOTA: a cada novo conjunto de XSD, são alterados os nomes nos arquivos XSD referentes a cada evento. CUIDADO ao atualizar verificar se podem ser localizados.
+
+## NOVA VERSÃO 2.1.2 ENTRA EM PRODUÇÃO EM SETEMBRO/2023  
+
+### Eventos com alteração de 2.1.1 para 2.1.2
+
+- R-2030
+- R-4010
+- R-4020
+- R-4040
+- R-4080
+- R-9001
+- R-9005
+- R-9011
+- R-9015
+
+
+## Alterações na nova versão v2.1.1
+
+## NOVA VERSÃO 2.1.1 ENTRA EM PRODUÇÃO EM MARÇO/2023
+
+>NOTA: A versão 2.1.1 já está em testes, concomitantemente com a versão 1.5.1.
 
 A nova versão dos layouts v2.1.1 entra em vigor a partir da competência de março/2023, até fevereiro de 2023 deve ser utilizada a versão 1.5.1.
 
-> NOTA: já está em andamento as alterações e inclusões para suportar a nova versão, concomitantemente com a versão 1.5.1.
-
-## Alterações na nova versão v2.1.1 
 
 Vide [FALHAS](FALHAS.md)                       
 Vide [REGRAS](REGRAS.md)
@@ -30,8 +50,6 @@ Vide [REGRAS](REGRAS.md)
 
 [![Latest Stable Version][ico-stable]][link-packagist]
 [![Build Status][ico-travis]][link-travis]
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![License][ico-license]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
@@ -125,8 +143,6 @@ Este pacote está diponibilizado sob LGPLv3 ou MIT License (MIT). Leia  [Arquivo
 [ico-forks]: https://img.shields.io/github/forks/nfephp-org/sped-efdreinf.svg?style=flat-square
 [ico-issues]: https://img.shields.io/github/issues/nfephp-org/sped-efdreinf.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/nfephp-org/sped-efdreinf/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/nfephp-org/sped-efdreinf.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/nfephp-org/sped-efdreinf.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/nfephp-org/sped-efdreinf.svg?style=flat-square
 [ico-version]: https://img.shields.io/packagist/v/nfephp-org/sped-efdreinf.svg?style=flat-square
 [ico-license]: https://poser.pugx.org/nfephp-org/nfephp/license.svg?style=flat-square
@@ -134,8 +150,6 @@ Este pacote está diponibilizado sob LGPLv3 ou MIT License (MIT). Leia  [Arquivo
 
 [link-packagist]: https://packagist.org/packages/nfephp-org/sped-efdreinf
 [link-travis]: https://travis-ci.org/nfephp-org/sped-efdreinf
-[link-scrutinizer]: https://scrutinizer-ci.com/g/nfephp-org/sped-efdreinf/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/nfephp-org/sped-efdreinf
 [link-downloads]: https://packagist.org/packages/nfephp-org/sped-efdreinf
 [link-author]: https://github.com/nfephp-org
 [link-issues]: https://github.com/nfephp-org/sped-efdreinf/issues

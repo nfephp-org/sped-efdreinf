@@ -1,0 +1,155 @@
+{
+    "title": "evtCPRB",
+    "type": "object",
+    "properties": {
+        "sequencial": {
+            "required": false,
+            "type": ["integer","null"],
+            "minimum": 1,
+            "maximum": 99999
+        },
+        "indretif": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2
+        },
+        "nrrecibo": {
+            "required": false,
+            "type": ["string","null"],
+            "pattern": "^[0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18}$"
+        },
+        "perapur": {
+            "required": true,
+            "type": "string",
+            "pattern": "^20([0-9][0-9])-(0[1-9]|1[0-2])$"
+        },
+        "tpinscestab": {
+            "required": true,
+            "type": "string",
+            "pattern": "^(1|4)$"
+        },
+        "nrinscestab": {
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]{12}|[0-9]{14}$"
+        },
+        "vlrrecbrutatotal": {
+            "required": true,
+            "type": "number",
+            "multipleOf": 0.01
+        },
+        "vlrcpapurtotal": {
+            "required": true,
+            "type": "number"
+        },
+        "vlrcprbsusptotal": {
+            "required": true,
+            "type": "number"
+        },
+        "tipocod": {
+            "required": true,
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 500,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "codativecon": {
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[0-9]{8}$"
+                    },
+                    "vlrrecbrutaativ": {
+                        "required": true,
+                        "type": "number"
+                    },
+                    "vlrexcrecbruta": {
+                        "required": true,
+                        "type": "number"
+                    },
+                    "vlradicrecbruta": {
+                        "required": true,
+                        "type": "number"
+                    },
+                    "vlrbccprb": {
+                        "required": true,
+                        "type": "number"
+                    },
+                    "vlrcprbapur": {
+                        "required": false,
+                        "type": "number"
+                    },
+                    "tipoajuste": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "tpajuste": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 1
+                                },
+                                "codajuste": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 11
+                                },
+                                "vlrajuste": {
+                                    "required": true,
+                                    "type": "number"
+                                },
+                                "descajuste": {
+                                    "required": true,
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 20
+                                },
+                                "dtajuste": {
+                                    "required": true,
+                                    "type": "string",
+                                    "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])$"
+                                }
+                            }
+                        }
+                    },
+                    "infproc": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
+                        "maxItems": 50,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "tpproc": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 2
+                                },
+                                "nrproc": {
+                                    "required": true,
+                                    "type": "string",
+                                    "pattern": "^[0-9]{1,21}$"
+                                },
+                                "codsusp": {
+                                    "required": false,
+                                    "type": ["string","null"],
+                                    "pattern": "^[0-9]{14}$"
+                                },
+                                "vlrcprbsusp": {
+                                    "required": true,
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

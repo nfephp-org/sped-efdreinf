@@ -17,9 +17,7 @@ namespace NFePHP\EFDReinf\Factories;
 
 use NFePHP\EFDReinf\Common\Factory;
 use NFePHP\EFDReinf\Common\FactoryInterface;
-use NFePHP\EFDReinf\Common\FactoryId;
 use NFePHP\Common\Certificate;
-use NFePHP\Common\Strings;
 use NFePHP\EFDReinf\Factories\Traits\FormatNumber;
 use stdClass;
 
@@ -129,32 +127,41 @@ class EvtRetPF extends Factory implements FactoryInterface
         );
         $this->dom->addChild(
             $ideBenef,
-            "nmfBenef",
+            "nmBenef",
             $this->std->idebenef->nmbenef ?? null,
             false
         );
-        foreach ($this->std->idedep as $dep) {
-            $ideDep = $this->dom->createElement('ideDep');
-            $this->dom->addChild(
-                $ideDep,
-                "cpfDep",
-                $dep->cpfdep,
-                true
-            );
-            $this->dom->addChild(
-                $ideDep,
-                "relDep",
-                $dep->reldep,
-                true
-            );
-            $this->dom->addChild(
-                $ideDep,
-                "descrDep",
-                $dep->descrdep ?? null,
-                false
-            );
-            $ideBenef->appendChild($ideDep);
+        $this->dom->addChild(
+            $ideBenef,
+            "ideEvtAdic",
+            $this->std->idebenef->ideevtadic ?? null,
+            false
+        );
+        if (!empty($this->std->idedep)) {
+            foreach ($this->std->idedep as $dep) {
+                $ideDep = $this->dom->createElement('ideDep');
+                $this->dom->addChild(
+                    $ideDep,
+                    "cpfDep",
+                    $dep->cpfdep,
+                    true
+                );
+                $this->dom->addChild(
+                    $ideDep,
+                    "relDep",
+                    $dep->reldep,
+                    true
+                );
+                $this->dom->addChild(
+                    $ideDep,
+                    "descrDep",
+                    $dep->descdep ?? null,
+                    false
+                );
+                $ideBenef->appendChild($ideDep);
+            }
         }
+
         foreach ($this->std->idepgto as $pgto) {
             $idePgto = $this->dom->createElement('idePgto');
             $this->dom->addChild(
@@ -228,7 +235,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoPgto,
                     "percSCP",
-                    !empty($info->percscp) ? $info->percscp : null,
+                    !empty($info->percscp) ? self::format($info->percscp, 1) : null,
                     false
                 );
                 $this->dom->addChild(
@@ -243,168 +250,190 @@ class EvtRetPF extends Factory implements FactoryInterface
                     $info->paisresidext ?? null,
                     false
                 );
-                foreach ($info->detded as $ded) {
-                    $detDed = $this->dom->createElement('detDed');
-                    $this->dom->addChild(
-                        $detDed,
-                        "indTpDeducao",
-                        $ded->indtpdeducao,
-                        true
-                    );
-                    $this->dom->addChild(
-                        $detDed,
-                        "vlrDeducao",
-                        self::format($ded->vlrdeducao),
-                        true
-                    );
-                    $this->dom->addChild(
-                        $detDed,
-                        "infoEntid",
-                        $ded->infoentid ?? null,
-                        false
-                    );
-                    $this->dom->addChild(
-                        $detDed,
-                        "nrInscPrevComp",
-                        $ded->nrinscprevcomp ?? null,
-                        false
-                    );
-                    $this->dom->addChild(
-                        $detDed,
-                        "vlrPatrocFunp",
-                        self::format($ded->vlrpatrocfunp),
-                        false
-                    );
-                    foreach ($ded->benefpen as $pen) {
-                        $benefPen = $this->dom->createElement('benefPen');
+                $this->dom->addChild(
+                    $infoPgto,
+                    "dtEscrCont",
+                    $info->dtescrcont ?? null,
+                    false
+                );
+                $this->dom->addChild(
+                    $infoPgto,
+                    "observ",
+                    $info->observ ?? null,
+                    false
+                );
+
+                if (!empty($this->detded)) {
+                    foreach ($info->detded as $ded) {
+                        $detDed = $this->dom->createElement('detDed');
                         $this->dom->addChild(
-                            $benefPen,
-                            "cpfDep",
-                            $pen->cpfdep,
-                            true
-                        );
-                        $this->dom->addChild(
-                            $benefPen,
-                            "cpfDep",
-                            self::format($pen->vlrdepen),
-                            true
-                        );
-                        $detDed->appendChild($benefPen);
-                    }
-                    $infoPgto->appendChild($detDed);
-                }
-                foreach ($info->rendisento as $isento) {
-                    $rendIsento = $this->dom->createElement('rendIsento');
-                    $this->dom->addChild(
-                        $rendIsento,
-                        "tpIsencao",
-                        $isento->tpisencao,
-                        true
-                    );
-                    $this->dom->addChild(
-                        $rendIsento,
-                        "vlrIsento",
-                        self::format($isento->vlrisento),
-                        true
-                    );
-                    $this->dom->addChild(
-                        $rendIsento,
-                        "descRendimento",
-                        $isento->descRendimento ?? null,
-                        false
-                    );
-                    $this->dom->addChild(
-                        $rendIsento,
-                        "dtLaudo",
-                        $isento->dtlaudo ?? null,
-                        false
-                    );
-                    $infoPgto->appendChild($rendIsento);
-                }
-                foreach ($info->infoprocret as $ret) {
-                    $infoProcRet = $this->dom->createElement('infoProcRet');
-                    $this->dom->addChild(
-                        $infoProcRet,
-                        "tpProcRet",
-                        $ret->tpprocret,
-                        true
-                    );
-                    $this->dom->addChild(
-                        $infoProcRet,
-                        "nrProcRet",
-                        $ret->nrprocret,
-                        true
-                    );
-                    $this->dom->addChild(
-                        $infoProcRet,
-                        "codSusp",
-                        $ret->codsusp ?? null,
-                        false
-                    );
-                    $this->dom->addChild(
-                        $infoProcRet,
-                        "vlrNRetido",
-                        self::format($ret->vlrnretido ?? null),
-                        false
-                    );
-                    $this->dom->addChild(
-                        $infoProcRet,
-                        "vlrDepJud",
-                        self::format($ret->vlrdepjud ?? null),
-                        false
-                    );
-                    $this->dom->addChild(
-                        $infoProcRet,
-                        "vlrCmpAnoCal",
-                        self::format($ret->vlrcmpanocal ?? null),
-                        false
-                    );
-                    $this->dom->addChild(
-                        $infoProcRet,
-                        "vlrCmpAnoAnt",
-                        self::format($ret->vlrcmpanoant ?? null),
-                        false
-                    );
-                    $this->dom->addChild(
-                        $infoProcRet,
-                        "vlrRendSusp",
-                        self::format($ret->vlrrendsusp ?? null),
-                        false
-                    );
-                    foreach ($ret->dedsusp as $susp) {
-                        $dedSusp = $this->dom->createElement('dedSusp');
-                        $this->dom->addChild(
-                            $dedSusp,
+                            $detDed,
                             "indTpDeducao",
-                            $susp->indtpdeducao,
+                            $ded->indtpdeducao,
                             true
                         );
                         $this->dom->addChild(
-                            $dedSusp,
-                            "vlrDedSusp",
-                            self::format($susp->vlrDedSusp ?? null),
+                            $detDed,
+                            "vlrDeducao",
+                            self::format($ded->vlrdeducao),
+                            true
+                        );
+                        $this->dom->addChild(
+                            $detDed,
+                            "infoEntid",
+                            $ded->infoentid ?? null,
                             false
                         );
-                        foreach ($susp->benefpen as $bpen) {
+                        $this->dom->addChild(
+                            $detDed,
+                            "nrInscPrevComp",
+                            $ded->nrinscprevcomp ?? null,
+                            false
+                        );
+                        $this->dom->addChild(
+                            $detDed,
+                            "vlrPatrocFunp",
+                            self::format($ded->vlrpatrocfunp),
+                            false
+                        );
+                        foreach ($ded->benefpen as $pen) {
                             $benefPen = $this->dom->createElement('benefPen');
                             $this->dom->addChild(
                                 $benefPen,
                                 "cpfDep",
-                                $bpen->cpfdep,
+                                $pen->cpfdep,
                                 true
                             );
                             $this->dom->addChild(
                                 $benefPen,
-                                "cpfDep",
-                                self::format($bpen->vlrdepensusp),
+                                "vlrDepen",
+                                self::format($pen->vlrdepen),
                                 true
                             );
-                            $dedSusp->appendChild($benefPen);
+                            $detDed->appendChild($benefPen);
                         }
-                        $infoProcRet->appendChild($dedSusp);
+                        $infoPgto->appendChild($detDed);
                     }
-                    $infoPgto->appendChild($infoProcRet);
                 }
+
+                if (!empty($this->rendisento)) {
+                    foreach ($info->rendisento as $isento) {
+                        $rendIsento = $this->dom->createElement('rendIsento');
+                        $this->dom->addChild(
+                            $rendIsento,
+                            "tpIsencao",
+                            $isento->tpisencao,
+                            true
+                        );
+                        $this->dom->addChild(
+                            $rendIsento,
+                            "vlrIsento",
+                            self::format($isento->vlrisento),
+                            true
+                        );
+                        $this->dom->addChild(
+                            $rendIsento,
+                            "descRendimento",
+                            $isento->descrendimento ?? null,
+                            false
+                        );
+                        $this->dom->addChild(
+                            $rendIsento,
+                            "dtLaudo",
+                            $isento->dtlaudo ?? null,
+                            false
+                        );
+                        $infoPgto->appendChild($rendIsento);
+                    }
+                }
+
+                if (!empty($this->infoprocret)) {
+                    foreach ($info->infoprocret as $ret) {
+                        $infoProcRet = $this->dom->createElement('infoProcRet');
+                        $this->dom->addChild(
+                            $infoProcRet,
+                            "tpProcRet",
+                            $ret->tpprocret,
+                            true
+                        );
+                        $this->dom->addChild(
+                            $infoProcRet,
+                            "nrProcRet",
+                            $ret->nrprocret,
+                            true
+                        );
+                        $this->dom->addChild(
+                            $infoProcRet,
+                            "codSusp",
+                            $ret->codsusp ?? null,
+                            false
+                        );
+                        $this->dom->addChild(
+                            $infoProcRet,
+                            "vlrNRetido",
+                            self::format($ret->vlrnretido ?? null),
+                            false
+                        );
+                        $this->dom->addChild(
+                            $infoProcRet,
+                            "vlrDepJud",
+                            self::format($ret->vlrdepjud ?? null),
+                            false
+                        );
+                        $this->dom->addChild(
+                            $infoProcRet,
+                            "vlrCmpAnoCal",
+                            self::format($ret->vlrcmpanocal ?? null),
+                            false
+                        );
+                        $this->dom->addChild(
+                            $infoProcRet,
+                            "vlrCmpAnoAnt",
+                            self::format($ret->vlrcmpanoant ?? null),
+                            false
+                        );
+                        $this->dom->addChild(
+                            $infoProcRet,
+                            "vlrRendSusp",
+                            self::format($ret->vlrrendsusp ?? null),
+                            false
+                        );
+                        foreach ($ret->dedsusp as $susp) {
+                            $dedSusp = $this->dom->createElement('dedSusp');
+                            $this->dom->addChild(
+                                $dedSusp,
+                                "indTpDeducao",
+                                $susp->indtpdeducao,
+                                true
+                            );
+                            $this->dom->addChild(
+                                $dedSusp,
+                                "vlrDedSusp",
+                                self::format($susp->vlrdedsusp ?? null),
+                                false
+                            );
+                            foreach ($susp->benefpen as $bpen) {
+                                $benefPen = $this->dom->createElement('benefPen');
+                                $this->dom->addChild(
+                                    $benefPen,
+                                    "cpfDep",
+                                    $bpen->cpfdep,
+                                    true
+                                );
+                                $this->dom->addChild(
+                                    $benefPen,
+                                    "vlrDepenSusp",
+                                    self::format($bpen->vlrdepensusp),
+                                    true
+                                );
+                                $dedSusp->appendChild($benefPen);
+                            }
+                            $infoProcRet->appendChild($dedSusp);
+                        }
+                        $infoPgto->appendChild($infoProcRet);
+                    }
+                }
+
                 if (!empty($info->inforra)) {
                     $rra = $info->inforra;
                     $infoRRA = $this->dom->createElement('infoRRA');
@@ -435,7 +464,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $infoRRA,
                         "qtdMesesRRA",
-                        $rra->qtdmesesrra,
+                        self::format($rra->qtdmesesrra, 1),
                         true
                     );
                     $this->dom->addChild(
@@ -633,104 +662,110 @@ class EvtRetPF extends Factory implements FactoryInterface
             }
             $ideBenef->appendChild($idePgto);
         }
-        foreach ($this->std->ideopsaude as $sau) {
-            $ideOpSaude = $this->dom->createElement('ideOpSaude');
-            $this->dom->addChild(
-                $ideOpSaude,
-                "nrInsc",
-                $sau->nrinsc,
-                true
-            );
-            $this->dom->addChild(
-                $ideOpSaude,
-                "regANS",
-                $sau->regans ?? null,
-                false
-            );
-            $this->dom->addChild(
-                $ideOpSaude,
-                "vlrSaude",
-                self::format($sau->vlrsaude),
-                true
-            );
-            foreach ($sau->inforeemb as $reem) {
-                $infoReemb = $this->dom->createElement('infoReemb');
+
+        if (!empty($this->std->ideopsaude)) {
+            foreach ($this->std->ideopsaude as $sau) {
+                $ideOpSaude = $this->dom->createElement('ideOpSaude');
                 $this->dom->addChild(
-                    $infoReemb,
-                    "tpInsc",
-                    $reem->tpinsc,
-                    true
-                );
-                $this->dom->addChild(
-                    $infoReemb,
+                    $ideOpSaude,
                     "nrInsc",
-                    $reem->nrinsc,
+                    $sau->nrinsc,
                     true
                 );
                 $this->dom->addChild(
-                    $infoReemb,
-                    "vlrReemb",
-                    self::format($reem->vlrreemb ?? null),
+                    $ideOpSaude,
+                    "regANS",
+                    $sau->regans ?? null,
                     false
                 );
                 $this->dom->addChild(
-                    $infoReemb,
-                    "vlrReembAnt",
-                    self::format($reem->vlrreembant ?? null),
-                    false
-                );
-                $ideOpSaude->appendChild($infoReemb);
-            }
-            foreach ($sau->infodependpl as $dpl) {
-                $infoDependPl = $this->dom->createElement('infoDependPl');
-                $this->dom->addChild(
-                    $infoDependPl,
-                    "cpfDep",
-                    $dpl->cpfdep,
-                    true
-                );
-                $this->dom->addChild(
-                    $infoDependPl,
+                    $ideOpSaude,
                     "vlrSaude",
-                    self::format($dpl->vlrsaude),
+                    self::format($sau->vlrsaude),
                     true
                 );
-                foreach ($dpl->inforeembdep as $reedep) {
-                    $infoReembDep = $this->dom->createElement('infoReembDep');
+                foreach ($sau->inforeemb as $reem) {
+                    $infoReemb = $this->dom->createElement('infoReemb');
                     $this->dom->addChild(
-                        $infoReembDep,
+                        $infoReemb,
                         "tpInsc",
-                        $reedep->tpinsc,
+                        $reem->tpinsc,
                         true
                     );
                     $this->dom->addChild(
-                        $infoReembDep,
+                        $infoReemb,
                         "nrInsc",
-                        $reedep->nrinsc,
+                        $reem->nrinsc,
                         true
                     );
                     $this->dom->addChild(
-                        $infoReembDep,
+                        $infoReemb,
                         "vlrReemb",
-                        self::format($reedep->vlrreemb ?? null),
+                        self::format($reem->vlrreemb ?? null),
                         false
                     );
                     $this->dom->addChild(
-                        $infoReembDep,
+                        $infoReemb,
                         "vlrReembAnt",
-                        self::format($reedep->vlrreembant ?? null),
+                        self::format($reem->vlrreembant ?? null),
                         false
                     );
-                    $infoDependPl->appendChild($infoReembDep);
+                    $ideOpSaude->appendChild($infoReemb);
                 }
-                $ideOpSaude->appendChild($infoDependPl);
+                foreach ($sau->infodependpl as $dpl) {
+                    $infoDependPl = $this->dom->createElement('infoDependPl');
+                    $this->dom->addChild(
+                        $infoDependPl,
+                        "cpfDep",
+                        $dpl->cpfdep,
+                        true
+                    );
+                    $this->dom->addChild(
+                        $infoDependPl,
+                        "vlrSaude",
+                        self::format($dpl->vlrsaude),
+                        true
+                    );
+                    foreach ($dpl->inforeembdep as $reedep) {
+                        $infoReembDep = $this->dom->createElement('infoReembDep');
+                        $this->dom->addChild(
+                            $infoReembDep,
+                            "tpInsc",
+                            $reedep->tpinsc,
+                            true
+                        );
+                        $this->dom->addChild(
+                            $infoReembDep,
+                            "nrInsc",
+                            $reedep->nrinsc,
+                            true
+                        );
+                        $this->dom->addChild(
+                            $infoReembDep,
+                            "vlrReemb",
+                            self::format($reedep->vlrreemb ?? null),
+                            false
+                        );
+                        $this->dom->addChild(
+                            $infoReembDep,
+                            "vlrReembAnt",
+                            self::format($reedep->vlrreembant ?? null),
+                            false
+                        );
+                        $infoDependPl->appendChild($infoReembDep);
+                    }
+                    $ideOpSaude->appendChild($infoDependPl);
+                }
+                $ideBenef->appendChild($ideOpSaude);
             }
-            $ideBenef->appendChild($ideOpSaude);
         }
+
         //finalização do xml
-        $this->node->appendChild($ideBenef);
+        $ideEstab->appendChild($ideBenef);
+        $this->node->appendChild($ideEstab);
+        //$this->node->appendChild($ideBenef);
         $this->reinf->appendChild($this->node);
-        $this->xml = $this->dom->saveXML($this->reinf);
-        //$this->sign($this->evtTag);
+        //$this->xml = $this->dom->saveXML($this->reinf);
+        $this->sign($this->evtTag);
     }
 }

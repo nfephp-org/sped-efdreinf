@@ -11,7 +11,7 @@ $config = [
     'tpAmb' => 2, //tipo de ambiente 1 - Produção; 2 - Produção restrita (homologação)
     'verProc' => '0_2_1_1', //Versão do processo de emissão do evento. Informar a versão do aplicativo emissor do evento.
     'eventoVersion' => '2_01_01', //versão do layout do evento
-    'serviceVersion' => '1_05_01', //versão do webservice
+    'serviceVersion' => '1_00_00', //versão do webservice
     'contribuinte' => [
         //'admPublica' => false, //campo Opcional, deve ser true apenas se natureza
         //jurídica do contribuinte declarante for de administração pública
@@ -51,7 +51,7 @@ $std->idepgto[0]->infopgto[0]->dtFG = '2022-07-15';
 $std->idepgto[0]->infopgto[0]->vlrBruto = 7834.45;
 $std->idepgto[0]->infopgto[0]->indFciScp = '1';
 $std->idepgto[0]->infopgto[0]->nrInscFciScp = '12345678901234';
-$std->idepgto[0]->infopgto[0]->percSCP = 20;
+$std->idepgto[0]->infopgto[0]->percscp = 2.0;
 $std->idepgto[0]->infopgto[0]->indJud = 'N';
 $std->idepgto[0]->infopgto[0]->paisResidExt = '169';
 
@@ -112,7 +112,7 @@ $std->idepgto[0]->infopgto[0]->infopgtoext->endExt->complem = 'SALA 100';
 $std->idepgto[0]->infopgto[0]->infopgtoext->endExt->bairro = 'bairro';
 $std->idepgto[0]->infopgto[0]->infopgtoext->endExt->cidade = 'cidade';
 $std->idepgto[0]->infopgto[0]->infopgtoext->endExt->estado = 'estado';
-$std->idepgto[0]->infopgto[0]->infopgtoext->endExt->codPostal = 'codPostal';
+$std->idepgto[0]->infopgto[0]->infopgtoext->endExt->codPostal = '1234';
 $std->idepgto[0]->infopgto[0]->infopgtoext->endExt->telef = '12345678901';
 
 /*
@@ -140,8 +140,8 @@ try {
         $certificate
     )->toXml();
 
-    //$xml = Event::r4010($configJson, $std, $certificate)->toXML();
-    //$json = Event::evtRetPF($configJson, $std, $certificate)->toJson();
+    //$xml = Event::r4020($configJson, $std, $certificate)->toXML();
+    //$json = Event::evtRetPJ($configJson, $std, $certificate)->toJson();
 
     header('Content-type: text/xml; charset=UTF-8');
     echo $xml;

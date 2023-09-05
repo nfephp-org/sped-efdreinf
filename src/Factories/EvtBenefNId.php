@@ -113,6 +113,12 @@ class EvtBenefNId extends Factory implements FactoryInterface
             $this->std->nrinscestab,
             true
         );
+        $this->dom->addChild(
+            $ideEstab,
+            "ideEvtAdic",
+            $this->std->ideevtadic ?? null,
+            false
+        );
         foreach ($this->std->idenat as $nat) {
             $ideNat = $this->dom->createElement("ideNat");
             $this->dom->addChild(
@@ -132,8 +138,8 @@ class EvtBenefNId extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoPgto,
                     "vlrLiq",
-                    self::format($pgto->vlrliq),
-                    true
+                    !empty($pgto->vlrliq) ? self::format($pgto->vlrliq) : null,
+                    false
                 );
                 $this->dom->addChild(
                     $infoPgto,
@@ -149,49 +155,57 @@ class EvtBenefNId extends Factory implements FactoryInterface
                 );
                 $this->dom->addChild(
                     $infoPgto,
+                    "dtEscrCont",
+                    $pgto->dtescrcont ?? null,
+                    false
+                );
+                $this->dom->addChild(
+                    $infoPgto,
                     "descr",
                     $pgto->descr,
                     true
                 );
-                foreach ($pgto->infoprocret as $ret) {
-                    $infoProcRet = $this->dom->createElement("infoProcRet");
-                    $this->dom->addChild(
-                        $infoProcRet,
-                        "tpProcRet",
-                        $ret->tpprocret,
-                        true
-                    );
-                    $this->dom->addChild(
-                        $infoProcRet,
-                        "nrProcRet",
-                        $ret->nrprocret,
-                        true
-                    );
-                    $this->dom->addChild(
-                        $infoProcRet,
-                        "codSusp",
-                        $ret->codsusp ?? null,
-                        false
-                    );
-                    $this->dom->addChild(
-                        $infoProcRet,
-                        "vlrBaseSuspIR",
-                        self::format($ret->vlrbasesuspir ?? null),
-                        false
-                    );
-                    $this->dom->addChild(
-                        $infoProcRet,
-                        "vlrNIR",
-                        self::format($ret->vlrnir ?? null),
-                        false
-                    );
-                    $this->dom->addChild(
-                        $infoProcRet,
-                        "vlrDepNIR",
-                        self::format($ret->vlrdepnir ?? null),
-                        false
-                    );
-                    $infoPgto->appendChild($infoProcRet);
+                if (!empty($pgto->infoprocret)) {
+                    foreach ($pgto->infoprocret as $ret) {
+                        $infoProcRet = $this->dom->createElement("infoProcRet");
+                        $this->dom->addChild(
+                            $infoProcRet,
+                            "tpProcRet",
+                            $ret->tpprocret,
+                            true
+                        );
+                        $this->dom->addChild(
+                            $infoProcRet,
+                            "nrProcRet",
+                            $ret->nrprocret,
+                            true
+                        );
+                        $this->dom->addChild(
+                            $infoProcRet,
+                            "codSusp",
+                            $ret->codsusp ?? null,
+                            false
+                        );
+                        $this->dom->addChild(
+                            $infoProcRet,
+                            "vlrBaseSuspIR",
+                            self::format($ret->vlrbasesuspir ?? null),
+                            false
+                        );
+                        $this->dom->addChild(
+                            $infoProcRet,
+                            "vlrNIR",
+                            self::format($ret->vlrnir ?? null),
+                            false
+                        );
+                        $this->dom->addChild(
+                            $infoProcRet,
+                            "vlrDepNIR",
+                            self::format($ret->vlrdepnir ?? null),
+                            false
+                        );
+                        $infoPgto->appendChild($infoProcRet);
+                    }
                 }
                 $ideNat->appendChild($infoPgto);
             }

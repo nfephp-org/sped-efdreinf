@@ -36,6 +36,7 @@ class Standardize
      */
     public $rootTagList = [
         'retornoLoteEventos',
+        'retornoLoteEventosAssincrono',
         'evtTotalContrib',
         'evtTotal',
         'loteEventos',

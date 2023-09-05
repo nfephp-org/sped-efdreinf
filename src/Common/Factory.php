@@ -17,7 +17,6 @@ namespace NFePHP\EFDReinf\Common;
 
 use DateTime;
 use DOMDocument;
-use DOMElement;
 use JsonSchema\Validator as JsonValid;
 use NFePHP\Common\Certificate;
 use NFePHP\Common\DOMImproved as Dom;
@@ -46,9 +45,9 @@ abstract class Factory
      */
     public $nmRazao;
     /**
-     * @var DateTime
+     * @var DateTime|null
      */
-    public $date;
+    public $date = null;
     /**
      * @var int
      */
@@ -126,7 +125,7 @@ abstract class Factory
      */
     protected $certificate;
     /**
-     * @var
+     * @var string
      */
     protected $config;
     /**
@@ -164,6 +163,10 @@ abstract class Factory
         $this->evtName = $params->evtName;
         $this->evtAlias = $params->evtAlias;
         $this->config = $stdConf;
+        $this->date = null;
+        if (!empty($date)) {
+            $this->date = DateTime::createFromFormat('Y-m-d H:i:s', $date);
+        }
         if (empty($std) || !is_object($std)) {
             throw EventsException::wrongArgument(1003, '');
         }
@@ -173,20 +176,21 @@ abstract class Factory
             . $this->evtName
             . ".schema"
         );
-        $this->schema = realpath(
-            __DIR__
-            . "/../../schemes/$this->layoutStr/"
-            . $this->evtName
-            . "-" . $this->layoutStr
-            . ".xsd"
-        );
-        if ($this->config->eventoVersion === '1_05_01') {
-            //na versão 1.5.1 os XSD exige numericos com virgula
-            $this->decimalSeparator = ',';
-        } else {
-            //na versão 2.1.1 os XSD exige numericos com ponto
-            $this->decimalSeparator = '.';
+
+        $this->schema = null;
+        $schema = dirname(dirname(__DIR__)) . "/schemes/$this->layoutStr/";
+        if (is_dir($schema)) {
+            $file = $schema . $this->evtName . "-" . $this->layoutStr . ".xsd";
+            if (!is_file($file)) {
+                $file = $schema . $this->evtAlias . "-" . $this->evtName . "-" . $this->layoutStr . "_B" . ".xsd";
+                if (is_file($file)) {
+                    $this->schema = $file;
+                }
+            } else {
+                $this->schema = $file;
+            }
         }
+        $this->decimalSeparator = ',';
         //convert all data fields to lower case
         $this->std = $this->propertiesToLower($std);
         //validate input data with schema
@@ -292,13 +296,15 @@ abstract class Factory
                 $this->std->sequencial ?? null
             );
             $this->node = $this->dom->createElement($this->evtTag);
+            $tagIDname = 'id';
+            /*
             if ($this->config->eventoVersion === '1_05_01') {
                 //na versão 1.5.1 o marcador ID está com letras minusculas
                 $tagIDname = 'id';
             } else {
                 //na versão 2.1.1 o marcador ID está com a primeira letra maiuscula
-                $tagIDname = 'Id';
-            }
+                $tagIDname = 'id';
+            }*/
             $att = $this->dom->createAttribute($tagIDname);
             $att->value = $this->evtid;
             $this->node->appendChild($att);
@@ -429,6 +435,7 @@ abstract class Factory
      */
     protected function sign($tagsigned = '')
     {
+        $tagIDname = 'id';
         $xml = $this->dom->saveXML($this->reinf);
         $xml = Strings::clearXmlString($xml);
         if (!empty($this->certificate)) {
@@ -436,11 +443,14 @@ abstract class Factory
                 $this->certificate,
                 $xml,
                 $tagsigned,
-                'id',
+                $tagIDname,
                 OPENSSL_ALGO_SHA256,
                 [true, false, null, null]
             );
             //validation by XSD schema throw Exception if dont pass
+            if (empty($this->schema)) {
+                throw new \Exception("XSD não localizado");
+            }
             if ($this->schema) {
                 Validator::isValid($xml, $this->schema);
             }

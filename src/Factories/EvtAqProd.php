@@ -92,12 +92,6 @@ class EvtAqProd extends Factory implements FactoryInterface
             $this->verProc,
             true
         );
-        $this->dom->addChild(
-            $ideEvento,
-            "retifS1250",
-            !empty($this->std->retifs1250) ? $this->std->retifs1250 : null,
-            false
-        );
         $this->node->insertBefore($ideEvento, $ideContri);
 
         $info = $this->dom->createElement("infoAquisProd");

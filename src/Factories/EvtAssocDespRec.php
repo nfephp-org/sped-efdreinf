@@ -132,8 +132,20 @@ class EvtAssocDespRec extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $recursosRec,
                 "cnpjOrigRecurso",
-                $r->cnpjorigrecurso,
-                true
+                $r->cnpjorigrecurso ?? null,
+                false
+            );
+            $this->dom->addChild(
+                $recursosRec,
+                "recEmprExt",
+                $r->recemprext ?? null,
+                false
+            );
+            $this->dom->addChild(
+                $recursosRec,
+                "nmEmprExt",
+                $r->nmemprext ?? null,
+                false
             );
             $this->dom->addChild(
                 $recursosRec,

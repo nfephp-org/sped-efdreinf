@@ -11,7 +11,7 @@ $config = [
     'tpAmb' => 2, //tipo de ambiente 1 - Produção; 2 - Produção restrita (homologação)
     'verProc' => '0_2_1_1', //Versão do processo de emissão do evento. Informar a versão do aplicativo emissor do evento.
     'eventoVersion' => '2_01_01', //versão do layout do evento
-    'serviceVersion' => '1_05_01', //versão do webservice
+    'serviceVersion' => '1_00_00', //versão do webservice
     'contribuinte' => [
         //'admPublica' => false, //campo Opcional, deve ser true apenas se natureza
         //jurídica do contribuinte declarante for de administração pública
@@ -102,7 +102,8 @@ try {
     $xml = Event::evtInfoContri(
         $configJson,
         $std,
-        $certificate
+        $certificate,
+        "2023-01-22 10:10:10" //para forçar um datetime especifico
     )->toXml();
 
     //$xml = Event::r1000($configJson, $std, $certificate)->toXML();

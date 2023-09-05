@@ -87,7 +87,7 @@ class EvtInfoContri extends Factory implements FactoryInterface
             true
         );
         if ($this->std->modo == 'INC') {
-            $this->std->fimvalid = null;
+           // $this->std->fimvalid = null;
         }
         $this->dom->addChild(
             $idePeriodo,

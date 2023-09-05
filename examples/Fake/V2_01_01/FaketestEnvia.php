@@ -4,7 +4,6 @@ ini_set('display_errors', 'On');
 require_once '../../../bootstrap.php';
 
 use NFePHP\Common\Certificate;
-use JsonSchema\Validator;
 use NFePHP\EFDReinf\Event;
 use NFePHP\EFDReinf\Tools;
 use NFePHP\EFDReinf\Common\FakePretty;

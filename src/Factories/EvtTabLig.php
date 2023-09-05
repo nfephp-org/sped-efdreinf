@@ -39,7 +39,7 @@ class EvtTabLig extends Factory implements FactoryInterface
         $data = ''
     ) {
         $params = new \stdClass();
-        $params->evtName = 'evt1050TabEntidadesLigadas';
+        $params->evtName = 'evt1050TabLig';
         $params->evtTag = 'evtTabLig';
         $params->evtAlias = 'R-1050';
         parent::__construct($config, $std, $params, $certificate, $data);
