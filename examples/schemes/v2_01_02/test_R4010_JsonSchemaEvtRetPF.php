@@ -331,7 +331,7 @@ $jsonSchema = '{
                                                 "indtpdeducao": {
                                                     "required": true,
                                                     "type": "string",
-                                                    "pattern": "^(1|2|3|4|5|7)$"
+                                                    "pattern": "^(1|2|3|4|5|7|8)$"
                                                 },
                                                 "vlrdedsusp": {
                                                     "required": false,
