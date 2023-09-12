@@ -152,12 +152,14 @@ class EvtRetPF extends Factory implements FactoryInterface
                     $dep->reldep,
                     true
                 );
-                $this->dom->addChild(
-                    $ideDep,
-                    "descrDep",
-                    $dep->descdep ?? null,
-                    false
-                );
+                if ($dep->reldep == 99) {
+                    $this->dom->addChild(
+                        $ideDep,
+                        "descrDep",
+                        $dep->descdep ?? null,
+                        true
+                    );
+                }
                 $ideBenef->appendChild($ideDep);
             }
         }
