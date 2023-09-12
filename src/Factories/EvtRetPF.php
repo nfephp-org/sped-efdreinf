@@ -349,7 +349,7 @@ class EvtRetPF extends Factory implements FactoryInterface
                     }
                 }
 
-                if (!empty($this->infoprocret)) {
+                if (!empty($info->infoprocret)) {
                     foreach ($info->infoprocret as $ret) {
                         $infoProcRet = $this->dom->createElement('infoProcRet');
                         $this->dom->addChild(
