@@ -43,6 +43,7 @@ class Tools extends ToolsBase
     const CONSULTA_R2098 = 10;
     const CONSULTA_R2099 = 11;
     const CONSULTA_R3010 = 12;
+    const CONSULTA_R4099 = 15;
     const CONSULTA_FECHAMENTO = 14;
 
     /**
@@ -217,6 +218,10 @@ class Tools extends ToolsBase
                 break;
             case 14:
                 $request = $this->consultFechamento($std);
+                break;
+            case 15:
+                $evt = 4099;
+                $request = $this->consultR409($evt, $std);
                 break;
             default:
                 throw ProcessException::wrongArgument(2003, '');
@@ -542,6 +547,36 @@ class Tools extends ToolsBase
      * @return string
      */
     protected function consultR209(int $evt, stdClass $std): string
+    {
+        $properties = [
+            'perapur' => [
+                'required' => false,
+                'type' => ['string', "null"],
+                'regex' => '^(19[0-9][0-9]|2[0-9][0-9][0-9])[-](0?[1-9]|1[0-2])$'
+            ],
+        ];
+        $this->validInputParameters($properties, $std);
+
+        $this->method = "ConsultaReciboEvento{$evt}";
+        $this->action = "{$this->namespace}ConsultasReinf/{$this->method}";
+        $request = "<sped:{$this->method}>"
+            . "<sped:tipoEvento>{$evt}</sped:tipoEvento>"
+            . "<sped:tpInsc>{$this->tpInsc}</sped:tpInsc>"
+            . "<sped:nrInsc>{$this->doc}</sped:nrInsc>";
+        if (!empty($std->perapur)) {
+            $request .= "<sped:perApur>{$std->perapur}</sped:perApur>";
+        }
+        $request .= "</sped:{$this->method}>";
+        return $request;
+    }
+
+    /**
+     * Consultation R4099
+     * @param integer $evt
+     * @param stdClass $std
+     * @return string
+     */
+    protected function consultR409(int $evt, stdClass $std): string
     {
         $properties = [
             'perapur' => [
