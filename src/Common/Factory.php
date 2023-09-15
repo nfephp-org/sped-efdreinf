@@ -182,9 +182,15 @@ abstract class Factory
         if (is_dir($schema)) {
             $file = $schema . $this->evtName . "-" . $this->layoutStr . ".xsd";
             if (!is_file($file)) {
-                $file = $schema . $this->evtAlias . "-" . $this->evtName . "-" . $this->layoutStr . "_B" . ".xsd";
-                if (is_file($file)) {
-                    $this->schema = $file;
+                $asc = 70; //procura por xsd atualizados com letras no final de F até A
+                while ($asc >= 65) {
+                    $letter = chr($asc);
+                    $file = $schema . $this->evtAlias . "-" . $this->evtName . "-" . $this->layoutStr . "_{$letter}" . ".xsd";
+                    if (is_file($file)) {
+                        $this->schema = $file;
+                        break;
+                    }
+                    $asc--;
                 }
             } else {
                 $this->schema = $file;
