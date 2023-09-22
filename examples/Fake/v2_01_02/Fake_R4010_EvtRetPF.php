@@ -44,8 +44,8 @@ $std->idebenef->ideevtadic = 'AB345678';
 
 $std->idedep[0] = new stdclass();
 $std->idedep[0]->cpfdep = '12345678901';
-$std->idedep[0]->reldep = '1';
-$std->idedep[0]->descdep = 'esposa';
+$std->idedep[0]->reldep = '99';
+$std->idedep[0]->descdep = 'irmao';
 
 $std->idepgto[0] = new stdclass();
 $std->idepgto[0]->natrend = '10001';
