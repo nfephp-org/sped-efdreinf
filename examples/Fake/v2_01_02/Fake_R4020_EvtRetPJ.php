@@ -59,16 +59,16 @@ $std->idepgto[0]->infopgto[0]->dtescrcont = '2022-03-03';
 $std->idepgto[0]->infopgto[0]->observ = 'Observações não sei para o que';
 
 $std->idepgto[0]->infopgto[0]->retencoes = new stdclass();
-$std->idepgto[0]->infopgto[0]->vlrBaseIR = 4324.56;
-$std->idepgto[0]->infopgto[0]->vlrIR = 400.33;
-$std->idepgto[0]->infopgto[0]->vlrBaseAgreg = 1000.00;
-$std->idepgto[0]->infopgto[0]->vlrAgreg = 1000.00;
-$std->idepgto[0]->infopgto[0]->vlrBaseCSLL = 1000.00;
-$std->idepgto[0]->infopgto[0]->vlrCSLL = 1000.00;
-$std->idepgto[0]->infopgto[0]->vlrBaseCofins = 1000.00;
-$std->idepgto[0]->infopgto[0]->vlrCofins = 1000.00;
-$std->idepgto[0]->infopgto[0]->vlrBasePP = 1000.00;
-$std->idepgto[0]->infopgto[0]->vlrPP = 1000.00;
+$std->idepgto[0]->infopgto[0]->retencoes->vlrBaseIR = 4324.56;
+$std->idepgto[0]->infopgto[0]->retencoes->vlrIR = 400.33;
+$std->idepgto[0]->infopgto[0]->retencoes->vlrBaseAgreg = 1000.00;
+$std->idepgto[0]->infopgto[0]->retencoes->vlrAgreg = 1000.00;
+$std->idepgto[0]->infopgto[0]->retencoes->vlrBaseCSLL = 1000.00;
+$std->idepgto[0]->infopgto[0]->retencoes->vlrCSLL = 1000.00;
+$std->idepgto[0]->infopgto[0]->retencoes->vlrBaseCofins = 1000.00;
+$std->idepgto[0]->infopgto[0]->retencoes->vlrCofins = 1000.00;
+$std->idepgto[0]->infopgto[0]->retencoes->vlrBasePP = 1000.00;
+$std->idepgto[0]->infopgto[0]->retencoes->vlrPP = 1000.00;
 
 $std->idepgto[0]->infopgto[0]->infoprocret[0] = new stdclass();
 $std->idepgto[0]->infopgto[0]->infoprocret[0]->tpProcRet = '1';
