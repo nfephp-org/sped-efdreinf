@@ -12,7 +12,7 @@
             "required": true,
             "type": "string",
             "maxLength": 6,
-            "pattern": "^(R-20)[1-7]{1}[0-9]{1}|(R-3010)$"
+            "pattern": "^(R-20)[1-7]{1}[0-9]{1}|(R-3010)|(R-4010)|(R-4020)$"
         },
         "nrrecevt": {
             "required": true,
