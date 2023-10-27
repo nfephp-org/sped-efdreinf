@@ -249,7 +249,7 @@ class EvtServPrest extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoTpServ,
                     "vlrServicos25",
-                    !self::format($its->vlrservicos25 ?? null, 2, $this->decimalSeparator),
+                    self::format($its->vlrservicos25 ?? null, 2, $this->decimalSeparator),
                     false
                 );
                 $this->dom->addChild(
