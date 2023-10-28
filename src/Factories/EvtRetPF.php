@@ -207,13 +207,13 @@ class EvtRetPF extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $infoPgto,
                     "vlrRendTrib",
-                    self::format($info->vlrrendtrib),
+                    self::format($info->vlrrendtrib ?? null),
                     false
                 );
                 $this->dom->addChild(
                     $infoPgto,
                     "vlrIR",
-                    self::format($info->vlrir),
+                    self::format($info->vlrir ?? null),
                     false
                 );
                 $this->dom->addChild(
