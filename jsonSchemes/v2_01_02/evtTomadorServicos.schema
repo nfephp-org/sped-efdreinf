@@ -47,8 +47,7 @@
         },
         "vlrtotalbruto": {
             "required": true,
-            "type": "number",
-            "multipleOf": 0.01
+            "type": "number"
         },
         "vlrtotalbaseret": {
            "required": true,
