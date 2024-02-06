@@ -42,7 +42,7 @@ $std->indobra = 0; //Obrigatório Indicativo de prestação de serviços em obra
             //2 - É obra de construção civil, modalidade empreitada parcial.
 
 $std->cnpjprestador = '12345678901234'; //Obrigatório CNPJ do prestador de serviços
-$std->vlrtotalbruto = 200.00; //Obrigatório Valor bruto da(s) nota(s) fiscal(is)
+$std->vlrtotalbruto = 571123.7; //Obrigatório Valor bruto da(s) nota(s) fiscal(is)
                 // SOMA de $std->nfs[$n]->vlrbruto
 
 $std->vlrtotalbaseret = 200.00; //Obrigatório Valor soma da base de cálculo da retenção da contribuição previdenciária das notas fiscais emitidas para o contratante.
