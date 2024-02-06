@@ -788,10 +788,13 @@ class Tools extends ToolsBase
         $id = null;
         $grupo = null;
         foreach ($keys as $tagname) {
+            $id = null;
             if (!empty($dom->getElementsByTagName($tagname)->item(0))) {
                 $tag = $dom->getElementsByTagName($tagname)->item(0);
                 $id = $tag->getAttribute('id');
                 $grupo = $possibles[$tagname];
+            }
+            if (!empty($id)) {
                 break;
             }
         }

@@ -30,7 +30,7 @@ $jsonSchema = '{
         "nrrecibo": {
             "required": false,
             "type": ["string", "null"],
-            "pattern": "^[0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{4}[-][0-9]{1,18}$"
+            "pattern": "^[0-9]{1,18}[-][0-9]{2}[-][0-9]{4}[-][0-9]{6}[-][0-9]{1,18}$"
         },
         "dtapuracao": {
             "required": true,
@@ -265,7 +265,7 @@ $jsonSchema = '{
 $std = new \stdClass();
 //$std->sequencial = 1;
 $std->indretif = 1;
-$std->nrrecibo = '1-12-1234-1234-123456576';
+$std->nrrecibo = '1-12-1234-123456-123456576';
 $std->dtapuracao = '2017-12-01';
 $std->nrinscestab = '12345678901234';
 
