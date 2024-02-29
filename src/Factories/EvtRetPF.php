@@ -298,22 +298,26 @@ class EvtRetPF extends Factory implements FactoryInterface
                             self::format($ded->vlrpatrocfunp),
                             false
                         );
-                        foreach ($ded->benefpen as $pen) {
-                            $benefPen = $this->dom->createElement('benefPen');
-                            $this->dom->addChild(
-                                $benefPen,
-                                "cpfDep",
-                                $pen->cpfdep,
-                                true
-                            );
-                            $this->dom->addChild(
-                                $benefPen,
-                                "vlrDepen",
-                                self::format($pen->vlrdepen),
-                                true
-                            );
-                            $detDed->appendChild($benefPen);
+                        
+                        if (!empty($ded->benefpen)) {
+                            foreach ($ded->benefpen as $pen) {
+                                $benefPen = $this->dom->createElement('benefPen');
+                                $this->dom->addChild(
+                                    $benefPen,
+                                    "cpfDep",
+                                    $pen->cpfdep,
+                                    true
+                                );
+                                $this->dom->addChild(
+                                    $benefPen,
+                                    "vlrDepen",
+                                    self::format($pen->vlrdepen),
+                                    true
+                                );
+                                $detDed->appendChild($benefPen);
+                            }
                         }
+                        
                         $infoPgto->appendChild($detDed);
                     }
                 }
@@ -414,22 +418,26 @@ class EvtRetPF extends Factory implements FactoryInterface
                                 self::format($susp->vlrdedsusp ?? null),
                                 false
                             );
-                            foreach ($susp->benefpen as $bpen) {
-                                $benefPen = $this->dom->createElement('benefPen');
-                                $this->dom->addChild(
-                                    $benefPen,
-                                    "cpfDep",
-                                    $bpen->cpfdep,
-                                    true
-                                );
-                                $this->dom->addChild(
-                                    $benefPen,
-                                    "vlrDepenSusp",
-                                    self::format($bpen->vlrdepensusp),
-                                    true
-                                );
-                                $dedSusp->appendChild($benefPen);
+                            
+                            if (!empty($susp->benefpen)) {
+                                foreach ($susp->benefpen as $bpen) {
+                                    $benefPen = $this->dom->createElement('benefPen');
+                                    $this->dom->addChild(
+                                        $benefPen,
+                                        "cpfDep",
+                                        $bpen->cpfdep,
+                                        true
+                                    );
+                                    $this->dom->addChild(
+                                        $benefPen,
+                                        "vlrDepenSusp",
+                                        self::format($bpen->vlrdepensusp),
+                                        true
+                                    );
+                                    $dedSusp->appendChild($benefPen);
+                                }
                             }
+                            
                             $infoProcRet->appendChild($dedSusp);
                         }
                         $infoPgto->appendChild($infoProcRet);
