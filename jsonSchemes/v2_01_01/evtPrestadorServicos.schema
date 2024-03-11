@@ -47,8 +47,7 @@
         },
         "vlrtotalbruto": {
             "required": true,
-            "type": "number",
-            "multipleOf": 0.01
+            "type": "number"
         },
         "vlrtotalbaseret": {
             "required": true,
@@ -97,8 +96,7 @@
                     },
                     "vlrbruto": {
                         "required": true,
-                        "type": "number",
-                        "multipleOf": 0.01
+                        "type": "number"
                     },
                     "obs": {
                         "required": false,
@@ -188,8 +186,7 @@
                     },
                     "valorprinc": {
                         "required": true,
-                        "type": "number",
-                        "multipleOf": 0.01
+                        "type": "number"
                     }
                 }
             }
@@ -221,8 +218,7 @@
                     },
                     "valoradic": {
                         "required": true,
-                        "type": "number",
-                        "multipleOf": 0.01
+                        "type": "number"
                     }
                 }
             }
