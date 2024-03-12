@@ -55,8 +55,7 @@
                     },
                     "vlrtotalrec": {
                         "required": true,
-                        "type": "number",
-                        "multipleOf": 0.01
+                        "type": "number"
                     },
                     "vlrtotalret": {
                         "required": true,
@@ -123,8 +122,7 @@
                                 },
                                 "vlrnret": {
                                     "required": true,
-                                    "type": "number",
-                                    "multipleOf": 0.01
+                                    "type": "number"
                                 }
                             }
                         }
