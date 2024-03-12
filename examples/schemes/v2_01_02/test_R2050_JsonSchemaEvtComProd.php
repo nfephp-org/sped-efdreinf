@@ -44,8 +44,7 @@ $jsonSchema = '{
         },
         "vlrrecbrutatotal": {
             "required": true,
-            "type": "number",
-            "multipleOf": 0.01
+            "type": "number"
         },
         "vlrcpapur": {
             "required": true,

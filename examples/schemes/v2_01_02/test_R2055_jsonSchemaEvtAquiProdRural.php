@@ -84,8 +84,7 @@ $jsonSchema = '{
                     },
                     "vlrbruto": {
                         "required": true,
-                        "type": "number",
-                        "multipleOf": 0.01
+                        "type": "number"
                     },
                     "vlrcpdescpr": {
                         "required": true,
