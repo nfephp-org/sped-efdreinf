@@ -57,8 +57,7 @@ $jsonSchema = '{
                     },
                     "vlrtotalrep": {
                         "required": true,
-                        "type": "number",
-                        "multipleOf": 0.01
+                        "type": "number"
                     },
                     "vlrtotalret": {
                         "required": true,
@@ -125,8 +124,7 @@ $jsonSchema = '{
                                 },
                                 "vlrnret": {
                                     "required": true,
-                                    "type": "number",
-                                    "multipleOf": 0.01
+                                    "type": "number"
                                 }
                             }
                         }

@@ -60,8 +60,7 @@ $jsonSchema = '{
         },
         "vlrtotalbruto": {
             "required": true,
-            "type": "number",
-            "multipleOf": 0.01
+            "type": "number"
         },
         "vlrtotalbaseret": {
             "required": true,
@@ -110,8 +109,7 @@ $jsonSchema = '{
                     },
                     "vlrbruto": {
                         "required": true,
-                        "type": "number",
-                        "multipleOf": 0.01
+                        "type": "number"
                     },
                     "obs": {
                         "required": false,
@@ -200,8 +198,7 @@ $jsonSchema = '{
                     },
                     "valorprinc": {
                         "required": true,
-                        "type": "number",
-                        "multipleOf": 0.01
+                        "type": "number"
                     }
                 }
             }
@@ -232,8 +229,7 @@ $jsonSchema = '{
                     },
                     "valoradic": {
                         "required": true,
-                        "type": "number",
-                        "multipleOf": 0.01
+                        "type": "number"
                     }
                 }
             }

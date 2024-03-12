@@ -185,7 +185,14 @@ abstract class Factory
                 $asc = 70; //procura por xsd atualizados com letras no final de F até A
                 while ($asc >= 65) {
                     $letter = chr($asc);
-                    $file = $schema . $this->evtAlias . "-" . $this->evtName . "-" . $this->layoutStr . "_{$letter}" . ".xsd";
+                    $file = $schema
+                        . $this->evtAlias
+                        . "-"
+                        . $this->evtName
+                        . "-"
+                        . $this->layoutStr
+                        . "_{$letter}"
+                        . ".xsd";
                     if (is_file($file)) {
                         $this->schema = $file;
                         break;
