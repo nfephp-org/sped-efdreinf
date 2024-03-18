@@ -1144,12 +1144,12 @@ class Tools extends ToolsBase
     {
         $required = [
             'perapur' => '/^20([0-9][0-9])-(0[1-9]|1[0-2])$/',
-            'tpinscestab' => '/^(1|4)$/',
-            'nrinscestab' => '/^[0-9]{12}|[0-9]{14}$/',
+            'tpinscestab' => '/^(1|2|3)$/',
+            'nrinscestab' => '/^[0-9]{11}|[0-9]{14}$/',
         ];
         $std = self::propertiesToLower($std);
-        if (!empty($std->cpfbenef)) {
-            $required['cpfbenef'] = '/^[0-9]{11}$/';
+        if (!empty($std->cnpjbenef)) {
+            $required['cnpjbenef'] = '/^[0-9]{14}$/';
         }
         $val = self::validateConsultData($required, $std);
         if (!$val['status']) {
@@ -1157,10 +1157,10 @@ class Tools extends ToolsBase
             throw new \RuntimeException('Campos foram passados com erro para a consulta. ' . $message);
         }
         $base = self::urlbase($std);
-        if (!empty($std->cpfbenef)) {
-            return "{$base}/{$std->perapur}/{$std->tpinscestab}/{$std->nrinscestab}/{$std->cpfbenef}";
+        if (!empty($std->cnpjbenef)) {
+            return "{$base}/{$std->perapur}/{$std->tpinscestab}/{$std->nrinscestab}/{$std->cnpjbenef}";
         }
-        return "{$std->baseurl}/R4020/semCpfBeneficiario/{$std->tpinsc}/{$std->nrinsc}/{$std->perapur}"
+        return "{$std->baseurl}/R4020/semCnpjBeneficiario/{$std->tpinsc}/{$std->nrinsc}/{$std->perapur}"
             . "/{$std->tpinscestab}/{$std->nrinscestab}";
     }
 
