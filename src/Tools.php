@@ -342,10 +342,10 @@ class Tools extends ToolsBase
         }
         $request .= "<sped:tpInscEstab>{$std->tpinscestab}</sped:tpInscEstab>"
             . "<sped:nrInscEstab>"
-            . str_pad($std->nrinscestab, 14, '0', STR_PAD_LEFT)
+            . $std->nrinscestab
             . "</sped:nrInscEstab>"
             . "<sped:cnpjPrestador>"
-            . str_pad($std->cnpjprestador, 14, '0', STR_PAD_LEFT)
+            . $std->cnpjprestador
             . "</sped:cnpjPrestador>"
             . "</sped:{$this->method}>";
         return $request;
