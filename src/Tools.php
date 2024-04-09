@@ -926,7 +926,7 @@ class Tools extends ToolsBase
         $proc = "urlR$evento";
         $std->baseurl = $baseurl;
         $std->tpinsc = $this->tpInsc;
-        $std->nrinsc = $this->nrInsc;
+        $std->nrinsc = $this->doc;
         return self::$proc($std);
     }
 
