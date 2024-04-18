@@ -110,9 +110,6 @@ class EvtTabProcesso extends Factory implements FactoryInterface
             );
         } elseif ($this->std->modo == 'ALT') {
             //alteracao
-            if (empty($this->std->fimvalid)) {
-                throw new \Exception("Numa alteração é obrigatório informar o FIM da VALIDADE do evento anterior.");
-            }
             $node = $this->dom->createElement("alteracao");
             $this->dom->addChild(
                 $ideProcesso,
