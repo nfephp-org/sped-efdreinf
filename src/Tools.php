@@ -765,7 +765,7 @@ class Tools extends ToolsBase
             'evtInfoContri' => 1,
             'evtTabLig' => 1,
             'evtTabProcesso' => 1,
-            'evtServTom' => 2,
+            'evtServTom' => 3,
             'evtServPrest' => 2,
             'evtAssocDespRec' => 2,
             'evtAssocDespRep' => 2,
@@ -833,9 +833,9 @@ class Tools extends ToolsBase
                 throw new \RuntimeException('Devem ser enviados em um lote apenas eventos '
                     . 'pertencentes ao mesmo grupo');
             }
-            if ($grp !== $grupo) {
+            if ($grp != $grupo) {
                 throw new \RuntimeException('O grupo correto deve ser declarado e não pode diferir'
-                    . 'do grupo dos eventos');
+                    . ' do grupo dos eventos');
             }
             $id = $resp['id'];
             $xml .= "<evento Id=\"$id\">";
